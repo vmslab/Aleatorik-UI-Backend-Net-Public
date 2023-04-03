@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.Security.Claims;
 using System.Text;
 
@@ -61,26 +63,49 @@ public static class AuthConfiguration
                 {
                     //var endpoint = context.HttpContext.Features.Get<IEndpointFeature>()?.Endpoint;
                     // HTTP/1.1
-                    // HTTP/2
                     string accessToken = string.Empty;
-                    if (context.Request.Protocol == "HTTP/2")
-                    {
-                        var token = Convert.ToString(context.Request.Headers["access_token"]) ?? "";
-                        accessToken = token;
-                    }
-                    else
-                    {
-                        var token = Convert.ToString(context.Request.Cookies["access_token"]) ?? "";
-                        accessToken = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
-                    }
+                    var token = Convert.ToString(context.Request.Cookies["access_token"]) ?? "";
 
                     //if (!string.IsNullOrEmpty(accessToken) && (context.HttpContext.WebSockets.IsWebSocketRequest || context.Request.Headers["Accept"] == "text/event-stream"))
                     //{
                     //    context.Token = accessToken;
                     //}
-                    if (!string.IsNullOrEmpty(accessToken))
+                    if (!string.IsNullOrEmpty(token))
                     {
+                        accessToken = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
                         context.Token = accessToken;
+                    }
+                    else
+                    {
+                        if (context.Request.Path.Value != "/api/auth/Login" || context.Request.Path.Value != "/api/auth/Refresh")
+                        {
+                            foreach (var c in context.Request.Cookies)
+                            {
+                                if (c.Key == "refresh_token")
+                                {
+                                    try
+                                    {
+                                        byte[] data = Convert.FromBase64String(c.Value);
+                                        string decodedString = Encoding.UTF8.GetString(data);
+                                        var refreshToken = System.Uri.UnescapeDataString(decodedString);
+                                        
+                                        if (!string.IsNullOrEmpty(refreshToken))
+                                        {
+                                            var authHelper = context.HttpContext.RequestServices.GetServices(typeof(AuthServiceHelper))?.FirstOrDefault();
+                                            //var authManager = authManagers.Where(x => ((AuthServiceHelper)x).Count > 0).FirstOrDefault() as IJwtAuthManager;
+
+                                            if (authHelper != null)
+											{
+                                                var authService = (AuthServiceHelper)authHelper;
+                                                var jwtResult = authService.Refresh(refreshToken, context.HttpContext);
+                                                context.Token = jwtResult.AccessToken;
+                                            }
+										}
+                                    }
+                                    catch { }
+                                }
+                            }
+                        }
                     }
 
                     return Task.CompletedTask;
@@ -100,6 +125,7 @@ public static class AuthConfiguration
         });
 
         services.AddSingleton<IJwtAuthManager, JwtAuthManager>();
+        services.AddSingleton<AuthServiceHelper>();
 
         return services;
     }

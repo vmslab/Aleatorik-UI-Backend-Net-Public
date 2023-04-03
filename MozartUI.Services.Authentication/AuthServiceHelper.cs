@@ -31,7 +31,7 @@ public class AuthServiceHelper
 	//    _userManager = userManager;
 	//    _authManager = authManager;
 	//}
-	public AuthServiceHelper(ILogger logger, IJwtAuthManager authManager)
+	public AuthServiceHelper(ILogger<AuthServiceHelper> logger, IJwtAuthManager authManager)
 	{
 		_logger = logger;
 		_authManager = authManager;
@@ -86,7 +86,7 @@ public class AuthServiceHelper
 		await httpContext?.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 	}
 
-	public async Task<JwtAuthResult> Refresh(string refreshToken, HttpContext httpContext = null)
+	public JwtAuthResult Refresh(string refreshToken, HttpContext httpContext = null)
 	{
 		if (httpContext is null)
 			return null;

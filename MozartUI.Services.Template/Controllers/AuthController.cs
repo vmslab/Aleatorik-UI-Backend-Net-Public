@@ -20,11 +20,11 @@ public class AuthController: ControllerBase
     private readonly IUserDao _userDao;
 
 
-    public AuthController(ILogger<AuthController> logger, IUserDao userDao, IJwtAuthManager authManager, IHttpContextAccessor httpContextAccessor)
+    public AuthController(ILogger<AuthController> logger, IUserDao userDao, AuthServiceHelper helper, IHttpContextAccessor httpContextAccessor)
     {
         _logger = logger;
         _userDao = userDao;
-        _helper = new AuthServiceHelper(logger, authManager);
+        _helper = helper;
         _httpContextAccessor = httpContextAccessor;
     }
 
@@ -64,14 +64,17 @@ public class AuthController: ControllerBase
         {
             if (httpContext is null) return Unauthorized();
             var accessToken = httpContext.Request.Cookies["access_token"];
-            if (accessToken == null) return Ok();
-            var refreshToken = HttpUtility.UrlDecode(Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(accessToken)));
 
-            if (string.IsNullOrEmpty(accessToken))
+            var refreshSource = httpContext.Request.Cookies["refresh_token"];
+            byte[] tokenData = Convert.FromBase64String(refreshSource);
+            string decodedString = Encoding.UTF8.GetString(tokenData);
+            var refreshToken = System.Uri.UnescapeDataString(decodedString);
+
+			if (string.IsNullOrEmpty(accessToken))
             {
                 if (string.IsNullOrEmpty(refreshToken)) return Unauthorized();
 
-                var jwtResult = await _helper.Refresh(refreshToken, httpContext);
+                var jwtResult = _helper.Refresh(refreshToken, httpContext);
                 if (jwtResult is null) return Unauthorized();
 
                 ret = await TokenToLoginResult(httpContext, jwtResult);
@@ -126,10 +129,6 @@ public class AuthController: ControllerBase
         ret.Name = _userDao.GetByEmail(new UserInfo { Email = userId })?.Name;
 		ret.Role = "User";
 
-		if (httpContext != null && httpContext.Request.Protocol == "HTTP/2")
-        {
-            ret.AccessToken = accessToken;
-        }
         ret.RefreshToken = refreshToken;
 		ret.Expiration = cookieExpiration;
         ret.Success = true;
