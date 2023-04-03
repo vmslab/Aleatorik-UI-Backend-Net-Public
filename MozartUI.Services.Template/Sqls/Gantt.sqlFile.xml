@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="MozartUI.Services.Template" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="resource-gantt-result"  				class="ResourceGantInfos" >
+			<result property="NoduleKey"    		column="MODULE_KEY"/>
+			<result property="ResourceId"    		column="RESOURCE_ID"/>
+			<result property="PlanSeq"     			column="PLAN_SEQ"/>
+			<result property="StageId"				column="STAGE_ID"/>
+			<result property="Phase"				column="PHASE"/>
+			<result property="Level"				column="LEVEL"/>
+			<result property="AllocationKey"		column="ALLOCATION_KEY"/>
+			<result property="SoId"					column="SO_ID"/>
+			<result property="MoId"					column="MO_ID"/>
+			<result property="LotId"				column="LOT_ID"/>
+			<result property="BomId"				column="BOM_ID"/>
+			<result property="AllocType"			column="ALLOC_TYPE"/>
+			<result property="SoItemId"				column="SO_ITEM_ID"/>
+			<result property="SoSiteId"				column="SO_SITE_ID"/>
+			<result property="SoBufferId"			column="SO_BUFFER_ID"/>
+			<result property="SoDueDate"			column="SO_DUE_DATE"/>
+			<result property="Priority"				column="PRIORITY"/>
+			<result property="LotGroupKey"			column="LOT_GROUP_KEY"/>
+			<result property="ItemId"				column="ITEM_ID"/>
+			<result property="ItemType"				column="ITEM_TYPE"/>
+			<result property="StieId"				column="SITE_ID"/>
+			<result property="BufferId"				column="BUFFER_ID"/>
+			<result property="RoutingId"			column="ROUTING_ID"/>
+			<result property="OperationId"			column="OPERATION_ID"/>
+			<result property="Yield"				column="YIELD"/>
+			<result property="BChgRatio"			column="B_CHG_RATIO"/>
+			<result property="TotalTat"				column="TOTAL_TAT"/>
+			<result property="PlanQty"				column="PLAN_QTY"/>
+			<result property="PlanUnitQty"			column="PLAN_UNIT_QTY"/>
+			<result property="ArrivalTime"			column="ARRIVAL_TIME"/>
+			<result property="StartTime"			column="START_TIME"/>
+			<result property="EndTime"				column="END_TIME"/>
+			<result property="ResEndTime"			column="RES_END_TIME"/>
+			<result property="CreationType"			column="CREATION_TYPE"/>
+			<result property="WipType"				column="WIP_TYPE"/>
+			<result property="PlanDate"				column="PLAN_DATE"/>
+			<result property="PlanWeek"				column="PLAN_WEEK"/>
+			<result property="PlanMonth"			column="PLAN_MONTH"/>
+			<result property="TargetDateTime"		column="TARGET_DATETIME"/>
+			<result property="TargetDate"			column="TARGET_DATE"/>
+			<result property="TargetWeek"			column="TARGET_WEEK"/>
+			<result property="TargetMonth"			column="TARGET_MONTH"/>
+			<result property="LpstGapDay"			column="LPST_GAP_DAY"/>
+			<result property="MaxLatenessDays"		column="MAX_LATENESS_DAYS"/>
+			<result property="ExtendedSoDueDate"	column="EXTENDED_SO_DUE_DATE"/>
+			<result property="ExtendedTargetDate"	column="EXTENDED_TARGET_DATE"/>
+			<result property="RetryCount"			column="RETRY_COUNT"/>
+			<result property="Load"					column="LOAD"/>
+			<result property="UsagePer"				column="USAGE_PER"/>
+			<result property="OrgLotId"				column="ORG_LOT_ID"/>
+		</resultMap>
+
+		<resultMap id="production-gantt-result"  	class="ProductionGantInfos" >
+			<result property="NoduleKey"    		column="MODULE_KEY"/>
+			<result property="PlanSeq"     			column="PLAN_SEQ"/>
+			<result property="StageId"				column="STAGE_ID"/>
+			<result property="Phase"				column="PHASE"/>
+			<result property="Level"				column="LEVEL"/>
+			<result property="SoId"					column="SO_ID"/>
+			<result property="MoId"					column="MO_ID"/>
+			<result property="LotId"				column="LOT_ID"/>
+			<result property="BomId"				column="BOM_ID"/>
+			<result property="AllocType"			column="ALLOC_TYPE"/>
+			<result property="SoItemId"				column="SO_ITEM_ID"/>
+			<result property="SoSiteId"				column="SO_SITE_ID"/>
+			<result property="SoBufferId"			column="SO_BUFFER_ID"/>
+			<result property="SoDueDate"			column="SO_DUE_DATE"/>
+			<result property="Priority"				column="PRIORITY"/>
+			<result property="LotGroupKey"			column="LOT_GROUP_KEY"/>
+			<result property="ItemId"				column="ITEM_ID"/>
+			<result property="ItemType"				column="ITEM_TYPE"/>
+			<result property="StieId"				column="SITE_ID"/>
+			<result property="BufferId"				column="BUFFER_ID"/>
+			<result property="RoutingId"			column="ROUTING_ID"/>
+			<result property="OperationId"			column="OPERATION_ID"/>
+			<result property="Yield"				column="YIELD"/>
+			<result property="BChgRatio"			column="B_CHG_RATIO"/>
+			<result property="TotalTat"				column="TOTAL_TAT"/>
+			<result property="InPlanQty"			column="IN_PLAN_QTY"/>
+			<result property="InPlanUnitQty"		column="IN_PLAN_UNIT_QTY"/>
+			<result property="ResourceId"    		column="RESOURCE_ID"/>
+			<result property="ArrivalTime"			column="ARRIVAL_TIME"/>
+			<result property="StartTime"			column="START_TIME"/>
+			<result property="EndTime"				column="END_TIME"/>
+			<result property="ResEndTime"			column="RES_END_TIME"/>
+			<result property="CreationType"			column="CREATION_TYPE"/>
+			<result property="WipType"				column="WIP_TYPE"/>
+			<result property="PlanDate"				column="PLAN_DATE"/>
+			<result property="PlanWeek"				column="PLAN_WEEK"/>
+			<result property="PlanMonth"			column="PLAN_MONTH"/>
+			<result property="TargetDateTime"		column="TARGET_DATETIME"/>
+			<result property="TargetDate"			column="TARGET_DATE"/>
+			<result property="TargetWeek"			column="TARGET_WEEK"/>
+			<result property="TargetMonth"			column="TARGET_MONTH"/>
+			<result property="LpstGapDay"			column="LPST_GAP_DAY"/>
+			<result property="MaxLatenessDays"		column="MAX_LATENESS_DAYS"/>
+			<result property="ExtendedSoDueDate"	column="EXTENDED_SO_DUE_DATE"/>
+			<result property="ExtendedTargetDate"	column="EXTENDED_TARGET_DATE"/>
+			<result property="RetryCount"			column="RETRY_COUNT"/>
+			<result property="Load"					column="LOAD"/>
+			<result property="UsagePer"				column="USAGE_PER"/>
+			<result property="OrgLotId"				column="ORG_LOT_ID"/>
+			<result property="RefPlanId"			column="REF_PLAN_ID"/>
+		</resultMap>
+
+		<resultMap id="gantt-GetResourceGanttInfo.result" class="GetResourceGanttInfo" >
+			<result property="StartTimeMin"    		column="START_TIME_MIN"/>
+			<result property="EndTimeMax"    		column="END_TIME_MAX"/>
+		</resultMap>
+
+		<resultMap id="gantt-GetResourceGanttData.result" class="GetResourceGanttData" >
+			<result property="ItemId"    			column="ITEM_ID"/>
+			<result property="ResourceId"    		column="RESOURCE_ID"/>
+			<result property="StageId"    			column="STAGE_ID"/>
+			<result property="StartTime"    		column="START_TIME"/>
+			<result property="EndTime"    			column="END_TIME"/>
+		</resultMap>
+
+		<resultMap id="gantt-GetProductionGanttInfo.result" class="GetProductionGanttInfo" >
+			<result property="StartTimeMin"    		column="START_TIME_MIN"/>
+			<result property="EndTimeMax"    		column="END_TIME_MAX"/>
+			<result property="TargetDatetimeMax"    column="TARGET_DATETIME_MAX"/>
+		</resultMap>
+
+	</resultMaps>
+
+	<statements>
+
+		<select id="Gantt.ResourceGantInfos" resultMap="resource-gantt-result">
+			SELECT 
+				MODULE_KEY,
+				RESOURCE_ID,
+				PLAN_SEQ,
+				STAGE_ID,
+				PHASE,
+				LEVEL,
+				ALLOCATION_KEY,
+				SO_ID,
+				MO_ID,
+				LOT_ID,
+				BOM_ID,
+				ALLOC_TYPE,
+				SO_ITEM_ID,
+				SO_SITE_ID,
+				SO_BUFFER_ID,
+				SO_DUE_DATE,
+				PRIORITY,
+				LOT_GROUP_KEY,
+				ITEM_ID,
+				ITEM_TYPE,
+				SITE_ID,
+				BUFFER_ID,
+				ROUTING_ID,
+				OPERATION_ID,
+				YIELD,
+				B_CHG_RATIO,
+				TOTAL_TAT,
+				PLAN_QTY,
+				PLAN_UNIT_QTY,
+				ARRIVAL_TIME,
+				START_TIME,
+				END_TIME,
+				RES_END_TIME,
+				CREATION_TYPE,
+				WIP_TYPE,
+				PLAN_DATE,
+				PLAN_WEEK,
+				PLAN_MONTH,
+				TARGET_DATETIME,
+				TARGET_DATE,
+				TARGET_WEEK,
+				TARGET_MONTH,
+				LPST_GAP_DAY,
+				MAX_LATENESS_DAYS,
+				EXTENDED_SO_DUE_DATE,
+				EXTENDED_TARGET_DATE,
+				RETRY_COUNT,
+				LOAD,
+				USAGE_PER,
+				ORG_LOT_ID
+			FROM 
+				RESOURCE_PLAN
+		</select>
+
+		<select id="Gantt.ProductionGantInfos" resultMap="production-gantt-result">
+			SELECT 
+				MODULE_KEY
+				PLAN_SEQ
+				STAGE_ID
+				PHASE
+				LEVEL
+				SO_ID
+				MO_ID
+				LOT_ID
+				BOM_ID
+				ALLOC_TYPE
+				SO_ITEM_ID
+				SO_SITE_ID
+				SO_BUFFER_ID
+				SO_DUE_DATE
+				PRIORITY
+				LOT_GROUP_KEY
+				ITEM_ID
+				ITEM_TYPE
+				SITE_ID
+				BUFFER_ID
+				ROUTING_ID
+				OPERATION_ID
+				YIELD
+				B_CHG_RATIO
+				TOTAL_TAT
+				IN_PLAN_QTY
+				IN_PLAN_UNIT_QTY
+				RESOURCE_ID
+				ARRIVAL_TIME
+				START_TIME
+				END_TIME
+				RES_END_TIME
+				CREATION_TYPE
+				WIP_TYPE
+				PLAN_DATE
+				PLAN_WEEK
+				PLAN_MONTH
+				TARGET_DATETIME
+				TARGET_DATE
+				TARGET_WEEK
+				TARGET_MONTH
+				LPST_GAP_DAY
+				MAX_LATENESS_DAYS
+				EXTENDED_SO_DUE_DATE
+				EXTENDED_TARGET_DATE
+				RETRY_COUNT
+				LOAD
+				USAGE_PER
+				ORG_LOT_ID
+				REF_PLAN_ID
+			FROM 
+				PRODUCTION_PLAN
+		</select>
+
+		<!-- GetResourceGanttInfo -->
+		<select id="Gantt.GetResourceGanttInfo" resultMap="gantt-GetResourceGanttInfo.result">
+			SELECT 
+				MIN(START_TIME) AS START_TIME_MIN,
+				MAX(END_TIME) AS END_TIME_MAX
+			FROM
+				RESOURCE_PLAN
+		</select>
+
+		<!-- GetResourceGanttData -->
+		<select id="Gantt.GetResourceGanttData" resultMap="gantt-GetResourceGanttData.result">
+			SELECT 
+				ITEM_ID,
+				RESOURCE_ID,
+				STAGE_ID,
+				START_TIME,
+				END_TIME
+			FROM
+				RESOURCE_PLAN
+		</select>
+
+		<!-- GetProductionGanttInfo -->
+		<select id="Gantt.GetProductionGanttInfo" resultMap="gantt-GetProductionGanttInfo.result">
+			SELECT 
+				MIN(START_TIME) AS START_TIME_MIN,
+				MAX(END_TIME) AS END_TIME_MAX,
+				MAX(TARGET_DATETIME) AS TARGET_DATETIME_MAX
+			FROM
+				PRODUCTION_PLAN
+		</select>
+
+	</statements>
+</sqlMap>

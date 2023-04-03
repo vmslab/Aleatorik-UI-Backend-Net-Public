@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="MozartUI.Services.Template" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="menu-map-result"  class="MenuMapInfo" >
+      <result property="MenuMapId"    		column="MENU_MAP_ID"/>
+			<result property="MenuId"    		column="MENU_ID"/>
+      <result property="SystemId"    	column="SYSTEM_ID"/>
+      <result property="GroupId"    	column="GROUP_ID"/>
+			<result property="CategoryId"     column="CATEGORY_ID"/>
+			<result property="Name"	column="NAME"/>
+      <result property="Sequence"	column="SEQUENCE"/>
+      <result property="Separator"	column="SEPARATOR"/>
+      <result property="IsRead"	column="IS_READ"/>
+      <result property="IsWrite"	column="IS_WRITE"/>
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+
+		<!--SELECT All-->
+		<select id="MenuMap.SelectMenuMaps" parameterClass="MenuMapInfo" resultMap="menu-map-result">
+      SELECT
+      T_MENU_MAP.MENU_MAP_ID,
+      T_MENU.SYSTEM_ID,
+      T_MENU.MENU_ID,
+      T_MENU_MAP.GROUP_ID,
+      T_MENU.CATEGORY_ID,
+      T_MENU.NAME,
+      T_MENU.SEQUENCE,
+      T_MENU.SEPARATOR,
+      ISNULL(T_MENU_MAP.IS_READ, 0) IS_READ,
+      ISNULL(T_MENU_MAP.IS_WRITE, 0) IS_WRITE
+      FROM
+      T_MENU
+      LEFT JOIN
+      (
+      SELECT
+      T_MENU_MAP.SYSTEM_ID,
+      T_MENU_MAP.MENU_ID,
+      T_MENU_MAP.MENU_MAP_ID,
+      T_MENU_MAP.GROUP_ID,
+      T_MENU_MAP.IS_READ,
+      T_MENU_MAP.IS_WRITE
+      FROM
+      T_MENU_MAP
+      WHERE
+      T_MENU_MAP.SYSTEM_ID = #SystemId#
+      AND T_MENU_MAP.GROUP_ID = #GroupId#
+      ) T_MENU_MAP
+      ON
+      T_MENU.MENU_ID = T_MENU_MAP.MENU_ID AND T_MENU.SYSTEM_ID  = T_MENU_MAP.SYSTEM_ID
+      ORDER BY T_MENU.SEQUENCE ASC
+    </select>
+
+		<!--SELECT BY ID-->
+		<select id="MenuMap.SelectMenuMap" parameterClass="string" resultMap="menu-map-result">
+      SELECT
+        MENU_MAP_ID,
+        SYSTEM_ID,
+        MENU_ID,
+        GROUP_ID,
+        IS_READ,
+        IS_WRITE
+      FROM 
+        T_MENU_MAP
+      WHERE
+        MENU_MAP_ID = #Id#
+    </select>
+
+		<!--Merge-->
+		<update id="MenuMap.MergeMenuMap" parameterClass="MenuMapInfo">
+      MERGE INTO T_MENU_MAP
+      USING (SELECT 1 AS dual) as X
+      ON (T_MENU_MAP.MENU_MAP_ID = #MenuMapId#)
+      WHEN MATCHED THEN
+      UPDATE SET
+      <dynamic prepend=" " close=" ">
+        <isNotEmpty prepend="," property="IsRead">
+          IS_READ = #IsRead#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="IsWrite">
+          IS_WRITE = #IsWrite#
+        </isNotEmpty>
+      </dynamic>
+      WHEN NOT MATCHED THEN
+      INSERT
+        (MENU_MAP_ID,
+        SYSTEM_ID,
+        MENU_ID,
+        GROUP_ID,
+        IS_READ,
+        IS_WRITE)
+      VALUES
+        (#MenuMapId#,
+        #SystemId#,
+        #MenuId#,
+        #GroupId#,
+        #IsRead#,
+        #IsWrite#);
+    </update>
+	</statements>
+</sqlMap>

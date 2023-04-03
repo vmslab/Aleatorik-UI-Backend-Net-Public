@@ -1,0 +1,80 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      // Use IntelliSense to find out which attributes exist for C# debugging
+      // Use hover for the description of the existing attributes
+      // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+      "name": ".NET Core Launch (web)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      // If you have changed target frameworks, make sure to update the program path.
+      "program": "${workspaceFolder}/mzsui/bin/Debug/net6.0/mzsui.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/mzsui",
+      // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+      // "serverReadyAction": {
+      //   "action": "openExternally",
+      //   "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      // },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    },
+    {
+      // Use IntelliSense to find out which attributes exist for C# debugging
+      // Use hover for the description of the existing attributes
+      // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+      "name": ".NET Core Launch WSL (web)",
+      "type": "mono",
+      "request": "launch",
+      "preLaunchTask": "build",
+      // If you have changed target frameworks, make sure to update the program path.
+      "program": "${workspaceFolder}/mzsui/bin/Debug/net6.0/mzsui.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/mzsui",
+      // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+      // "serverReadyAction": {
+      //   "action": "openExternally",
+      //   "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      // },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    {
+      "name": ".NET Core Attach WSL",
+      "type": "mono",
+      "request": "attach",
+      "address": "localhost",
+      "port": 35085
+    },
+    {
+      // Use IntelliSense to find out which attributes exist for C# debugging
+      // Use hover for the description of the existing attributes
+      // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+      "name": "Template Launch (web)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-template",
+      // If you have changed target frameworks, make sure to update the program path.
+      "program": "${workspaceFolder}/MozartUI.Services.Template/bin/Debug/net6.0/MozartUI.Services.Template.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/MozartUI.Services.Template",
+      // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  ]
+}
