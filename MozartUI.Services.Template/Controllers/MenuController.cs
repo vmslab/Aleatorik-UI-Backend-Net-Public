@@ -89,59 +89,5 @@ namespace MozartUI.Services.Template.Controllers
 				return 0;
 			}
 		}
-
-		//[HttpPost("/api/AddMenu")]
-		//public int Insert(MenuInfo menuInfo)
-		//{
-		//    try
-		//    {
-		//        _logger.LogInformation("menuInfo : {}", menuInfo);
-		//        _menuDao.Insert(menuInfo);
-		//        return 1;
-		//    }
-		//    catch (Exception e)
-		//    {
-		//        _logger.LogError("error : {}", e.Message);
-		//        return 0;
-		//    }
-		//}
-
-		//[HttpPut("/api/ModifyMenu")]
-		//public int Update(MenuInfo menuInfo)
-		//{
-		//    _logger.LogInformation("menuInfo : {}", menuInfo);
-		//    try
-		//    {
-		//        var result = _menuDao.Update(menuInfo);
-		//        _logger.LogInformation("result : {}", result);
-
-		//        return result;
-		//    }
-		//    catch (Exception e)
-		//    {
-		//        _logger.LogError("error : {}", e.Message);
-		//        return 0;
-		//    }
-
-		//}
-
-		//[HttpDelete("/api/RemoveMenu")]
-		//public int Delete(MenuInfo menuInfo)
-		//{
-		//    _logger.LogInformation("menuInfo : {}", menuInfo);
-		//    try
-		//    {
-		//        var result = _menuDao.Delete(menuInfo);
-		//        _logger.LogInformation("result : {}", result);
-
-		//        return result;
-		//    }
-		//    catch (Exception e)
-		//    {
-		//        _logger.LogError("error : {}", e.Message);
-		//        return 0;
-		//    }
-
-		//}
 	}
 }

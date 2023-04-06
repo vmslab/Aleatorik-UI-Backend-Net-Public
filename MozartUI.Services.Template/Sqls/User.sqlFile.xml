@@ -78,15 +78,15 @@
       #Password#)
     </insert>
 
-		<!--UPDATE-->
-		<update id="User.UpdateUser" parameterClass="UserInfo">
-			UPDATE
-				T_USER
-			SET
-			<dynamic prepend=" " close=" ">
-				<isNotEmpty prepend="," property="Department">
-					DEPARTMENT = #Department#
-				</isNotEmpty>
+    <!--UPDATE-->
+    <update id="User.UpdateUser" parameterClass="UserInfo">
+      UPDATE
+      T_USER
+      SET
+      <dynamic prepend=" " close=" ">
+        <isNotEmpty prepend="," property="Department">
+          DEPARTMENT = #Department#
+        </isNotEmpty>
         <isNotEmpty prepend="," property="Name">
           NAME = #Name#
         </isNotEmpty>
@@ -96,10 +96,20 @@
         <isNotEmpty prepend="," property="GroupId">
           GROUP_ID = #GroupId#
         </isNotEmpty>
-				WHERE
-					EMAIL = #Email#
-			</dynamic>
-		</update>
+        WHERE
+        EMAIL = #Email#
+      </dynamic>
+    </update>
+
+    <!--UPDATE-->
+    <update id="User.UpdateUserGroup" parameterClass="string">
+      UPDATE
+      T_USER
+      SET
+      GROUP_ID = 'default'
+      WHERE
+      GROUP_ID = #GroupId#
+    </update>
 
 		<!--DELETE-->
 		<delete id="User.DeleteUser" parameterClass="string">

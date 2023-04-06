@@ -35,7 +35,15 @@ namespace MozartUI.Services.Template.DAO
                 var affectedRow = 0;
                 foreach (var menuInfo in menuInfos)
                 {
-                    affectedRow += transaction.SqlMapper.Update("Menu.MergeMenu", menuInfo);
+                    if (menuInfo.State == "removed")
+                    {
+                        affectedRow += transaction.SqlMapper.Update("Menu.DeleteMenu", menuInfo);
+                        affectedRow += transaction.SqlMapper.Update("Menu.DeleteMenuMap", menuInfo);
+                    }
+                    else
+                    {
+                        affectedRow += transaction.SqlMapper.Update("Menu.MergeMenu", menuInfo);
+                    }
                 }
                 transaction.CommitTransaction();
                 return affectedRow;

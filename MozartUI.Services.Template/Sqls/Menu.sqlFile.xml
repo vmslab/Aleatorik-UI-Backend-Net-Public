@@ -3,17 +3,30 @@
 <sqlMap namespace="MozartUI.Services.Template" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
 	<resultMaps>
-		<resultMap id="menu-result"  class="MenuInfo" >
-			<result property="MenuId"    		column="MENU_ID"/>
-			<result property="SystemId"    	column="SYSTEM_ID"/>
-			<result property="CategoryId"     column="CATEGORY_ID"/>
-			<result property="Name"	column="NAME"/>
-			<result property="Path"	column="PATH"/>
+    <resultMap id="menu-result"  class="MenuInfo" >
+      <result property="MenuId"    		column="MENU_ID"/>
+      <result property="SystemId"    	column="SYSTEM_ID"/>
+      <result property="CategoryId"     column="CATEGORY_ID"/>
+      <result property="Name"	column="NAME"/>
+      <result property="Path"	column="PATH"/>
       <result property="Sequence"	column="SEQUENCE"/>
       <result property="Type"		column="MENU_TYPE"/>
       <result property="Separator"	column="SEPARATOR"/>
       <result property="Params"		column="PARAMS"/>
-		</resultMap>
+    </resultMap>
+    <resultMap id="menu-auth-result"  class="MenuInfo" >
+      <result property="MenuId"    		column="MENU_ID"/>
+      <result property="SystemId"    	column="SYSTEM_ID"/>
+      <result property="CategoryId"     column="CATEGORY_ID"/>
+      <result property="Name"	column="NAME"/>
+      <result property="Path"	column="PATH"/>
+      <result property="Sequence"	column="SEQUENCE"/>
+      <result property="Type"		column="MENU_TYPE"/>
+      <result property="Separator"	column="SEPARATOR"/>
+      <result property="Params"		column="PARAMS"/>
+      <result property="IsRead"		column="IS_READ"/>
+      <result property="IsWrite"		column="IS_WRITE"/>
+    </resultMap>
 	</resultMaps>
 
 	<statements>
@@ -38,7 +51,7 @@
     </select>
     
     <!--SELECT FOR USER-->
-    <select id="Menu.SelectMenusForUser" parameterClass="UserInfo" resultMap="menu-result">
+    <select id="Menu.SelectMenusForUser" parameterClass="UserInfo" resultMap="menu-auth-result">
       SELECT
         M.MENU_ID,
         M.SYSTEM_ID,
@@ -162,14 +175,25 @@
 			</dynamic>
 		</update>
 
-		<!--DELETE-->
-		<delete id="Menu.DeleteMenu" parameterClass="string">
-			DELETE
-			FROM
-				T_MENU
-			WHERE
-				MENU_ID = #Id#
-		</delete>
+    <!--DELETE-->
+    <delete id="Menu.DeleteMenu" parameterClass="MenuInfo">
+      DELETE
+      FROM
+      T_MENU
+      WHERE
+      SYSTEM_ID = #SystemId#
+      AND MENU_ID = #MenuId#
+    </delete>
+
+    <!--DELETE-->
+    <delete id="Menu.DeleteMenuMap" parameterClass="MenuInfo">
+      DELETE
+      FROM
+      T_MENU_MAP
+      WHERE
+      SYSTEM_ID = #SystemId#
+      AND MENU_ID = #MenuId#
+    </delete>
 
     <!--DELETE BY SYSTEM-->
     <delete id="Menu.DeleteMenus" parameterClass="string">

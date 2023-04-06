@@ -11,5 +11,8 @@ namespace MozartUI.Services.Template.DTO
         public string? Type { get; set; }
         public bool? Separator { get; set; }
         public string? Params { get; set; }
+        public string? State { get; set; }
+        public bool? IsRead { get; set; }
+        public bool? IsWrite { get; set; }
     }
 }

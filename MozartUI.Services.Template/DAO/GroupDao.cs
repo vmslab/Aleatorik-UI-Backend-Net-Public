@@ -39,7 +39,8 @@ namespace MozartUI.Services.Template.DAO
 
 		public int Delete(GroupInfo groupInfo)
 		{
+            Mapper.Update("User.UpdateUserGroup", groupInfo.GroupId);
             return Mapper.Delete("Group.DeleteGroup", groupInfo.GroupId);
-		}
+        }
 	}
 }
