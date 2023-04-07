@@ -9,7 +9,8 @@
       <result property="SystemId"    	column="SYSTEM_ID"/>
       <result property="GroupId"    	column="GROUP_ID"/>
 			<result property="CategoryId"     column="CATEGORY_ID"/>
-			<result property="Name"	column="NAME"/>
+      <result property="Name"	column="NAME"/>
+      <result property="Path"	column="PATH"/>
       <result property="Sequence"	column="SEQUENCE"/>
       <result property="Separator"	column="SEPARATOR"/>
       <result property="IsRead"	column="IS_READ"/>
@@ -28,6 +29,7 @@
       T_MENU_MAP.GROUP_ID,
       T_MENU.CATEGORY_ID,
       T_MENU.NAME,
+      T_MENU.PATH,
       T_MENU.SEQUENCE,
       T_MENU.SEPARATOR,
       ISNULL(T_MENU_MAP.IS_READ, 0) IS_READ,

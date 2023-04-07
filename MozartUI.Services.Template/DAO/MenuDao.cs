@@ -43,6 +43,29 @@ public class MenuDao : IMenuDao
                 else
                 {
                     affectedRow += transaction.SqlMapper.Update("Menu.MergeMenu", menuInfo);
+
+                    if (menuInfo.State == "added")
+                    {
+                        var adminMapInfo = new MenuMapInfo {
+                            MenuMapId = Guid.NewGuid().ToString(),
+                            SystemId = menuInfo.SystemId,
+                            MenuId = menuInfo.MenuId,
+                            GroupId = "admin",
+                            IsRead = true,
+                            IsWrite = true
+                        };
+                        affectedRow += transaction.SqlMapper.Update("Menu.InsertMenuMap", adminMapInfo);
+                        var defaultMapInfo = new MenuMapInfo
+                        {
+                            MenuMapId = Guid.NewGuid().ToString(),
+                            SystemId = menuInfo.SystemId,
+                            MenuId = menuInfo.MenuId,
+                            GroupId = "default",
+                            IsRead = true,
+                            IsWrite = false
+                        };
+                        affectedRow += transaction.SqlMapper.Update("Menu.InsertMenuMap", defaultMapInfo);
+                    }
                 }
             }
             transaction.CommitTransaction();

@@ -8,6 +8,7 @@ public class MenuMapInfo
     public string? GroupId { get; set; }
     public string? CategoryId { get; set; }
     public string? Name { get; set; }
+    public string? Path { get; set; }
     public int Sequence { get; set; }
     public bool? Separator { get; set; }
     public bool? IsRead { get; set; }

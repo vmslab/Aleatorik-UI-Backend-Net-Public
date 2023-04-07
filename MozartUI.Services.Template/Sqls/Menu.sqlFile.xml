@@ -175,6 +175,25 @@
 			</dynamic>
 		</update>
 
+    <!--ADD-->
+    <delete id="Menu.InsertMenuMap" parameterClass="MenuMapInfo">
+      INSERT INTO
+      T_MENU_MAP
+      (MENU_MAP_ID,
+      SYSTEM_ID,
+      MENU_ID,
+      GROUP_ID,
+      IS_READ,
+      IS_WRITE)
+      VALUES
+      (#MenuMapId#,
+      #SystemId#,
+      #MenuId#,
+      #GroupId#,
+      #IsRead#,
+      #IsWrite#)
+    </delete>
+
     <!--DELETE-->
     <delete id="Menu.DeleteMenu" parameterClass="MenuInfo">
       DELETE
@@ -185,7 +204,7 @@
       AND MENU_ID = #MenuId#
     </delete>
 
-    <!--DELETE-->
+    <!--DELETE MAP-->
     <delete id="Menu.DeleteMenuMap" parameterClass="MenuInfo">
       DELETE
       FROM
