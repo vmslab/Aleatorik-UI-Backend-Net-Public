@@ -2,92 +2,91 @@ using Microsoft.AspNetCore.Mvc;
 using MozartUI.Services.Template.DAO;
 using MozartUI.Services.Template.DTO;
 
-namespace MozartUI.Services.Template.Controllers
+namespace MozartUI.Services.Template.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class MenuController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class MenuController : ControllerBase
+
+    private readonly ILogger<MenuController> _logger;
+    private readonly IMenuDao _menuDao;
+
+    public MenuController(ILogger<MenuController> logger, IMenuDao menuDao)
     {
+        _logger = logger;
+        _menuDao = menuDao;
+	}
 
-        private readonly ILogger<MenuController> _logger;
-        private readonly IMenuDao _menuDao;
-
-        public MenuController(ILogger<MenuController> logger, IMenuDao menuDao)
-        {
-            _logger = logger;
-            _menuDao = menuDao;
-		}
-
-		[HttpGet("/api/GetMenu/{systemId}")]
-		public IEnumerable<MenuInfo> GetAll(string systemId)
+	[HttpGet("/api/GetMenu/{systemId}")]
+	public IEnumerable<MenuInfo> GetAll(string systemId)
+	{
+		try
 		{
-			try
-			{
-				var result = _menuDao.GetAll(systemId);
-				_logger.LogInformation("result : {}", result);
-				Serilog.Log.Logger.Information(result.ToString());
-				return result;
-			}
-			catch (Exception e)
-			{
-				_logger.LogError("error : {}", e.Message);
-				Serilog.Log.Logger.Error(e.Message);
-				return new List<MenuInfo>();
-			}
+			var result = _menuDao.GetAll(systemId);
+			_logger.LogInformation("result : {}", result);
+			Serilog.Log.Logger.Information(result.ToString());
+			return result;
 		}
-
-		[HttpPost("/api/GetMenu")]
-		public IEnumerable<MenuInfo> GetAll(UserInfo userInfo)
+		catch (Exception e)
 		{
-			try
-			{
-				var result = _menuDao.GetAll(userInfo);
-				_logger.LogInformation("result : {}", result);
-				Serilog.Log.Logger.Information(result.ToString());
-				return result;
-			}
-			catch (Exception e)
-			{
-				_logger.LogError("error : {}", e.Message);
-				Serilog.Log.Logger.Error(e.Message);
-				return new List<MenuInfo>();
-			}
+			_logger.LogError("error : {}", e.Message);
+			Serilog.Log.Logger.Error(e.Message);
+			return new List<MenuInfo>();
 		}
+	}
 
-		[HttpPost("/api/GetMenuById")]
-        public MenuInfo GetById(MenuInfo menuInfo)
+	[HttpPost("/api/GetMenu")]
+	public IEnumerable<MenuInfo> GetAll(UserInfo userInfo)
+	{
+		try
+		{
+			var result = _menuDao.GetAll(userInfo);
+			_logger.LogInformation("result : {}", result);
+			Serilog.Log.Logger.Information(result.ToString());
+			return result;
+		}
+		catch (Exception e)
+		{
+			_logger.LogError("error : {}", e.Message);
+			Serilog.Log.Logger.Error(e.Message);
+			return new List<MenuInfo>();
+		}
+	}
+
+	[HttpPost("/api/GetMenuById")]
+    public MenuInfo GetById(MenuInfo menuInfo)
+    {
+        _logger.LogInformation("menuInfo : {}", menuInfo);
+
+        try
         {
-            _logger.LogInformation("menuInfo : {}", menuInfo);
-
-            try
-            {
-                var result = _menuDao.GetById(menuInfo);
-                _logger.LogInformation("result : {}", result);
-                return result;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError("error : {}", e.Message);
-                return new MenuInfo();
-            }
-
+            var result = _menuDao.GetById(menuInfo);
+            _logger.LogInformation("result : {}", result);
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return new MenuInfo();
         }
 
-        [HttpPost("/api/SaveMenu")]
-		public int Save(List<MenuInfo> menuInfos)
+    }
+
+    [HttpPost("/api/SaveMenu")]
+	public int Save(List<MenuInfo> menuInfos)
+	{
+		try
 		{
-			try
-			{
-				_logger.LogInformation("menuInfo : {}", menuInfos.Select(x => x.MenuId));
-				var result = _menuDao.Save(menuInfos);
-				_logger.LogInformation("result : {}", result);
-				return result;
-			}
-			catch (Exception e)
-			{
-				_logger.LogError("error : {}", e.Message);
-				return 0;
-			}
+			_logger.LogInformation("menuInfo : {}", menuInfos.Select(x => x.MenuId));
+			var result = _menuDao.Save(menuInfos);
+			_logger.LogInformation("result : {}", result);
+			return result;
+		}
+		catch (Exception e)
+		{
+			_logger.LogError("error : {}", e.Message);
+			return 0;
 		}
 	}
 }

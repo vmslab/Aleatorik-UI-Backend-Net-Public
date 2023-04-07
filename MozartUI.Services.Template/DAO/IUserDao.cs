@@ -1,14 +1,13 @@
 ﻿using MozartUI.Services.Template.DTO;
 
-namespace MozartUI.Services.Template.DAO
+namespace MozartUI.Services.Template.DAO;
+
+public interface IUserDao
 {
-    public interface IUserDao
-    {
-        public IEnumerable<UserInfo> GetAll();
-        public UserInfo GetByEmail(UserInfo userInfo);
-        public void Insert(UserInfo userInfo);
-        public int Update(UserInfo userInfo);
-        public int Delete(UserInfo userInfo);
-        public UserInfo Login(AuthInfo authInfo);
-    }
+    public IEnumerable<UserInfo> GetAll();
+    public UserInfo GetByEmail(UserInfo userInfo);
+    public void Insert(UserInfo userInfo);
+    public int Update(UserInfo userInfo);
+    public int Delete(UserInfo userInfo);
+    public UserInfo Login(AuthInfo authInfo);
 }

@@ -1,75 +1,74 @@
 using Microsoft.AspNetCore.Mvc;
 using MozartUI.Services.Template.DTO;
 
-namespace MozartUI.Services.Template.Controllers
+namespace MozartUI.Services.Template.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class FileController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class FileController : ControllerBase
+    private readonly ILogger<FileController> _logger;
+    private string _tempFilePath = @"C:\Temp\RestFile";
+
+    public FileController(ILogger<FileController> logger)
     {
-        private readonly ILogger<FileController> _logger;
-        private string _tempFilePath = @"C:\Temp\RestFile";
+        _logger = logger;
+    }
 
-        public FileController(ILogger<FileController> logger)
+    [HttpGet("/api/GetFile")]
+    public IEnumerable<object> GetFile()
+    {
+        try
         {
-            _logger = logger;
+            var files = FileHelper.GetFileList(_tempFilePath);
+            return files;
+        } 
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return new List<TodoInfo>();
+		}
+
+    }
+
+    [HttpPost("/api/UploadFile")]
+    public async Task<IActionResult> UploadFile(List<IFormFile> files)
+    {
+        if (files == null || files.Count == 0)
+        {
+            return BadRequest("No file selected");
         }
 
-        [HttpGet("/api/GetFile")]
-        public IEnumerable<object> GetFile()
-        {
-            try
-            {
-                var files = FileHelper.GetFileList(_tempFilePath);
-                return files;
-            } 
-            catch (Exception e)
-            {
-                _logger.LogError("error : {}", e.Message);
-                return new List<TodoInfo>();
-			}
+        _logger.LogInformation("file : {}", String.Join(',', files.Select(x => x.FileName)));
 
-        }
+        long size = files.Sum(f => f.Length);
 
-        [HttpPost("/api/UploadFile")]
-        public async Task<IActionResult> UploadFile(List<IFormFile> files)
+        try
         {
-            if (files == null || files.Count == 0)
+            if (Directory.Exists(_tempFilePath) == false)
             {
-                return BadRequest("No file selected");
+                Directory.CreateDirectory(_tempFilePath);
             }
 
-            _logger.LogInformation("file : {}", String.Join(',', files.Select(x => x.FileName)));
-
-            long size = files.Sum(f => f.Length);
-
-            try
+            foreach (var file in files)
             {
-                if (Directory.Exists(_tempFilePath) == false)
-                {
-                    Directory.CreateDirectory(_tempFilePath);
-                }
+                var filePath = Path.Combine(_tempFilePath, Path.GetRandomFileName());
 
-                foreach (var file in files)
+                if (file.Length > 0)
                 {
-                    var filePath = Path.Combine(_tempFilePath, Path.GetRandomFileName());
-
-                    if (file.Length > 0)
+                    using (var stream = System.IO.File.Create(filePath))
                     {
-                        using (var stream = System.IO.File.Create(filePath))
-                        {
-                            await file.CopyToAsync(stream);
-                        }
+                        await file.CopyToAsync(stream);
                     }
                 }
+            }
 
-                return Ok(new { count = files.Count, size });
-            }
-            catch (Exception e)
-            {
-                _logger.LogError("error : {}", e.Message);
-                return BadRequest("Error occurred. Please, Check log for detail");
-            }
+            return Ok(new { count = files.Count, size });
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return BadRequest("Error occurred. Please, Check log for detail");
         }
     }
 }

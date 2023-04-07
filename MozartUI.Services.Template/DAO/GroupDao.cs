@@ -1,46 +1,45 @@
 ﻿using MozartUI.Services.Template.DTO;
 using SqlBatis.DataMapper;
 
-namespace MozartUI.Services.Template.DAO
+namespace MozartUI.Services.Template.DAO;
+
+public class GroupDao : IGroupDao
 {
-    public class GroupDao : IGroupDao
+    public GroupDao(ISqlMapper mapper)
     {
-        public GroupDao(ISqlMapper mapper)
-        {
-            Mapper = mapper;
-        }
+        Mapper = mapper;
+    }
 
-        private ISqlMapper Mapper { get; }
+    private ISqlMapper Mapper { get; }
 
-        public IEnumerable<GroupInfo> GetAll()
-        {
-            return Mapper.QueryForList<GroupInfo>("Group.SelectGroups", null);
-        }
+    public IEnumerable<GroupInfo> GetAll()
+    {
+        return Mapper.QueryForList<GroupInfo>("Group.SelectGroups", null);
+    }
 
-        public GroupInfo GetById(GroupInfo groupInfo)
-        {
-            return Mapper.QueryForObject<GroupInfo>("Group.SelectGroup", groupInfo.GroupId);
-        }
+    public GroupInfo GetById(GroupInfo groupInfo)
+    {
+        return Mapper.QueryForObject<GroupInfo>("Group.SelectGroup", groupInfo.GroupId);
+    }
 
-        public IEnumerable<GroupInfo> GetBySystem(GroupInfo groupInfo)
-        {
-            return Mapper.QueryForList<GroupInfo>("Group.SelectGroupsBySystem", groupInfo.SystemId);
-        }
+    public IEnumerable<GroupInfo> GetBySystem(GroupInfo groupInfo)
+    {
+        return Mapper.QueryForList<GroupInfo>("Group.SelectGroupsBySystem", groupInfo.SystemId);
+    }
 
-        public void Insert(GroupInfo groupInfo)
-        {
-            Mapper.Insert("Group.InsertGroup", groupInfo);
-        }
+    public void Insert(GroupInfo groupInfo)
+    {
+        Mapper.Insert("Group.InsertGroup", groupInfo);
+    }
 
-		public int Update(GroupInfo groupInfo)
-        {
-            return Mapper.Update("Group.UpdateGroup", groupInfo);
-        }
+	public int Update(GroupInfo groupInfo)
+    {
+        return Mapper.Update("Group.UpdateGroup", groupInfo);
+    }
 
-		public int Delete(GroupInfo groupInfo)
-		{
-            Mapper.Update("User.UpdateUserGroup", groupInfo.GroupId);
-            return Mapper.Delete("Group.DeleteGroup", groupInfo.GroupId);
-        }
-	}
+	public int Delete(GroupInfo groupInfo)
+	{
+        Mapper.Update("User.UpdateUserGroup", groupInfo.GroupId);
+        return Mapper.Delete("Group.DeleteGroup", groupInfo.GroupId);
+    }
 }

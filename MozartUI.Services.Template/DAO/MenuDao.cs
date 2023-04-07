@@ -1,57 +1,56 @@
 ﻿using MozartUI.Services.Template.DTO;
 using SqlBatis.DataMapper;
 
-namespace MozartUI.Services.Template.DAO
+namespace MozartUI.Services.Template.DAO;
+
+public class MenuDao : IMenuDao
 {
-    public class MenuDao : IMenuDao
+    public MenuDao(ISqlMapper mapper)
     {
-        public MenuDao(ISqlMapper mapper)
-        {
-            Mapper = mapper;
-        }
+        Mapper = mapper;
+    }
 
-        private ISqlMapper Mapper { get; }
+    private ISqlMapper Mapper { get; }
 
-        public IEnumerable<MenuInfo> GetAll(string systemId)
-        {
-            return Mapper.QueryForList<MenuInfo>("Menu.SelectMenus", systemId);
-        }
+    public IEnumerable<MenuInfo> GetAll(string systemId)
+    {
+        return Mapper.QueryForList<MenuInfo>("Menu.SelectMenus", systemId);
+    }
 
-        public IEnumerable<MenuInfo> GetAll(UserInfo userInfo)
-        {
-            return Mapper.QueryForList<MenuInfo>("Menu.SelectMenusForUser", userInfo);
-        }
+    public IEnumerable<MenuInfo> GetAll(UserInfo userInfo)
+    {
+        return Mapper.QueryForList<MenuInfo>("Menu.SelectMenusForUser", userInfo);
+    }
 
-        public MenuInfo GetById(MenuInfo menuInfo)
-        {
-            return Mapper.QueryForObject<MenuInfo>("Menu.SelectMenu", menuInfo.MenuId);
-        }
+    public MenuInfo GetById(MenuInfo menuInfo)
+    {
+        return Mapper.QueryForObject<MenuInfo>("Menu.SelectMenu", menuInfo.MenuId);
+    }
 
-		public int Save(List<MenuInfo> menuInfos)
+	public int Save(List<MenuInfo> menuInfos)
+    {
+        var transaction = Mapper.BeginTransaction();
+        try
         {
-            var transaction = Mapper.BeginTransaction();
-            try
+            var affectedRow = 0;
+            foreach (var menuInfo in menuInfos)
             {
-                var affectedRow = 0;
-                foreach (var menuInfo in menuInfos)
+                if (menuInfo.State == "removed")
                 {
-                    if (menuInfo.State == "removed")
-                    {
-                        affectedRow += transaction.SqlMapper.Update("Menu.DeleteMenu", menuInfo);
-                        affectedRow += transaction.SqlMapper.Update("Menu.DeleteMenuMap", menuInfo);
-                    }
-                    else
-                    {
-                        affectedRow += transaction.SqlMapper.Update("Menu.MergeMenu", menuInfo);
-                    }
+                    affectedRow += transaction.SqlMapper.Update("Menu.DeleteMenu", menuInfo);
+                    affectedRow += transaction.SqlMapper.Update("Menu.DeleteMenuMap", menuInfo);
                 }
-                transaction.CommitTransaction();
-                return affectedRow;
-            } catch (Exception e) {
-                transaction.RollBackTransaction();
-                throw e;
-			}
-            return 0;
-        }
-	}
+                else
+                {
+                    affectedRow += transaction.SqlMapper.Update("Menu.MergeMenu", menuInfo);
+                }
+            }
+            transaction.CommitTransaction();
+            return affectedRow;
+        } catch (Exception e) {
+            transaction.RollBackTransaction();
+            throw e;
+		}
+        return 0;
+    }
 }

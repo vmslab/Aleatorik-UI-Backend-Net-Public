@@ -1,28 +1,27 @@
-﻿namespace MozartUI.Services.Template
+﻿namespace MozartUI.Services.Template;
+
+public class FileHelper
 {
-	public class FileHelper
+    public static List<object> GetFileList(string dirPath)
     {
-        public static List<object> GetFileList(string dirPath)
+        var files = new List<object>();
+
+        string[] entries = Directory.GetFileSystemEntries(dirPath, "*", SearchOption.AllDirectories);
+
+        foreach (var entry in entries)
         {
-            var files = new List<object>();
-
-            string[] entries = Directory.GetFileSystemEntries(dirPath, "*", SearchOption.AllDirectories);
-
-            foreach (var entry in entries)
+            if (File.Exists(entry))
             {
-                if (File.Exists(entry))
+                var fi = new FileInfo(entry);
+                files.Add(new
                 {
-                    var fi = new FileInfo(entry);
-                    files.Add(new
-                    {
-                        name = entry.Replace(dirPath + @"\", string.Empty),
-                        size = fi.Length,
-                        latestUpdateTime = fi.LastAccessTime.ToString("yyyy-MM-dd HH:mm:ss"),
-                    });
-                }
+                    name = entry.Replace(dirPath + @"\", string.Empty),
+                    size = fi.Length,
+                    latestUpdateTime = fi.LastAccessTime.ToString("yyyy-MM-dd HH:mm:ss"),
+                });
             }
-
-            return files;
         }
+
+        return files;
     }
 }

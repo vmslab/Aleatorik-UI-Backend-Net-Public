@@ -2,107 +2,106 @@ using Microsoft.AspNetCore.Mvc;
 using MozartUI.Services.Template.DAO;
 using MozartUI.Services.Template.DTO;
 
-namespace MozartUI.Services.Template.Controllers
+namespace MozartUI.Services.Template.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class GroupController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class GroupController : ControllerBase
+
+    private readonly ILogger<GroupController> _logger;
+    private readonly IGroupDao _groupDao;
+
+    public GroupController(ILogger<GroupController> logger, IGroupDao groupDao)
     {
+        _logger = logger;
+        _groupDao = groupDao;
+    }
 
-        private readonly ILogger<GroupController> _logger;
-        private readonly IGroupDao _groupDao;
-
-        public GroupController(ILogger<GroupController> logger, IGroupDao groupDao)
+    [HttpPost("/api/GetGroup")]
+    public IEnumerable<GroupInfo> GetAll()
+    {
+        try {
+            var result = _groupDao.GetAll();
+            _logger.LogInformation("result : {}", result);
+            return result;
+        } 
+        catch (Exception e)
         {
-            _logger = logger;
-            _groupDao = groupDao;
-        }
+            _logger.LogError("error : {}", e.Message);
+            return new List<GroupInfo>();
+		}
+    }
 
-        [HttpPost("/api/GetGroup")]
-        public IEnumerable<GroupInfo> GetAll()
+    [HttpPost("/api/GetGroupBySystem")]
+    public IEnumerable<GroupInfo> GetBySystem(GroupInfo groupInfo)
+    {
+        _logger.LogInformation("UserInfo : {}", groupInfo);
+
+        try
         {
-            try {
-                var result = _groupDao.GetAll();
-                _logger.LogInformation("result : {}", result);
-                return result;
-            } 
-            catch (Exception e)
-            {
-                _logger.LogError("error : {}", e.Message);
-                return new List<GroupInfo>();
-			}
+            var result = _groupDao.GetBySystem(groupInfo);
+            _logger.LogInformation("result : {}", result);
+            return result;
         }
-
-        [HttpPost("/api/GetGroupBySystem")]
-        public IEnumerable<GroupInfo> GetBySystem(GroupInfo groupInfo)
+        catch (Exception e)
         {
-            _logger.LogInformation("UserInfo : {}", groupInfo);
-
-            try
-            {
-                var result = _groupDao.GetBySystem(groupInfo);
-                _logger.LogInformation("result : {}", result);
-                return result;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError("error : {}", e.Message);
-                return new List<GroupInfo>();
-            }
+            _logger.LogError("error : {}", e.Message);
+            return new List<GroupInfo>();
         }
+    }
 
-        [HttpPost("/api/AddGroup")]
-        public int Insert(GroupInfo groupInfo)
-        {
-            try
-            {
-                _logger.LogInformation("GroupInfo : {}", groupInfo);
-                _groupDao.Insert(groupInfo);
-                return 1;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError("error : {}", e.Message);
-                return 0;
-            }
-        }
-
-        [HttpPut("/api/ModifyGroup")]
-        public int Update(GroupInfo groupInfo)
+    [HttpPost("/api/AddGroup")]
+    public int Insert(GroupInfo groupInfo)
+    {
+        try
         {
             _logger.LogInformation("GroupInfo : {}", groupInfo);
-            try
-            {
-                var result = _groupDao.Update(groupInfo);
-                _logger.LogInformation("result : {}", result);
-
-                return result;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError("error : {}", e.Message);
-                return 0;
-            }
-
+            _groupDao.Insert(groupInfo);
+            return 1;
         }
-
-        [HttpDelete("/api/RemoveGroup")]
-        public int Delete(GroupInfo groupInfo)
+        catch (Exception e)
         {
-            _logger.LogInformation("GroupInfo : {}", groupInfo);
-            try
-            {
-                var result = _groupDao.Delete(groupInfo);
-                _logger.LogInformation("result : {}", result);
-
-                return result;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError("error : {}", e.Message);
-                return 0;
-            }
-
+            _logger.LogError("error : {}", e.Message);
+            return 0;
         }
+    }
+
+    [HttpPut("/api/ModifyGroup")]
+    public int Update(GroupInfo groupInfo)
+    {
+        _logger.LogInformation("GroupInfo : {}", groupInfo);
+        try
+        {
+            var result = _groupDao.Update(groupInfo);
+            _logger.LogInformation("result : {}", result);
+
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+
+    }
+
+    [HttpDelete("/api/RemoveGroup")]
+    public int Delete(GroupInfo groupInfo)
+    {
+        _logger.LogInformation("GroupInfo : {}", groupInfo);
+        try
+        {
+            var result = _groupDao.Delete(groupInfo);
+            _logger.LogInformation("result : {}", result);
+
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+
     }
 }

@@ -1,44 +1,43 @@
 ﻿using MozartUI.Services.Template.DTO;
 using SqlBatis.DataMapper;
 
-namespace MozartUI.Services.Template.DAO
+namespace MozartUI.Services.Template.DAO;
+
+public class MenuMapDao : IMenuMapDao
 {
-    public class MenuMapDao : IMenuMapDao
+    public MenuMapDao(ISqlMapper mapper)
     {
-        public MenuMapDao(ISqlMapper mapper)
-        {
-            Mapper = mapper;
-        }
+        Mapper = mapper;
+    }
 
-        private ISqlMapper Mapper { get; }
+    private ISqlMapper Mapper { get; }
 
-		public IEnumerable<MenuMapInfo> GetAll(MenuMapInfo menuMapInfo)
-        {
-            return Mapper.QueryForList<MenuMapInfo>("MenuMap.SelectMenuMaps", menuMapInfo);
-        }
+	public IEnumerable<MenuMapInfo> GetAll(MenuMapInfo menuMapInfo)
+    {
+        return Mapper.QueryForList<MenuMapInfo>("MenuMap.SelectMenuMaps", menuMapInfo);
+    }
 
-		public MenuMapInfo GetById(string menuMapId)
-        {
-            return Mapper.QueryForObject<MenuMapInfo>("MenuMap.SelectMenuMap", menuMapId);
-        }
+	public MenuMapInfo GetById(string menuMapId)
+    {
+        return Mapper.QueryForObject<MenuMapInfo>("MenuMap.SelectMenuMap", menuMapId);
+    }
 
-		public int Save(List<MenuMapInfo> menuMapInfos)
+	public int Save(List<MenuMapInfo> menuMapInfos)
+    {
+        var transaction = Mapper.BeginTransaction();
+        try
         {
-            var transaction = Mapper.BeginTransaction();
-            try
+            var affectedRow = 0;
+            foreach (var menuMapInfo in menuMapInfos)
             {
-                var affectedRow = 0;
-                foreach (var menuMapInfo in menuMapInfos)
-                {
-                    affectedRow += transaction.SqlMapper.Update("MenuMap.MergeMenuMap", menuMapInfo);
-                }
-                transaction.CommitTransaction();
-                return affectedRow;
-            } catch (Exception e) {
-                transaction.RollBackTransaction();
-                throw e;
-			}
-            return 0;
-        }
-	}
+                affectedRow += transaction.SqlMapper.Update("MenuMap.MergeMenuMap", menuMapInfo);
+            }
+            transaction.CommitTransaction();
+            return affectedRow;
+        } catch (Exception e) {
+            transaction.RollBackTransaction();
+            throw e;
+		}
+        return 0;
+    }
 }
