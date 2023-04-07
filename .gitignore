@@ -113,7 +113,3 @@ _ReSharper*/
 .sonar/
 .sonarqube/
 .scannerwork/
-
-# custom
-Schema/schema.db
-appsettings.*
