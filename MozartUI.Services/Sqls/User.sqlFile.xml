@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="MozartUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <resultMaps>
+    <resultMap id="user-result"  class="UserInfo" >
+      <result property="Email"	column="EMAIL"/>
+      <result property="Name"	column="NAME"/>
+      <result property="Department"	column="DEPARTMENT"/>
+    </resultMap>
+  </resultMaps>
+  
+  <resultMaps>
+    <resultMap id="user-group-result"  class="UserInfo" >
+      <result property="Email"	column="EMAIL"/>
+      <result property="Name"	column="NAME"/>
+      <result property="Department"	column="DEPARTMENT"/>
+      <result property="GroupId"	column="GROUP_ID"/>
+      <result property="GroupName"	column="GROUP_NAME"/>
+    </resultMap>
+  </resultMaps>
+
+	<statements>
+
+		<!--SELECT All-->
+		<select id="User.SelectUsers" resultMap="user-group-result">
+      SELECT
+      T_USER.EMAIL,
+      T_USER.NAME as NAME,
+      T_USER.DEPARTMENT,
+      T_GROUP.GROUP_ID,
+      T_GROUP.NAME as GROUP_NAME
+      FROM
+      T_USER
+      LEFT JOIN
+      T_GROUP
+      ON
+      T_USER.GROUP_ID = T_GROUP.GROUP_ID
+    </select>
+
+		<!--SELECT BY EMAIL-->
+		<select id="User.SelectUser" parameterClass="string" resultMap="user-group-result">
+      SELECT
+      T_USER.EMAIL,
+      T_USER.NAME as NAME,
+      T_USER.DEPARTMENT,
+      T_USER.GROUP_ID as GROUP_ID,
+      T_GROUP.NAME as GROUP_NAME
+      FROM
+      T_USER
+      LEFT JOIN
+      T_GROUP
+      ON
+      T_USER.GROUP_ID = T_GROUP.GROUP_ID
+      WHERE
+      T_USER.EMAIL = #Email#
+    </select>
+
+		<!--INSERT-->
+		<insert id="User.InsertUser" parameterClass="UserInfo">
+      INSERT INTO
+      T_USER
+      (EMAIL,
+      NAME,
+      <isNotEmpty property="Department">
+        DEPARTMENT,
+      </isNotEmpty>
+      <isNotEmpty property="GroupId">
+        GROUP_ID,
+      </isNotEmpty>
+      PASSWORD)
+      VALUES
+      (#Email#,
+      #Name#,
+      <isNotEmpty property="Department">
+        DEPARTMENT = #Department#,
+      </isNotEmpty>
+      #Password#)
+    </insert>
+
+    <!--UPDATE-->
+    <update id="User.UpdateUser" parameterClass="UserInfo">
+      UPDATE
+      T_USER
+      SET
+      <dynamic prepend=" " close=" ">
+        <isNotEmpty prepend="," property="Department">
+          DEPARTMENT = #Department#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="Name">
+          NAME = #Name#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="Password">
+          PASSWORD = #Password#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="GroupId">
+          GROUP_ID = #GroupId#
+        </isNotEmpty>
+        WHERE
+        EMAIL = #Email#
+      </dynamic>
+    </update>
+
+    <!--UPDATE-->
+    <update id="User.UpdateUserGroup" parameterClass="string">
+      UPDATE
+      T_USER
+      SET
+      GROUP_ID = 'default'
+      WHERE
+      GROUP_ID = #GroupId#
+    </update>
+
+		<!--DELETE-->
+		<delete id="User.DeleteUser" parameterClass="string">
+			DELETE
+			FROM
+				T_USER
+			WHERE
+				Email = #Email#
+		</delete>
+
+    <!--LOGIN-->
+    <select id="User.Login" parameterClass="AuthInfo" resultMap="user-result">
+      SELECT
+      EMAIL,
+      NAME,
+      DEPARTMENT
+      FROM
+      T_USER
+      WHERE
+      EMAIL = #Email#
+      AND PASSWORD = #Password#
+    </select>
+
+	</statements>
+</sqlMap>

@@ -1,4 +1,4 @@
-﻿namespace MozartUI.Gantt
+﻿namespace MozartUI.Gantt.Data
 {
     public class GanttLink
     {

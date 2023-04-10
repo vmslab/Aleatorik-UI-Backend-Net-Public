@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MozartUI.Gantt
+namespace MozartUI.Gantt.Util
 {
     public class DateTimeRange
     {
@@ -54,8 +54,8 @@ namespace MozartUI.Gantt
 
         public DateTimeRange Intersect(DateTimeRange other)
         {
-            var start = this.From;
-            var end = this.To;
+            var start = From;
+            var end = To;
             var otherStart = other.From;
             var otherEnd = other.To;
             var isZeroLength = start == end;
@@ -114,12 +114,12 @@ namespace MozartUI.Gantt
 
         public IEnumerable<DateTimeRange> Subtract(DateTimeRange other)
         {
-            var start = this.From;
-            var end = this.To;
+            var start = From;
+            var end = To;
             var oStart = other.From;
             var oEnd = other.To;
 
-            if (this.Intersect(other) == null)
+            if (Intersect(other) == null)
             {
                 return new List<DateTimeRange> { this };
             }

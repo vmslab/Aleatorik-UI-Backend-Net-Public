@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MozartUI.Gantt
+namespace MozartUI.Gantt.Data
 {
     public class GanttHeaderInfos
     {
