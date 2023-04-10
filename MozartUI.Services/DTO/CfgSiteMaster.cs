@@ -1,4 +1,4 @@
-namespace MozartUI.Services.Template.DTO;
+namespace MozartUI.Services.DTO;
 
 public class CfgSiteMaster
 {

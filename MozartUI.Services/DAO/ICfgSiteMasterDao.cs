@@ -1,6 +1,6 @@
-﻿using MozartUI.Services.Template.DTO;
+﻿using MozartUI.Services.DTO;
 
-namespace MozartUI.Services.Template.DAO;
+namespace MozartUI.Services.DAO;
 
 public interface ICfgSiteMasterDao
 {

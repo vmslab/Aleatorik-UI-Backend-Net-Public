@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using MozartUI.Services.Template.DAO;
-using MozartUI.Services.Template.DTO;
+using MozartUI.Services.DAO;
+using MozartUI.Services.DTO;
 
-namespace MozartUI.Services.Template.Controllers;
+namespace MozartUI.Services.Controllers;
 
 [ApiController]
 [Route("[controller]")]

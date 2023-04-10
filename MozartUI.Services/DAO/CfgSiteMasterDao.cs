@@ -1,7 +1,7 @@
-﻿using MozartUI.Services.Template.DTO;
+﻿using MozartUI.Services.DTO;
 using SqlBatis.DataMapper;
 
-namespace MozartUI.Services.Template.DAO;
+namespace MozartUI.Services.DAO;
 
 public class CfgSiteMasterDao : ICfgSiteMasterDao
 {
