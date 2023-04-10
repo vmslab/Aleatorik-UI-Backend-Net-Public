@@ -33,6 +33,8 @@ public class Startup
         services.AddSingleton<IMenuDao, MenuDao>();
         services.AddSingleton<IMenuMapDao, MenuMapDao>();
 
+        services.AddSingleton<ICfgSiteMasterDao, CfgSiteMasterDao>();
+
         services.AddSqlMapper(options => Configuration.GetSection("DB").Bind(options));
         services.AddHttpContextAccessor();
     }
