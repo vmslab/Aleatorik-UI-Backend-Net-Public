@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MozartUI.Gantt
+namespace MozartUI.Gantt.Data
 {
     public class GanttMilestone
     {

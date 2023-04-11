@@ -1,6 +1,7 @@
+using MozartUI.Gantt.Data;
 using System.Collections.Generic;
 
-namespace MozartUI.Gantt
+namespace MozartUI.Gantt.Util
 {
     public static class GanttHelper
     {

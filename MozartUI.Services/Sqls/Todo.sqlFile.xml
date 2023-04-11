@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="MozartUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="todo-result"  class="TodoInfo" >
+			<result property="Id"    		column="ID"/>
+			<result property="Title"    	column="TITLE"/>
+			<result property="Contents"     column="CONTENTS"/>
+			<result property="IsFinished"	column="IS_FINISHED"/>
+			<result property="FinishedDate"	column="FINISHED_DATE"/>
+			<result property="ExpectedDate"	column="EXPECTED_DATE"/>
+			<result property="Priority"		column="PRIORITY"/>
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+
+		<!--SELECT All-->
+		<select id="Todo.SelectTodos" resultMap="todo-result">
+			SELECT
+				ID,
+				TITLE,
+				CONTENTS,
+				IS_FINISHED,
+				FINISHED_DATE,
+				EXPECTED_DATE,
+				PRIORITY
+			FROM
+				TODO
+		</select>
+
+		<!--SELECT BY ID-->
+		<select id="Todo.SelectTodo" parameterClass="string" resultMap="todo-result">
+			SELECT
+				ID,
+				TITLE,
+				CONTENTS,
+				IS_FINISHED,
+				FINISHED_DATE,
+				EXPECTED_DATE,
+				PRIORITY
+			FROM
+				TODO
+			WHERE
+				ID = #Id#
+		</select>
+
+		<!--INSERT-->
+		<insert id="Todo.InsertTodo" parameterClass="TodoInfo">
+			INSERT INTO
+			TODO
+				(ID,
+				TITLE,
+				CONTENTS,
+				IS_FINISHED,
+				FINISHED_DATE,
+				EXPECTED_DATE,
+				PRIORITY)
+			VALUES
+				(#Id#,
+				#Title#,
+				#Contents#,
+				#IsFinished#,
+				#FinishedDate#,
+				#ExpectedDate#,
+				#Priority#)
+		</insert>
+
+		<!--UPDATE-->
+		<update id="Todo.UpdateTodo" parameterClass="TodoInfo">
+			UPDATE
+				TODO
+			SET
+			<dynamic prepend=" " close=" ">
+				<isNotEmpty prepend="," property="Title">
+					TITLE = #Title#
+				</isNotEmpty>
+				<isNotEmpty prepend="," property="Contents">
+					CONTENTS = #Contents#
+				</isNotEmpty>
+				<isNotEmpty prepend="," property="IsFinished">
+					IS_FINISHED = #IsFinished#
+				</isNotEmpty>
+				<isNotEmpty prepend="," property="FinishedDate">
+					FINISHED_DATE = #FinishedDate#
+				</isNotEmpty>
+				<isNotEmpty prepend="," property="ExpectedDate">
+					EXPECTED_DATE = #ExpectedDate#
+				</isNotEmpty>
+				<isNotEmpty prepend="," property="Priority">
+					PRIORITY = #Priority#
+				</isNotEmpty>
+				WHERE
+					ID = #Id#
+			</dynamic>
+		</update>
+
+		<!--DELETE-->
+		<delete id="Todo.DeleteTodo" parameterClass="string">
+			DELETE
+			FROM
+				TODO
+			WHERE
+				ID = #Id#
+		</delete>
+
+	</statements>
+</sqlMap>
