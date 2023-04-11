@@ -113,3 +113,4 @@ _ReSharper*/
 .sonar/
 .sonarqube/
 .scannerwork/
+MozartUI.Services/appsettings.json
