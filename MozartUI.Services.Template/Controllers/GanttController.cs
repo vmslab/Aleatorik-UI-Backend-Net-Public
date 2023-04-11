@@ -19,7 +19,7 @@ public class GanttController : ControllerBase
         _ganttDao = ganttDao;
     }
 
-    [HttpGet("/api/resource/gantt/info")]
+    [HttpGet("/api/gantt/resource/info")]
     public GetResourceGanttInfo GetResourceGanttInfo()
     {
         var result = _ganttDao.GetResourceGanttInfo();
@@ -28,7 +28,7 @@ public class GanttController : ControllerBase
         return result;
     }
 
-    [HttpGet("/api/resource/gantt/data")]
+    [HttpGet("/api/gantt/resource/data")]
     public IEnumerable<GanttRow> GetResourceGanttData()
     {
         var result = new List<GanttRow>();
@@ -71,7 +71,7 @@ public class GanttController : ControllerBase
         return result;
     }
 
-    [HttpGet("/api/production/gantt/info")]
+    [HttpGet("/api/gantt/production/info")]
     public GetProductionGanttInfo GetProductionGanttInfo()
     {
         var result = _ganttDao.GetProductionGanttInfo();

@@ -21,7 +21,8 @@ static class JwtUtil
             
             //new Claim(ClaimTypes.Name, userName),
             //new Claim(ClaimTypes.Country, RegionInfo.CurrentRegion.DisplayName),
-
+            
+            new Claim(JwtRegisteredClaimNames.Name, userName),
             new Claim(JwtRegisteredClaimNames.NameId, userName),
             new Claim(JwtRegisteredClaimNames.Jti, JwtUtil.JtiGenerator()),
             new Claim(JwtRegisteredClaimNames.Iat,

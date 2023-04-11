@@ -25,13 +25,11 @@ public class MenuController : ControllerBase
 		{
 			var result = _menuDao.GetAll(systemId);
 			_logger.LogInformation("result : {}", result);
-			Serilog.Log.Logger.Information(result.ToString());
 			return result;
 		}
 		catch (Exception e)
 		{
 			_logger.LogError("error : {}", e.Message);
-			Serilog.Log.Logger.Error(e.Message);
 			return new List<MenuInfo>();
 		}
 	}
@@ -43,13 +41,11 @@ public class MenuController : ControllerBase
 		{
 			var result = _menuDao.GetAll(userInfo);
 			_logger.LogInformation("result : {}", result);
-			Serilog.Log.Logger.Information(result.ToString());
 			return result;
 		}
 		catch (Exception e)
 		{
 			_logger.LogError("error : {}", e.Message);
-			Serilog.Log.Logger.Error(e.Message);
 			return new List<MenuInfo>();
 		}
 	}

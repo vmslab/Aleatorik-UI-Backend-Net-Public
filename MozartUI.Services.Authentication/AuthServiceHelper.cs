@@ -57,6 +57,12 @@ public class AuthServiceHelper
 				SameSite = SameSiteMode.Strict,
 				Expires = SystemClock.UtcNow.Add(_authManager.AccessTokenExpiration),
 			});
+			httpContext.Response.Cookies.Append("user_identity", WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(userId)), new CookieOptions
+			{
+				HttpOnly = true,
+				SameSite = SameSiteMode.Strict,
+				Expires = SystemClock.UtcNow.Add(_authManager.AccessTokenExpiration),
+			});
 			await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, jwtResult.Principal);
 		}
 
@@ -82,6 +88,7 @@ public class AuthServiceHelper
 		//await httpContext?.SignOutAsync(IdentityConstants.TwoFactorUserIdScheme);
 
 		httpContext.Response.Cookies.Delete("access_token");
+		httpContext.Response.Cookies.Delete("user_identity");
 
 		await httpContext?.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 	}
@@ -105,6 +112,12 @@ public class AuthServiceHelper
 			//    jwtResult.Principal,
 			//    new AuthenticationProperties());
 			httpContext.Response.Cookies.Append("access_token", WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(jwtResult.AccessToken)), new CookieOptions
+			{
+				HttpOnly = true,
+				SameSite = SameSiteMode.Strict,
+				Expires = SystemClock.UtcNow.Add(_authManager.AccessTokenExpiration),
+			});
+			httpContext.Response.Cookies.Append("user_identity", WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token.UserName)), new CookieOptions
 			{
 				HttpOnly = true,
 				SameSite = SameSiteMode.Strict,

@@ -20,6 +20,7 @@
 
 	  <!-- oracle db -->
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.131" />
+    <PackageReference Include="Serilog.Enrichers.ClientInfo" Version="1.2.0" />
 
 	  <!-- mssql db -->
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
@@ -82,5 +83,7 @@
     </Reference>
     <ProjectReference Include="..\MozartUI.Services.Authentication\MozartUI.Services.Authentication.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

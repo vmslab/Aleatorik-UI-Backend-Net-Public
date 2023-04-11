@@ -25,7 +25,6 @@ public class MenuMapController : ControllerBase
         {
             var result = _menuMapDao.GetAll(menuMapInfo);
             _logger.LogInformation("result : {}", result);
-            Serilog.Log.Logger.Information(result.ToString());
             return result;
         }
         catch (Exception e)

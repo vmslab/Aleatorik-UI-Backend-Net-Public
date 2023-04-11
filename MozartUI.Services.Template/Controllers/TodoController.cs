@@ -24,7 +24,6 @@ public class TodoController : ControllerBase
         try {
             var result = _todoDao.GetAll();
             _logger.LogInformation("result : {}", result);
-            Serilog.Log.Logger.Information(result.ToString());
             return result;
         } 
         catch (Exception e)
