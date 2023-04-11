@@ -16,7 +16,6 @@ public class LogController : ControllerBase
         _logger = logger;
     }
 
-    [AllowAnonymous]
     [HttpGet("/api/GetLog/{fileName}")]
     public IEnumerable<string> GetLog(string fileName)
     {
@@ -47,7 +46,6 @@ public class LogController : ControllerBase
         }
     }
 
-    [AllowAnonymous]
     [HttpGet("/api/GetLog/{fileName}/{from}/{to}")]
     public IEnumerable<string> GetLog(string fileName, int from, int to)
     {
