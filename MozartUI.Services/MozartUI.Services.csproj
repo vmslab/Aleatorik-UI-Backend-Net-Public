@@ -57,28 +57,118 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Sqls\Gantt.sqlFile.xml">
+    <None Update="Sqls\exp\Gantt.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmDemand.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmCustInfo.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmResource.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmOperResource.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmOperResourceSub1.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmConstInfo.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmPmPlan.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmSetupInfo.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmCalendar.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmCalendarSub1.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmCalendarSub2.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmWip.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmSite.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmAllocGroup.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmFactoryOper.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmCodeGroup.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmCodeGroupSub1.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmProperty.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmItem.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmBuffer.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmIsb.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmBom.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmBomSub1.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmBomSub2.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmBomSub3.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmRouting.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmRoutingOper.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmRoutingOperSub1.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmBomRouting.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmBomRoutingSub1.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\mdm\MdmStage.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\Member.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\Group.sqlFile.xml">
+    <None Update="Sqls\sys\Group.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\MenuMap.sqlFile.xml">
+    <None Update="Sqls\sys\MenuMap.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\Menu.sqlFile.xml">
+    <None Update="Sqls\sys\Menu.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\CfgSiteMaster.sqlFile.xml">
+    <None Update="Sqls\sys\User.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\User.sqlFile.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Sqls\Todo.sqlFile.xml">
+    <None Update="Sqls\exp\Todo.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -88,6 +178,21 @@
       <HintPath>..\MozartUI.Gantt\bin\Debug\net6.0\MozartUI.Gantt.dll</HintPath>
     </Reference>
     <ProjectReference Include="..\MozartUI.Services.Authentication\MozartUI.Services.Authentication.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\out\" />
+    <Folder Include="Controllers\plm\" />
+    <Folder Include="Controllers\aor\" />
+    <Folder Include="DAO\aor\" />
+    <Folder Include="DAO\out\" />
+    <Folder Include="DAO\plm\" />
+    <Folder Include="DTO\aor\" />
+    <Folder Include="DTO\out\" />
+    <Folder Include="DTO\plm\" />
+    <Folder Include="Sqls\out\" />
+    <Folder Include="Sqls\plm\" />
+    <Folder Include="Sqls\aor\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="MozartUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnMdmSite"  class="MdmSite" >
+			<result property="siteID"    	column="SITE_ID"/>
+			<result property="siteType"		column="SITE_TYPE"/>
+			<result property="createTime"   column="CREATE_TIME"/>
+			<result property="createUser"	column="CREATE_USER"/>
+			<result property="updateTime"	column="UPDATE_TIME"/>
+			<result property="updateUser"	column="UPDATE_USER"/>
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+		<!--SELECT All-->
+		<select id="MdmSite.Select" resultMap="rtnMdmSite">
+			SELECT SITE_ID
+				 , SITE_TYPE
+				 , CREATE_TIME
+				 , CREATE_USER
+				 , UPDATE_TIME
+				 , UPDATE_USER
+			  FROM CFG_SITE_MASTER
+		</select>
+
+		<!--SELECT BY ID-->
+		<select id="MdmSite.SelectID" parameterClass="string" resultMap="rtnMdmSite">
+			SELECT SITE_ID
+			     , SITE_TYPE
+			     , CREATE_TIME
+			     , CREATE_USER
+			     , UPDATE_TIME
+			     , UPDATE_USER
+			  FROM CFG_SITE_MASTER
+			 WHERE SITE_ID = #siteID#
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmSite.Insert" parameterClass="MdmSite">
+			INSERT INTO CFG_SITE_MASTER
+				 ( SITE_ID
+				 , SITE_TYPE
+				 , CREATE_TIME
+				 , CREATE_USER
+				 , UPDATE_TIME
+				 , UPDATE_USER
+				 ) VALUES
+				 ( #siteID#
+				 , #siteType#
+				 , #createTime#
+				 , #createUser#
+				 , #updateTime#
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmSite.Update" parameterClass="MdmSite">
+			UPDATE CFG_SITE_MASTER
+			   SET 
+			<dynamic prepend=" " close=" ">
+				<isNotEmpty prepend="," property="siteType">
+					SITE_TYPE = #siteType#
+				</isNotEmpty>
+				<isNotEmpty prepend="," property="updateTime">
+					UPDATE_TIME = #updateTime#
+				</isNotEmpty>
+				<isNotEmpty prepend="," property="updateUser">
+					UPDATE_USER = #updateUser#
+				</isNotEmpty>
+				WHERE SITE_ID = #siteID#
+			</dynamic>
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmSite.Delete" parameterClass="string">
+			DELETE
+			  FROM CFG_SITE_MASTER
+			 WHERE SITE_ID = #siteID#
+		</delete>
+
+	</statements>
+</sqlMap>
