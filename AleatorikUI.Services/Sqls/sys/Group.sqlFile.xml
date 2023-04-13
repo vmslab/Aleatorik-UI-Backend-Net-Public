@@ -25,7 +25,7 @@
     </select>
 
     <!--SELECT BY SYSTEM-->
-    <select id="Group.SelectGroupsBySystem" parameterClass="GroupInfo" resultMap="group-result">
+    <select id="Group.SelectGroupsBySystem" parameterClass="string" resultMap="group-result">
       SELECT
       GROUP_ID,
       SYSTEM_ID,
@@ -34,7 +34,7 @@
       FROM
       T_GROUP
       WHERE
-      SYSTEM_ID = #SystemId#
+      SYSTEM_ID = #Id#
     </select>
 
     <!--SELECT BY ID-->
