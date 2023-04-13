@@ -1,11 +1,11 @@
-﻿using MozartUI.Services.Authentication;
-using SqlBatis.DataMapper.DependencyInjection;
-using MozartUI.Services.Configuration;
-using MozartUI.Services.DAO.mdm;
-using MozartUI.Services.DAO.exp;
-using MozartUI.Services.DAO.sys;
+﻿using SqlBatis.DataMapper.DependencyInjection;
+using AleatorikUI.Services.DAO.mdm;
+using AleatorikUI.Services.DAO.exp;
+using AleatorikUI.Services.DAO.sys;
+using AleatorikUI.Services.Configuration;
+using AleatorikUI.Services.Authentication;
 
-namespace MozartUI.Services;
+namespace AleatorikUI.Services;
 public class Startup
 {
     IConfiguration _configuration;
@@ -31,8 +31,8 @@ public class Startup
         /**
          *        기준 정보 관리
          */
-        services.AddSingleton<IMdmStageDao,              MdmStageDao>();            // 스테이지
-        services.AddSingleton<IMdmSiteDao,               MdmSiteDao>();             // 사이트
+        services.AddSingleton<IMdmStageDao, MdmStageDao>();            // 스테이지
+        services.AddSingleton<IMdmSiteDao, MdmSiteDao>();             // 사이트
         /*
        services.AddSingleton<IMdmAllocGroupDao,         MdmAllocGroupDao>();       // 할당그룹
                                                                                // 
@@ -96,7 +96,7 @@ public class Startup
          */
         services.AddSingleton<ITodoDao, TodoDao>();
         services.AddSingleton<IGanttDao, GanttDao>();
-        
+
         services.AddSqlMapper(options => Configuration.GetSection("DB").Bind(options));
         services.AddHttpContextAccessor();
     }

@@ -1,6 +1,6 @@
-﻿using MozartUI.Services.DTO.sys;
+﻿using AleatorikUI.Services.DTO.sys;
 
-namespace MozartUI.Services.DAO.mdm;
+namespace AleatorikUI.Services.DAO.mdm;
 
 public interface IMdmBomRoutingSub1Dao
 {

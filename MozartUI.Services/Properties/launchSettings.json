@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "MozartUI.Services": {
+    "AleatorikUI.Services": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

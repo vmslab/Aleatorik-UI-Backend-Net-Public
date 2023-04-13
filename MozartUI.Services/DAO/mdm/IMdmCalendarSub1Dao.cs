@@ -1,4 +1,4 @@
-﻿namespace MozartUI.Services.DAO.mdm
+﻿namespace AleatorikUI.Services.DAO.mdm
 {
     public interface IMdmCalendarSub1Dao
     {

@@ -1,8 +1,8 @@
+using AleatorikUI.Services.DAO.exp;
+using AleatorikUI.Services.DTO.exp;
 using Microsoft.AspNetCore.Mvc;
-using MozartUI.Services.DAO.exp;
-using MozartUI.Services.DTO.exp;
 
-namespace MozartUI.Services.Controllers.exp;
+namespace AleatorikUI.Services.Controllers.exp;
 
 [ApiController]
 [Route("[controller]")]

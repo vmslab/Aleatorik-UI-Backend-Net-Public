@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MozartUI.Gantt.Util
+namespace AleatorikUI.Gantt.Util
 {
     public class DateTimeRange
     {

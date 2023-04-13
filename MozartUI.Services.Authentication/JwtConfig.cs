@@ -1,4 +1,4 @@
-﻿namespace MozartUI.Services.Authentication;
+﻿namespace AleatorikUI.Services.Authentication;
 
 public class JwtConfig
 {

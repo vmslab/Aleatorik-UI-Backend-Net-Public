@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace MozartUI.Services.Authentication;
+namespace AleatorikUI.Services.Authentication;
 
 public class JwtAuthManager : IJwtAuthManager
 {

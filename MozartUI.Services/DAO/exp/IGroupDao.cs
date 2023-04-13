@@ -1,6 +1,6 @@
-﻿using MozartUI.Services.DTO.sys;
+﻿using AleatorikUI.Services.DTO.sys;
 
-namespace MozartUI.Services.DAO.exp;
+namespace AleatorikUI.Services.DAO.exp;
 
 public interface IGroupDao
 {

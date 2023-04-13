@@ -1,7 +1,7 @@
-﻿using MozartUI.Services.DTO.sys;
+﻿using AleatorikUI.Services.DTO.sys;
 using SqlBatis.DataMapper;
 
-namespace MozartUI.Services.DAO.exp;
+namespace AleatorikUI.Services.DAO.exp;
 
 public class GroupDao : IGroupDao
 {

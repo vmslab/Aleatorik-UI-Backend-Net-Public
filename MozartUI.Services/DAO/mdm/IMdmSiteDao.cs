@@ -1,5 +1,6 @@
-﻿using MozartUI.Services.DTO.mdm;
-namespace MozartUI.Services.DAO.mdm
+﻿using AleatorikUI.Services.DTO.mdm;
+
+namespace AleatorikUI.Services.DAO.mdm
 {
     public interface IMdmSiteDao
     {

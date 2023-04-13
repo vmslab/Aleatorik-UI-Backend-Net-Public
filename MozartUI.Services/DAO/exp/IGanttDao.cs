@@ -1,6 +1,6 @@
-using MozartUI.Services.DTO.exp;
+using AleatorikUI.Services.DTO.exp;
 
-namespace MozartUI.Services.DAO.exp;
+namespace AleatorikUI.Services.DAO.exp;
 
 public interface IGanttDao
 {

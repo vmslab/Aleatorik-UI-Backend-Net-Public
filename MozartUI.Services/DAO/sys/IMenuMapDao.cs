@@ -1,6 +1,6 @@
-﻿using MozartUI.Services.DTO.sys;
+﻿using AleatorikUI.Services.DTO.sys;
 
-namespace MozartUI.Services.DAO.sys;
+namespace AleatorikUI.Services.DAO.sys;
 
 public interface IMenuMapDao
 {

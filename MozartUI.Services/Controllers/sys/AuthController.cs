@@ -1,14 +1,15 @@
 ﻿using System.Text;
 using System.Web;
+using AleatorikUI.Services.Authentication;
+using AleatorikUI.Services.DAO.sys;
+using AleatorikUI.Services.DTO.sys;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
-using MozartUI.Services.Authentication;
-using MozartUI.Services.DAO.sys;
-using MozartUI.Services.DTO;
-using MozartUI.Services.DTO.sys;
+using AleatorikUI.Services.DTO;
+using AleatorikUI.Services.DTO.sys;
 
-namespace MozartUI.Services.Controllers.sys;
+namespace AleatorikUI.Services.Controllers.sys;
 
 [Authorize]
 [Route("auth/[controller]")]

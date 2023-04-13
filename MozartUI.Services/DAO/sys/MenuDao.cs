@@ -1,7 +1,7 @@
-﻿using MozartUI.Services.DTO.sys;
+﻿using AleatorikUI.Services.DTO.sys;
 using SqlBatis.DataMapper;
 
-namespace MozartUI.Services.DAO.sys;
+namespace AleatorikUI.Services.DAO.sys;
 
 public class MenuDao : IMenuDao
 {

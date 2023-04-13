@@ -1,4 +1,4 @@
-namespace MozartUI.Services.DTO.mdm;
+namespace AleatorikUI.Services.DTO.mdm;
 
 public class MdmBomSub2
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MozartUI.Gantt.Data
+namespace AleatorikUI.Gantt.Data
 {
     public class GanttTask
     {

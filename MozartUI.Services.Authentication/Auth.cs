@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MozartUI.Services.Authentication;
+namespace AleatorikUI.Services.Authentication;
 
 static class Auth
 {

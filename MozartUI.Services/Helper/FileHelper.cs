@@ -1,4 +1,4 @@
-﻿namespace MozartUI.Services.Helper;
+﻿namespace AleatorikUI.Services.Helper;
 
 public class FileHelper
 {

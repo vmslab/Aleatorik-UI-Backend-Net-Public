@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using MozartUI.Services.Model;
+using AleatorikUI.Services.Model;
 using MozartUI.Gantt.Util;
 using MozartUI.Gantt.Data;
-using MozartUI.Services.DTO.exp;
-using MozartUI.Services.DAO.exp;
+using AleatorikUI.Services.DTO.exp;
+using AleatorikUI.Services.DAO.exp;
 
-namespace MozartUI.Services.Controllers.exp;
+namespace AleatorikUI.Services.Controllers.exp;
 
 [ApiController]
 [Route("[controller]")]

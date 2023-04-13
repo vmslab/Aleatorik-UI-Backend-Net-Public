@@ -1,6 +1,6 @@
 using MozartUI.Gantt.Data;
 
-namespace MozartUI.Services.Model;
+namespace AleatorikUI.Services.Model;
 
 public class ResourceGanttRow : GanttRow
 {

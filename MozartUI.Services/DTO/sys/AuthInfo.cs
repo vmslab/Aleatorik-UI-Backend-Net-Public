@@ -1,4 +1,4 @@
-﻿namespace MozartUI.Services.DTO.sys;
+﻿namespace AleatorikUI.Services.DTO.sys;
 
 public class AuthInfo
 {

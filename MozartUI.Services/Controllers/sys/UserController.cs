@@ -1,8 +1,8 @@
+using AleatorikUI.Services.DAO.sys;
+using AleatorikUI.Services.DTO.sys;
 using Microsoft.AspNetCore.Mvc;
-using MozartUI.Services.DAO.sys;
-using MozartUI.Services.DTO.sys;
 
-namespace MozartUI.Services.Controllers.sys;
+namespace AleatorikUI.Services.Controllers.sys;
 
 [ApiController]
 [Route("[controller]")]

@@ -177,7 +177,7 @@
     <Reference Include="MozartUI.Gantt">
       <HintPath>..\MozartUI.Gantt\bin\Debug\net6.0\MozartUI.Gantt.dll</HintPath>
     </Reference>
-    <ProjectReference Include="..\MozartUI.Services.Authentication\MozartUI.Services.Authentication.csproj" />
+    <ProjectReference Include="..\MozartUI.Services.Authentication\AleatorikUI.Services.Authentication.csproj" />
   </ItemGroup>
 
   <ItemGroup>

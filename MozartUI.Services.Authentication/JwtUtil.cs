@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 
-namespace MozartUI.Services.Authentication;
+namespace AleatorikUI.Services.Authentication;
 
 static class JwtUtil
 {
@@ -24,7 +24,7 @@ static class JwtUtil
             
             new Claim(JwtRegisteredClaimNames.Name, userName),
             new Claim(JwtRegisteredClaimNames.NameId, userName),
-            new Claim(JwtRegisteredClaimNames.Jti, JwtUtil.JtiGenerator()),
+            new Claim(JwtRegisteredClaimNames.Jti, JtiGenerator()),
             new Claim(JwtRegisteredClaimNames.Iat,
                     new DateTimeOffset(now).ToUniversalTime().ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
         };

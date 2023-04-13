@@ -11,7 +11,7 @@
 //using System.Reflection;
 //using System.Text;
 
-//namespace MozartUI.Services.Helper
+//namespace AleatorikUI.Services.Helper
 //{
 //	public class ExcelHelper
 //    {

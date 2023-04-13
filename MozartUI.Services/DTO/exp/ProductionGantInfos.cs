@@ -1,4 +1,4 @@
-namespace MozartUI.Services.DTO.exp;
+namespace AleatorikUI.Services.DTO.exp;
 
 public class ProductionGantInfos
 {

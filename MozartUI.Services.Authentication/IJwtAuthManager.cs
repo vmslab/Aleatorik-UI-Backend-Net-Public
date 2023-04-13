@@ -3,7 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 
-namespace MozartUI.Services.Authentication;
+namespace AleatorikUI.Services.Authentication;
 
 public interface IJwtAuthManager
 {

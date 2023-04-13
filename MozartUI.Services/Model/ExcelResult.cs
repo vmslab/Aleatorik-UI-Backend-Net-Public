@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace MozartUI.Services.Model;
+namespace AleatorikUI.Services.Model;
 
 public class ExcelResult
 {

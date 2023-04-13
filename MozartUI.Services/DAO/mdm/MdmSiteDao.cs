@@ -1,7 +1,7 @@
-﻿using MozartUI.Services.DTO.mdm;
+﻿using AleatorikUI.Services.DTO.mdm;
 using SqlBatis.DataMapper;
 
-namespace MozartUI.Services.DAO.mdm;
+namespace AleatorikUI.Services.DAO.mdm;
 
 public class MdmSiteDao : IMdmSiteDao
 {

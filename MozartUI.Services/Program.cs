@@ -1,4 +1,4 @@
-using MozartUI.Services;
+using AleatorikUI.Services;
 
 Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>

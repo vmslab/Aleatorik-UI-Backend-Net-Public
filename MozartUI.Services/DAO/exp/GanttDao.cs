@@ -1,7 +1,7 @@
-using MozartUI.Services.DTO.exp;
+using AleatorikUI.Services.DTO.exp;
 using SqlBatis.DataMapper;
 
-namespace MozartUI.Services.DAO.exp;
+namespace AleatorikUI.Services.DAO.exp;
 
 public class GanttDao : IGanttDao
 {

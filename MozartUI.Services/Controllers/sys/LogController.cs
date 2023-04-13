@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MozartUI.Services.Controllers.sys;
+namespace AleatorikUI.Services.Controllers.sys;
 
 [ApiController]
 [Route("[controller]")]

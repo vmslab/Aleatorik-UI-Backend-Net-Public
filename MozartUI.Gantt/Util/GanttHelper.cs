@@ -1,7 +1,7 @@
-using MozartUI.Gantt.Data;
+using AleatorikUI.Gantt.Data;
 using System.Collections.Generic;
 
-namespace MozartUI.Gantt.Util
+namespace AleatorikUI.Gantt.Util
 {
     public static class GanttHelper
     {
