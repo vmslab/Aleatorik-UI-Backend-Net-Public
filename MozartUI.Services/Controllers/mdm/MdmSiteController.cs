@@ -59,9 +59,6 @@ public class MdmSiteController : ControllerBase
     {
         try
         {
-            mdmSite.createTime = DateTime.Now;
-            mdmSite.updateTime = DateTime.Now;
-
             _logger.LogInformation("Insert : {}", mdmSite);
             _mdmSiteDao.Insert(mdmSite);
             return 1;
@@ -73,7 +70,7 @@ public class MdmSiteController : ControllerBase
         }
     }
 
-    [HttpPut("/api/MdmSite/{siteID}")]
+    [HttpPatch("/api/MdmSite/{siteID}")]
     public int Update(MdmSite mdmSite, string siteID)
     {
         _logger.LogInformation("Update : {}", mdmSite);

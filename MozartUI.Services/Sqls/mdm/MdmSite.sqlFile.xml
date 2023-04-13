@@ -49,9 +49,9 @@
 				 ) VALUES
 				 ( #siteID#
 				 , #siteType#
-				 , #createTime#
+				 , getDate()
 				 , #createUser#
-				 , #updateTime#
+				 , getDate()
 				 , #updateUser#
 				 )
 		</insert>
@@ -59,13 +59,10 @@
 		<!--UPDATE-->
 		<update id="MdmSite.Update" parameterClass="MdmSite">
 			UPDATE CFG_SITE_MASTER
-			   SET 
+			   SET UPDATE_TIME = getDate() 
 			<dynamic prepend=" " close=" ">
 				<isNotEmpty prepend="," property="siteType">
 					SITE_TYPE = #siteType#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateTime">
-					UPDATE_TIME = #updateTime#
 				</isNotEmpty>
 				<isNotEmpty prepend="," property="updateUser">
 					UPDATE_USER = #updateUser#
