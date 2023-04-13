@@ -22,9 +22,9 @@ public class GroupDao : IGroupDao
         return Mapper.QueryForObject<GroupInfo>("Group.SelectGroup", groupInfo.GroupId);
     }
 
-    public IEnumerable<GroupInfo> GetBySystem(GroupInfo groupInfo)
+    public IEnumerable<GroupInfo> GetBySystem(string systemId)
     {
-        return Mapper.QueryForList<GroupInfo>("Group.SelectGroupsBySystem", groupInfo.SystemId);
+        return Mapper.QueryForList<GroupInfo>("Group.SelectGroupsBySystem", systemId);
     }
 
     public void Insert(GroupInfo groupInfo)

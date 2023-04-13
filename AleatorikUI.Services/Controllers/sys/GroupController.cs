@@ -18,7 +18,7 @@ public class GroupController : ControllerBase
         _groupDao = groupDao;
     }
 
-    [HttpPost("/api/GetGroup")]
+    [HttpGet("/api/GetGroup")]
     public IEnumerable<GroupInfo> GetAll()
     {
         try
@@ -34,14 +34,12 @@ public class GroupController : ControllerBase
         }
     }
 
-    [HttpPost("/api/GetGroupBySystem")]
-    public IEnumerable<GroupInfo> GetBySystem(GroupInfo groupInfo)
+    [HttpGet("/api/GetGroup/{systemId}")]
+    public IEnumerable<GroupInfo> GetBySystem(string systemId)
     {
-        _logger.LogInformation("UserInfo : {}", groupInfo);
-
         try
         {
-            var result = _groupDao.GetBySystem(groupInfo);
+            var result = _groupDao.GetBySystem(systemId);
             _logger.LogInformation("result : {}", result);
             return result;
         }
