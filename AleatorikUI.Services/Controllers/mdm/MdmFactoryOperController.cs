@@ -6,24 +6,24 @@ namespace AleatorikUI.Services.Controllers.mdm;
 
 [ApiController]
 [Route("[controller]")]
-public class MdmStageController : ControllerBase
+public class MdmFactoryOperController : ControllerBase
 {
 
-    private readonly ILogger<MdmStageController> _logger;
-    private readonly IMdmStageDao _mdmStageDao;
+    private readonly ILogger<MdmFactoryOperController> _logger;
+    private readonly IMdmFactoryOperDao _mdmFactoryOperDao;
 
-    public MdmStageController(ILogger<MdmStageController> logger, IMdmStageDao mdmStageDao)
+    public MdmFactoryOperController(ILogger<MdmFactoryOperController> logger, IMdmFactoryOperDao mdmFactoryOperDao)
     {
         _logger = logger;
-        _mdmStageDao = mdmStageDao;
+        _mdmFactoryOperDao = mdmFactoryOperDao;
     }
 
-    [HttpGet("/api/MdmStage")]
-    public IEnumerable<MdmStage> GetAll()
+    [HttpGet("/api/MdmFactoryOper")]
+    public IEnumerable<MdmFactoryOper> GetAll()
     {
         try
         {
-            var result = _mdmStageDao.GetAll();
+            var result = _mdmFactoryOperDao.GetAll();
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -32,20 +32,17 @@ public class MdmStageController : ControllerBase
         {
             _logger.LogError("error : {}", e.Message);
             Serilog.Log.Logger.Error(e.Message);
-            return new List<MdmStage>();
+            return new List<MdmFactoryOper>();
         }
     }
 
-    [HttpPost("/api/MdmStage")]
-    public int Insert(MdmStage mdmStage)
+    [HttpPost("/api/MdmFactoryOper")]
+    public int Insert(MdmFactoryOper mdmFactoryOper)
     {
         try
         {
-            //mdmStage.createTime = DateTime.Now;
-            //mdmStage.updateTime = DateTime.Now;
-
-            _logger.LogInformation("Insert : {}", mdmStage);
-            _mdmStageDao.Insert(mdmStage);
+            _logger.LogInformation("Insert : {}", mdmFactoryOper);
+            _mdmFactoryOperDao.Insert(mdmFactoryOper);
             return 1;
         }
         catch (Exception e)
@@ -55,13 +52,13 @@ public class MdmStageController : ControllerBase
         }
     }
 
-    [HttpPut("/api/MdmStage/{stageID}")]
-    public int Update(MdmStage mdmStage)
+    [HttpPut("/api/MdmFactoryOper/{factoryStartTime}")]
+    public int Update(MdmFactoryOper mdmFactoryOper)
     {
-        _logger.LogInformation("Update : {}", mdmStage);
+        _logger.LogInformation("Update : {}", mdmFactoryOper);
         try
         {
-            var result = _mdmStageDao.Update(mdmStage);
+            var result = _mdmFactoryOperDao.Update(mdmFactoryOper);
             _logger.LogInformation("result : {}", result);
 
             return result;
@@ -73,13 +70,13 @@ public class MdmStageController : ControllerBase
         }
     }
 
-    [HttpDelete("/api/MdmStage/{stageID}")]
-    public int Delete(MdmStage mdmStage)
+    [HttpDelete("/api/MdmFactoryOper/{factoryStartTime}")]
+    public int Delete(MdmFactoryOper mdmFactoryOper)
     {
-        _logger.LogInformation("Delete : {}", mdmStage);
+        _logger.LogInformation("Delete : {}", mdmFactoryOper);
         try
         {
-            var result = _mdmStageDao.Delete(mdmStage);
+            var result = _mdmFactoryOperDao.Delete(mdmFactoryOper);
             _logger.LogInformation("result : {}", result);
 
             return result;

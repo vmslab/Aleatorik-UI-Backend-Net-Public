@@ -6,24 +6,24 @@ namespace AleatorikUI.Services.Controllers.mdm;
 
 [ApiController]
 [Route("[controller]")]
-public class MdmStageController : ControllerBase
+public class MdmCodeGroupController : ControllerBase
 {
 
-    private readonly ILogger<MdmStageController> _logger;
-    private readonly IMdmStageDao _mdmStageDao;
+    private readonly ILogger<MdmCodeGroupController> _logger;
+    private readonly IMdmCodeGroupDao _mdmCodeGroupDao;
 
-    public MdmStageController(ILogger<MdmStageController> logger, IMdmStageDao mdmStageDao)
+    public MdmCodeGroupController(ILogger<MdmCodeGroupController> logger, IMdmCodeGroupDao mdmCodeGroupDao)
     {
         _logger = logger;
-        _mdmStageDao = mdmStageDao;
+        _mdmCodeGroupDao = mdmCodeGroupDao;
     }
 
-    [HttpGet("/api/MdmStage")]
-    public IEnumerable<MdmStage> GetAll()
+    [HttpGet("/api/MdmCodeGroup")]
+    public IEnumerable<MdmCodeGroup> GetAll()
     {
         try
         {
-            var result = _mdmStageDao.GetAll();
+            var result = _mdmCodeGroupDao.GetAll();
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -32,20 +32,17 @@ public class MdmStageController : ControllerBase
         {
             _logger.LogError("error : {}", e.Message);
             Serilog.Log.Logger.Error(e.Message);
-            return new List<MdmStage>();
+            return new List<MdmCodeGroup>();
         }
     }
 
-    [HttpPost("/api/MdmStage")]
-    public int Insert(MdmStage mdmStage)
+    [HttpPost("/api/MdmCodeGroup")]
+    public int Insert(MdmCodeGroup mdmCodeGroup)
     {
         try
         {
-            //mdmStage.createTime = DateTime.Now;
-            //mdmStage.updateTime = DateTime.Now;
-
-            _logger.LogInformation("Insert : {}", mdmStage);
-            _mdmStageDao.Insert(mdmStage);
+            _logger.LogInformation("Insert : {}", mdmCodeGroup);
+            _mdmCodeGroupDao.Insert(mdmCodeGroup);
             return 1;
         }
         catch (Exception e)
@@ -55,13 +52,13 @@ public class MdmStageController : ControllerBase
         }
     }
 
-    [HttpPut("/api/MdmStage/{stageID}")]
-    public int Update(MdmStage mdmStage)
+    [HttpPut("/api/MdmCodeGroup/{categoryID}")]
+    public int Update(MdmCodeGroup mdmCodeGroup)
     {
-        _logger.LogInformation("Update : {}", mdmStage);
+        _logger.LogInformation("Update : {}", mdmCodeGroup);
         try
         {
-            var result = _mdmStageDao.Update(mdmStage);
+            var result = _mdmCodeGroupDao.Update(mdmCodeGroup);
             _logger.LogInformation("result : {}", result);
 
             return result;
@@ -73,13 +70,13 @@ public class MdmStageController : ControllerBase
         }
     }
 
-    [HttpDelete("/api/MdmStage/{stageID}")]
-    public int Delete(MdmStage mdmStage)
+    [HttpDelete("/api/MdmCodeGroup/{categoryID}")]
+    public int Delete(MdmCodeGroup mdmCodeGroup)
     {
-        _logger.LogInformation("Delete : {}", mdmStage);
+        _logger.LogInformation("Delete : {}", mdmCodeGroup);
         try
         {
-            var result = _mdmStageDao.Delete(mdmStage);
+            var result = _mdmCodeGroupDao.Delete(mdmCodeGroup);
             _logger.LogInformation("result : {}", result);
 
             return result;

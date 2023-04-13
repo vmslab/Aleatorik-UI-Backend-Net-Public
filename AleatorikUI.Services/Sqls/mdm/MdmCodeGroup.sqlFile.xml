@@ -3,82 +3,43 @@
 <sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
 	<resultMaps>
-		<resultMap id="rtnMdmStage"  class="MdmStage" >
-			<result property="stageID"    	column="STAGE_ID"/>
+		<resultMap id="rtnMdmCodeGroup"  class="MdmCodeGroup" >
+			<result property="categoryID"   column="CATEGORY_ID"/>
 			<result property="description"  column="DESCRIPTION"/>
-			<result property="createTime"   column="CREATE_TIME"/>
-			<result property="createUser"	column="CREATE_USER"/>
-			<result property="updateTime"	column="UPDATE_TIME"/>
-			<result property="updateUser"	column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
 	<statements>
 		<!--SELECT All-->
-		<select id="MdmStage.Select" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
+		<select id="MdmCodeGroup.Select" resultMap="rtnMdmCodeGroup">
+			SELECT CATEGORY_ID
 				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-		</select>
-
-		<!--SELECT BY ID-->
-		<select id="MdmStage.SelectId" parameterClass="string" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+			  FROM CFG_CODE_CATEGORY
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmStage.Insert" parameterClass="MdmStage">
-			INSERT INTO CFG_STAGE
-				 ( STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-				 ) VALUES
-				 ( #stageID#
-				 , #description#
-				 , #createTime#
-				 , #createUser#
-				 , #updateTime#
-				 , #updateUser#
-				 )
+		<insert id="MdmCodeGroup.Insert" parameterClass="MdmCodeGroup">
+			INSERT INTO CFG_CODE_CATEGORY
+				( CATEGORY_ID
+				, DESCRIPTION
+				) VALUES
+				( #categoryID#
+				, #description#
+				)
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmStage.Update" parameterClass="MdmStage">
-			UPDATE CFG_STAGE
-			   SET 
-			<dynamic prepend=" " close=" ">
-				<isNotEmpty prepend="," property="description">
-					DESCRIPTION = #description#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateTime">
-					UPDATE_TIME = #updateTime#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateUser">
-					UPDATE_USER = #updateUser#
-				</isNotEmpty>
-			 WHERE STAGE_ID = #stageID#
-			</dynamic>
+		<update id="MdmCodeGroup.Update" parameterClass="MdmCodeGroup">
+			UPDATE CFG_CODE_CATEGORY
+			   SET DESCRIPTION         = #description#
+			 WHERE CATEGORY_ID = #categoryID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmStage.Delete" parameterClass="string">
+		<delete id="MdmCodeGroup.Delete" parameterClass="string">
 			DELETE
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+			  FROM CFG_CODE_CATEGORY
+			 WHERE CATEGORY_ID = #categoryID#
 		</delete>
 
 	</statements>

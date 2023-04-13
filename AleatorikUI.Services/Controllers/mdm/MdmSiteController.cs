@@ -36,24 +36,6 @@ public class MdmSiteController : ControllerBase
         }
     }
 
-    [HttpGet("/api/MdmSite/{siteID}")]
-    public MdmSite GetById(string siteID)
-    {
-        _logger.LogInformation("GetById  : {}", siteID);
-
-        try
-        {
-            var result = _mdmSiteDao.GetById(siteID);
-            _logger.LogInformation("result : {}", result);
-            return result;
-        }
-        catch (Exception e)
-        {
-            _logger.LogError("error : {}", e.Message);
-            return new MdmSite();
-        }
-    }
-
     [HttpPost("/api/MdmSite")]
     public int Insert(MdmSite mdmSite)
     {
@@ -70,15 +52,12 @@ public class MdmSiteController : ControllerBase
         }
     }
 
-    [HttpPatch("/api/MdmSite/{siteID}")]
-    public int Update(MdmSite mdmSite, string siteID)
+    [HttpPut("/api/MdmSite/{siteID}")]
+    public int Update(MdmSite mdmSite)
     {
         _logger.LogInformation("Update : {}", mdmSite);
         try
         {
-            mdmSite.siteID = siteID;
-            mdmSite.updateTime = DateTime.Now;
-
             var result = _mdmSiteDao.Update(mdmSite);
             _logger.LogInformation("result : {}", result);
 
@@ -92,13 +71,11 @@ public class MdmSiteController : ControllerBase
     }
 
     [HttpDelete("/api/MdmSite/{siteID}")]
-    public int Delete(MdmSite mdmSite, string siteID)
+    public int Delete(MdmSite mdmSite)
     {
         _logger.LogInformation("Delete : {}", mdmSite);
         try
         {
-            mdmSite.siteID = siteID;
-
             var result = _mdmSiteDao.Delete(mdmSite);
             _logger.LogInformation("result : {}", result);
 

@@ -17,11 +17,6 @@ public class MdmStageDao : IMdmStageDao
         return Mapper.QueryForList<MdmStage>("MdmStage.Select", null);
     }
 
-    public MdmStage GetById(string mdmStage)
-    {
-        return Mapper.QueryForObject<MdmStage>("MdmStage.SelectID", mdmStage);
-    }
-
     public void Insert(MdmStage mdmStage)
     {
         Mapper.Insert("MdmStage.Insert", mdmStage);

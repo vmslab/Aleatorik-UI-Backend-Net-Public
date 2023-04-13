@@ -25,18 +25,6 @@
 			  FROM CFG_STAGE
 		</select>
 
-		<!--SELECT BY ID-->
-		<select id="MdmStage.SelectID" parameterClass="string" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
-		</select>
-
 		<!--INSERT-->
 		<insert id="MdmStage.Insert" parameterClass="MdmStage">
 			INSERT INTO CFG_STAGE
@@ -49,9 +37,9 @@
 				 ) VALUES
 				 ( #stageID#
 				 , #description#
-				 , #createTime#
+				 , getdate()
 				 , #createUser#
-				 , #updateTime#
+				 , getdate()
 				 , #updateUser#
 				 )
 		</insert>
@@ -59,19 +47,10 @@
 		<!--UPDATE-->
 		<update id="MdmStage.Update" parameterClass="MdmStage">
 			UPDATE CFG_STAGE
-			   SET 
-			<dynamic prepend=" " close=" ">
-				<isNotEmpty prepend="," property="description">
-					DESCRIPTION = #description#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateTime">
-					UPDATE_TIME = #updateTime#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateUser">
-					UPDATE_USER = #updateUser#
-				</isNotEmpty>
-			 WHERE STAGE_ID = #stageID#
-			</dynamic>
+			   SET DESCRIPTION = #description#
+				 , UPDATE_TIME = getdate()
+				 , UPDATE_USER = #updateUser#
+			 WHERE STAGE_ID    = #stageID#
 		</update>
 
 		<!--DELETE-->

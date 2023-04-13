@@ -17,11 +17,6 @@ public class MdmSiteDao : IMdmSiteDao
         return Mapper.QueryForList<MdmSite>("MdmSite.Select", null);
     }
 
-    public MdmSite GetById(string mdmSite)
-    {
-        return Mapper.QueryForObject<MdmSite>("MdmSite.SelectID", mdmSite);
-    }
-
     public void Insert(MdmSite mdmSite)
     {
         Mapper.Insert("MdmSite.Insert", mdmSite);

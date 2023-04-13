@@ -25,18 +25,6 @@
 			  FROM CFG_SITE_MASTER
 		</select>
 
-		<!--SELECT BY ID-->
-		<select id="MdmSite.SelectID" parameterClass="string" resultMap="rtnMdmSite">
-			SELECT SITE_ID
-			     , SITE_TYPE
-			     , CREATE_TIME
-			     , CREATE_USER
-			     , UPDATE_TIME
-			     , UPDATE_USER
-			  FROM CFG_SITE_MASTER
-			 WHERE SITE_ID = #siteID#
-		</select>
-
 		<!--INSERT-->
 		<insert id="MdmSite.Insert" parameterClass="MdmSite">
 			INSERT INTO CFG_SITE_MASTER
@@ -59,16 +47,10 @@
 		<!--UPDATE-->
 		<update id="MdmSite.Update" parameterClass="MdmSite">
 			UPDATE CFG_SITE_MASTER
-			   SET UPDATE_TIME = getDate() 
-			<dynamic prepend=" " close=" ">
-				<isNotEmpty prepend="," property="siteType">
-					SITE_TYPE = #siteType#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateUser">
-					UPDATE_USER = #updateUser#
-				</isNotEmpty>
-				WHERE SITE_ID = #siteID#
-			</dynamic>
+			   SET SITE_TYPE   = #siteType#
+			     , UPDATE_TIME = getDate()
+ 			     , UPDATE_USER = #updateUser#
+			 WHERE SITE_ID     = #siteID#
 		</update>
 
 		<!--DELETE-->

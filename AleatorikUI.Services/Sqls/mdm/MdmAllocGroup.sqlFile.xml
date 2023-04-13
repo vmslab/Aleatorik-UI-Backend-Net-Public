@@ -3,9 +3,10 @@
 <sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
 	<resultMaps>
-		<resultMap id="rtnMdmStage"  class="MdmStage" >
-			<result property="stageID"    	column="STAGE_ID"/>
-			<result property="description"  column="DESCRIPTION"/>
+		<resultMap id="rtnMdmAllocGroup"  class="MdmAllocGroup" >
+			<result property="allocGroupID" column="ALLOCATION_GROUP_ID"/>
+			<result property="sequence"     column="SEQUENCE"/>
+			<result property="allocType"    column="ALLOCATION_TYPE"/>
 			<result property="createTime"   column="CREATE_TIME"/>
 			<result property="createUser"	column="CREATE_USER"/>
 			<result property="updateTime"	column="UPDATE_TIME"/>
@@ -15,70 +16,53 @@
 
 	<statements>
 		<!--SELECT All-->
-		<select id="MdmStage.Select" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
+		<select id="MdmAllocGroup.Select" resultMap="rtnMdmAllocGroup">
+			SELECT ALLOCATION_GROUP_ID
+				 , [SEQUENCE]
+				 , ALLOCATION_TYPE
 				 , CREATE_TIME
 				 , CREATE_USER
 				 , UPDATE_TIME
 				 , UPDATE_USER
-			  FROM CFG_STAGE
-		</select>
-
-		<!--SELECT BY ID-->
-		<select id="MdmStage.SelectId" parameterClass="string" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+			  FROM CFG_ALLOCATION_GROUP_MASTER
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmStage.Insert" parameterClass="MdmStage">
-			INSERT INTO CFG_STAGE
-				 ( STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-				 ) VALUES
-				 ( #stageID#
-				 , #description#
-				 , #createTime#
-				 , #createUser#
-				 , #updateTime#
-				 , #updateUser#
-				 )
+		<insert id="MdmAllocGroup.Insert" parameterClass="MdmAllocGroup">
+			INSERT INTO CFG_ALLOCATION_GROUP_MASTER
+				( ALLOCATION_GROUP_ID
+				, [SEQUENCE]
+				, ALLOCATION_TYPE
+				, CREATE_TIME
+				, CREATE_USER
+				, UPDATE_TIME
+				, UPDATE_USER
+				) VALUES
+				( #allocGroupID#
+				, #sequence#
+				, #allocType#
+				, getdate()
+				, #createUser#
+				, #updateTime#
+				, getdate()
+				)
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmStage.Update" parameterClass="MdmStage">
-			UPDATE CFG_STAGE
-			   SET 
-			<dynamic prepend=" " close=" ">
-				<isNotEmpty prepend="," property="description">
-					DESCRIPTION = #description#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateTime">
-					UPDATE_TIME = #updateTime#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateUser">
-					UPDATE_USER = #updateUser#
-				</isNotEmpty>
-			 WHERE STAGE_ID = #stageID#
-			</dynamic>
+		<update id="MdmAllocGroup.Update" parameterClass="MdmAllocGroup">
+			UPDATE CFG_ALLOCATION_GROUP_MASTER
+			   SET [SEQUENCE]          = #sequence#
+			     , ALLOCATION_TYPE     = #allocType#
+			     , UPDATE_TIME         = getdate()
+			     , UPDATE_USER         = #updateUser#
+			 WHERE ALLOCATION_GROUP_ID = #allocGroupID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmStage.Delete" parameterClass="string">
+		<delete id="MdmAllocGroup.Delete" parameterClass="string">
 			DELETE
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+			  FROM CFG_ALLOCATION_GROUP_MASTER
+			 WHERE ALLOCATION_GROUP_ID = #allocGroupID#
 		</delete>
 
 	</statements>

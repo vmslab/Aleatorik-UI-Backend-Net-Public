@@ -2,10 +2,11 @@ namespace AleatorikUI.Services.DTO.mdm;
 
 public class MdmAllocGroup
 {
-    public string? SiteId { get; set; }
-    public string? SiteType { get; set; }
-    public DateTime? CreateTime { get; set; }
-    public string? CreateUser { get; set; }
-    public DateTime? UpdateTime { get; set; }
-    public string? UpdateUser { get; set; }
+    public string? allocGroupID { get; set; }
+    public int sequence { get; set; }
+    public string? allocType { get; set; }
+    public DateTime? createTime { get; set; }
+    public string? createUser { get; set; }
+    public DateTime? updateTime { get; set; }
+    public string? updateUser { get; set; }
 }
