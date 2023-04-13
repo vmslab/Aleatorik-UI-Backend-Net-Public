@@ -54,7 +54,7 @@
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmSite.Delete" parameterClass="string">
+		<delete id="MdmSite.Delete" parameterClass="MdmSite">
 			DELETE
 			  FROM CFG_SITE_MASTER
 			 WHERE SITE_ID = #siteID#

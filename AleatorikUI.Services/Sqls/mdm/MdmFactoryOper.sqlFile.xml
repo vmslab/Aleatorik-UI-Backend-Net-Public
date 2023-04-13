@@ -55,7 +55,7 @@
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmFactoryOper.Delete" parameterClass="string">
+		<delete id="MdmFactoryOper.Delete" parameterClass="MdmFactoryOper">
 			DELETE
 			  FROM CFG_SUPPLY_CHAIN_CONFIG
 			 WHERE FACTORY_START_TIME = #factoryStartTime#

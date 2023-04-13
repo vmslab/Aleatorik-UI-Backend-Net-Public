@@ -87,4 +87,77 @@ public class MdmCodeGroupController : ControllerBase
             return 0;
         }
     }
+    /**
+     * DETAIL
+     */
+    [HttpGet("/api/MdmCodeGroup/{categoryID}/Sub1")]
+    public IEnumerable<MdmCodeGroupSub1> GetAllDetail(String categoryID)
+    {
+        try
+        {
+            var result = _mdmCodeGroupDao.GetAllDetail(categoryID);
+            _logger.LogInformation("result : {}", result);
+            Serilog.Log.Logger.Information(result.ToString());
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            Serilog.Log.Logger.Error(e.Message);
+            return new List<MdmCodeGroupSub1>();
+        }
+    }
+
+    [HttpPost("/api/MdmCodeGroup/{categoryID}/Sub1")]
+    public int InsertDetail(MdmCodeGroupSub1 mdmCodeGroupSub1, String categoryID)
+    {
+        try
+        {
+            mdmCodeGroupSub1.categoryID = categoryID;
+            _logger.LogInformation("Insert : {}", mdmCodeGroupSub1);
+            _mdmCodeGroupDao.InsertDetail(mdmCodeGroupSub1);
+            return 1;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+    }
+
+    [HttpPut("/api/MdmCodeGroup/{categoryID}/Sub1/{codeID}")]
+    public int UpdateDetail(MdmCodeGroupSub1 mdmCodeGroupSub1)
+    {
+        _logger.LogInformation("Update : {}", mdmCodeGroupSub1);
+        try
+        {
+            var result = _mdmCodeGroupDao.UpdateDetail(mdmCodeGroupSub1);
+            _logger.LogInformation("result : {}", result);
+
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+    }
+
+    [HttpDelete("/api/MdmCodeGroup/{categoryID}/Sub1/{codeID}")]
+    public int DeleteDetail(MdmCodeGroupSub1 mdmCodeGroupSub1)
+    {
+        _logger.LogInformation("Delete : {}", mdmCodeGroupSub1);
+        try
+        {
+            var result = _mdmCodeGroupDao.DeleteDetail(mdmCodeGroupSub1);
+            _logger.LogInformation("result : {}", result);
+
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+    }
 }

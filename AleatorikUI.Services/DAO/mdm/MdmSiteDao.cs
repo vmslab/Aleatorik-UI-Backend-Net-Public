@@ -29,6 +29,6 @@ public class MdmSiteDao : IMdmSiteDao
 
     public int Delete(MdmSite mdmSite)
     {
-        return Mapper.Delete("MdmSite.Delete", mdmSite.siteID);
+        return Mapper.Delete("MdmSite.Delete", mdmSite);
     }
 }

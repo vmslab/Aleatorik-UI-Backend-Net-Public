@@ -31,14 +31,14 @@ public class Startup
         /**
          *        기준 정보 관리
          */
-        services.AddSingleton<IMdmStageDao, MdmStageDao>();            // 스테이지
-        services.AddSingleton<IMdmSiteDao, MdmSiteDao>();              // 사이트
-        services.AddSingleton<IMdmAllocGroupDao,         MdmAllocGroupDao>();       // 할당그룹
-        services.AddSingleton<IMdmFactoryOperDao,        MdmFactoryOperDao>();      // 공장운영정보 
-        services.AddSingleton<IMdmCodeGroupDao,       MdmCodeGroupDao>();        // 코드 그룹
-        /*
-         services.AddSingleton<IMdmCodeGroupSub1Dao,      MdmCodeGroupSub1Dao>();    // 코드 관리
-        services.AddSingleton<IMdmPropertyDao,           MdmPropertyDao>();         // 속성 관리
+        services.AddSingleton<IMdmStageDao, MdmStageDao>();                     // 스테이지
+        services.AddSingleton<IMdmSiteDao, MdmSiteDao>();                       // 사이트
+        services.AddSingleton<IMdmAllocGroupDao, MdmAllocGroupDao>();           // 할당그룹
+        services.AddSingleton<IMdmFactoryOperDao, MdmFactoryOperDao>();         // 공장운영정보 
+        services.AddSingleton<IMdmCodeGroupDao, MdmCodeGroupDao>();             // 코드 그룹, 코드 관리
+    /*
+        services.AddSingleton<IMdmPropertyDao, MdmPropertyDao>();               // 속성 관리
+
         /* -------------------------------------------------------------------------------------------- 
         services.AddSingleton<IMdmItemDao,               MdmItemDao>();                // 품목 정보
         services.AddSingleton<IMdmBufferDao,             MdmBufferDao>();              // 버퍼 정보

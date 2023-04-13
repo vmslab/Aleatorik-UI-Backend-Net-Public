@@ -108,9 +108,6 @@
     <None Update="Sqls\mdm\MdmCodeGroup.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmCodeGroupSub1.sqlFile.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Sqls\mdm\MdmProperty.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

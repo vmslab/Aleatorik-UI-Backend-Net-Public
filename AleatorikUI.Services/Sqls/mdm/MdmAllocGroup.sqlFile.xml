@@ -59,7 +59,7 @@
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmAllocGroup.Delete" parameterClass="string">
+		<delete id="MdmAllocGroup.Delete" parameterClass="MdmAllocGroup">
 			DELETE
 			  FROM CFG_ALLOCATION_GROUP_MASTER
 			 WHERE ALLOCATION_GROUP_ID = #allocGroupID#

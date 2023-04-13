@@ -29,6 +29,6 @@ public class MdmAllocGroupDao : IMdmAllocGroupDao
 
     public int Delete(MdmAllocGroup mdmAllocGroup)
     {
-        return Mapper.Delete("MdmAllocGroup.Delete", mdmAllocGroup.allocGroupID);
+        return Mapper.Delete("MdmAllocGroup.Delete", mdmAllocGroup);
     }
 }

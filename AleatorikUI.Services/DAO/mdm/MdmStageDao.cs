@@ -29,6 +29,6 @@ public class MdmStageDao : IMdmStageDao
 
     public int Delete(MdmStage mdmStage)
     {
-        return Mapper.Delete("MdmStage.Delete", mdmStage.stageID);
+        return Mapper.Delete("MdmStage.Delete", mdmStage);
     }
 }

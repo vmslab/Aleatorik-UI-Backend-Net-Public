@@ -7,9 +7,17 @@
 			<result property="categoryID"   column="CATEGORY_ID"/>
 			<result property="description"  column="DESCRIPTION"/>
 		</resultMap>
+		<resultMap id="rtnMdmCodeGroupSub1"  class="MdmCodeGroupSub1" >
+			<result property="categoryID"   column="CATEGORY_ID"/>
+			<result property="codeID"		column="CODE_ID"/>
+			<result property="codeName"		column="CODE_NAME"/>
+			<result property="seq"			column="SEQ"/>
+		</resultMap>	
 	</resultMaps>
 
+
 	<statements>
+	<!-- MASTER -->
 		<!--SELECT All-->
 		<select id="MdmCodeGroup.Select" resultMap="rtnMdmCodeGroup">
 			SELECT CATEGORY_ID
@@ -36,11 +44,53 @@
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmCodeGroup.Delete" parameterClass="string">
+		<delete id="MdmCodeGroup.Delete" parameterClass="MdmCodeGroup">
 			DELETE
 			  FROM CFG_CODE_CATEGORY
 			 WHERE CATEGORY_ID = #categoryID#
 		</delete>
+		
+	<!-- DETAIL -->
+		<!--SELECT All-->
+		<select id="MdmCodeGroupSub1.Select" parameterClass="string"  resultMap="rtnMdmCodeGroupSub1">
+			SELECT CATEGORY_ID
+				 , CODE_ID
+				 , CODE_NAME
+				 , SEQ
+			  FROM CFG_CODE
+			 WHERE CATEGORY_ID = #categoryID#
+		</select>
 
+		<!--INSERT-->
+		<insert id="MdmCodeGroupSub1.Insert" parameterClass="MdmCodeGroupSub1">
+			INSERT INTO CFG_CODE
+				 ( CATEGORY_ID
+				 , CODE_ID
+				 , CODE_NAME
+				 , SEQ
+				 ) VALUES
+				 ( #categoryID#
+				 , #codeID#
+				 , #codeName#
+				 , #seq#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmCodeGroupSub1.Update" parameterClass="MdmCodeGroupSub1">
+			UPDATE CFG_CODE
+			   SET CODE_NAME   = #codeName#
+				 , SEQ         = #seq#
+			 WHERE CATEGORY_ID = #categoryID#
+			   AND CODE_ID     = #codeID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmCodeGroupSub1.Delete" parameterClass="MdmCodeGroupSub1">
+			DELETE
+			  FROM CFG_CODE
+			 WHERE CATEGORY_ID = #categoryID#
+			   AND CODE_ID     = #codeID#
+		</delete>
 	</statements>
 </sqlMap>

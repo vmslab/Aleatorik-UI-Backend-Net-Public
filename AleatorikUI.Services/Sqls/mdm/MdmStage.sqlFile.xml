@@ -54,7 +54,7 @@
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmStage.Delete" parameterClass="string">
+		<delete id="MdmStage.Delete" parameterClass="MdmStage">
 			DELETE
 			  FROM CFG_STAGE
 			 WHERE STAGE_ID = #stageID#

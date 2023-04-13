@@ -29,6 +29,6 @@ public class MdmFactoryOperDao : IMdmFactoryOperDao
 
     public int Delete(MdmFactoryOper mdmFactoryOper)
     {
-        return Mapper.Delete("MdmFactoryOper.Delete", mdmFactoryOper.factoryStartTime);
+        return Mapper.Delete("MdmFactoryOper.Delete", mdmFactoryOper);
     }
 }
