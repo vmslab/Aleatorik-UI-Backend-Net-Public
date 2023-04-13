@@ -2,6 +2,7 @@ namespace AleatorikUI.Services.DTO.sys;
 
 public class MenuInfo
 {
+    public string? OrigMenuId { get; set; }
     public string? MenuId { get; set; }
     public string? SystemId { get; set; }
     public string? CategoryId { get; set; }

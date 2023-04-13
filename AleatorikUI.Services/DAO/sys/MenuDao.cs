@@ -67,6 +67,10 @@ public class MenuDao : IMenuDao
                         };
                         affectedRow += transaction.SqlMapper.Update("Menu.InsertMenuMap", defaultMapInfo);
                     }
+                    else
+                    {
+                        affectedRow += transaction.SqlMapper.Update("Menu.UpdateMenuMap", menuInfo);
+                    }
                 }
             }
             transaction.CommitTransaction();

@@ -95,7 +95,7 @@
 				MENU_ID = #Id#
     </select>
 
-		<!--Merge-->
+		<!--MERGE-->
 		<update id="Menu.MergeMenu" parameterClass="MenuInfo">
       MERGE INTO T_MENU
       USING (SELECT 1 AS dual) as X
@@ -174,9 +174,9 @@
           AND SYSTEM_ID = #SystemId#
 			</dynamic>
 		</update>
-
-    <!--ADD-->
-    <delete id="Menu.InsertMenuMap" parameterClass="MenuMapInfo">
+    
+    <!--ADD MENU_MAP-->
+    <insert id="Menu.InsertMenuMap" parameterClass="MenuMapInfo">
       INSERT INTO
       T_MENU_MAP
       (MENU_MAP_ID,
@@ -192,7 +192,17 @@
       #GroupId#,
       #IsRead#,
       #IsWrite#)
-    </delete>
+    </insert>
+
+    <!--UPDATE MENU_MAP-->
+    <update id="Menu.UpdateMenuMap" parameterClass="MenuInfo">
+      UPDATE
+      T_MENU_MAP
+      SET
+      MENU_ID = #MenuId#
+      WHERE
+      MENU_ID = #OrigMenuId#
+    </update>
 
     <!--DELETE-->
     <delete id="Menu.DeleteMenu" parameterClass="MenuInfo">
@@ -204,7 +214,7 @@
       AND MENU_ID = #MenuId#
     </delete>
 
-    <!--DELETE MAP-->
+    <!--DELETE MENU_MAP-->
     <delete id="Menu.DeleteMenuMap" parameterClass="MenuInfo">
       DELETE
       FROM
