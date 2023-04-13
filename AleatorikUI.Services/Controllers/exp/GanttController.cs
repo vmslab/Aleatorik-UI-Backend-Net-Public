@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using AleatorikUI.Services.Model;
-using MozartUI.Gantt.Util;
-using MozartUI.Gantt.Data;
+using AleatorikUI.Gantt.Util;
+using AleatorikUI.Gantt.Data;
 using AleatorikUI.Services.DTO.exp;
 using AleatorikUI.Services.DAO.exp;
 

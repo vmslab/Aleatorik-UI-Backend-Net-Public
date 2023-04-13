@@ -174,10 +174,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="MozartUI.Gantt">
-      <HintPath>..\MozartUI.Gantt\bin\Debug\net6.0\MozartUI.Gantt.dll</HintPath>
+    <Reference Include="AleatorikUI.Gantt">
+      <HintPath>..\AleatorikUI.Gantt\bin\Debug\net6.0\AleatorikUI.Gantt.dll</HintPath>
     </Reference>
-    <ProjectReference Include="..\MozartUI.Services.Authentication\AleatorikUI.Services.Authentication.csproj" />
+    <ProjectReference Include="..\AleatorikUI.Services.Authentication\AleatorikUI.Services.Authentication.csproj" />
   </ItemGroup>
 
   <ItemGroup>

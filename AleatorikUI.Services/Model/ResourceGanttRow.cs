@@ -1,4 +1,4 @@
-using MozartUI.Gantt.Data;
+using AleatorikUI.Gantt.Data;
 
 namespace AleatorikUI.Services.Model;
 
