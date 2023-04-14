@@ -1,7 +1,7 @@
 ﻿using AleatorikUI.Services.DTO.sys;
 using SqlBatis.DataMapper;
 
-namespace AleatorikUI.Services.DAO.exp;
+namespace AleatorikUI.Services.DAO.sys;
 
 public class GroupDao : IGroupDao
 {

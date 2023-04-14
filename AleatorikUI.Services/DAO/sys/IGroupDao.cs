@@ -1,6 +1,6 @@
 ﻿using AleatorikUI.Services.DTO.sys;
 
-namespace AleatorikUI.Services.DAO.exp;
+namespace AleatorikUI.Services.DAO.sys;
 
 public interface IGroupDao
 {
