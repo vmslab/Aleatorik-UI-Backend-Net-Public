@@ -2,10 +2,10 @@ namespace AleatorikUI.Services.DTO.mdm;
 
 public class MdmItem
 {
-    public string? SiteId { get; set; }
-    public string? SiteType { get; set; }
-    public DateTime? CreateTime { get; set; }
-    public string? CreateUser { get; set; }
-    public DateTime? UpdateTime { get; set; }
-    public string? UpdateUser { get; set; }
+    public string? itemID { get; set; }
+    public string? itemType { get; set; }
+    public DateTime? createTime { get; set; }
+    public string? createUser { get; set; }
+    public DateTime? updateTime { get; set; }
+    public string? updateUser { get; set; }
 }

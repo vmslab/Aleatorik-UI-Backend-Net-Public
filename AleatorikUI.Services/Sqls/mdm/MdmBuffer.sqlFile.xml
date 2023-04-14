@@ -3,52 +3,44 @@
 <sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
 	<resultMaps>
-		<resultMap id="rtnMdmStage"  class="MdmStage" >
-			<result property="stageID"    	column="STAGE_ID"/>
-			<result property="description"  column="DESCRIPTION"/>
-			<result property="createTime"   column="CREATE_TIME"/>
-			<result property="createUser"	column="CREATE_USER"/>
-			<result property="updateTime"	column="UPDATE_TIME"/>
-			<result property="updateUser"	column="UPDATE_USER"/>
+		<resultMap id="rtnMdmBuffer"  class="MdmBuffer" >
+			<result property="stageID"    column="STAGE_ID"/>
+			<result property="bufferID"   column="BUFFER_ID"/>
+			<result property="sequence"   column="SEQUENCE"/>
+			<result property="createTime" column="CREATE_TIME"/>
+			<result property="createUser" column="CREATE_USER"/>
+			<result property="updateTime" column="UPDATE_TIME"/>
+			<result property="updateUser" column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
 	<statements>
 		<!--SELECT All-->
-		<select id="MdmStage.Select" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
+		<select id="MdmBuffer.Select" resultMap="rtnMdmBuffer">
+			SELECT [STAGE_ID]
+				 , [BUFFER_ID]
+				 , [SEQUENCE]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_BUFFER_MASTER]
 		</select>
-
-		<!--SELECT BY ID-->
-		<select id="MdmStage.SelectId" parameterClass="string" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
-		</select>
-
+		
 		<!--INSERT-->
-		<insert id="MdmStage.Insert" parameterClass="MdmStage">
-			INSERT INTO CFG_STAGE
-				 ( STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
+		<insert id="MdmBuffer.Insert" parameterClass="MdmBuffer">
+			INSERT INTO [CFG_BUFFER_MASTER]
+				 ( [STAGE_ID]
+				 , [BUFFER_ID]
+				 , [SEQUENCE]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
 				 ) VALUES
 				 ( #stageID#
-				 , #description#
+				 , #bufferID#
+				 , #sequence#
 				 , #createTime#
 				 , #createUser#
 				 , #updateTime#
@@ -57,28 +49,25 @@
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmStage.Update" parameterClass="MdmStage">
-			UPDATE CFG_STAGE
-			   SET 
-			<dynamic prepend=" " close=" ">
-				<isNotEmpty prepend="," property="description">
-					DESCRIPTION = #description#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateTime">
-					UPDATE_TIME = #updateTime#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateUser">
-					UPDATE_USER = #updateUser#
-				</isNotEmpty>
-			 WHERE STAGE_ID = #stageID#
-			</dynamic>
+		<update id="MdmBuffer.Update" parameterClass="MdmBuffer">
+			UPDATE [CFG_BUFFER_MASTER]
+			   SET [STAGE_ID]    = #stageID#
+			     , [BUFFER_ID]   = #bufferID#
+			     , [SEQUENCE]    = #sequence#
+			     , [CREATE_TIME] = #createTime#
+			     , [CREATE_USER] = #createUser#
+			     , [UPDATE_TIME] = #updateTime#
+			     , [UPDATE_USER] = #updateUser#
+			 WHERE [STAGE_ID]    = #stageID#
+			   AND [BUFFER_ID]   = #bufferID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmStage.Delete" parameterClass="string">
+		<delete id="MdmBuffer.Delete" parameterClass="string">
 			DELETE
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+			  FROM [CFG_BUFFER_MASTER]
+		 	 WHERE [STAGE_ID]    = #stageID#
+			   AND [BUFFER_ID]   = #bufferID#
 		</delete>
 
 	</statements>

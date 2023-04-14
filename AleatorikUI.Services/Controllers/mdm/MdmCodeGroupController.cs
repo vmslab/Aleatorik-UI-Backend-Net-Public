@@ -88,14 +88,14 @@ public class MdmCodeGroupController : ControllerBase
         }
     }
     /**
-     * DETAIL
+     * Sub1
      */
     [HttpGet("/api/MdmCodeGroup/{categoryID}/Sub1")]
-    public IEnumerable<MdmCodeGroupSub1> GetAllDetail(String categoryID)
+    public IEnumerable<MdmCodeGroupSub1> GetAllSub1(String categoryID)
     {
         try
         {
-            var result = _mdmCodeGroupDao.GetAllDetail(categoryID);
+            var result = _mdmCodeGroupDao.GetAllSub1(categoryID);
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -109,13 +109,13 @@ public class MdmCodeGroupController : ControllerBase
     }
 
     [HttpPost("/api/MdmCodeGroup/{categoryID}/Sub1")]
-    public int InsertDetail(MdmCodeGroupSub1 mdmCodeGroupSub1, String categoryID)
+    public int InsertSub1(MdmCodeGroupSub1 mdmCodeGroupSub1, String categoryID)
     {
         try
         {
             mdmCodeGroupSub1.categoryID = categoryID;
             _logger.LogInformation("Insert : {}", mdmCodeGroupSub1);
-            _mdmCodeGroupDao.InsertDetail(mdmCodeGroupSub1);
+            _mdmCodeGroupDao.InsertSub1(mdmCodeGroupSub1);
             return 1;
         }
         catch (Exception e)
@@ -126,12 +126,12 @@ public class MdmCodeGroupController : ControllerBase
     }
 
     [HttpPut("/api/MdmCodeGroup/{categoryID}/Sub1/{codeID}")]
-    public int UpdateDetail(MdmCodeGroupSub1 mdmCodeGroupSub1)
+    public int UpdateSub1(MdmCodeGroupSub1 mdmCodeGroupSub1)
     {
         _logger.LogInformation("Update : {}", mdmCodeGroupSub1);
         try
         {
-            var result = _mdmCodeGroupDao.UpdateDetail(mdmCodeGroupSub1);
+            var result = _mdmCodeGroupDao.UpdateSub1(mdmCodeGroupSub1);
             _logger.LogInformation("result : {}", result);
 
             return result;
@@ -144,12 +144,12 @@ public class MdmCodeGroupController : ControllerBase
     }
 
     [HttpDelete("/api/MdmCodeGroup/{categoryID}/Sub1/{codeID}")]
-    public int DeleteDetail(MdmCodeGroupSub1 mdmCodeGroupSub1)
+    public int DeleteSub1(MdmCodeGroupSub1 mdmCodeGroupSub1)
     {
         _logger.LogInformation("Delete : {}", mdmCodeGroupSub1);
         try
         {
-            var result = _mdmCodeGroupDao.DeleteDetail(mdmCodeGroupSub1);
+            var result = _mdmCodeGroupDao.DeleteSub1(mdmCodeGroupSub1);
             _logger.LogInformation("result : {}", result);
 
             return result;

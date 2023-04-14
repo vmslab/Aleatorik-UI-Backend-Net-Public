@@ -50,7 +50,7 @@
 			 WHERE CATEGORY_ID = #categoryID#
 		</delete>
 		
-	<!-- DETAIL -->
+	<!-- Sub1 -->
 		<!--SELECT All-->
 		<select id="MdmCodeGroupSub1.Select" parameterClass="string"  resultMap="rtnMdmCodeGroupSub1">
 			SELECT CATEGORY_ID

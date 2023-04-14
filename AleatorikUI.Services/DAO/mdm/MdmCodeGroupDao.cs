@@ -32,22 +32,25 @@ public class MdmCodeGroupDao : IMdmCodeGroupDao
         return Mapper.Delete("MdmCodeGroup.Delete", mdmCodeGroup);
     }
 
-    public IEnumerable<MdmCodeGroupSub1> GetAllDetail(String categoryID)
+    /**
+     * Sub1
+     */
+    public IEnumerable<MdmCodeGroupSub1> GetAllSub1(String categoryID)
     {
         return Mapper.QueryForList<MdmCodeGroupSub1>("MdmCodeGroupSub1.Select", categoryID);
     }
 
-    public void InsertDetail(MdmCodeGroupSub1 mdmCodeGroupSub1)
+    public void InsertSub1(MdmCodeGroupSub1 mdmCodeGroupSub1)
     {
         Mapper.Insert("MdmCodeGroupSub1.Insert", mdmCodeGroupSub1);
     }
 
-    public int UpdateDetail(MdmCodeGroupSub1 mdmCodeGroupSub1)
+    public int UpdateSub1(MdmCodeGroupSub1 mdmCodeGroupSub1)
     {
         return Mapper.Update("MdmCodeGroupSub1.Update", mdmCodeGroupSub1);
     }
 
-    public int DeleteDetail(MdmCodeGroupSub1 mdmCodeGroupSub1)
+    public int DeleteSub1(MdmCodeGroupSub1 mdmCodeGroupSub1)
     {
         return Mapper.Delete("MdmCodeGroupSub1.Delete", mdmCodeGroupSub1);
     }

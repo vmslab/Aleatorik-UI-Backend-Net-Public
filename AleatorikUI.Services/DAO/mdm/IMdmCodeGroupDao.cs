@@ -8,9 +8,9 @@ namespace AleatorikUI.Services.DAO.mdm
         public int Update(MdmCodeGroup mdmCodeGroup);
         public int Delete(MdmCodeGroup mdmCodeGroup);
 
-        public  IEnumerable<MdmCodeGroupSub1> GetAllDetail(String categoryID);
-        public void InsertDetail(MdmCodeGroupSub1 mdmCodeGroupSub1);
-        public int UpdateDetail(MdmCodeGroupSub1 mdmCodeGroupSub1);
-        public int DeleteDetail(MdmCodeGroupSub1 mdmCodeGroupSub1);
+        public  IEnumerable<MdmCodeGroupSub1> GetAllSub1(String categoryID);
+        public void InsertSub1(MdmCodeGroupSub1 mdmCodeGroupSub1);
+        public int UpdateSub1(MdmCodeGroupSub1 mdmCodeGroupSub1);
+        public int DeleteSub1(MdmCodeGroupSub1 mdmCodeGroupSub1);
     }
 }
