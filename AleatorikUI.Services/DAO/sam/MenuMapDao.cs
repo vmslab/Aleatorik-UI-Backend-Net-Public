@@ -1,7 +1,7 @@
-﻿using AleatorikUI.Services.DTO.sys;
+﻿using AleatorikUI.Services.DTO.sam;
 using SqlBatis.DataMapper;
 
-namespace AleatorikUI.Services.DAO.sys;
+namespace AleatorikUI.Services.DAO.sam;
 
 public class MenuMapDao : IMenuMapDao
 {

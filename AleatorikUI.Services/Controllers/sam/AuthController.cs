@@ -1,13 +1,13 @@
 ﻿using System.Text;
 using System.Web;
 using AleatorikUI.Services.Authentication;
-using AleatorikUI.Services.DAO.sys;
-using AleatorikUI.Services.DTO.sys;
+using AleatorikUI.Services.DAO.sam;
+using AleatorikUI.Services.DTO.sam;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace AleatorikUI.Services.Controllers.sys;
+namespace AleatorikUI.Services.Controllers.sam;
 
 [Authorize]
 [Route("auth/[controller]")]

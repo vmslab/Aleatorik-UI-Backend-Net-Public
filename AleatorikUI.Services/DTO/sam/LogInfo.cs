@@ -1,4 +1,4 @@
-﻿namespace AleatorikUI.Services.DTO.sys
+﻿namespace AleatorikUI.Services.DTO.sam
 {
     public class LogInfo
     {

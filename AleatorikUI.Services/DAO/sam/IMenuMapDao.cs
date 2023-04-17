@@ -1,6 +1,6 @@
-﻿using AleatorikUI.Services.DTO.sys;
+﻿using AleatorikUI.Services.DTO.sam;
 
-namespace AleatorikUI.Services.DAO.sys;
+namespace AleatorikUI.Services.DAO.sam;
 
 public interface IMenuMapDao
 {
