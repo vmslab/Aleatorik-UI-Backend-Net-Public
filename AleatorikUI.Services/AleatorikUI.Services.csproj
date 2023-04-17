@@ -123,16 +123,16 @@
     <None Update="Sqls\Member.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\sys\Group.sqlFile.xml">
+    <None Update="Sqls\sam\Group.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\sys\MenuMap.sqlFile.xml">
+    <None Update="Sqls\sam\MenuMap.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\sys\Menu.sqlFile.xml">
+    <None Update="Sqls\sam\Menu.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\sys\User.sqlFile.xml">
+    <None Update="Sqls\sam\User.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\exp\Todo.sqlFile.xml">

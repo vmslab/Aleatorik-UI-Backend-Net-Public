@@ -1,9 +1,9 @@
 ﻿using SqlBatis.DataMapper.DependencyInjection;
 using AleatorikUI.Services.DAO.mdm;
 using AleatorikUI.Services.DAO.exp;
-using AleatorikUI.Services.DAO.sys;
 using AleatorikUI.Services.Configuration;
 using AleatorikUI.Services.Authentication;
+using AleatorikUI.Services.DAO.sam;
 
 namespace AleatorikUI.Services;
 public class Startup

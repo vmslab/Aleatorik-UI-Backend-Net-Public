@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AleatorikUI.Services.Controllers.sys;
+namespace AleatorikUI.Services.Controllers.sam;
 
 [ApiController]
 [Route("[controller]")]
