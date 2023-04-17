@@ -73,15 +73,18 @@
       (#Email#,
       #Name#,
       <isNotEmpty property="Department">
-        DEPARTMENT = #Department#,
+        #Department#,
       </isNotEmpty>
+	  <isNotEmpty property="GroupId">
+		#GroupId#,
+	  </isNotEmpty>
       #Password#)
     </insert>
 
     <!--UPDATE-->
     <update id="User.UpdateUser" parameterClass="UserInfo">
       UPDATE
-      T_USER
+        T_USER
       SET
       <dynamic prepend=" " close=" ">
         <isNotEmpty prepend="," property="Department">
