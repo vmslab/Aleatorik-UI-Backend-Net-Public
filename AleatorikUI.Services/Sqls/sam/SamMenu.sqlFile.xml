@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+    <resultMap id="menu-result"  class="SamMenuInfo" >
+      <result property="MenuId"    		column="MENU_ID"/>
+      <result property="SystemId"    	column="SYSTEM_ID"/>
+      <result property="CategoryId"     column="CATEGORY_ID"/>
+      <result property="Name"	        column="NAME"/>
+      <result property="Path"	        column="PATH"/>
+      <result property="Sequence"	    column="SEQUENCE"/>
+      <result property="Type"		    column="MENU_TYPE"/>
+      <result property="Separator"	    column="SEPARATOR"/>
+      <result property="Params"		    column="PARAMS"/>
+    </resultMap>
+    <resultMap id="menu-auth-result"  class="SamMenuInfo" >
+      <result property="MenuId"    		column="MENU_ID"/>
+      <result property="SystemId"    	column="SYSTEM_ID"/>
+      <result property="CategoryId"     column="CATEGORY_ID"/>
+      <result property="Name"	        column="NAME"/>
+      <result property="Path"	        column="PATH"/>
+      <result property="Sequence"	    column="SEQUENCE"/>
+      <result property="Type"		    column="MENU_TYPE"/>
+      <result property="Separator"	    column="SEPARATOR"/>
+      <result property="Params"		    column="PARAMS"/>
+      <result property="IsRead"		    column="IS_READ"/>
+      <result property="IsWrite"		column="IS_WRITE"/>
+    </resultMap>
+	</resultMaps>
+
+	<statements>
+
+		<!--SELECT All-->
+		<select id="Menu.SelectMenus" parameterClass="string" resultMap="menu-result">
+      SELECT 
+				MENU_ID, 
+        SYSTEM_ID, 
+        CATEGORY_ID, 
+        NAME, 
+        PATH, 
+        SEQUENCE, 
+        MENU_TYPE, 
+        SEPARATOR, 
+        PARAMS
+      FROM
+				T_MENU
+      WHERE
+				SYSTEM_ID = #Id#
+      ORDER BY SEQUENCE ASC
+    </select>
+    
+    <!--SELECT FOR USER-->
+    <select id="Menu.SelectMenusForUser" parameterClass="SamUserInfo" resultMap="menu-auth-result">
+      SELECT
+        M.MENU_ID,
+        M.SYSTEM_ID,
+        M.CATEGORY_ID,
+        M.NAME,
+        M.PATH,
+        M.SEQUENCE,
+        M.MENU_TYPE,
+        M.SEPARATOR,
+        M.PARAMS,
+        MM.IS_READ,
+        MM.IS_WRITE
+      FROM
+        T_GROUP G, T_MENU_MAP MM, T_USER U, T_MENU M
+      WHERE
+        G.GROUP_ID = MM.GROUP_ID
+        AND U.GROUP_ID = G.GROUP_ID
+        AND U.GROUP_ID = MM.GROUP_ID
+        AND MM.MENU_ID = M.MENU_ID
+        AND U.EMAIL =#Email#
+        AND M.SYSTEM_ID = #SystemId#
+        AND IS_READ = 1
+      ORDER BY SEQUENCE ASC
+    </select>
+
+    <!--SELECT BY ID-->
+		<select id="Menu.SelectMenu" parameterClass="string" resultMap="menu-result">
+      SELECT
+				MENU_ID,
+				SYSTEM_ID,
+				CATEGORY_ID,
+				NAME,
+				PATH,
+				SEQUENCE,
+				MENU_TYPE,
+				SEPARATOR,
+				PARAMS
+      FROM 
+				T_MENU
+      WHERE
+				MENU_ID = #Id#
+    </select>
+
+		<!--MERGE-->
+		<update id="Menu.MergeMenu" parameterClass="SamMenuInfo">
+      MERGE INTO T_MENU
+      USING (SELECT 1 AS dual) as X
+      ON (T_MENU.MENU_ID = #MenuId#)
+      WHEN MATCHED THEN
+      UPDATE SET
+      <dynamic prepend=" " close=" ">
+        <isNotEmpty prepend="," property="CategoryId">
+          CATEGORY_ID = #CategoryId#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="Name">
+          NAME = #Name#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="Path">
+          PATH = #Path#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="Sequence">
+          SEQUENCE = #Sequence#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="Separator">
+          SEPARATOR = #Separator#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="Params">
+          PARAMS = #Params#
+        </isNotEmpty>
+      </dynamic>
+      WHEN NOT MATCHED THEN
+      INSERT
+        (MENU_ID,
+        SYSTEM_ID,
+        CATEGORY_ID,
+        NAME,
+        PATH,
+        SEQUENCE,
+        MENU_TYPE,
+        SEPARATOR,
+        PARAMS)
+      VALUES
+        (#MenuId#,
+        #SystemId#,
+        #CategoryId#,
+        #Name#,
+        #Path#,
+        #Sequence#,
+        #Type#,
+        #Separator#,
+        #Params#);
+    </update>
+
+		<!--UPDATE-->
+		<update id="Menu.UpdateMenu" parameterClass="SamMenuInfo">
+			UPDATE
+				T_MENU
+			SET
+			<dynamic prepend=" " close=" ">
+				<isNotEmpty prepend="," property="CategoryId">
+					CATEGORY_ID = #CategoryId#
+				</isNotEmpty>
+				<isNotEmpty prepend="," property="Name">
+					NAME = #Name#
+				</isNotEmpty>
+				<isNotEmpty prepend="," property="Path">
+					PATH = #Path#
+				</isNotEmpty>
+				<isNotEmpty prepend="," property="Sequence">
+					SEQUENCE = #Sequence#
+				</isNotEmpty>
+				<isNotEmpty prepend="," property="Separator">
+          SEPARATOR = #Separator#
+        </isNotEmpty>
+				<isNotEmpty prepend="," property="Params">
+          PARAMS = #Params#
+        </isNotEmpty>
+				WHERE
+					MENU_ID = #MenuId#
+          AND SYSTEM_ID = #SystemId#
+			</dynamic>
+		</update>
+    
+    <!--ADD MENU_MAP-->
+    <insert id="Menu.InsertMenuMap" parameterClass="SamMenuMapInfo">
+      INSERT INTO
+      T_MENU_MAP
+      (MENU_MAP_ID,
+      SYSTEM_ID,
+      MENU_ID,
+      GROUP_ID,
+      IS_READ,
+      IS_WRITE)
+      VALUES
+      (#MenuMapId#,
+      #SystemId#,
+      #MenuId#,
+      #GroupId#,
+      #IsRead#,
+      #IsWrite#)
+    </insert>
+
+    <!--UPDATE MENU_MAP-->
+    <update id="Menu.UpdateMenuMap" parameterClass="SamMenuInfo">
+      UPDATE
+      T_MENU_MAP
+      SET
+      MENU_ID = #MenuId#
+      WHERE
+      MENU_ID = #OrigMenuId#
+    </update>
+
+    <!--DELETE-->
+    <delete id="Menu.DeleteMenu" parameterClass="SamMenuInfo">
+      DELETE
+      FROM
+      T_MENU
+      WHERE
+      SYSTEM_ID = #SystemId#
+      AND MENU_ID = #MenuId#
+    </delete>
+
+    <!--DELETE MENU_MAP-->
+    <delete id="Menu.DeleteMenuMap" parameterClass="SamMenuInfo">
+      DELETE
+      FROM
+      T_MENU_MAP
+      WHERE
+      SYSTEM_ID = #SystemId#
+      AND MENU_ID = #MenuId#
+    </delete>
+
+    <!--DELETE BY SYSTEM-->
+    <delete id="Menu.DeleteMenus" parameterClass="string">
+      DELETE
+      FROM
+				T_MENU
+      WHERE
+				SYSTEM_ID = #Id#
+    </delete>
+
+	</statements>
+</sqlMap>

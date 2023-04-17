@@ -306,4 +306,152 @@ public class MdmBomMasterController : ControllerBase
             return 0;
         }
     }
+
+    /**
+      * Sub4
+      */
+    [HttpGet("/api/MdmBomMaster/{bomID}/Sub4")]
+    public IEnumerable<MdmBomSub4> GetAllSub4(String bomID)
+    {
+        try
+        {
+            var result = _mdmBomMasterDao.GetAllSub4(bomID);
+            _logger.LogInformation("result : {}", result);
+            Serilog.Log.Logger.Information(result.ToString());
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            Serilog.Log.Logger.Error(e.Message);
+            return new List<MdmBomSub4>();
+        }
+    }
+
+    [HttpPost("/api/MdmBomMaster/{bomID}/Sub4")]
+    public int InsertSub4(MdmBomSub4 mdmBomSub4, String bomID)
+    {
+        try
+        {
+            mdmBomSub4.bomID = bomID;
+            _logger.LogInformation("Insert : {}", mdmBomSub4);
+            _mdmBomMasterDao.InsertSub4(mdmBomSub4);
+            return 1;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+    }
+
+    [HttpPut("/api/MdmBomMaster/{bomID}/Sub4/{routingID}")]
+    public int UpdateSub4(MdmBomSub4 mdmBomSub4)
+    {
+        _logger.LogInformation("Update : {}", mdmBomSub4);
+        try
+        {
+            var result = _mdmBomMasterDao.UpdateSub4(mdmBomSub4);
+            _logger.LogInformation("result : {}", result);
+
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+    }
+
+    [HttpDelete("/api/MdmBomMaster/{bomID}/Sub4/{routingID}")]
+    public int DeleteSub4(MdmBomSub4 mdmBomSub4)
+    {
+        _logger.LogInformation("Delete : {}", mdmBomSub4);
+        try
+        {
+            var result = _mdmBomMasterDao.DeleteSub4(mdmBomSub4);
+            _logger.LogInformation("result : {}", result);
+
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+    }
+
+    /**
+      * Sub5
+      */
+    [HttpGet("/api/MdmBomMaster/{bomID}/Sub5")]
+    public IEnumerable<MdmBomSub5> GetAllSub5(String bomID)
+    {
+        try
+        {
+            var result = _mdmBomMasterDao.GetAllSub5(bomID);
+            _logger.LogInformation("result : {}", result);
+            Serilog.Log.Logger.Information(result.ToString());
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            Serilog.Log.Logger.Error(e.Message);
+            return new List<MdmBomSub5>();
+        }
+    }
+
+    [HttpPost("/api/MdmBomMaster/{bomID}/Sub5")]
+    public int InsertSub5(MdmBomSub5 mdmBomSub5, String bomID)
+    {
+        try
+        {
+            mdmBomSub5.bomID = bomID;
+            _logger.LogInformation("Insert : {}", mdmBomSub5);
+            _mdmBomMasterDao.InsertSub5(mdmBomSub5);
+            return 1;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+    }
+
+    [HttpPut("/api/MdmBomMaster/{bomID}/Sub5/{routingID}")]
+    public int UpdateSub5(MdmBomSub5 mdmBomSub5)
+    {
+        _logger.LogInformation("Update : {}", mdmBomSub5);
+        try
+        {
+            var result = _mdmBomMasterDao.UpdateSub5(mdmBomSub5);
+            _logger.LogInformation("result : {}", result);
+
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+    }
+
+    [HttpDelete("/api/MdmBomMaster/{bomID}/Sub5/{routingID}")]
+    public int DeleteSub5(MdmBomSub5 mdmBomSub5)
+    {
+        _logger.LogInformation("Delete : {}", mdmBomSub5);
+        try
+        {
+            var result = _mdmBomMasterDao.DeleteSub5(mdmBomSub5);
+            _logger.LogInformation("result : {}", result);
+
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+    }
 }

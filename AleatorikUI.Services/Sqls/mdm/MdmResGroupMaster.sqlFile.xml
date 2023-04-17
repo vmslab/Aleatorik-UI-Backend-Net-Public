@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnMdmResGroupMaster"  class="MdmResGroupMaster" >
+			<result property="resourceGroupID"    column="RESOURCE_GROUP_ID"/>
+			<result property="sequence"           column="SEQUENCE"/>
+			<result property="allocationGroupID"  column="ALLOCATION_GROUP_ID"/>
+			<result property="createTime"         column="CREATE_TIME"/>
+			<result property="createUser"         column="CREATE_USER"/>
+			<result property="updateTime"         column="UPDATE_TIME"/>
+			<result property="updateUser"         column="UPDATE_USER"/>
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+		<!--SELECT All-->
+		<select id="MdmResGroupMaster.Select" resultMap="rtnMdmResGroupMaster">
+			SELECT [RESOURCE_GROUP_ID]
+				 , [SEQUENCE]
+				 , [ALLOCATION_GROUP_ID]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_RESOURCE_GROUP_MASTER]
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmResGroupMaster.Insert" parameterClass="MdmResGroupMaster">
+			INSERT INTO [CFG_RESOURCE_GROUP_MASTER]
+				 ( [RESOURCE_GROUP_ID]
+				 , [SEQUENCE]
+				 , [ALLOCATION_GROUP_ID]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #resourceGroupID#
+				 , #sequence#
+				 , #allocationGroupID#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmResGroupMaster.Update" parameterClass="MdmResGroupMaster">
+			UPDATE [CFG_RESOURCE_GROUP_MASTER]
+			   SET [RESOURCE_GROUP_ID]   = #resourceGroupID#
+			     , [SEQUENCE]            = #sequence#
+			     , [ALLOCATION_GROUP_ID] = #allocationGroupID#
+			     , [UPDATE_TIME]         = getdate()
+			     , [UPDATE_USER]         = #updateUser#
+			 WHERE [RESOURCE_GROUP_ID]   = #resourceGroupID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmResGroupMaster.Delete" parameterClass="string">
+			DELETE
+			  FROM [CFG_RESOURCE_GROUP_MASTER]
+			 WHERE [RESOURCE_GROUP_ID]   = #resourceGroupID#
+		</delete>
+
+	</statements>
+</sqlMap>

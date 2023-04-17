@@ -3,82 +3,67 @@
 <sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
 	<resultMaps>
-		<resultMap id="rtnMdmStage"  class="MdmStage" >
-			<result property="stageID"    	column="STAGE_ID"/>
-			<result property="description"  column="DESCRIPTION"/>
+		<resultMap id="rtnMdmCustInfo"  class="MdmCustInfo" >
+			<result property="customerID"   column="CUSTOMER_ID"/>
+			<result property="customerName" column="CUSTOMER_NAME"/>
+			<result property="priority"     column="PRIORITY"/>
 			<result property="createTime"   column="CREATE_TIME"/>
-			<result property="createUser"	column="CREATE_USER"/>
-			<result property="updateTime"	column="UPDATE_TIME"/>
-			<result property="updateUser"	column="UPDATE_USER"/>
+			<result property="createUser"   column="CREATE_USER"/>
+			<result property="updateTime"   column="UPDATE_TIME"/>
+			<result property="updateUser"   column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
 	<statements>
 		<!--SELECT All-->
-		<select id="MdmStage.Select" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-		</select>
-
-		<!--SELECT BY ID-->
-		<select id="MdmStage.SelectId" parameterClass="string" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+		<select id="MdmCustInfo.Select" resultMap="rtnMdmCustInfo">
+			SELECT [CUSTOMER_ID]
+				 , [CUSTOMER_NAME]
+				 , [PRIORITY]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_CUSTOMER]
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmStage.Insert" parameterClass="MdmStage">
-			INSERT INTO CFG_STAGE
-				 ( STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
+		<insert id="MdmCustInfo.Insert" parameterClass="MdmCustInfo">
+			INSERT INTO [CFG_CUSTOMER]
+				 ( [CUSTOMER_ID]
+				 , [CUSTOMER_NAME]
+				 , [PRIORITY]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #stageID#
-				 , #description#
-				 , #createTime#
+				 ( #customerID#
+				 , #customerName#
+				 , #priority#
+				 , getdate()
 				 , #createUser#
-				 , #updateTime#
+				 , getdate()
 				 , #updateUser#
 				 )
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmStage.Update" parameterClass="MdmStage">
-			UPDATE CFG_STAGE
-			   SET 
-			<dynamic prepend=" " close=" ">
-				<isNotEmpty prepend="," property="description">
-					DESCRIPTION = #description#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateTime">
-					UPDATE_TIME = #updateTime#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateUser">
-					UPDATE_USER = #updateUser#
-				</isNotEmpty>
-			 WHERE STAGE_ID = #stageID#
-			</dynamic>
+		<update id="MdmCustInfo.Update" parameterClass="MdmCustInfo">
+			UPDATE [CFG_CUSTOMER]
+			   SET [CUSTOMER_ID]   = #customerID#
+				 , [CUSTOMER_NAME] = #customerName#
+				 , [PRIORITY]      = #priority#
+				 , [UPDATE_TIME]   = getdate()
+				 , [UPDATE_USER]   = #updateUser#
+			 WHERE [CUSTOMER_ID]   = #customerID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmStage.Delete" parameterClass="string">
+		<delete id="MdmCustInfo.Delete" parameterClass="string">
 			DELETE
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+			  FROM [CFG_CUSTOMER]
+			 WHERE [CUSTOMER_ID]   = #customerID#
 		</delete>
 
 	</statements>

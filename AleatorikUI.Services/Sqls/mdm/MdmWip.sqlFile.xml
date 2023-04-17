@@ -3,82 +3,117 @@
 <sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
 	<resultMaps>
-		<resultMap id="rtnMdmStage"  class="MdmStage" >
-			<result property="stageID"    	column="STAGE_ID"/>
-			<result property="description"  column="DESCRIPTION"/>
-			<result property="createTime"   column="CREATE_TIME"/>
-			<result property="createUser"	column="CREATE_USER"/>
-			<result property="updateTime"	column="UPDATE_TIME"/>
-			<result property="updateUser"	column="UPDATE_USER"/>
+		<resultMap id="rtnMdmWip"  class="MdmWip" >
+			<result property="lotID"         column="LOT_ID"/>
+			<result property="stageID"       column="STAGE_ID"/>
+			<result property="lotType"       column="LOT_TYPE"/>
+			<result property="lotQty"        column="LOT_QTY"/>
+			<result property="status"        column="STATUS"/>
+			<result property="itemID"        column="ITEM_ID"/>
+			<result property="siteID"        column="SITE_ID"/>
+			<result property="bufferID"      column="BUFFER_ID"/>
+			<result property="routingID"     column="ROUTING_ID"/>
+			<result property="operationID"   column="OPERATION_ID"/>
+			<result property="resourceID"    column="RESOURCE_ID"/>
+			<result property="availableTime" column="AVAILABLE_TIME"/>
+			<result property="trackInTime"   column="TRACK_IN_TIME"/>
+			<result property="createTime"    column="CREATE_TIME"/>
+			<result property="createUser"    column="CREATE_USER"/>
+			<result property="updateTime"    column="UPDATE_TIME"/>
+			<result property="updateUser"    column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
 	<statements>
 		<!--SELECT All-->
-		<select id="MdmStage.Select" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-		</select>
-
-		<!--SELECT BY ID-->
-		<select id="MdmStage.SelectId" parameterClass="string" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+		<select id="MdmWip.Select" resultMap="rtnMdmWip">
+			SELECT [LOT_ID]
+				 , [STAGE_ID]
+				 , [LOT_TYPE]
+				 , [LOT_QTY]
+				 , [STATUS]
+				 , [ITEM_ID]
+				 , [SITE_ID]
+				 , [BUFFER_ID]
+				 , [ROUTING_ID]
+				 , [OPERATION_ID]
+				 , [RESOURCE_ID]
+				 , [AVAILABLE_TIME]
+				 , [TRACK_IN_TIME]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_WIP]
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmStage.Insert" parameterClass="MdmStage">
-			INSERT INTO CFG_STAGE
-				 ( STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
+		<insert id="MdmWip.Insert" parameterClass="MdmWip">
+			INSERT INTO [CFG_WIP]
+				 ( [LOT_ID]
+				 , [STAGE_ID]
+				 , [LOT_TYPE]
+				 , [LOT_QTY]
+				 , [STATUS]
+				 , [ITEM_ID]
+				 , [SITE_ID]
+				 , [BUFFER_ID]
+				 , [ROUTING_ID]
+				 , [OPERATION_ID]
+				 , [RESOURCE_ID]
+				 , [AVAILABLE_TIME]
+				 , [TRACK_IN_TIME]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #stageID#
-				 , #description#
-				 , #createTime#
+				 ( #lotID#
+				 , #stageID#
+				 , #lotType#
+				 , #lotQty#
+				 , #status#
+				 , #itemID#
+				 , #siteID#
+				 , #bufferID#
+				 , #routingID#
+				 , #operationID#
+				 , #resourceID#
+				 , #availableTime#
+				 , #trackInTime#
+				 , getdate()
 				 , #createUser#
-				 , #updateTime#
+				 , getdate()
 				 , #updateUser#
 				 )
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmStage.Update" parameterClass="MdmStage">
-			UPDATE CFG_STAGE
-			   SET 
-			<dynamic prepend=" " close=" ">
-				<isNotEmpty prepend="," property="description">
-					DESCRIPTION = #description#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateTime">
-					UPDATE_TIME = #updateTime#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateUser">
-					UPDATE_USER = #updateUser#
-				</isNotEmpty>
-			 WHERE STAGE_ID = #stageID#
-			</dynamic>
+		<update id="MdmWip.Update" parameterClass="MdmWip">
+			UPDATE [CFG_WIP]
+			   SET [LOT_ID]         = #lotID#
+				 , [STAGE_ID]       = #stageID#
+				 , [LOT_TYPE]       = #lotType#
+				 , [LOT_QTY]        = #lotQty#
+				 , [STATUS]         = #status#
+				 , [ITEM_ID]        = #itemID#
+				 , [SITE_ID]        = #siteID#
+				 , [BUFFER_ID]      = #bufferID#
+				 , [ROUTING_ID]     = #routingID#
+				 , [OPERATION_ID]   = #operationID#
+				 , [RESOURCE_ID]    = #resourceID#
+				 , [AVAILABLE_TIME] = #availableTime#
+				 , [TRACK_IN_TIME]  = #trackInTime#
+				 , [UPDATE_TIME]    = getdate()
+				 , [UPDATE_USER]    = #updateUser#
+			 WHERE [LOT_ID]         = #lotID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmStage.Delete" parameterClass="string">
+		<delete id="MdmWip.Delete" parameterClass="string">
 			DELETE
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+			  FROM [CFG_WIP]
+			 WHERE [LOT_ID]         = #lotID#
 		</delete>
 
 	</statements>

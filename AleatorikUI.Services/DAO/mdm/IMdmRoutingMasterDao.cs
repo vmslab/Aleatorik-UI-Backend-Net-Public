@@ -4,7 +4,6 @@ namespace AleatorikUI.Services.DAO.mdm;
 
 public interface IMdmRoutingMasterDao
 {
-
     public IEnumerable<MdmRoutingMaster> GetAll();
     public void Insert(MdmRoutingMaster mdmRoutingMaster);
     public int Update(MdmRoutingMaster mdmRoutingMaster);

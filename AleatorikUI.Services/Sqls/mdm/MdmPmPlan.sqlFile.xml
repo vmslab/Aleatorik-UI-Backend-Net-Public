@@ -3,82 +3,99 @@
 <sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
 	<resultMaps>
-		<resultMap id="rtnMdmStage"  class="MdmStage" >
-			<result property="stageID"    	column="STAGE_ID"/>
-			<result property="description"  column="DESCRIPTION"/>
+		<resultMap id="rtnMdmPmPlan"  class="MdmPmPlan" >
+			<result property="pmID"         column="PM_ID"/>
+			<result property="priority"     column="PRIORITY"/>
+			<result property="startTime"    column="START_TIME"/>
+			<result property="endTime"      column="END_TIME"/>
+			<result property="pmTime"       column="PM_TIME"/>
+			<result property="patternName"  column="PATTERN_NAME"/>
+			<result property="patternValue" column="PATTERN_VALUE"/>
+			<result property="pmPolicy"     column="PM_POLICY"/>
+			<result property="parameter"    column="PARAMETER"/>
 			<result property="createTime"   column="CREATE_TIME"/>
-			<result property="createUser"	column="CREATE_USER"/>
-			<result property="updateTime"	column="UPDATE_TIME"/>
-			<result property="updateUser"	column="UPDATE_USER"/>
+			<result property="createUser"   column="CREATE_USER"/>
+			<result property="updateTime"   column="UPDATE_TIME"/>
+			<result property="updateUser"   column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
 	<statements>
 		<!--SELECT All-->
-		<select id="MdmStage.Select" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-		</select>
-
-		<!--SELECT BY ID-->
-		<select id="MdmStage.SelectId" parameterClass="string" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+		<select id="MdmPmPlan.Select" resultMap="rtnMdmPmPlan">
+			SELECT [PM_ID]
+				 , [PRIORITY]
+				 , [START_TIME]
+				 , [END_TIME]
+				 , [PM_TIME]
+				 , [PATTERN_NAME]
+				 , [PATTERN_VALUE]
+				 , [PM_POLICY]
+				 , [PARAMETER]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_PM_PLAN]
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmStage.Insert" parameterClass="MdmStage">
-			INSERT INTO CFG_STAGE
-				 ( STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
+		<insert id="MdmPmPlan.Insert" parameterClass="MdmPmPlan">
+			INSERT INTO [CFG_PM_PLAN]
+				 ( [PM_ID]
+				 , [PRIORITY]
+				 , [START_TIME]
+				 , [END_TIME]
+				 , [PM_TIME]
+				 , [PATTERN_NAME]
+				 , [PATTERN_VALUE]
+				 , [PM_POLICY]
+				 , [PARAMETER]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #stageID#
-				 , #description#
-				 , #createTime#
+				 ( #pmID#
+				 , #priority#
+				 , #startTime#
+				 , #endTime#
+				 , #pmTime#
+				 , #patternName#
+				 , #patternValue#
+				 , #pmPolicy#
+				 , #parameter#
+				 , getdate()
 				 , #createUser#
-				 , #updateTime#
+				 , getdate()
 				 , #updateUser#
 				 )
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmStage.Update" parameterClass="MdmStage">
-			UPDATE CFG_STAGE
-			   SET 
-			<dynamic prepend=" " close=" ">
-				<isNotEmpty prepend="," property="description">
-					DESCRIPTION = #description#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateTime">
-					UPDATE_TIME = #updateTime#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateUser">
-					UPDATE_USER = #updateUser#
-				</isNotEmpty>
-			 WHERE STAGE_ID = #stageID#
-			</dynamic>
+		<update id="MdmPmPlan.Update" parameterClass="MdmPmPlan">
+			UPDATE [CFG_PM_PLAN]
+			   SET [PM_ID]         = #pmID#
+				 , [PRIORITY]      = #priority#
+				 , [START_TIME]    = #startTime#
+				 , [END_TIME]      = #endTime#
+				 , [PM_TIME]       = #pmTime#
+				 , [PATTERN_NAME]  = #patternName#
+				 , [PATTERN_VALUE] = #patternValue#
+				 , [PM_POLICY]     = #pmPolicy#
+				 , [PARAMETER]     = #parameter#
+				 , [UPDATE_TIME]   = getdate()
+				 , [UPDATE_USER]   = #updateUser#
+			 WHERE PM_ID    = #pmID#
+			   AND PRIORITY = #priority#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmStage.Delete" parameterClass="string">
+		<delete id="MdmPmPlan.Delete" parameterClass="string">
 			DELETE
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+			  FROM [CFG_PM_PLAN]
+			 WHERE PM_ID    = #pmID#
+			   AND PRIORITY = #priority#
 		</delete>
 
 	</statements>

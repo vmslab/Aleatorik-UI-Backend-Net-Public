@@ -3,82 +3,74 @@
 <sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
 	<resultMaps>
-		<resultMap id="rtnMdmStage"  class="MdmStage" >
-			<result property="stageID"    	column="STAGE_ID"/>
-			<result property="description"  column="DESCRIPTION"/>
+		<resultMap id="rtnMdmConstInfo"  class="MdmConstInfo" >
+			<result property="constraintID" column="CONSTRAINT_ID"/>
+			<result property="propertyID"   column="PROPERTY_ID"/>
+			<result property="condition"    column="CONDITION"/>
+			<result property="calendarID"   column="CALENDAR_ID"/>
 			<result property="createTime"   column="CREATE_TIME"/>
-			<result property="createUser"	column="CREATE_USER"/>
-			<result property="updateTime"	column="UPDATE_TIME"/>
-			<result property="updateUser"	column="UPDATE_USER"/>
+			<result property="createUser"   column="CREATE_USER"/>
+			<result property="updateTime"   column="UPDATE_TIME"/>
+			<result property="updateUser"   column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
 	<statements>
 		<!--SELECT All-->
-		<select id="MdmStage.Select" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
+		<select id="MdmConstInfo.Select" resultMap="rtnMdmConstInfo">
+			SELECT [CONSTRAINT_ID]
+				 , [PROPERTY_ID]
+				 , [CONDITION]
+				 , [CALENDAR_ID]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_CONSTRAINT_INFO]
 		</select>
 
-		<!--SELECT BY ID-->
-		<select id="MdmStage.SelectId" parameterClass="string" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
-		</select>
+
 
 		<!--INSERT-->
-		<insert id="MdmStage.Insert" parameterClass="MdmStage">
-			INSERT INTO CFG_STAGE
-				 ( STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
+		<insert id="MdmConstInfo.Insert" parameterClass="MdmConstInfo">
+			INSERT INTO [CFG_CONSTRAINT_INFO]
+				 ( [CONSTRAINT_ID]
+				 , [PROPERTY_ID]
+				 , [CONDITION]
+				 , [CALENDAR_ID]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #stageID#
-				 , #description#
-				 , #createTime#
+				 ( #constraintID#
+				 , #propertyID#
+				 , #condition#
+				 , #calendarID#
+				 , getdate()
 				 , #createUser#
-				 , #updateTime#
+				 , getdate()
 				 , #updateUser#
 				 )
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmStage.Update" parameterClass="MdmStage">
-			UPDATE CFG_STAGE
-			   SET 
-			<dynamic prepend=" " close=" ">
-				<isNotEmpty prepend="," property="description">
-					DESCRIPTION = #description#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateTime">
-					UPDATE_TIME = #updateTime#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateUser">
-					UPDATE_USER = #updateUser#
-				</isNotEmpty>
-			 WHERE STAGE_ID = #stageID#
-			</dynamic>
+		<update id="MdmConstInfo.Update" parameterClass="MdmConstInfo">
+			UPDATE [CFG_CONSTRAINT_INFO]
+			   SET [CONSTRAINT_ID] = #constraintID#
+				 , [PROPERTY_ID]   = #propertyID#
+				 , [CONDITION]     = #condition#
+				 , [CALENDAR_ID]   = #calendarID#
+				 , [UPDATE_TIME]   = getdate()
+				 , [UPDATE_USER]   = #updateUser#
+			 WHERE [CONSTRAINT_ID] = #constraintID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmStage.Delete" parameterClass="string">
+		<delete id="MdmConstInfo.Delete" parameterClass="string">
 			DELETE
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+			  FROM [CFG_CONSTRAINT_INFO]
+			 WHERE [CONSTRAINT_ID] = #constraintID#
 		</delete>
 
 	</statements>

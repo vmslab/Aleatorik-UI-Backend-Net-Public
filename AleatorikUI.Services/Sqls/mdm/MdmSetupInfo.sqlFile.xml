@@ -3,82 +3,97 @@
 <sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
 	<resultMaps>
-		<resultMap id="rtnMdmStage"  class="MdmStage" >
-			<result property="stageID"    	column="STAGE_ID"/>
-			<result property="description"  column="DESCRIPTION"/>
-			<result property="createTime"   column="CREATE_TIME"/>
-			<result property="createUser"	column="CREATE_USER"/>
-			<result property="updateTime"	column="UPDATE_TIME"/>
-			<result property="updateUser"	column="UPDATE_USER"/>
+		<resultMap id="rtnMdmSetupInfo"  class="MdmSetupInfo" >
+			<result property="setupID"       column="SETUP_ID"/>
+			<result property="setupType"     column="SETUP_TYPE"/>
+			<result property="fromCondition" column="FROM_CONDITION"/>
+			<result property="toCondition"   column="TO_CONDITION"/>
+			<result property="setupTime"     column="SETUP_TIME"/>
+			<result property="timeUom"       column="TIME_UOM"/>
+			<result property="createTime"    column="CREATE_TIME"/>
+			<result property="createUser"    column="CREATE_USER"/>
+			<result property="updateTime"    column="UPDATE_TIME"/>
+			<result property="updateUser"    column="UPDATE_USER"/>
+			<result property="setupIndex"    column="SETUP_INDEX"/>
+			<result property="priority"      column="PRIORITY"/>
+			<result property="setupResource" column="SETUP_RESOURCE"/>
 		</resultMap>
 	</resultMaps>
 
 	<statements>
 		<!--SELECT All-->
-		<select id="MdmStage.Select" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-		</select>
-
-		<!--SELECT BY ID-->
-		<select id="MdmStage.SelectId" parameterClass="string" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+		<select id="MdmSetupInfo.Select" resultMap="rtnMdmSetupInfo">
+			SELECT [SETUP_ID]
+				 , [SETUP_TYPE]
+				 , [FROM_CONDITION]
+				 , [TO_CONDITION]
+				 , [SETUP_TIME]
+				 , [TIME_UOM]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 , [SETUP_INDEX]
+				 , [PRIORITY]
+				 , [SETUP_RESOURCE]
+			  FROM [CFG_SETUP_INFO]
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmStage.Insert" parameterClass="MdmStage">
-			INSERT INTO CFG_STAGE
-				 ( STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
+		<insert id="MdmSetupInfo.Insert" parameterClass="MdmSetupInfo">
+			INSERT INTO [CFG_SETUP_INFO]
+				 ( [SETUP_ID]
+				 , [SETUP_TYPE]
+				 , [FROM_CONDITION]
+				 , [TO_CONDITION]
+				 , [SETUP_TIME]
+				 , [TIME_UOM]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 , [SETUP_INDEX]
+				 , [PRIORITY]
+				 , [SETUP_RESOURCE]
 				 ) VALUES
-				 ( #stageID#
-				 , #description#
-				 , #createTime#
+				 ( #setupID#
+				 , #setupType#
+				 , #fromCondition#
+				 , #toCondition#
+				 , #setupTime#
+				 , #timeUom#
+				 , getdate()
 				 , #createUser#
-				 , #updateTime#
+				 , getdate()
 				 , #updateUser#
+				 , #setupIndex#
+				 , #priority#
+				 , #setupResource#
 				 )
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmStage.Update" parameterClass="MdmStage">
-			UPDATE CFG_STAGE
-			   SET 
-			<dynamic prepend=" " close=" ">
-				<isNotEmpty prepend="," property="description">
-					DESCRIPTION = #description#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateTime">
-					UPDATE_TIME = #updateTime#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateUser">
-					UPDATE_USER = #updateUser#
-				</isNotEmpty>
-			 WHERE STAGE_ID = #stageID#
-			</dynamic>
+		<update id="MdmSetupInfo.Update" parameterClass="MdmSetupInfo">
+			UPDATE [CFG_SETUP_INFO]
+			   SET [SETUP_ID]       = #setupID#
+			     , [SETUP_TYPE]     = #setupType#
+				 , [FROM_CONDITION] = #fromCondition#
+				 , [TO_CONDITION]   = #toCondition#
+				 , [SETUP_TIME]     = #setupTime#
+				 , [TIME_UOM]       = #timeUom#
+				 , [UPDATE_TIME]    = getdate()
+				 , [UPDATE_USER]    = #updateUser#
+				 , [SETUP_INDEX]    = #setupIndex#
+				 , [PRIORITY]       = #priority#
+				 , [SETUP_RESOURCE] = #setupResource#
+			 WHERE [SETUP_ID] = #setupID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmStage.Delete" parameterClass="string">
+		<delete id="MdmSetupInfo.Delete" parameterClass="string">
 			DELETE
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+			  FROM [CFG_SETUP_INFO]
+			 WHERE [SETUP_ID] = #setupID#
 		</delete>
 
 	</statements>

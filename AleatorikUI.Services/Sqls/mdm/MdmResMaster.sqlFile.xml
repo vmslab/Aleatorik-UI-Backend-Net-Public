@@ -3,82 +3,102 @@
 <sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
 	<resultMaps>
-		<resultMap id="rtnMdmStage"  class="MdmStage" >
-			<result property="stageID"    	column="STAGE_ID"/>
-			<result property="description"  column="DESCRIPTION"/>
-			<result property="createTime"   column="CREATE_TIME"/>
-			<result property="createUser"	column="CREATE_USER"/>
-			<result property="updateTime"	column="UPDATE_TIME"/>
-			<result property="updateUser"	column="UPDATE_USER"/>
+		<resultMap id="rtnMdmResMaster"  class="MdmResMaster" >
+			<result property="resourceID"       column="RESOURCE_ID"/>
+			<result property="siteID"           column="SITE_ID"/>
+			<result property="location"         column="LOCATION"/>
+			<result property="category"         column="CATEGORY"/>
+			<result property="resourceType"     column="RESOURCE_TYPE"/>
+			<result property="resourceGroupID"  column="RESOURCE_GROUP_ID"/>
+			<result property="stageID"          column="STAGE_ID"/>
+			<result property="capacityType"     column="CAPACITY_TYPE"/>
+			<result property="capacityMode"     column="CAPACITY_MODE"/>
+			<result property="isActive"         column="IS_ACTIVE"/>
+			<result property="createTime"       column="CREATE_TIME"/>
+			<result property="createUser"       column="CREATE_USER"/>
+			<result property="updateTime"       column="UPDATE_TIME"/>
+			<result property="updateUser"       column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
 	<statements>
 		<!--SELECT All-->
-		<select id="MdmStage.Select" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-		</select>
-
-		<!--SELECT BY ID-->
-		<select id="MdmStage.SelectId" parameterClass="string" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+		<select id="MdmResMaster.Select" resultMap="rtnMdmResMaster">
+			SELECT [RESOURCE_ID]
+				 , [SITE_ID]
+				 , [LOCATION]
+				 , [CATEGORY]
+				 , [RESOURCE_TYPE]
+				 , [RESOURCE_GROUP_ID]
+				 , [STAGE_ID]
+				 , [CAPACITY_TYPE]
+				 , [CAPACITY_MODE]
+				 , [IS_ACTIVE]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_RESOURCE_MASTER]
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmStage.Insert" parameterClass="MdmStage">
-			INSERT INTO CFG_STAGE
-				 ( STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
+		<insert id="MdmResMaster.Insert" parameterClass="MdmResMaster">
+			INSERT INTO [CFG_RESOURCE_MASTER]
+				 ( [RESOURCE_ID]
+				 , [SITE_ID]
+				 , [LOCATION]
+				 , [CATEGORY]
+				 , [RESOURCE_TYPE]
+				 , [RESOURCE_GROUP_ID]
+				 , [STAGE_ID]
+				 , [CAPACITY_TYPE]
+				 , [CAPACITY_MODE]
+				 , [IS_ACTIVE]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #stageID#
-				 , #description#
-				 , #createTime#
+				 ( #resourceID#
+				 , #siteID#
+				 , #location#
+				 , #category#
+				 , #resourceType#
+				 , #resourceGroupID#
+				 , #stageID#
+				 , #capacityType#
+				 , #capacityMode#
+				 , #isActive#
+				 , getdate()
 				 , #createUser#
-				 , #updateTime#
+				 , getdate()
 				 , #updateUser#
 				 )
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmStage.Update" parameterClass="MdmStage">
-			UPDATE CFG_STAGE
-			   SET 
-			<dynamic prepend=" " close=" ">
-				<isNotEmpty prepend="," property="description">
-					DESCRIPTION = #description#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateTime">
-					UPDATE_TIME = #updateTime#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateUser">
-					UPDATE_USER = #updateUser#
-				</isNotEmpty>
-			 WHERE STAGE_ID = #stageID#
-			</dynamic>
+		<update id="MdmResMaster.Update" parameterClass="MdmResMaster">
+			UPDATE [CFG_RESOURCE_MASTER]
+			   SET [RESOURCE_ID]       = #resourceID#
+			     , [SITE_ID]           = #siteID#
+			     , [LOCATION]          = #location#
+			     , [CATEGORY]          = #category#
+			     , [RESOURCE_TYPE]     = #resourceType#
+			     , [RESOURCE_GROUP_ID] = #resourceGroupID#
+			     , [STAGE_ID]          = #stageID#
+			     , [CAPACITY_TYPE]     = #capacityType#
+			     , [CAPACITY_MODE]     = #capacityMode#
+			     , [IS_ACTIVE]         = #isActive#
+			     , [UPDATE_TIME]       = getdate()
+			     , [UPDATE_USER]       = #updateUser#
+			 WHERE [RESOURCE_ID]       = #resourceID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmStage.Delete" parameterClass="string">
+		<delete id="MdmResMaster.Delete" parameterClass="string">
 			DELETE
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+			  FROM [CFG_RESOURCE_MASTER]
+			 WHERE [RESOURCE_ID]       = #resourceID#
 		</delete>
 
 	</statements>

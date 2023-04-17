@@ -66,6 +66,9 @@
     <None Update="Sqls\mdm\MdmCustInfo.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Sqls\mdm\MdmResGroupMaster.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sqls\mdm\MdmResMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -75,10 +78,16 @@
     <None Update="Sqls\mdm\MdmPmPlan.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Sqls\mdm\MdmOperResMaster.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sqls\mdm\MdmSetupInfo.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\mdm\MdmCalMaster.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\iod\IodReport.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\mdm\MdmWip.sqlFile.xml">
@@ -114,25 +123,28 @@
     <None Update="Sqls\mdm\MdmRoutingMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmBomRoutingMaster.sqlFile.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Sqls\mdm\MdmStageMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\Member.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\sam\Group.sqlFile.xml">
+    <None Update="Sqls\plm\PlmFactor.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\sam\MenuMap.sqlFile.xml">
+    <None Update="Sqls\rar\RarBomMapView.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\sam\Menu.sqlFile.xml">
+    <None Update="Sqls\sam\SamGroup.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\sam\User.sqlFile.xml">
+    <None Update="Sqls\sam\SamMenuMap.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\sam\SamMenu.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sqls\sam\SamUser.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\exp\Todo.sqlFile.xml">
@@ -145,21 +157,6 @@
       <HintPath>..\AleatorikUI.Gantt\bin\Debug\net6.0\AleatorikUI.Gantt.dll</HintPath>
     </Reference>
     <ProjectReference Include="..\AleatorikUI.Services.Authentication\AleatorikUI.Services.Authentication.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\out\" />
-    <Folder Include="Controllers\plm\" />
-    <Folder Include="Controllers\aor\" />
-    <Folder Include="DAO\aor\" />
-    <Folder Include="DAO\out\" />
-    <Folder Include="DAO\plm\" />
-    <Folder Include="DTO\aor\" />
-    <Folder Include="DTO\out\" />
-    <Folder Include="DTO\plm\" />
-    <Folder Include="Sqls\out\" />
-    <Folder Include="Sqls\plm\" />
-    <Folder Include="Sqls\aor\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

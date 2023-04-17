@@ -3,82 +3,117 @@
 <sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
 	<resultMaps>
-		<resultMap id="rtnMdmStage"  class="MdmStage" >
-			<result property="stageID"    	column="STAGE_ID"/>
-			<result property="description"  column="DESCRIPTION"/>
-			<result property="createTime"   column="CREATE_TIME"/>
-			<result property="createUser"	column="CREATE_USER"/>
-			<result property="updateTime"	column="UPDATE_TIME"/>
-			<result property="updateUser"	column="UPDATE_USER"/>
+		<resultMap id="rtnMdmDemand"  class="MdmDemand" >
+			<result property="soID"              column="SO_ID"/>
+			<result property="stageID"           column="STAGE_ID"/>
+			<result property="itemID"            column="ITEM_ID"/>
+			<result property="siteID"            column="SITE_ID"/>
+			<result property="bufferID"          column="BUFFER_ID"/>
+			<result property="dueDate"           column="DUE_DATE"/>
+			<result property="qty"               column="QTY"/>
+			<result property="priority"          column="PRIORITY"/>
+			<result property="customerID"        column="CUSTOMER_ID"/>
+			<result property="demandType"        column="DEMAND_TYPE"/>
+			<result property="maxLatenessDays"   column="MAX_LATENESS_DAYS"/>
+			<result property="maxEarlinessDays"  column="MAX_EARLINESS_DAYS"/>
+			<result property="isRtfTarget"       column="IS_RTF_TARGET"/>
+			<result property="createTime"        column="CREATE_TIME"/>
+			<result property="createUser"        column="CREATE_USER"/>
+			<result property="updateTime"        column="UPDATE_TIME"/>
+			<result property="updateUser"        column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
 	<statements>
 		<!--SELECT All-->
-		<select id="MdmStage.Select" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-		</select>
-
-		<!--SELECT BY ID-->
-		<select id="MdmStage.SelectId" parameterClass="string" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+		<select id="MdmDemand.Select" resultMap="rtnMdmDemand">
+			SELECT [SO_ID]
+				 , [STAGE_ID]
+				 , [ITEM_ID]
+				 , [SITE_ID]
+				 , [BUFFER_ID]
+				 , [DUE_DATE]
+				 , [QTY]
+				 , [PRIORITY]
+				 , [CUSTOMER_ID]
+				 , [DEMAND_TYPE]
+				 , [MAX_LATENESS_DAYS]
+				 , [MAX_EARLINESS_DAYS]
+				 , [IS_RTF_TARGET]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_SALES_ORDER]
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmStage.Insert" parameterClass="MdmStage">
-			INSERT INTO CFG_STAGE
-				 ( STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
+		<insert id="MdmDemand.Insert" parameterClass="MdmDemand">
+			INSERT INTO [CFG_SALES_ORDER]
+				 ( [SO_ID]
+				 , [STAGE_ID]
+				 , [ITEM_ID]
+				 , [SITE_ID]
+				 , [BUFFER_ID]
+				 , [DUE_DATE]
+				 , [QTY]
+				 , [PRIORITY]
+				 , [CUSTOMER_ID]
+				 , [DEMAND_TYPE]
+				 , [MAX_LATENESS_DAYS]
+				 , [MAX_EARLINESS_DAYS]
+				 , [IS_RTF_TARGET]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #stageID#
-				 , #description#
-				 , #createTime#
+				 ( #soID#
+				 , #stageID#
+				 , #itemID#
+				 , #siteID#
+				 , #bufferID#
+				 , #dueDate#
+				 , #qty#
+				 , #priority#
+				 , #customerID#
+				 , #demandType#
+				 , #maxLatenessDays#
+				 , #maxEarlinessDays#
+				 , #isRtfTarget#
+				 , getdate()
 				 , #createUser#
-				 , #updateTime#
+				 , getdate()
 				 , #updateUser#
 				 )
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmStage.Update" parameterClass="MdmStage">
-			UPDATE CFG_STAGE
-			   SET 
-			<dynamic prepend=" " close=" ">
-				<isNotEmpty prepend="," property="description">
-					DESCRIPTION = #description#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateTime">
-					UPDATE_TIME = #updateTime#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateUser">
-					UPDATE_USER = #updateUser#
-				</isNotEmpty>
-			 WHERE STAGE_ID = #stageID#
-			</dynamic>
+		<update id="MdmDemand.Update" parameterClass="MdmDemand">
+			UPDATE [CFG_SALES_ORDER]
+			   SET [SO_ID]              = #soID#
+				 , [STAGE_ID]           = #stageID#
+				 , [ITEM_ID]            = #itemID#
+				 , [SITE_ID]            = #siteID#
+				 , [BUFFER_ID]          = #bufferID#
+				 , [DUE_DATE]           = #dueDate#
+				 , [QTY]                = #qty#
+				 , [PRIORITY]           = #priority#
+				 , [CUSTOMER_ID]        = #customerID#
+				 , [DEMAND_TYPE]        = #demandType#
+				 , [MAX_LATENESS_DAYS]  = #maxLatenessDays#
+				 , [MAX_EARLINESS_DAYS] = #maxEarlinessDays#
+				 , [IS_RTF_TARGET]      = #isRtfTarget#
+				 , [UPDATE_TIME]        = getdate()
+				 , [UPDATE_USER]        = #updateUser#
+			 WHERE [SO_ID]              = #soID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmStage.Delete" parameterClass="string">
+		<delete id="MdmDemand.Delete" parameterClass="string">
 			DELETE
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+			  FROM [CFG_SALES_ORDER]
+			 WHERE [SO_ID]              = #soID#
 		</delete>
 
 	</statements>

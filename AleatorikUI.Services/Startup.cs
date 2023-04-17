@@ -4,6 +4,8 @@ using AleatorikUI.Services.DAO.exp;
 using AleatorikUI.Services.Configuration;
 using AleatorikUI.Services.Authentication;
 using AleatorikUI.Services.DAO.sam;
+using AleatorikUI.Services.DAO.iod;
+using Microsoft.OpenApi.Models;
 
 namespace AleatorikUI.Services;
 public class Startup
@@ -26,42 +28,70 @@ public class Startup
 
         services.AddControllers();
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        //services.AddSwaggerGen();
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("api", new OpenApiInfo
+            {
+                Title = "Aleatorik UI Service Api",
+                Description = "Aleatorik UI Api 문서",
+                Contact = new OpenApiContact
+                {
+                    Name = "서버 정보",
+                    Email = string.Empty,
+                    Url = new Uri("http://localhost:5235")
+                }
+                
+            });
+            c.SwaggerDoc("admin", new OpenApiInfo
+            {
+                Title = "관리자 Title",
+                Description = "관리자 DESC",
+                Contact = new OpenApiContact
+                {
+                    Name = "서버 정보 - Server Gitlab",
+                    Email = string.Empty,
+                    Url = new Uri("http://000.000.000.000")
+                }
+            });
+        });
+        string sMode = "PRODT";
+
+#if DEBUG
+        sMode = "DEV";
+#endif
 
         /**
          *        기준 정보 관리
          */
-        services.AddSingleton<IMdmStageMasterDao, MdmStageMasterDao>();                     // 스테이지
-        services.AddSingleton<IMdmSiteMasterDao, MdmSiteMasterDao>();                       // 사이트
-        services.AddSingleton<IMdmAllocGroupMasterDao, MdmAllocGroupMasterDao>();           // 할당그룹
-        services.AddSingleton<IMdmFactoryMasterDao, MdmFactoryMasterDao>();         // 공장운영정보 
-        services.AddSingleton<IMdmCodeGroupMasterDao, MdmCodeGroupMasterDao>();             // 코드 그룹, 코드 관리
-        services.AddSingleton<IMdmPropMasterDao, MdmPropMasterDao>();               // 속성 관리
+        services.AddSingletonWithNamedMapper<IMdmStageMasterDao, MdmStageMasterDao>(sMode);                     // 스테이지
+        services.AddSingletonWithNamedMapper<IMdmSiteMasterDao, MdmSiteMasterDao>(sMode);                       // 사이트
+        services.AddSingletonWithNamedMapper<IMdmAllocGroupMasterDao, MdmAllocGroupMasterDao>(sMode);           // 할당그룹
+        services.AddSingletonWithNamedMapper<IMdmFactoryMasterDao, MdmFactoryMasterDao>(sMode);                 // 공장운영정보 
+        services.AddSingletonWithNamedMapper<IMdmCodeGroupMasterDao, MdmCodeGroupMasterDao>(sMode);             // 코드 그룹, 코드 관리
+        services.AddSingletonWithNamedMapper<IMdmPropMasterDao, MdmPropMasterDao>(sMode);                       // 속성 관리
         /* -------------------------------------------------------------------------------------------- */
-        services.AddSingleton<IMdmItemMasterDao, MdmItemMasterDao>();                       // 품목 정보
-        services.AddSingleton<IMdmBufferMasterDao, MdmBufferMasterDao>();                   // 버퍼 정보
-        services.AddSingleton<IMdmIsbMasterDao, MdmIsbMasterDao>();                         // ISB 정보
-        services.AddSingleton<IMdmBomMasterDao, MdmBomMasterDao>();                         // BOM MASTER, DETAIL, DETAIL ALT, PROPERTY VALUE
-        services.AddSingleton<IMdmRoutingMasterDao, MdmRoutingMasterDao>();             // ROUTING MASTER, ROUTING OPERATION, ROUTING OPERATION PROPERTY VALUE
-        /* 
-        services.AddSingleton<IMdmBomRoutingDao,         MdmBomRoutingDao>();          // BOM ROUTING
-        services.AddSingleton<IMdmBomRoutingSub1Dao,     MdmBomRoutingSub1Dao>();     // BOM ROUTING PROPERTY VALUE
-/* -------------------------------------------------------------------------------------------- 
-services.AddSingleton<IMdmWipDao,                MdmWipDao>(); // 재공 정보
-/* --------------------------------------------------------------------------------------------
-services.AddSingleton<IMdmDemandDao,             MdmDemandDao>();              // DEMAND 정보
-services.AddSingleton<IMdmCustInfoDao,           MdmCustInfoDao>();            // 고객 정보
-/* --------------------------------------------------------------------------------------------- 
-services.AddSingleton<IMdmResourceDao,           MdmResourceDao>();            // RESOURCE MASTER
-services.AddSingleton<IMdmOperResourceDao,       MdmOperResourceDao>();        // OPERATION RESOURCE
-services.AddSingleton<IMdmOperResourceSub1Dao,   MdmOperResourceSub1>();   // OPERATION RESOURCE PROPERTY VALUE
-services.AddSingleton<IMdmConstInfoDao,          MdmConstInfoDao>();           // CONSTRAINT INFO
-services.AddSingleton<IMdmPmPlanDao,             MdmPmPlanDao>();              // PM PLAN
-services.AddSingleton<IMdmSetupInfoDao,          MdmSetupInfoDao>();           // SETUP INFO
+        services.AddSingletonWithNamedMapper<IMdmItemMasterDao, MdmItemMasterDao>(sMode);                       // 품목 정보
+        services.AddSingletonWithNamedMapper<IMdmBufferMasterDao, MdmBufferMasterDao>(sMode);                   // 버퍼 정보
+        services.AddSingletonWithNamedMapper<IMdmIsbMasterDao, MdmIsbMasterDao>(sMode);                         // ISB 정보
+        services.AddSingletonWithNamedMapper<IMdmBomMasterDao, MdmBomMasterDao>(sMode);                         // BOM MASTER, DETAIL, DETAIL ALT, PROPERTY VALUE, BOM ROUTING, BOM ROUTING PROPERTY VALUE
+        services.AddSingletonWithNamedMapper<IMdmRoutingMasterDao, MdmRoutingMasterDao>(sMode);                 // ROUTING MASTER, ROUTING OPERATION, ROUTING OPERATION PROPERTY VALUE 
+        /* -------------------------------------------------------------------------------------------- */
+        services.AddSingletonWithNamedMapper<IMdmWipDao, MdmWipDao>(sMode);                                     // 재공 정보
+        /* -------------------------------------------------------------------------------------------- */
+        services.AddSingletonWithNamedMapper<IMdmCustInfoDao, MdmCustInfoDao>(sMode);                           // 고객 정보
+        services.AddSingletonWithNamedMapper<IMdmDemandDao, MdmDemandDao>(sMode);                               // DEMAND 정보
+        /* -------------------------------------------------------------------------------------------- */
+        services.AddSingletonWithNamedMapper<IMdmResGroupMasterDao, MdmResGroupMasterDao>(sMode);               // RESOURCE GROUP MASTER
+        services.AddSingletonWithNamedMapper<IMdmResMasterDao, MdmResMasterDao>(sMode);                         // RESOURCE MASTER
+        services.AddSingletonWithNamedMapper<IMdmOperResMasterDao, MdmOperResMasterDao>(sMode);                 // OPERATION RESOURCE, OPERATION RESOURCE PROPERTY VALUE
+        services.AddSingletonWithNamedMapper<IMdmConstInfoDao, MdmConstInfoDao>(sMode);                         // CONSTRAINT INFO
+        services.AddSingletonWithNamedMapper<IMdmPmPlanDao, MdmPmPlanDao>(sMode);                               // PM PLAN
+        services.AddSingletonWithNamedMapper<IMdmSetupInfoDao, MdmSetupInfoDao>(sMode);                         // SETUP INFO
 /* ---------------------------------------------------------------------------------------------
-services.AddSingleton<IMdmCalendarDao,           MdmCalendarDao>();            // 캘린더마스터
-services.AddSingleton<IMdmCalendarSub1Dao,       MdmCalendarSub1Dao>();       // 캘린더상세정보
-services.AddSingleton<IMdmCalendarSub2Dao,       MdmCalendarSub2Dao>();       // 캘린더속성값 관리
+services.AddSingletonWithNamedMapper<IMdmCalendarDao,           MdmCalendarDao>();            // 캘린더마스터
+services.AddSingletonWithNamedMapper<IMdmCalendarSub1Dao,       MdmCalendarSub1Dao>();       // 캘린더상세정보
+services.AddSingletonWithNamedMapper<IMdmCalendarSub2Dao,       MdmCalendarSub2Dao>();       // 캘린더속성값 관리
 */
 
 
@@ -80,17 +110,19 @@ services.AddSingleton<IMdmCalendarSub2Dao,       MdmCalendarSub2Dao>();       //
         /**
          *        관리자 메뉴
          */
-        services.AddSingleton<IUserDao, UserDao>();
-        services.AddSingleton<IGroupDao, GroupDao>();
-        services.AddSingleton<IMenuDao, MenuDao>();
-        services.AddSingleton<IMenuMapDao, MenuMapDao>();
+        services.AddSingletonWithNamedMapper<ISamUserDao, SamUserDao>(sMode);
+        services.AddSingletonWithNamedMapper<ISamGroupDao, SamGroupDao>(sMode);
+        services.AddSingletonWithNamedMapper<ISamMenuDao, SamMenuDao>(sMode);
+        services.AddSingletonWithNamedMapper<ISamMenuMapDao, SamMenuMapDao>(sMode);
         /**
          *        예제
          */
-        services.AddSingleton<ITodoDao, TodoDao>();
-        services.AddSingleton<IGanttDao, GanttDao>();
+        services.AddSingletonWithNamedMapper<ITodoDao, TodoDao>(sMode) ;
+        services.AddSingletonWithNamedMapper<IGanttDao, GanttDao>(sMode);
       
-        services.AddSqlMapper(options => Configuration.GetSection("DB").Bind(options));
+        // 접속 DB 선택
+        services.AddSqlMapper("PRODT", options => Configuration.GetSection("DB-Aleatorik").Bind(options));
+        services.AddSqlMapper("DEV",   options => Configuration.GetSection("DB-Dev").Bind(options));
         services.AddHttpContextAccessor();
     }
 
@@ -109,7 +141,12 @@ services.AddSingleton<IMdmCalendarSub2Dao,       MdmCalendarSub2Dao>();       //
         if (env.IsDevelopment())
         {
             app.UseSwagger();
-            app.UseSwaggerUI();
+            //app.UseSwaggerUI();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/api/swagger.json", "API Documents");
+                c.SwaggerEndpoint("/swagger/admin/swagger.json", "Admin Documents");
+            });
         }
 
         app.UseHttpsRedirection();

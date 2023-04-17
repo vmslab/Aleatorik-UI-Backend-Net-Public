@@ -100,4 +100,51 @@ public class MdmBomMasterDao : IMdmBomMasterDao
     {
         return Mapper.Delete("MdmBomSub3.Delete", mdmBomSub3);
     }
+
+    /**
+    * Sub4
+    */
+    public IEnumerable<MdmBomSub4> GetAllSub4(String bomID)
+    {
+        return Mapper.QueryForList<MdmBomSub4>("MdmBomSub4.Select", bomID);
+    }
+
+    public void InsertSub4(MdmBomSub4 mdmBomSub4)
+    {
+        Mapper.Insert("MdmBomSub4.Insert", mdmBomSub4);
+    }
+
+    public int UpdateSub4(MdmBomSub4 mdmBomSub4)
+    {
+        return Mapper.Update("MdmBomSub4.Update", mdmBomSub4);
+    }
+
+    public int DeleteSub4(MdmBomSub4 mdmBomSub4)
+    {
+        return Mapper.Delete("MdmBomSub4.Delete", mdmBomSub4);
+    }
+
+
+    /**
+    * Sub5
+    */
+    public IEnumerable<MdmBomSub5> GetAllSub5(String bomID)
+    {
+        return Mapper.QueryForList<MdmBomSub5>("MdmBomSub5.Select", bomID);
+    }
+
+    public void InsertSub5(MdmBomSub5 mdmBomSub5)
+    {
+        Mapper.Insert("MdmBomSub5.Insert", mdmBomSub5);
+    }
+
+    public int UpdateSub5(MdmBomSub5 mdmBomSub5)
+    {
+        return Mapper.Update("MdmBomSub5.Update", mdmBomSub5);
+    }
+
+    public int DeleteSub5(MdmBomSub5 mdmBomSub5)
+    {
+        return Mapper.Delete("MdmBomSub5.Delete", mdmBomSub5);
+    }
 }

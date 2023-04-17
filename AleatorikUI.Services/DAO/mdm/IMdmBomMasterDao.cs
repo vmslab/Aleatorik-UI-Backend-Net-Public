@@ -23,5 +23,15 @@ namespace AleatorikUI.Services.DAO.mdm
         public void InsertSub3(MdmBomSub3 mdmBomSub3);
         public int UpdateSub3(MdmBomSub3 mdmBomSub3);
         public int DeleteSub3(MdmBomSub3 mdmBomSub3);
+
+        public IEnumerable<MdmBomSub4> GetAllSub4(String bomID);
+        public void InsertSub4(MdmBomSub4 mdmBomSub4);
+        public int UpdateSub4(MdmBomSub4 mdmBomSub4);
+        public int DeleteSub4(MdmBomSub4 mdmBomSub4);
+
+        public IEnumerable<MdmBomSub5> GetAllSub5(String bomID);
+        public void InsertSub5(MdmBomSub5 mdmBomSub5);
+        public int UpdateSub5(MdmBomSub5 mdmBomSub5);
+        public int DeleteSub5(MdmBomSub5 mdmBomSub5);
     }
 }

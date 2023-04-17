@@ -53,7 +53,26 @@
 			<result property="createUser" column="CREATE_USER"/>
 			<result property="updateTime" column="UPDATE_TIME"/>
 			<result property="updateUser" column="UPDATE_USER"/>
-		</resultMap>		
+		</resultMap>
+		<resultMap id="rtnMdmBomSub4"  class="MdmBomSub4" >
+			<result property="bomID"      column="BOM_ID"/>
+			<result property="routingID"  column="ROUTING_ID"/>
+			<result property="priority"   column="PRIORITY"/>
+			<result property="createTime" column="CREATE_TIME"/>
+			<result property="createUser" column="CREATE_USER"/>
+			<result property="updateTime" column="UPDATE_TIME"/>
+			<result property="updateUser" column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmBomSub5"  class="MdmBomSub5" >
+			<result property="bomID"      column="BOM_ID"/>
+			<result property="routingID"  column="ROUTING_ID"/>
+			<result property="propertyID" column="PROPERTY_ID"/>
+			<result property="value"      column="VALUE"/>
+			<result property="createTime" column="CREATE_TIME"/>
+			<result property="createUser" column="CREATE_USER"/>
+			<result property="updateTime" column="UPDATE_TIME"/>
+			<result property="updateUser" column="UPDATE_USER"/>
+		</resultMap>
 	</resultMaps>
 
 
@@ -352,6 +371,122 @@
 			DELETE 
 			  FROM [CFG_BOM_PROPERTY_VALUE]
 			 WHERE [BOM_ID]      = #bomID#
+			   AND [PROPERTY_ID] = #propertyID#
+		</delete>
+
+		<!-- Sub4 -->
+		<!--SELECT All-->
+		<select id="MdmBomSub4.Select" parameterClass="string"  resultMap="rtnMdmBomSub4">
+			SELECT [BOM_ID]
+				 , [ROUTING_ID]
+				 , [PRIORITY]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+		  	  FROM [CFG_BOM_ROUTING]
+			 WHERE [BOM_ID] = #bomID#
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmBomSub4.Insert" parameterClass="MdmBomSub4">
+			INSERT INTO [CFG_BOM_ROUTING]
+				 ( [BOM_ID]
+				 , [ROUTING_ID]
+				 , [PRIORITY]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #bomID#
+				 , #routingID#
+				 , #priority#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmBomSub4.Update" parameterClass="MdmBomSub4">
+			UPDATE [CFG_BOM_ROUTING]
+			   SET [BOM_ID]      = #bomID#
+			     , [ROUTING_ID]  = #routingID#
+			     , [PRIORITY]    = #priority#
+			     , [UPDATE_TIME] = getdate()
+			     , [UPDATE_USER] = #updateUser#
+			 WHERE [BOM_ID]      = #bomID#
+			   AND [ROUTING_ID]  = #routingID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmBomSub4.Delete" parameterClass="MdmBomSub4">
+			DELETE
+			  FROM [CFG_BOM_ROUTING]
+			 WHERE [BOM_ID]      = #bomID#
+			   AND [ROUTING_ID]  = #routingID#
+		</delete>
+
+		<!-- Sub5 -->
+		<!--SELECT All-->
+		<select id="MdmBomSub5.Select" parameterClass="string"  resultMap="rtnMdmBomSub5">
+			SELECT [BOM_ID]
+				 , [ROUTING_ID]
+				 , [PROPERTY_ID]
+				 , [VALUE]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_BOM_ROUTING_PROPERTY_VALUE]
+			 WHERE [BOM_ID] = #bomID#
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmBomSub5.Insert" parameterClass="MdmBomSub5">
+			INSERT INTO [CFG_BOM_ROUTING_PROPERTY_VALUE]
+				 ( [BOM_ID]
+				 , [ROUTING_ID]
+				 , [PROPERTY_ID]
+				 , [VALUE]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #bomID#
+				 , #routingID#
+				 , #propertyID#
+				 , #value#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmBomSub5.Update" parameterClass="MdmBomSub5">
+			UPDATE [CFG_BOM_ROUTING_PROPERTY_VALUE]
+			   SET [BOM_ID]      = #bomID#
+			     , [ROUTING_ID]  = #routingID#
+			     , [PROPERTY_ID] = #propertyID#
+			     , [VALUE]       = #value#
+			     , [UPDATE_TIME] = getdate()
+			     , [UPDATE_USER] = #updateUser#
+			 WHERE [BOM_ID]      = #bomID#
+			   AND [ROUTING_ID]  = #routingID#
+			   AND [PROPERTY_ID] = #propertyID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmBomSub5.Delete" parameterClass="MdmBomSub5">
+			DELETE
+			  FROM [CFG_BOM_ROUTING_PROPERTY_VALUE]
+			 WHERE [BOM_ID]      = #bomID#
+			   AND [ROUTING_ID]  = #routingID#
 			   AND [PROPERTY_ID] = #propertyID#
 		</delete>
 	</statements>
