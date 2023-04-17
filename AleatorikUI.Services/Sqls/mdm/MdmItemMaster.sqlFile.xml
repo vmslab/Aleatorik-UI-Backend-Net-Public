@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnMdmItemMaster"  class="MdmItemMaster" >
+			<result property="itemID"     column="ITEM_ID"/>
+			<result property="itemType"   column="ITEM_TYPE"/>
+			<result property="createTime" column="CREATE_TIME"/>
+			<result property="createUser" column="CREATE_USER"/>
+			<result property="updateTime" column="UPDATE_TIME"/>
+			<result property="updateUser" column="UPDATE_USER"/>
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+		<!--SELECT All-->
+		<select id="MdmItemMaster.Select" resultMap="rtnMdmItemMaster">
+			SELECT [ITEM_ID]
+				 , [ITEM_TYPE]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+		  	  FROM [CFG_ITEM_MASTER]
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmItemMaster.Insert" parameterClass="MdmItemMaster">
+			INSERT INTO [CFG_ITEM_MASTER]
+				 ( [ITEM_ID]
+				 , [ITEM_TYPE]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #itemID#
+				 , #itemType#
+				 , #createTime#
+				 , #createUser#
+				 , #updateTime#
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmItemMaster.Update" parameterClass="MdmItemMaster">
+			UPDATE [CFG_ITEM_MASTER]
+			   SET [ITEM_ID]     = #itemID#
+				 , [ITEM_TYPE]   = #itemType#
+				 , [CREATE_TIME] = #createTime#
+				 , [CREATE_USER] = #createUser#
+				 , [UPDATE_TIME] = #updateTime#
+				 , [UPDATE_USER] = #updateUser#
+		 	 WHERE [ITEM_ID]     = #itemID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmItemMaster.Delete" parameterClass="MdmItemMaster">
+			DELETE
+			  FROM [CFG_ITEM_MASTER]
+			 WHERE [ITEM_ID]     = #itemID#
+		</delete>
+
+	</statements>
+</sqlMap>

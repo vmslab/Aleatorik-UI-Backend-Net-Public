@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnMdmStageMaster"  class="MdmStageMaster" >
+			<result property="stageID"    	column="STAGE_ID"/>
+			<result property="description"  column="DESCRIPTION"/>
+			<result property="createTime"   column="CREATE_TIME"/>
+			<result property="createUser"	column="CREATE_USER"/>
+			<result property="updateTime"	column="UPDATE_TIME"/>
+			<result property="updateUser"	column="UPDATE_USER"/>
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+		<!--SELECT All-->
+		<select id="MdmStageMaster.Select" resultMap="rtnMdmStageMaster">
+			SELECT STAGE_ID
+				 , DESCRIPTION
+				 , CREATE_TIME
+				 , CREATE_USER
+				 , UPDATE_TIME
+				 , UPDATE_USER
+			  FROM CFG_STAGE
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmStageMaster.Insert" parameterClass="MdmStageMaster">
+			INSERT INTO CFG_STAGE
+				 ( STAGE_ID
+				 , DESCRIPTION
+				 , CREATE_TIME
+				 , CREATE_USER
+				 , UPDATE_TIME
+				 , UPDATE_USER
+				 ) VALUES
+				 ( #stageID#
+				 , #description#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmStageMaster.Update" parameterClass="MdmStageMaster">
+			UPDATE CFG_STAGE
+			   SET DESCRIPTION = #description#
+				 , UPDATE_TIME = getdate()
+				 , UPDATE_USER = #updateUser#
+			 WHERE STAGE_ID    = #stageID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmStageMaster.Delete" parameterClass="MdmStageMaster">
+			DELETE
+			  FROM CFG_STAGE
+			 WHERE STAGE_ID = #stageID#
+		</delete>
+
+	</statements>
+</sqlMap>

@@ -66,13 +66,7 @@
     <None Update="Sqls\mdm\MdmCustInfo.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmResource.sqlFile.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Sqls\mdm\MdmOperResource.sqlFile.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Sqls\mdm\MdmOperResourceSub1.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmResMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\mdm\MdmConstInfo.sqlFile.xml">
@@ -84,61 +78,46 @@
     <None Update="Sqls\mdm\MdmSetupInfo.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmCalendar.sqlFile.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Sqls\mdm\MdmCalendarSub1.sqlFile.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Sqls\mdm\MdmCalendarSub2.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmCalMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\mdm\MdmWip.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmSite.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmSiteMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmAllocGroup.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmAllocGroupMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmFactoryOper.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmFactoryMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmCodeGroup.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmCodeGroupMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmProperty.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmPropMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmItem.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmItemMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmBuffer.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmBufferMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmIsb.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmIsbMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmBom.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmBomMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmRouting.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmRoutingMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmRoutingOper.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmBomRoutingMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmRoutingOperSub1.sqlFile.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Sqls\mdm\MdmBomRouting.sqlFile.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Sqls\mdm\MdmBomRoutingSub1.sqlFile.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Sqls\mdm\MdmStage.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmStageMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\Member.sqlFile.xml">

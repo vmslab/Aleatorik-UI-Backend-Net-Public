@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnMdmBomMaster"  class="MdmBomMaster" >
+			<result property="bomID"         column="BOM_ID"/>
+			<result property="bomType"       column="BOM_TYPE"/>
+			<result property="priority"      column="PRIORITY"/>
+			<result property="effStartTime"  column="EFF_START_TIME"/>
+			<result property="effEndTime"    column="EFF_END_TIME"/>
+			<result property="createTime"    column="CREATE_TIME"/>
+			<result property="createUser"    column="CREATE_USER"/>
+			<result property="updateTime"    column="UPDATE_TIME"/>
+			<result property="updateUser"    column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmBomSub1"  class="MdmBomSub1" >
+			<result property="bomID"         column="BOM_ID"/>
+			<result property="fromItemID"    column="FROM_ITEM_ID"/>
+			<result property="fromSiteID"    column="FROM_SITE_ID"/>
+			<result property="fromBufferID"  column="FROM_BUFFER_ID"/>
+			<result property="fromQty"       column="FROM_QTY"/>
+			<result property="toItemID"      column="TO_ITEM_ID"/>
+			<result property="toSiteID"      column="TO_SITE_ID"/>
+			<result property="toBufferID"    column="TO_BUFFER_ID"/>
+			<result property="toQty"         column="TO_QTY"/>
+			<result property="calendarID"    column="CALENDAR_ID"/>
+			<result property="createTime"    column="CREATE_TIME"/>
+			<result property="createUser"    column="CREATE_USER"/>
+			<result property="updateTime"    column="UPDATE_TIME"/>
+			<result property="updateUser"    column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmBomSub2"  class="MdmBomSub2" >
+			<result property="bomID"       column="BOM_ID"/>
+			<result property="itemID"      column="ITEM_ID"/>
+			<result property="siteID"      column="SITE_ID"/>
+			<result property="bufferID"    column="BUFFER_ID"/>
+			<result property="altitemID"   column="ALTITEM_ID"/>
+			<result property="altsiteID"   column="ALTSITE_ID"/>
+			<result property="altbufferID" column="ALTBUFFER_ID"/>
+			<result property="priority"    column="PRIORITY"/>
+			<result property="createTime"  column="CREATE_TIME"/>
+			<result property="createUser"  column="CREATE_USER"/>
+			<result property="updateTime"  column="UPDATE_TIME"/>
+			<result property="updateUser"  column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmBomSub3"  class="MdmBomSub3" >
+			<result property="bomID"      column="BOM_ID"/>
+			<result property="propertyID" column="PROPERTY_ID"/>
+			<result property="value"      column="VALUE"/>
+			<result property="calendarID" column="CALENDAR_ID"/>
+			<result property="createTime" column="CREATE_TIME"/>
+			<result property="createUser" column="CREATE_USER"/>
+			<result property="updateTime" column="UPDATE_TIME"/>
+			<result property="updateUser" column="UPDATE_USER"/>
+		</resultMap>		
+	</resultMaps>
+
+
+	<statements>
+		<!-- MASTER -->
+		<!--SELECT All-->
+		<select id="MdmBomMaster.Select" resultMap="rtnMdmBomMaster">
+			SELECT [BOM_ID]
+				 , [BOM_TYPE]
+				 , [PRIORITY]
+				 , [EFF_START_TIME]
+				 , [EFF_END_TIME]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_BOM_MASTER]
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmBomMaster.Insert" parameterClass="MdmBomMaster">
+			INSERT INTO [CFG_BOM_MASTER]
+				 ( [BOM_ID]
+				 , [BOM_TYPE]
+				 , [PRIORITY]
+				 , [EFF_START_TIME]
+				 , [EFF_END_TIME]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #bomID#
+				 , #bomType#
+				 , #priority#
+				 , #effStartTime#
+				 , #effEndTime#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmBomMaster.Update" parameterClass="MdmBomMaster">
+			UPDATE [CFG_BOM_MASTER]
+			   SET [BOM_ID]         = #bomID#
+				 , [BOM_TYPE]       = #bomType#
+				 , [PRIORITY]       = #priority#
+				 , [EFF_START_TIME] = #effStartTime#
+				 , [EFF_END_TIME]   = #effEndTime#
+				 , [UPDATE_TIME]    = getdate()
+				 , [UPDATE_USER]    = #updateUser#
+			 WHERE [BOM_ID]         = #bomID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmBomMaster.Delete" parameterClass="MdmBomMaster">
+			DELETE 
+			  FROM [CFG_BOM_MASTER]
+			 WHERE [BOM_ID]         = #bomID#
+		</delete>
+
+		<!-- Sub1 -->
+		<!--SELECT All-->
+		<select id="MdmBomSub1.Select" parameterClass="string"  resultMap="rtnMdmBomSub1">
+			SELECT [BOM_ID]
+				 , [FROM_ITEM_ID]
+				 , [FROM_SITE_ID]
+				 , [FROM_BUFFER_ID]
+				 , [FROM_QTY]
+				 , [TO_ITEM_ID]
+				 , [TO_SITE_ID]
+				 , [TO_BUFFER_ID]
+				 , [TO_QTY]
+				 , [CALENDAR_ID]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_BOM_DETAIL]
+			 WHERE [BOM_ID] = #bomID#
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmBomSub1.Insert" parameterClass="MdmBomSub1">
+			INSERT INTO [CFG_BOM_DETAIL]
+				 ( [BOM_ID]
+				 , [FROM_ITEM_ID]
+				 , [FROM_SITE_ID]
+				 , [FROM_BUFFER_ID]
+				 , [FROM_QTY]
+				 , [TO_ITEM_ID]
+				 , [TO_SITE_ID]
+				 , [TO_BUFFER_ID]
+				 , [TO_QTY]
+				 , [CALENDAR_ID]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #bomID#
+				 , #fromItemID#
+				 , #fromSiteID#
+				 , #fromBufferID#
+				 , #fromQty#
+				 , #toItemID#
+				 , #toSiteID#
+				 , #toBufferID#
+				 , #toQty#
+				 , #calendarID#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmBomSub1.Update" parameterClass="MdmBomSub1">
+			UPDATE [CFG_BOM_DETAIL]
+			   SET [BOM_ID]         = #bomID#
+				 , [FROM_ITEM_ID]   = #fromItemID#
+				 , [FROM_SITE_ID]   = #fromSiteID#
+				 , [FROM_BUFFER_ID] = #fromBufferID#
+				 , [FROM_QTY]       = #fromQty#
+				 , [TO_ITEM_ID]     = #toItemID#
+				 , [TO_SITE_ID]     = #toSiteID#
+				 , [TO_BUFFER_ID]   = #toBufferID#
+				 , [TO_QTY]         = #toQty#
+				 , [CALENDAR_ID]    = #calendarID#
+				 , [UPDATE_TIME]    = getdate()
+				 , [UPDATE_USER]    = #updateUser#
+			 WHERE [BOM_ID]         = #bomID#
+			   AND [FROM_ITEM_ID]   = #fromItemID#
+			   AND [FROM_SITE_ID]   = #fromSiteID#
+			   AND [FROM_BUFFER_ID] = #fromBufferID#
+			   AND [TO_ITEM_ID]     = #toItemID#
+			   AND [TO_SITE_ID]     = #toSiteID#
+			   AND [TO_BUFFER_ID]   = #toBufferID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmBomSub1.Delete" parameterClass="MdmBomSub1">
+			DELETE 
+			  FROM [CFG_BOM_DETAIL]
+			 WHERE [BOM_ID]         = #bomID#
+			   AND [FROM_ITEM_ID]   = #fromItemID#
+			   AND [FROM_SITE_ID]   = #fromSiteID#
+			   AND [FROM_BUFFER_ID] = #fromBufferID#
+			   AND [TO_ITEM_ID]     = #toItemID#
+			   AND [TO_SITE_ID]     = #toSiteID#
+			   AND [TO_BUFFER_ID]   = #toBufferID#
+		</delete>
+	
+		<!-- Sub2 -->
+		<!--SELECT All-->
+		<select id="MdmBomSub2.Select" parameterClass="string"  resultMap="rtnMdmBomSub2">
+			SELECT [BOM_ID]
+				 , [ITEM_ID]
+				 , [SITE_ID]
+				 , [BUFFER_ID]
+				 , [ALTITEM_ID]
+				 , [ALTSITE_ID]
+				 , [ALTBUFFER_ID]
+				 , [PRIORITY]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_BOM_DETAIL_ALT]
+			 WHERE [BOM_ID] = #bomID#
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmBomSub2.Insert" parameterClass="MdmBomSub2">
+			INSERT INTO [CFG_BOM_DETAIL_ALT]
+				 ( [BOM_ID]
+				 , [ITEM_ID]
+				 , [SITE_ID]
+				 , [BUFFER_ID]
+				 , [ALTITEM_ID]
+				 , [ALTSITE_ID]
+				 , [ALTBUFFER_ID]
+				 , [PRIORITY]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #bomID#
+				 , #itemID#
+				 , #siteID#
+				 , #bufferID#
+				 , #altitemID#
+				 , #altsiteID#
+				 , #altbufferID#
+				 , #priority#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmBomSub2.Update" parameterClass="MdmBomSub2">
+			UPDATE [CFG_BOM_DETAIL_ALT]
+			   SET [BOM_ID]       = #bomID#
+				 , [ITEM_ID]      = #itemID#
+				 , [SITE_ID]      = #siteID#
+				 , [BUFFER_ID]    = #bufferID#
+				 , [ALTITEM_ID]   = #altitemID#
+				 , [ALTSITE_ID]   = #altsiteID#
+				 , [ALTBUFFER_ID] = #altbufferID#
+				 , [PRIORITY]     = #priority#
+				 , [UPDATE_TIME]  = getdate()
+				 , [UPDATE_USER]  = #updateUser#
+			 WHERE [BOM_ID]       = #bomID#
+			   AND [ITEM_ID]      = #itemID#
+			   AND [SITE_ID]      = #siteID#
+			   AND [BUFFER_ID]    = #bufferID#
+			   AND [ALTITEM_ID]   = #altitemID#
+			   AND [ALTSITE_ID]   = #altsiteID#
+			   AND [ALTBUFFER_ID] = #altbufferID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmBomSub2.Delete" parameterClass="MdmBomSub2">
+			DELETE 
+			  FROM [CFG_BOM_DETAIL_ALT]
+			 WHERE [BOM_ID]       = #bomID#
+			   AND [ITEM_ID]      = #itemID#
+			   AND [SITE_ID]      = #siteID#
+			   AND [BUFFER_ID]    = #bufferID#
+			   AND [ALTITEM_ID]   = #altitemID#
+			   AND [ALTSITE_ID]   = #altsiteID#
+			   AND [ALTBUFFER_ID] = #altbufferID#
+		</delete>
+
+		<!-- Sub3 -->
+		<!--SELECT All-->
+		<select id="MdmBomSub3.Select" parameterClass="string"  resultMap="rtnMdmBomSub3">
+			SELECT [BOM_ID]
+				 , [PROPERTY_ID]
+				 , [VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_BOM_PROPERTY_VALUE]
+			 WHERE [BOM_ID] = #bomID#			  
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmBomSub3.Insert" parameterClass="MdmBomSub3">
+			INSERT INTO [CFG_BOM_PROPERTY_VALUE]
+				 ( [BOM_ID]
+				 , [PROPERTY_ID]
+				 , [VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #bomID#
+				 , #propertyID#
+				 , #value#
+				 , #calendarID#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmBomSub3.Update" parameterClass="MdmBomSub3">
+			UPDATE [CFG_BOM_PROPERTY_VALUE]
+			   SET [BOM_ID]      = #bomID#
+				 , [PROPERTY_ID] = #propertyID#
+				 , [VALUE]       = #value#
+				 , [CALENDAR_ID] = #calendarID#
+				 , [UPDATE_TIME] = getdate()
+				 , [UPDATE_USER] = #updateUser#
+			 WHERE [BOM_ID]      = #bomID#
+			   AND [PROPERTY_ID] = #propertyID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmBomSub3.Delete" parameterClass="MdmBomSub3">
+			DELETE 
+			  FROM [CFG_BOM_PROPERTY_VALUE]
+			 WHERE [BOM_ID]      = #bomID#
+			   AND [PROPERTY_ID] = #propertyID#
+		</delete>
+	</statements>
+</sqlMap>

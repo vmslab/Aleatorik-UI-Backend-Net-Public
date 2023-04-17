@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnMdmRoutingMaster"  class="MdmRoutingMaster" >
+			<result property="routingID"     column="ROUTING_ID"/>
+			<result property="description"   column="DESCRIPTION"/>
+			<result property="effStartTime"  column="EFF_START_TIME"/>
+			<result property="effEndTime"    column="EFF_END_TIME"/>
+			<result property="createTime"    column="CREATE_TIME"/>
+			<result property="createUser"    column="CREATE_USER"/>
+			<result property="updateTime"    column="UPDATE_TIME"/>
+			<result property="updateUser"    column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmRoutingSub1"  class="MdmRoutingSub1" >
+			<result property="routingID"     column="ROUTING_ID"/>
+			<result property="operationID"   column="OPERATION_ID"/>
+			<result property="sequence"      column="SEQUENCE"/>
+			<result property="operationType" column="OPERATION_TYPE"/>
+			<result property="waitTat"       column="WAIT_TAT"/>
+			<result property="runTat"        column="RUN_TAT"/>
+			<result property="timeUom"       column="TIME_UOM"/>
+			<result property="yield"         column="YIELD"/>
+			<result property="createTime"    column="CREATE_TIME"/>
+			<result property="createUser"    column="CREATE_USER"/>
+			<result property="updateTime"    column="UPDATE_TIME"/>
+			<result property="updateUser"    column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmRoutingSub2"  class="MdmRoutingSub2" >
+			<result property="routingID"   column="ROUTING_ID"/>
+			<result property="operationID" column="OPERATION_ID"/>
+			<result property="propertyID"  column="PROPERTY_ID"/>
+			<result property="value"       column="VALUE"/>
+			<result property="calendarID"  column="CALENDAR_ID"/>
+			<result property="createTime"  column="CREATE_TIME"/>
+			<result property="createUser"  column="CREATE_USER"/>
+			<result property="updateTime"  column="UPDATE_TIME"/>
+			<result property="updateUser"  column="UPDATE_USER"/>
+		</resultMap>
+	</resultMaps>
+
+
+	<statements>
+		<!-- MASTER -->
+		<!--SELECT All-->
+		<select id="MdmRoutingMaster.Select" resultMap="rtnMdmRoutingMaster">
+			SELECT [ROUTING_ID]
+				 , [DESCRIPTION]
+				 , [EFF_START_TIME]
+				 , [EFF_END_TIME]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_ROUTING_MASTER]
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmRoutingMaster.Insert" parameterClass="MdmRoutingMaster">
+			INSERT INTO [CFG_ROUTING_MASTER]
+				 ( [ROUTING_ID]
+				 , [DESCRIPTION]
+				 , [EFF_START_TIME]
+				 , [EFF_END_TIME]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #routingID#
+				 , #description#
+				 , #effStartTime#
+				 , #effEndTime#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmRoutingMaster.Update" parameterClass="MdmRoutingMaster">
+			UPDATE [CFG_ROUTING_MASTER]
+			   SET [ROUTING_ID]     = #routingID#
+				 , [DESCRIPTION]    = #description#
+				 , [EFF_START_TIME] = #effStartTime#
+				 , [EFF_END_TIME]   = #effEndTime#
+				 , [UPDATE_TIME]    = getdate()
+				 , [UPDATE_USER]    = #updateUser#
+			 WHERE [ROUTING_ID]     = #routingID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmRoutingMaster.Delete" parameterClass="MdmRoutingMaster">
+			DELETE
+			  FROM [CFG_ROUTING_MASTER]
+		 	 WHERE [ROUTING_ID]     = #routingID#
+		</delete>
+
+		<!-- Sub1 -->
+		<!--SELECT All-->
+		<select id="MdmRoutingSub1.Select" parameterClass="string"  resultMap="rtnMdmRoutingSub1">
+			SELECT [ROUTING_ID]
+				 , [OPERATION_ID]
+				 , [SEQUENCE]
+				 , [OPERATION_TYPE]
+				 , [WAIT_TAT]
+				 , [RUN_TAT]
+				 , [TIME_UOM]
+				 , [YIELD]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+		  	  FROM [CFG_ROUTING_OPERATION]
+			 WHERE [ROUTING_ID] = #routingID#
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmRoutingSub1.Insert" parameterClass="MdmRoutingSub1">
+			INSERT INTO [CFG_ROUTING_OPERATION]
+				 ( [ROUTING_ID]
+				 , [OPERATION_ID]
+				 , [SEQUENCE]
+				 , [OPERATION_TYPE]
+				 , [WAIT_TAT]
+				 , [RUN_TAT]
+				 , [TIME_UOM]
+				 , [YIELD]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #routingID#
+				 , #operationID#
+				 , #sequence#
+				 , #operationType#
+				 , #waitTat#
+				 , #runTat#
+				 , #timeUom#
+				 , #yield#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmRoutingSub1.Update" parameterClass="MdmRoutingSub1">
+			UPDATE [CFG_ROUTING_OPERATION]
+			   SET [ROUTING_ID]     = #routingID#
+				 , [OPERATION_ID]   = #operationID#
+				 , [SEQUENCE]       = #sequence#
+				 , [OPERATION_TYPE] = #operationType#
+				 , [WAIT_TAT]       = #waitTat#
+				 , [RUN_TAT]        = #runTat#
+				 , [TIME_UOM]       = #timeUom#
+				 , [YIELD]          = #yield#
+				 , [UPDATE_TIME]    = getdate()
+				 , [UPDATE_USER]    = #updateUser#
+			 WHERE [ROUTING_ID]     = #routingID#
+			   AND [OPERATION_ID]   = #operationID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmRoutingSub1.Delete" parameterClass="MdmRoutingSub1">
+			DELETE
+			  FROM [CFG_ROUTING_OPERATION]
+			 WHERE [ROUTING_ID]     = #routingID#
+			   AND [OPERATION_ID]   = #operationID#
+		</delete>
+
+		<!-- Sub2 -->
+		<!--SELECT All-->
+		<select id="MdmRoutingSub2.Select" parameterClass="string"  resultMap="rtnMdmRoutingSub2">
+			SELECT [ROUTING_ID]
+				 , [OPERATION_ID]
+				 , [PROPERTY_ID]
+				 , [VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_ROUTING_OPERATION_PROPERTY_VALUE]
+			 WHERE [ROUTING_ID]     = #routingID#
+			   AND [OPERATION_ID]   = #operationID# 
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmRoutingSub2.Insert" parameterClass="MdmRoutingSub2">
+			INSERT INTO [CFG_ROUTING_OPERATION_PROPERTY_VALUE]
+				 ( [ROUTING_ID]
+				 , [OPERATION_ID]
+				 , [PROPERTY_ID]
+				 , [VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #routingID#
+				 , #operationID#
+				 , #propertyID#
+				 , #value#
+				 , #calendarID#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmRoutingSub2.Update" parameterClass="MdmRoutingSub2">
+			UPDATE [CFG_ROUTING_OPERATION_PROPERTY_VALUE]
+			   SET [ROUTING_ID]   = #routingID#
+				 , [OPERATION_ID] = #operationID#
+				 , [PROPERTY_ID]  = #propertyID#
+				 , [VALUE]        = #value#
+				 , [CALENDAR_ID]  = #calendarID#
+				 , [UPDATE_TIME]  = getdate()
+				 , [UPDATE_USER]  = #updateUser#
+			 WHERE [ROUTING_ID]   = #routingID#
+			   AND [OPERATION_ID] = #operationID#
+			   AND [PROPERTY_ID]  = #propertyID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmRoutingSub2.Delete" parameterClass="MdmRoutingSub2">
+			DELETE
+			  FROM [CFG_ROUTING_OPERATION_PROPERTY_VALUE]
+			 WHERE [ROUTING_ID]   = #routingID#
+			   AND [OPERATION_ID] = #operationID#
+			   AND [PROPERTY_ID]  = #propertyID#
+		</delete>
+	</statements>
+</sqlMap>

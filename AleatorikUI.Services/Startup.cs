@@ -31,23 +31,21 @@ public class Startup
         /**
          *        기준 정보 관리
          */
-        services.AddSingleton<IMdmStageDao, MdmStageDao>();                     // 스테이지
-        services.AddSingleton<IMdmSiteDao, MdmSiteDao>();                       // 사이트
-        services.AddSingleton<IMdmAllocGroupDao, MdmAllocGroupDao>();           // 할당그룹
-        services.AddSingleton<IMdmFactoryOperDao, MdmFactoryOperDao>();         // 공장운영정보 
-        services.AddSingleton<IMdmCodeGroupDao, MdmCodeGroupDao>();             // 코드 그룹, 코드 관리
-        services.AddSingleton<IMdmPropertyDao, MdmPropertyDao>();               // 속성 관리
+        services.AddSingleton<IMdmStageMasterDao, MdmStageMasterDao>();                     // 스테이지
+        services.AddSingleton<IMdmSiteMasterDao, MdmSiteMasterDao>();                       // 사이트
+        services.AddSingleton<IMdmAllocGroupMasterDao, MdmAllocGroupMasterDao>();           // 할당그룹
+        services.AddSingleton<IMdmFactoryMasterDao, MdmFactoryMasterDao>();         // 공장운영정보 
+        services.AddSingleton<IMdmCodeGroupMasterDao, MdmCodeGroupMasterDao>();             // 코드 그룹, 코드 관리
+        services.AddSingleton<IMdmPropMasterDao, MdmPropMasterDao>();               // 속성 관리
         /* -------------------------------------------------------------------------------------------- */
-        services.AddSingleton<IMdmItemDao, MdmItemDao>();                       // 품목 정보
-        services.AddSingleton<IMdmBufferDao, MdmBufferDao>();                   // 버퍼 정보
-        services.AddSingleton<IMdmIsbDao, MdmIsbDao>();                         // ISB 정보
-        services.AddSingleton<IMdmBomDao, MdmBomDao>();                         // BOM MASTER, DETAIL, DETAIL ALT, PROPERTY VALUE
-        /*
-services.AddSingleton<IMdmRoutingDao,            MdmRoutingDao>();             // ROUTING MASTER
-services.AddSingleton<IMdmRoutingOperDao,        MdmRoutingOperDao>();         // ROUTING OPERATION
-services.AddSingleton<IMdmRoutingOperSub1Dao,    MdmRoutingOperSub1Dao>();    // ROUTING OPERATION PROPERTY VALUE
-services.AddSingleton<IMdmBomRoutingDao,         MdmBomRoutingDao>();          // BOM ROUTING
-services.AddSingleton<IMdmBomRoutingSub1Dao,     MdmBomRoutingSub1Dao>();     // BOM ROUTING PROPERTY VALUE
+        services.AddSingleton<IMdmItemMasterDao, MdmItemMasterDao>();                       // 품목 정보
+        services.AddSingleton<IMdmBufferMasterDao, MdmBufferMasterDao>();                   // 버퍼 정보
+        services.AddSingleton<IMdmIsbMasterDao, MdmIsbMasterDao>();                         // ISB 정보
+        services.AddSingleton<IMdmBomMasterDao, MdmBomMasterDao>();                         // BOM MASTER, DETAIL, DETAIL ALT, PROPERTY VALUE
+        services.AddSingleton<IMdmRoutingMasterDao, MdmRoutingMasterDao>();             // ROUTING MASTER, ROUTING OPERATION, ROUTING OPERATION PROPERTY VALUE
+        /* 
+        services.AddSingleton<IMdmBomRoutingDao,         MdmBomRoutingDao>();          // BOM ROUTING
+        services.AddSingleton<IMdmBomRoutingSub1Dao,     MdmBomRoutingSub1Dao>();     // BOM ROUTING PROPERTY VALUE
 /* -------------------------------------------------------------------------------------------- 
 services.AddSingleton<IMdmWipDao,                MdmWipDao>(); // 재공 정보
 /* --------------------------------------------------------------------------------------------

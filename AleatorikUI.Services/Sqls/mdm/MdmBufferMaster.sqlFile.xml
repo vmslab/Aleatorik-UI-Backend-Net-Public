@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnMdmBufferMaster"  class="MdmBufferMaster" >
+			<result property="stageID"    column="STAGE_ID"/>
+			<result property="bufferID"   column="BUFFER_ID"/>
+			<result property="sequence"   column="SEQUENCE"/>
+			<result property="createTime" column="CREATE_TIME"/>
+			<result property="createUser" column="CREATE_USER"/>
+			<result property="updateTime" column="UPDATE_TIME"/>
+			<result property="updateUser" column="UPDATE_USER"/>
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+		<!--SELECT All-->
+		<select id="MdmBufferMaster.Select" resultMap="rtnMdmBufferMaster">
+			SELECT [STAGE_ID]
+				 , [BUFFER_ID]
+				 , [SEQUENCE]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_BUFFER_MASTER]
+		</select>
+		
+		<!--INSERT-->
+		<insert id="MdmBufferMaster.Insert" parameterClass="MdmBufferMaster">
+			INSERT INTO [CFG_BUFFER_MASTER]
+				 ( [STAGE_ID]
+				 , [BUFFER_ID]
+				 , [SEQUENCE]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #stageID#
+				 , #bufferID#
+				 , #sequence#
+				 , #createTime#
+				 , #createUser#
+				 , #updateTime#
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmBufferMaster.Update" parameterClass="MdmBufferMaster">
+			UPDATE [CFG_BUFFER_MASTER]
+			   SET [STAGE_ID]    = #stageID#
+			     , [BUFFER_ID]   = #bufferID#
+			     , [SEQUENCE]    = #sequence#
+			     , [CREATE_TIME] = #createTime#
+			     , [CREATE_USER] = #createUser#
+			     , [UPDATE_TIME] = #updateTime#
+			     , [UPDATE_USER] = #updateUser#
+			 WHERE [STAGE_ID]    = #stageID#
+			   AND [BUFFER_ID]   = #bufferID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmBufferMaster.Delete" parameterClass="string">
+			DELETE
+			  FROM [CFG_BUFFER_MASTER]
+		 	 WHERE [STAGE_ID]    = #stageID#
+			   AND [BUFFER_ID]   = #bufferID#
+		</delete>
+
+	</statements>
+</sqlMap>
