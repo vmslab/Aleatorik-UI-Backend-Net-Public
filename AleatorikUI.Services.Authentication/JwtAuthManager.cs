@@ -26,7 +26,7 @@ public class JwtAuthManager : IJwtAuthManager
 
     public TimeSpan RefreshTokenExpiration { get { return _jwtConfig.RefreshTokenExpiration; } }
 
-    public string ClientCookieExpiration { get { return _jwtConfig.ClientCookieExpiration; } }
+    public string ClientCookieExpiration { get { return _jwtConfig.ClientCookieExpiration ?? string.Empty; } }
 
     // optional: clean up expired refresh tokens
     public void RemoveExpiredRefreshTokens(DateTime now)
@@ -83,7 +83,7 @@ public class JwtAuthManager : IJwtAuthManager
     {
         var accessToken = _jwtConfig.GenerateAccessToken(claims, now);
 
-        RefreshToken refreshToken = refresh;
+        RefreshToken? refreshToken = refresh;
         if (refreshToken is null)
         {
             refreshToken = new RefreshToken

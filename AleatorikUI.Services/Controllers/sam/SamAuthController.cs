@@ -1,11 +1,9 @@
 ﻿using System.Text;
-using System.Web;
 using AleatorikUI.Services.Authentication;
 using AleatorikUI.Services.DAO.sam;
 using AleatorikUI.Services.DTO.sam;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
 
 namespace AleatorikUI.Services.Controllers.sam;
 
@@ -34,6 +32,10 @@ public class SamAuthController : ControllerBase
     public async Task<IActionResult> Login(SamAuthInfo request)
     {
         var httpContext = _httpContextAccessor?.HttpContext;
+        if (httpContext is null)
+            return BadRequest();
+        if (string.IsNullOrEmpty(request.Email))
+            return BadRequest();
 
         var user = _userDao.Login(request);
 
@@ -49,7 +51,7 @@ public class SamAuthController : ControllerBase
 
         _logger.LogInformation($"User [{request.Email}] logged in the system.");
 
-        var ret = await TokenToLoginResult(httpContext, jwtResult);
+        var ret = TokenToLoginResult(httpContext, jwtResult);
 
         return Ok(ret);
     }
@@ -59,14 +61,15 @@ public class SamAuthController : ControllerBase
     public async Task<IActionResult> Refresh()
     {
         var httpContext = _httpContextAccessor?.HttpContext;
+        if (httpContext is null) return BadRequest();
+
         var ret = new SamAuthInfo();
 
         try
         {
-            if (httpContext is null) return Unauthorized();
             var accessToken = httpContext.Request.Cookies["access_token"];
 
-            var refreshSource = httpContext.Request.Cookies["refresh_token"];
+            var refreshSource = httpContext.Request.Cookies["refresh_token"] ?? string.Empty;
             byte[] tokenData = Convert.FromBase64String(refreshSource);
             string decodedString = Encoding.UTF8.GetString(tokenData);
             var refreshToken = Uri.UnescapeDataString(decodedString);
@@ -78,12 +81,13 @@ public class SamAuthController : ControllerBase
                 var jwtResult = _helper.Refresh(refreshToken, httpContext);
                 if (jwtResult is null) return Unauthorized();
 
-                ret = await TokenToLoginResult(httpContext, jwtResult);
+                ret = TokenToLoginResult(httpContext, jwtResult);
             }
             else
             {
                 var refresh = _helper.GetRefreshToken(refreshToken);
-                ret = await TokenToLoginResult(httpContext, refresh.UserName, accessToken, refreshToken, _helper.ClientCookieExpiration);
+                if (string.IsNullOrEmpty(refresh.UserName)) return BadRequest();
+                ret = TokenToLoginResult(httpContext, refresh.UserName, accessToken, refreshToken, _helper.ClientCookieExpiration);
             }
         }
         catch (Exception ex)
@@ -99,7 +103,9 @@ public class SamAuthController : ControllerBase
     public async Task<IActionResult> Logout()
     {
         var httpContext = _httpContextAccessor?.HttpContext;
-        var identity = httpContext?.User.Identity;
+        if (httpContext is null) return BadRequest();
+
+        var identity = httpContext.User.Identity;
 
         if (identity is null || !identity.IsAuthenticated)
             return NoContent();
@@ -111,18 +117,18 @@ public class SamAuthController : ControllerBase
         return Ok("Succeed");
     }
 
-    private async Task<SamAuthInfo> TokenToLoginResult(HttpContext httpContext, JwtAuthResult jwtResult)
+    private SamAuthInfo TokenToLoginResult(HttpContext httpContext, JwtAuthResult jwtResult)
     {
-        return await TokenToLoginResult(
+        return TokenToLoginResult(
             httpContext,
-            jwtResult.RefreshToken.UserName,
-            jwtResult.AccessToken,
-            jwtResult.RefreshToken.TokenValue,
-            jwtResult.ClientCookieExpiration
+            jwtResult.RefreshToken?.UserName ?? string.Empty,
+            jwtResult.AccessToken ?? string.Empty,
+            jwtResult.RefreshToken?.TokenValue ?? string.Empty,
+            jwtResult.ClientCookieExpiration ?? string.Empty
         );
     }
 
-    private async Task<SamAuthInfo> TokenToLoginResult(HttpContext httpContext, string userId, string accessToken, string refreshToken, string cookieExpiration)
+    private SamAuthInfo TokenToLoginResult(HttpContext httpContext, string userId, string accessToken, string refreshToken, string cookieExpiration)
     {
         var ret = new SamAuthInfo();
 

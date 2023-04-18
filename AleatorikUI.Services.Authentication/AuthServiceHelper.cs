@@ -37,7 +37,7 @@ public class AuthServiceHelper
         _authManager = authManager;
     }
 
-    public async Task<JwtAuthResult> SignIn(string userId, string password, bool rememberMe, HttpContext httpContext = null, CancellationToken cancellationToken = default)
+    public async Task<JwtAuthResult> SignIn(string userId, string password, bool rememberMe, HttpContext httpContext, CancellationToken cancellationToken = default)
     {
         _logger.LogDebug($"Received login request for {userId}");
 
@@ -51,7 +51,7 @@ public class AuthServiceHelper
             //await httpContext?.SignInAsync(IdentityConstants.ApplicationScheme,
             //    jwtResult.Principal,
             //    new AuthenticationProperties());
-            httpContext.Response.Cookies.Append("access_token", WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(jwtResult.AccessToken)), new CookieOptions
+            httpContext.Response.Cookies.Append("access_token", WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(jwtResult.AccessToken!)), new CookieOptions
             {
                 HttpOnly = true,
                 SameSite = SameSiteMode.Strict,
@@ -63,25 +63,27 @@ public class AuthServiceHelper
                 SameSite = SameSiteMode.Strict,
                 Expires = SystemClock.UtcNow.Add(_authManager.AccessTokenExpiration),
             });
-            await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, jwtResult.Principal);
+            await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, jwtResult.Principal!);
         }
 
         _logger.LogInformation($"Login request for {userId} was successful");
 
-        return jwtResult;
+        return jwtResult!;
     }
 
-    public async Task SignOut(HttpContext httpContext = null)
+    public async Task SignOut(HttpContext httpContext)
     {
         if (httpContext is null)
             return;
 
-        var identity = httpContext?.User.Identity;
+        var identity = httpContext.User.Identity;
+        if (identity is null)
+            return;
 
         // optionally "revoke" JWT token on the server side --> add the current token to a block-list
         // https://github.com/auth0/node-jsonwebtoken/issues/375
 
-        _authManager.RemoveRefreshTokenByUserName(identity?.Name);
+        _authManager.RemoveRefreshTokenByUserName(identity.Name!);
 
         //await httpContext?.SignOutAsync(IdentityConstants.ApplicationScheme);
         //await httpContext?.SignOutAsync(IdentityConstants.ExternalScheme);
@@ -90,41 +92,35 @@ public class AuthServiceHelper
         httpContext.Response.Cookies.Delete("access_token");
         httpContext.Response.Cookies.Delete("user_identity");
 
-        await httpContext?.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
     }
 
-    public JwtAuthResult Refresh(string refreshToken, HttpContext httpContext = null)
+    public JwtAuthResult Refresh(string refreshToken, HttpContext httpContext)
     {
-        if (httpContext is null)
-            return null;
-
         // var jwtResult = _authManager.Refresh(refreshToken, SystemClock.UtcNow);
         var token = _authManager.GetRefreshToken(refreshToken);
 
         //var userRole = await _userManager.GetUserRole(token.UserName).ConfigureAwait(false);
-        var claims = _authManager.GenerateClaims(token.UserName, "User", SystemClock.UtcNow);
+        var claims = _authManager.GenerateClaims(token.UserName!, "User", SystemClock.UtcNow);
         //var claims = _authManager.GenerateClaims(token.UserName, "Admin", SystemClock.UtcNow);
-        var jwtResult = _authManager.GenerateTokens(token.UserName, claims, SystemClock.UtcNow, token); // need to recover the original claims
+        var jwtResult = _authManager.GenerateTokens(token.UserName!, claims, SystemClock.UtcNow, token); // need to recover the original claims
 
-        if (httpContext is not null && jwtResult is not null)
+        //await httpContext?.SignInAsync(IdentityConstants.ApplicationScheme,
+        //    jwtResult.Principal,
+        //    new AuthenticationProperties());
+        httpContext.Response.Cookies.Append("access_token", WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(jwtResult.AccessToken!)), new CookieOptions
         {
-            //await httpContext?.SignInAsync(IdentityConstants.ApplicationScheme,
-            //    jwtResult.Principal,
-            //    new AuthenticationProperties());
-            httpContext.Response.Cookies.Append("access_token", WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(jwtResult.AccessToken)), new CookieOptions
-            {
-                HttpOnly = true,
-                SameSite = SameSiteMode.Strict,
-                Expires = SystemClock.UtcNow.Add(_authManager.AccessTokenExpiration),
-            });
-            httpContext.Response.Cookies.Append("user_identity", WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token.UserName)), new CookieOptions
-            {
-                HttpOnly = true,
-                SameSite = SameSiteMode.Strict,
-                Expires = SystemClock.UtcNow.Add(_authManager.AccessTokenExpiration),
-            });
-            _logger.LogInformation($"User [{token.UserName}] has refreshed JWT token.");
-        }
+            HttpOnly = true,
+            SameSite = SameSiteMode.Strict,
+            Expires = SystemClock.UtcNow.Add(_authManager.AccessTokenExpiration),
+        });
+        httpContext.Response.Cookies.Append("user_identity", WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token.UserName!)), new CookieOptions
+        {
+            HttpOnly = true,
+            SameSite = SameSiteMode.Strict,
+            Expires = SystemClock.UtcNow.Add(_authManager.AccessTokenExpiration),
+        });
+        _logger.LogInformation($"User [{token.UserName}] has refreshed JWT token.");
 
         return jwtResult;
     }

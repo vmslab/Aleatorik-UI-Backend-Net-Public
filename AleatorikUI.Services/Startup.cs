@@ -8,6 +8,8 @@ using AleatorikUI.Services.DAO.iod;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using tusdotnet;
+using AleatorikUI.Services.Helper;
 
 namespace AleatorikUI.Services;
 public class Startup
@@ -134,6 +136,7 @@ services.AddSingletonWithNamedMapper<IMdmCalendarSub2Dao,       MdmCalendarSub2D
         app.UseHttpsRedirection();
 
         app.UseRouting();
+        app.UseTus(TusHelper.CreateTusConfiguration);
 
         app.UseAuthentication();
         app.UseAuthorization();

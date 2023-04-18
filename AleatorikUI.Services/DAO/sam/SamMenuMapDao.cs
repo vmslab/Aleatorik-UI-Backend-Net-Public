@@ -35,11 +35,10 @@ public class SamMenuMapDao : ISamMenuMapDao
             transaction.CommitTransaction();
             return affectedRow;
         }
-        catch (Exception e)
+        catch
         {
             transaction.RollBackTransaction();
-            throw e;
+            return 0;
         }
-        return 0;
     }
 }

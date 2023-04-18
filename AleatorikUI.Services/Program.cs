@@ -1,9 +1,6 @@
 using AleatorikUI.Services;
 
 Host.CreateDefaultBuilder(args)
-    .ConfigureServices(services =>
-    {
-    })
     .ConfigureWebHostDefaults(webBuilder =>
     {
         webBuilder.ConfigureAppConfiguration((hostingContext, configBuilder) =>
@@ -14,6 +11,9 @@ Host.CreateDefaultBuilder(args)
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
             .AddJsonFile($"appsettings.{env.EnvironmentName}.{os.Platform}.json", optional: true, reloadOnChange: true)
             .AddEnvironmentVariables();
+
+            SetupKestrel.Configure(webBuilder, configBuilder.Build());
+
         })
         .UseContentRoot(Directory.GetCurrentDirectory())
         .UseStartup<Startup>();

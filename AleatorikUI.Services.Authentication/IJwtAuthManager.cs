@@ -13,7 +13,7 @@ public interface IJwtAuthManager
     IImmutableDictionary<string, RefreshToken> UsersRefreshTokensReadOnlyDictionary { get; }
     List<Claim> GenerateClaims(string userName, string role, DateTime now);
     AuthenticationProperties GenerateAuthenticationProperties(DateTime now);
-    JwtAuthResult GenerateTokens(string userName, IReadOnlyCollection<Claim> claims, DateTime now, RefreshToken refresh = null);
+    JwtAuthResult GenerateTokens(string userName, IReadOnlyCollection<Claim> claims, DateTime now, RefreshToken? refresh = null);
     // JwtAuthResult Refresh(string refreshToken, DateTime now);
     RefreshToken GetRefreshToken(string refreshToken);
     Task<(ClaimsPrincipal, JwtSecurityToken?)> DecodeJwtToken(string token);

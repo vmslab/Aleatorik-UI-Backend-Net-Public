@@ -70,7 +70,7 @@ public static class AuthConfiguration
                     //var endpoint = context.HttpContext.Features.Get<IEndpointFeature>()?.Endpoint;
                     // HTTP/1.1
                     string accessToken = string.Empty;
-                    var token = Convert.ToString(context.Request.Cookies["access_token"]) ?? "";
+                    var token = Convert.ToString(context.Request.Cookies["access_token"]) ?? string.Empty;
 
                     //if (!string.IsNullOrEmpty(accessToken) && (context.HttpContext.WebSockets.IsWebSocketRequest || context.Request.Headers["Accept"] == "text/event-stream"))
                     //{
@@ -118,7 +118,7 @@ public static class AuthConfiguration
 
                     if (enableAccessLog)
                     {
-                        var identity = Convert.ToString(context.HttpContext.Request.Cookies["user_identity"]) ?? "";
+                        var identity = Convert.ToString(context.HttpContext.Request.Cookies["user_identity"]) ?? string.Empty;
                         var userName = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(identity));
 
                         var accesLog = new LogTemplate { User = userName, Path = context.Request.Path.Value, Message = "Access" };
