@@ -1,15 +1,15 @@
-﻿using SqlBatis.DataMapper.DependencyInjection;
-using AleatorikUI.Services.DAO.mdm;
-using AleatorikUI.Services.DAO.exp;
+﻿using AleatorikUI.Services.Authentication;
 using AleatorikUI.Services.Configuration;
-using AleatorikUI.Services.Authentication;
+using AleatorikUI.Services.DAO.aor;
+using AleatorikUI.Services.DAO.exp;
+using AleatorikUI.Services.DAO.mdm;
 using AleatorikUI.Services.DAO.sam;
-using AleatorikUI.Services.DAO.iod;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Versioning;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using tusdotnet;
 using AleatorikUI.Services.Helper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using SqlBatis.DataMapper.DependencyInjection;
+using tusdotnet;
 
 namespace AleatorikUI.Services;
 public class Startup
@@ -29,6 +29,8 @@ public class Startup
     {
         services.SetupLog(ref _configuration);
         services.AddJwtAuthentication(Configuration, true);
+
+        services.AddServerStateSocketService(Configuration);
 
         services.AddControllers();
         services.AddEndpointsApiExplorer();
@@ -77,11 +79,11 @@ public class Startup
         services.AddSingletonWithNamedMapper<IMdmConstInfoDao, MdmConstInfoDao>(sMode);                         // CONSTRAINT INFO
         services.AddSingletonWithNamedMapper<IMdmPmPlanDao, MdmPmPlanDao>(sMode);                               // PM PLAN
         services.AddSingletonWithNamedMapper<IMdmSetupInfoDao, MdmSetupInfoDao>(sMode);                         // SETUP INFO
-/* ---------------------------------------------------------------------------------------------
-services.AddSingletonWithNamedMapper<IMdmCalendarDao,           MdmCalendarDao>();            // 캘린더마스터
-services.AddSingletonWithNamedMapper<IMdmCalendarSub1Dao,       MdmCalendarSub1Dao>();       // 캘린더상세정보
-services.AddSingletonWithNamedMapper<IMdmCalendarSub2Dao,       MdmCalendarSub2Dao>();       // 캘린더속성값 관리
-*/
+        /* ---------------------------------------------------------------------------------------------
+        services.AddSingletonWithNamedMapper<IMdmCalendarDao,           MdmCalendarDao>();            // 캘린더마스터
+        services.AddSingletonWithNamedMapper<IMdmCalendarSub1Dao,       MdmCalendarSub1Dao>();       // 캘린더상세정보
+        services.AddSingletonWithNamedMapper<IMdmCalendarSub2Dao,       MdmCalendarSub2Dao>();       // 캘린더속성값 관리
+        */
 
 
         /**
@@ -91,6 +93,7 @@ services.AddSingletonWithNamedMapper<IMdmCalendarSub2Dao,       MdmCalendarSub2D
         /**
          *        결과분석 및 리포트
          */
+        services.AddSingletonWithNamedMapper<IAorBomMapDao, AorBomMapDao>(sMode);                               // BOM Map View
 
         /**
          *        입력/결과 데이터 조회
@@ -135,11 +138,18 @@ services.AddSingletonWithNamedMapper<IMdmCalendarSub2Dao,       MdmCalendarSub2D
 
         app.UseHttpsRedirection();
 
+        app.UseWebSockets(new WebSocketOptions
+        {
+            KeepAliveInterval = TimeSpan.FromSeconds(120),
+        });
+        app.UseMiddleware<Middleware.ServerStateSocket.ServerStateSocketManager>();
+
         app.UseRouting();
-        app.UseTus(TusHelper.CreateTusConfiguration);
 
         app.UseAuthentication();
         app.UseAuthorization();
+
+        app.UseTus(TusHelper.CreateTusConfiguration);
 
         app.UseEndpoints(endpoints =>
         {
