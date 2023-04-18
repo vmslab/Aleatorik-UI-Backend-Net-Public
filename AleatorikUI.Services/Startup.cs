@@ -129,11 +129,7 @@ public class Startup
         // Configure the HTTP request pipeline.
         app.UseHttpsRedirection();
         app.UseRouting();
-<<<<<<< Updated upstream
         app.UseTus(TusHelper.CreateTusConfiguration);
-
-=======
->>>>>>> Stashed changes
         app.UseAuthentication();
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
