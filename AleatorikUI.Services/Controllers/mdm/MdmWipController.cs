@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AleatorikUI.Services.Controllers.mdm;
 
+[ApiVersion("1.0")]
 [ApiController]
 [Route("[controller]")]
 public class MdmWipController : ControllerBase

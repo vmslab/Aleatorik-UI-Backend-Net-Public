@@ -5,7 +5,9 @@ using AleatorikUI.Services.Configuration;
 using AleatorikUI.Services.Authentication;
 using AleatorikUI.Services.DAO.sam;
 using AleatorikUI.Services.DAO.iod;
-using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace AleatorikUI.Services;
 public class Startup
@@ -28,33 +30,18 @@ public class Startup
 
         services.AddControllers();
         services.AddEndpointsApiExplorer();
-        //services.AddSwaggerGen();
-        services.AddSwaggerGen(c =>
+        services.AddApiVersioning(c =>
         {
-            c.SwaggerDoc("api", new OpenApiInfo
-            {
-                Title = "Aleatorik UI Service Api",
-                Description = "Aleatorik UI Api 문서",
-                Contact = new OpenApiContact
-                {
-                    Name = "서버 정보",
-                    Email = string.Empty,
-                    Url = new Uri("http://localhost:5235")
-                }
-                
-            });
-            c.SwaggerDoc("admin", new OpenApiInfo
-            {
-                Title = "관리자 Title",
-                Description = "관리자 DESC",
-                Contact = new OpenApiContact
-                {
-                    Name = "서버 정보 - Server Gitlab",
-                    Email = string.Empty,
-                    Url = new Uri("http://000.000.000.000")
-                }
-            });
-        });
+            c.DefaultApiVersion = new ApiVersion(1, 0);
+            c.AssumeDefaultVersionWhenUnspecified = true;
+            c.ReportApiVersions = true;
+
+            c.ApiVersionReader = new HeaderApiVersionReader("X-version");
+        }
+      );
+
+        services.AddSwaggerDocumentation();
+    
         string sMode = "PRODT";
 
 #if DEBUG
@@ -129,7 +116,8 @@ services.AddSingletonWithNamedMapper<IMdmCalendarSub2Dao,       MdmCalendarSub2D
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app,
         IWebHostEnvironment env,
-        IHostApplicationLifetime lifetime)
+        IHostApplicationLifetime lifetime,
+        IApiVersionDescriptionProvider provider)
     {
 
         if (env.IsDevelopment())
@@ -140,13 +128,7 @@ services.AddSingletonWithNamedMapper<IMdmCalendarSub2Dao,       MdmCalendarSub2D
         // Configure the HTTP request pipeline.
         if (env.IsDevelopment())
         {
-            app.UseSwagger();
-            //app.UseSwaggerUI();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/api/swagger.json", "API Documents");
-                c.SwaggerEndpoint("/swagger/admin/swagger.json", "Admin Documents");
-            });
+            app.UseSwaggerDocumentation(provider);
         }
 
         app.UseHttpsRedirection();

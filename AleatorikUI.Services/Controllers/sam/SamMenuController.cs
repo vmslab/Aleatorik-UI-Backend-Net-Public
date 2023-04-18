@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AleatorikUI.Services.Controllers.sam;
 
+[ApiVersion("1.0")]
 [ApiController]
 [Route("[controller]")]
 public class SamMenuController : ControllerBase

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.WebUtilities;
 namespace AleatorikUI.Services.Controllers.sam;
 
 [Authorize]
+[ApiVersion("1.0")]
 [Route("auth/[controller]")]
 [ApiController]
 public class SamAuthController : ControllerBase
@@ -30,7 +31,6 @@ public class SamAuthController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("/api/auth/Login")]
-    [ApiExplorerSettings(GroupName = "admin")]
     public async Task<IActionResult> Login(SamAuthInfo request)
     {
         var httpContext = _httpContextAccessor?.HttpContext;
@@ -56,7 +56,6 @@ public class SamAuthController : ControllerBase
 
     [AllowAnonymous]
     [HttpGet("/api/auth/Refresh")]
-    [ApiExplorerSettings(GroupName = "admin")]
     public async Task<IActionResult> Refresh()
     {
         var httpContext = _httpContextAccessor?.HttpContext;
@@ -97,7 +96,6 @@ public class SamAuthController : ControllerBase
     }
 
     [HttpGet("/api/auth/Logout")]
-    [ApiExplorerSettings(GroupName = "admin")]
     public async Task<IActionResult> Logout()
     {
         var httpContext = _httpContextAccessor?.HttpContext;
