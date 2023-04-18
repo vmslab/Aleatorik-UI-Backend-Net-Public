@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <resultMaps>
+    <resultMap id="rtnAorBomMap"  class="AorBomMapInfo" >
+      <result property="ItemLevel" column="ITEM_LEVEL" />
+      <result property="PlanVersion" column="PLAN_VERSION" />
+      <result property="SoItemID" column="SO_ITEM_ID" />
+      <result property="SoSiteID" column="SO_SITE_ID" />
+      <result property="SoBufferID" column="SO_BUFFER_ID" />
+      <result property="BomID" column="BOM_ID" />
+      <result property="RoutingID" column="ROUTING_ID" />
+      <result property="BomType" column="BOM_TYPE" />
+      <result property="ItemType" column="ITEM_TYPE" />
+      <result property="BomPriority" column="BOM_PRIORITY" />
+      <result property="FromItemID" column="FROM_ITEM_ID" />
+      <result property="FromSiteID" column="FROM_SITE_ID" />
+      <result property="FromBufferID" column="FROM_BUFFER_ID" />
+      <result property="FromBufferSeq" column="FROM_BUFFER_SEQ" />
+      <result property="FromQty" column="FROM_QTY" />
+      <result property="FromWipQty" column="FROM_WIP_QTY" />
+      <result property="FromSumWipQty" column="FROM_SUM_WIP_QTY" />
+      <result property="ToItemID" column="TO_ITEM_ID" />
+      <result property="ToSiteID" column="TO_SITE_ID" />
+      <result property="ToBufferID" column="TO_BUFFER_ID" />
+      <result property="ToBufferSeq" column="TO_BUFFER_SEQ" />
+      <result property="ToQty" column="TO_QTY" />
+      <result property="ToWipQty" column="TO_WIP_QTY" />
+      <result property="ToSumWipQty" column="TO_SUM_WIP_QTY" />
+      <result property="IsUsabledetail" column="IS_USABLEDETAIL" />
+      <result property="IsUsablebom" column="IS_USABLEBOM" />
+      <result property="ResourceIDs" column="RESOURCE_IDS" />
+      <result property="AllResourceIDs" column="ALL_RESOURCE_IDS" />
+      <result property="RoutingTat" column="ROUTING_TAT" />
+      <result property="MinCumTat" column="MIN_CUM_TAT" />
+      <result property="MaxCumTat" column="MAX_CUM_TAT" />
+      <result property="LateCumTat" column="LATE_CUM_TAT" />
+      <result property="MaxCumYield" column="MAX_CUM_YIELD" />
+      <result property="PrevItemSiteBuffers" column="PREV_ITEM_SITE_BUFFERS" />
+      <result property="NextItemSiteBuffers" column="NEXT_ITEM_SITE_BUFFERS" />
+    </resultMap>
+    <resultMap id="rtnAorBomMapSub1"  class="AorBomMapSub1" >
+      <result property="PlanVersion" column="PLAN_VERSION" />
+      <result property="SoID" column="SO_ID" />
+      <result property="Path" column="PATH" />
+    </resultMap>
+
+  </resultMaps>
+
+	<statements>
+		<!--SELECT BOM_NETWORK_INFO-->
+		<select id="BomMap.SelectBomNetworkInfos" parameterClass="AorBomMapParam" resultMap="rtnAorBomMap">
+      SELECT
+      A.ITEM_LEVEL
+      , A.PLAN_VERSION
+      , A.SO_ITEM_ID
+      , A.SO_SITE_ID
+      , A.SO_BUFFER_ID
+      , A.BOM_ID
+      , A.ROUTING_ID
+      , A.BOM_TYPE
+      , B.ITEM_TYPE
+      , A.BOM_PRIORITY
+      , A.FROM_ITEM_ID
+      , A.FROM_SITE_ID
+      , A.FROM_BUFFER_ID
+      , A.FROM_BUFFER_SEQ
+      , A.FROM_QTY
+      , A.FROM_WIP_QTY
+      , A.FROM_SUM_WIP_QTY
+      , A.TO_ITEM_ID
+      , A.TO_SITE_ID
+      , A.TO_BUFFER_ID
+      , A.TO_BUFFER_SEQ
+      , A.TO_QTY
+      , A.TO_WIP_QTY
+      , A.TO_SUM_WIP_QTY
+      , A.IS_USABLEDETAIL
+      , A.IS_USABLEBOM
+      , A.RESOURCE_IDS
+      , A.ALL_RESOURCE_IDS
+      , A.ROUTING_TAT
+      , A.MIN_CUM_TAT
+      , A.MAX_CUM_TAT
+      , A.LATE_CUM_TAT
+      , A.MAX_CUM_YIELD
+      , A.PREV_ITEM_SITE_BUFFERS
+      , A.NEXT_ITEM_SITE_BUFFERS
+      FROM
+      uFnGetBomTreeFromSO(#PlanVersion#, #SoID#) as A
+      LEFT JOIN
+      ODV_ITEM_MASTER as B
+      ON
+      A.PLAN_VERSION = B.PLAN_VERSION
+      AND A.FROM_ITEM_ID = B.ITEM_ID
+    </select>
+    
+    <!--SELECT BOM_PATH_SEARCH_LOG-->
+    <select id="BomMap.SelectBomPathLog" parameterClass="AorBomMapParam" resultMap="rtnAorBomMapSub1">
+      SELECT PLAN_VERSION, SO_ID, PATH
+      FROM OUT_BOM_PATH_SEARCH_LOG
+      WHERE PLAN_VERSION = #PlanVersion#
+      AND SO_ID = #SoID#
+    </select>
+	</statements>
+</sqlMap>

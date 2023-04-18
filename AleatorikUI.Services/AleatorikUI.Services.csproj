@@ -46,6 +46,7 @@
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Map" Version="1.0.2" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="5.0.0" />
+    <PackageReference Include="System.Management" Version="6.0.0" />
     <PackageReference Include="tusdotnet" Version="2.7.0" />
   </ItemGroup>
 
@@ -62,6 +63,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Sqls\aor\AorBomMap.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sqls\exp\Gantt.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
