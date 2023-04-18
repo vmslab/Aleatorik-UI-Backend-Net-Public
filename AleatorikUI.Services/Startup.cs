@@ -121,8 +121,6 @@ public class Startup
         IHostApplicationLifetime lifetime,
         IApiVersionDescriptionProvider provider)
     {
-
-        
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
@@ -140,8 +138,8 @@ public class Startup
 
         app.UseRouting();
 
-
         app.UseAuthentication();
+        app.UseAuthorization();
 
         app.UseTus(TusHelper.CreateTusConfiguration);
 
