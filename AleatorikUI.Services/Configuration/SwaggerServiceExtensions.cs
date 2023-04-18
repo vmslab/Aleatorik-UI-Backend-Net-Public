@@ -1,5 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace AleatorikUI.Services.Configuration;
 
@@ -28,18 +29,19 @@ public static class SwaggerServiceExtensions
         return services;
     }
 
-    // Configure() 메서드에서 사용할 부분
-    public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app,
-        IApiVersionDescriptionProvider provider)
-    {
-        app.UseSwagger();
-        app.UseSwaggerUI(options =>
+        // Configure() 메서드에서 사용할 부분
+        public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app,
+            IApiVersionDescriptionProvider provider)
         {
-            foreach (var description in provider.ApiVersionDescriptions)
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
-            }
-        });
+                foreach (var description in provider.ApiVersionDescriptions)
+                {
+                    c.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                }
+                c.DocExpansion(DocExpansion.None); 
+            });
 
         return app;
     }
