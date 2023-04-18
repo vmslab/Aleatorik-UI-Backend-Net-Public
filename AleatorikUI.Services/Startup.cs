@@ -12,6 +12,11 @@ using tusdotnet;
 using AleatorikUI.Services.Helper;
 
 namespace AleatorikUI.Services;
+
+/// <summary>
+///  슬러쉬(/) 를 3번 입력하면 자동으로 주석 폼이 생성 됩니다.
+///  주석 입력을 생활화 합시다.
+/// </summary>
 public class Startup
 {
     IConfiguration _configuration;
@@ -23,8 +28,11 @@ public class Startup
 
     public IConfiguration Configuration => _configuration;
 
-    // This method gets called by the runtime. Use this method to add services to the container.
-    // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+    /// <summary>
+    /// This method gets called by the runtime. Use this method to add services to the container.
+    /// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+    /// </summary>
+    /// <param name="services"></param>
     public void ConfigureServices(IServiceCollection services)
     {
         services.SetupLog(ref _configuration);
@@ -112,14 +120,18 @@ public class Startup
         services.AddHttpContextAccessor();
     }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    /// <summary>
+    /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline. 
+    /// </summary>
+    /// <param name="app"></param>
+    /// <param name="env"></param>
+    /// <param name="lifetime"></param>
+    /// <param name="provider"></param>
     public void Configure(IApplicationBuilder app,
         IWebHostEnvironment env,
         IHostApplicationLifetime lifetime,
         IApiVersionDescriptionProvider provider)
-    {
-
-        
+    {   
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();

@@ -4,6 +4,9 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace AleatorikUI.Services.Configuration
 {
+    /// <summary>
+    /// Swagger + Api Vision 관리 기능 구현
+    /// </summary>
     public static class SwaggerServiceExtensions
     {
         public static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services)
@@ -18,18 +21,24 @@ namespace AleatorikUI.Services.Configuration
             var serviceProvider = scope.ServiceProvider;
             var descriptionProvider = serviceProvider.GetRequiredService<IApiVersionDescriptionProvider>();
 
-            services.AddSwaggerGen(options =>
+            services.AddSwaggerGen(c =>
             {
                 foreach (var description in descriptionProvider.ApiVersionDescriptions)
                 {
-                    options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
+                    c.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
+                    c.IncludeXmlComments(string.Format(@"{0}\SwaggerDoc.XML", System.AppDomain.CurrentDomain.BaseDirectory));
                 }
             });
 
             return services;
         }
 
-        // Configure() 메서드에서 사용할 부분
+        /// <summary>
+        /// Swagger 설정, Configure() 메서드에서 사용할 부분
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
         public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app,
             IApiVersionDescriptionProvider provider)
         {
@@ -39,8 +48,8 @@ namespace AleatorikUI.Services.Configuration
                 foreach (var description in provider.ApiVersionDescriptions)
                 {
                     c.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                    c.DocExpansion(DocExpansion.None);
                 }
-                c.DocExpansion(DocExpansion.None); 
             });
 
             return app;

@@ -20,6 +20,10 @@ public class MdmDemandController : ControllerBase
         _mdmDemandDao = mdmDemandDao;
     }
 
+    /// <summary>
+    /// Demand Ãß°¡
+    /// </summary>
+    /// <returns></returns>
     [HttpGet("/api/MdmDemand")]
     public IEnumerable<MdmDemand> GetAll()
     {
