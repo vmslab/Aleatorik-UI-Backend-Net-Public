@@ -2,10 +2,14 @@ namespace AleatorikUI.Services.DTO.mdm;
 
 public class MdmCalSub2
 {
-    public string? SiteId { get; set; }
-    public string? SiteType { get; set; }
-    public DateTime? CreateTime { get; set; }
-    public string? CreateUser { get; set; }
-    public DateTime? UpdateTime { get; set; }
-    public string? UpdateUser { get; set; }
+    public string? attribute { get; set; }
+    public string? patternSeq { get; set; }
+    public string? calendarID { get; set; }
+    public string? value { get; set; }
+    public string? valueType { get; set; }
+    public string? valueUom { get; set; }
+    public DateTime? createTime { get; set; }
+    public string? createUser { get; set; }
+    public DateTime? updateTime { get; set; }
+    public string? updateUser { get; set; }
 }

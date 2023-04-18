@@ -32,15 +32,14 @@ public class Startup
 
         services.AddControllers();
         services.AddEndpointsApiExplorer();
-        services.AddApiVersioning(c =>
+        services.AddApiVersioning(c => 
         {
             c.DefaultApiVersion = new ApiVersion(1, 0);
             c.AssumeDefaultVersionWhenUnspecified = true;
             c.ReportApiVersions = true;
 
             c.ApiVersionReader = new HeaderApiVersionReader("X-version");
-        }
-      );
+        });
 
         services.AddSwaggerDocumentation();
     
@@ -77,13 +76,9 @@ public class Startup
         services.AddSingletonWithNamedMapper<IMdmConstInfoDao, MdmConstInfoDao>(sMode);                         // CONSTRAINT INFO
         services.AddSingletonWithNamedMapper<IMdmPmPlanDao, MdmPmPlanDao>(sMode);                               // PM PLAN
         services.AddSingletonWithNamedMapper<IMdmSetupInfoDao, MdmSetupInfoDao>(sMode);                         // SETUP INFO
-/* ---------------------------------------------------------------------------------------------
-services.AddSingletonWithNamedMapper<IMdmCalendarDao,           MdmCalendarDao>();            // 캘린더마스터
-services.AddSingletonWithNamedMapper<IMdmCalendarSub1Dao,       MdmCalendarSub1Dao>();       // 캘린더상세정보
-services.AddSingletonWithNamedMapper<IMdmCalendarSub2Dao,       MdmCalendarSub2Dao>();       // 캘린더속성값 관리
-*/
-
-
+        /* --------------------------------------------------------------------------------------------- */
+        services.AddSingletonWithNamedMapper<IMdmCalMasterDao, MdmCalMasterDao>(sMode);                         // 캘린더마스터, 캘린더상세정보, 캘린더속성값 관리
+        /* --------------------------------------------------------------------------------------------- */
         /**
          *        계획 관리
          */
@@ -103,12 +98,14 @@ services.AddSingletonWithNamedMapper<IMdmCalendarSub2Dao,       MdmCalendarSub2D
         services.AddSingletonWithNamedMapper<ISamGroupDao, SamGroupDao>(sMode);
         services.AddSingletonWithNamedMapper<ISamMenuDao, SamMenuDao>(sMode);
         services.AddSingletonWithNamedMapper<ISamMenuMapDao, SamMenuMapDao>(sMode);
+        /* --------------------------------------------------------------------------------------------- */
         /**
          *        예제
          */
         services.AddSingletonWithNamedMapper<ITodoDao, TodoDao>(sMode) ;
         services.AddSingletonWithNamedMapper<IGanttDao, GanttDao>(sMode);
-      
+        /* --------------------------------------------------------------------------------------------- */
+
         // 접속 DB 선택
         services.AddSqlMapper("PRODT", options => Configuration.GetSection("DB-Aleatorik").Bind(options));
         services.AddSqlMapper("DEV",   options => Configuration.GetSection("DB-Dev").Bind(options));
@@ -122,25 +119,23 @@ services.AddSingletonWithNamedMapper<IMdmCalendarSub2Dao,       MdmCalendarSub2D
         IApiVersionDescriptionProvider provider)
     {
 
+        
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
-        }
-
-        // Configure the HTTP request pipeline.
-        if (env.IsDevelopment())
-        {
             app.UseSwaggerDocumentation(provider);
         }
 
+        // Configure the HTTP request pipeline.
         app.UseHttpsRedirection();
-
         app.UseRouting();
+<<<<<<< Updated upstream
         app.UseTus(TusHelper.CreateTusConfiguration);
 
+=======
+>>>>>>> Stashed changes
         app.UseAuthentication();
         app.UseAuthorization();
-
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();

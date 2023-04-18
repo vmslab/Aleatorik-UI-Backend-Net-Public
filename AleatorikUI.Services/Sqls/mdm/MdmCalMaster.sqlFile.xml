@@ -3,83 +3,229 @@
 <sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
 	<resultMaps>
-		<resultMap id="rtnMdmStage"  class="MdmStage" >
-			<result property="stageID"    	column="STAGE_ID"/>
-			<result property="description"  column="DESCRIPTION"/>
+		<resultMap id="rtnMdmCalMaster"  class="MdmCalMaster" >
+			<result property="calendarID"   column="CALENDAR_ID"/>
+			<result property="calendarType" column="CALENDAR_TYPE"/>
 			<result property="createTime"   column="CREATE_TIME"/>
-			<result property="createUser"	column="CREATE_USER"/>
-			<result property="updateTime"	column="UPDATE_TIME"/>
-			<result property="updateUser"	column="UPDATE_USER"/>
+			<result property="createUser"   column="CREATE_USER"/>
+			<result property="updateTime"   column="UPDATE_TIME"/>
+			<result property="updateUser"   column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmCalSub1"  class="MdmCalSub1" >
+			<result property="patternSeq"    column="PATTERN_SEQ"/>
+			<result property="calendarID"    column="CALENDAR_ID"/>
+			<result property="effStartTime"  column="EFF_START_TIME"/>
+			<result property="effEndTime"    column="EFF_END_TIME"/>
+			<result property="patternName"   column="PATTERN_NAME"/>
+			<result property="patternValue"  column="PATTERN_VALUE"/>
+			<result property="priority"      column="PRIORITY"/>
+			<result property="createTime"    column="CREATE_TIME"/>
+			<result property="createUser"    column="CREATE_USER"/>
+			<result property="updateTime"    column="UPDATE_TIME"/>
+			<result property="updateUser"    column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmCalSub2"  class="MdmCalSub2" >
+			<result property="attribute"  column="ATTRIBUTE"/>
+			<result property="patternSeq" column="PATTERN_SEQ"/>
+			<result property="calendarID" column="CALENDAR_ID"/>
+			<result property="value"      column="VALUE"/>
+			<result property="valueType"  column="VALUE_TYPE"/>
+			<result property="valueUom"   column="VALUE_UOM"/>
+			<result property="createTime" column="CREATE_TIME"/>
+			<result property="createUser" column="CREATE_USER"/>
+			<result property="updateTime" column="UPDATE_TIME"/>
+			<result property="updateUser" column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
-	<statements>
-		<!--SELECT All-->
-		<select id="MdmStage.Select" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-		</select>
 
-		<!--SELECT BY ID-->
-		<select id="MdmStage.SelectId" parameterClass="string" resultMap="rtnMdmStage">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+	<statements>
+		<!-- MASTER -->
+		<!--SELECT All-->
+		<select id="MdmCalMaster.Select" resultMap="rtnMdmCalMaster">
+			SELECT [CALENDAR_ID]
+				 , [CALENDAR_TYPE]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_CALENDAR_MASTER]
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmStage.Insert" parameterClass="MdmStage">
-			INSERT INTO CFG_STAGE
-				 ( STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
+		<insert id="MdmCalMaster.Insert" parameterClass="MdmCalMaster">
+			INSERT INTO [CFG_CALENDAR_MASTER]
+				 ( [CALENDAR_ID]
+				 , [CALENDAR_TYPE]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #stageID#
-				 , #description#
-				 , #createTime#
+				 ( #calendarID#
+				 , #calendarType#
+				 , getdate()
 				 , #createUser#
-				 , #updateTime#
+				 , getdate()
 				 , #updateUser#
 				 )
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmStage.Update" parameterClass="MdmStage">
-			UPDATE CFG_STAGE
-			   SET 
-			<dynamic prepend=" " close=" ">
-				<isNotEmpty prepend="," property="description">
-					DESCRIPTION = #description#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateTime">
-					UPDATE_TIME = #updateTime#
-				</isNotEmpty>
-				<isNotEmpty prepend="," property="updateUser">
-					UPDATE_USER = #updateUser#
-				</isNotEmpty>
-			 WHERE STAGE_ID = #stageID#
-			</dynamic>
+		<update id="MdmCalMaster.Update" parameterClass="MdmCalMaster">
+			UPDATE [CFG_CALENDAR_MASTER]
+			   SET [CALENDAR_ID]   = #calendarID#
+			     , [CALENDAR_TYPE] = #calendarType#
+			     , [UPDATE_TIME]   = getdate()
+			     , [UPDATE_USER]   = #updateUser#
+			 WHERE [CALENDAR_ID]   = #calendarID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmStage.Delete" parameterClass="string">
+		<delete id="MdmCalMaster.Delete" parameterClass="MdmCalMaster">
 			DELETE
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+			  FROM [CFG_CALENDAR_MASTER]
+			 WHERE [CALENDAR_ID]   = #calendarID#
 		</delete>
 
+		<!-- Sub1 -->
+		<!--SELECT All-->
+		<select id="MdmCalSub1.Select" parameterClass="string"  resultMap="rtnMdmCalSub1">
+			SELECT [PATTERN_SEQ]
+			     , [CALENDAR_ID]
+			     , [EFF_START_TIME]
+			     , [EFF_END_TIME]
+			     , [PATTERN_NAME]
+			     , [PATTERN_VALUE]
+			     , [PRIORITY]
+			     , [CREATE_TIME]
+			     , [CREATE_USER]
+			     , [UPDATE_TIME]
+			     , [UPDATE_USER]
+			  FROM [CFG_CALENDAR_DETAIL]
+			 WHERE [CALENDAR_ID] = #calendarID#
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmCalSub1.Insert" parameterClass="MdmCalSub1">
+			INSERT INTO [CFG_CALENDAR_DETAIL]
+				 ( [PATTERN_SEQ]
+				 , [CALENDAR_ID]
+				 , [EFF_START_TIME]
+				 , [EFF_END_TIME]
+				 , [PATTERN_NAME]
+				 , [PATTERN_VALUE]
+				 , [PRIORITY]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #patternSeq#
+				 , #calendarID#
+				 , #effStartTime#
+				 , #effEndTime#
+				 , #patternName#
+				 , #patternValue#
+				 , #priority#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmCalSub1.Update" parameterClass="MdmCalSub1">
+			UPDATE [CFG_CALENDAR_DETAIL]
+			   SET [PATTERN_SEQ]    = #patternSeq#
+			     , [CALENDAR_ID]    = #calendarID#
+			     , [EFF_START_TIME] = #effStartTime#
+			     , [EFF_END_TIME]   = #effEndTime#
+			     , [PATTERN_NAME]   = #patternName#
+			     , [PATTERN_VALUE]  = #patternValue#
+			     , [PRIORITY]       = #priority#
+			     , [UPDATE_TIME]    = getdate()
+			     , [UPDATE_USER]    = #updateUser#
+			 WHERE [PATTERN_SEQ]    = #patternSeq#
+			   AND [CALENDAR_ID]    = #calendarID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmCalSub1.Delete" parameterClass="MdmCalSub1">
+			DELETE
+			  FROM [CFG_CALENDAR_DETAIL]
+			 WHERE [PATTERN_SEQ]    = #patternSeq#
+			   AND [CALENDAR_ID]    = #calendarID#
+		</delete>
+
+		<!-- Sub2 -->
+		<!--SELECT All-->
+		<select id="MdmCalSub2.Select" parameterClass="string"  resultMap="rtnMdmCalSub2">
+			SELECT [ATTRIBUTE]
+			     , [PATTERN_SEQ]
+			     , [CALENDAR_ID]
+			     , [VALUE]
+			     , [VALUE_TYPE]
+			     , [VALUE_UOM]
+			     , [CREATE_TIME]
+			     , [CREATE_USER]
+			     , [UPDATE_TIME]
+			     , [UPDATE_USER]
+			  FROM [CFG_CALENDAR_BASED_ATTRIBUTE]
+			 WHERE [CALENDAR_ID]    = #calendarID#
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmCalSub2.Insert" parameterClass="MdmCalSub2">
+			INSERT INTO [CFG_CALENDAR_BASED_ATTRIBUTE]
+				 ( [ATTRIBUTE]
+				 , [PATTERN_SEQ]
+				 , [CALENDAR_ID]
+				 , [VALUE]
+				 , [VALUE_TYPE]
+				 , [VALUE_UOM]
+				 , [CREATE_TIME]
+				 , [CREATE_USER]
+				 , [UPDATE_TIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #attribute#
+				 , #patternSeq#
+				 , #calendarID#
+				 , #value#
+				 , #valueType#
+				 , #valueUom#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmCalSub2.Update" parameterClass="MdmCalSub2">
+			UPDATE [CFG_CALENDAR_BASED_ATTRIBUTE]
+			   SET [ATTRIBUTE]   = #attribute#
+				 , [PATTERN_SEQ] = #patternSeq#
+				 , [CALENDAR_ID] = #calendarID#
+				 , [VALUE]       = #value#
+				 , [VALUE_TYPE]  = #valueType#
+				 , [VALUE_UOM]   = #valueUom#
+				 , [UPDATE_TIME] = getdate()
+				 , [UPDATE_USER] = #updateUser#
+			 WHERE [ATTRIBUTE]   = #attribute#
+			   AND [PATTERN_SEQ] = #patternSeq#
+			   AND [CALENDAR_ID] = #calendarID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmCalSub2.Delete" parameterClass="MdmCalSub2">
+			DELETE
+			  FROM [CFG_CALENDAR_BASED_ATTRIBUTE]
+			 WHERE [ATTRIBUTE]   = #attribute#
+			   AND [PATTERN_SEQ] = #patternSeq#
+			   AND [CALENDAR_ID] = #calendarID#
+		</delete>
 	</statements>
 </sqlMap>
