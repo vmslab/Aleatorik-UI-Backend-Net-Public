@@ -5,7 +5,6 @@
 	<resultMaps>
 		<resultMap id="rtnMdmSiteMaster"  class="MdmSiteMaster" >
 			<result property="siteID"    	column="SITE_ID"/>
-			<result property="siteType"		column="SITE_TYPE"/>
 			<result property="createTime"   column="CREATE_TIME"/>
 			<result property="createUser"	column="CREATE_USER"/>
 			<result property="updateTime"	column="UPDATE_TIME"/>
@@ -17,7 +16,6 @@
 		<!--SELECT All-->
 		<select id="MdmSiteMaster.Select" resultMap="rtnMdmSiteMaster">
 			SELECT SITE_ID
-				 , SITE_TYPE
 				 , CREATE_TIME
 				 , CREATE_USER
 				 , UPDATE_TIME
@@ -29,14 +27,12 @@
 		<insert id="MdmSiteMaster.Insert" parameterClass="MdmSiteMaster">
 			INSERT INTO CFG_SITE_MASTER
 				 ( SITE_ID
-				 , SITE_TYPE
 				 , CREATE_TIME
 				 , CREATE_USER
 				 , UPDATE_TIME
 				 , UPDATE_USER
 				 ) VALUES
 				 ( #siteID#
-				 , #siteType#
 				 , getDate()
 				 , #createUser#
 				 , getDate()
@@ -47,8 +43,7 @@
 		<!--UPDATE-->
 		<update id="MdmSiteMaster.Update" parameterClass="MdmSiteMaster">
 			UPDATE CFG_SITE_MASTER
-			   SET SITE_TYPE   = #siteType#
-			     , UPDATE_TIME = getDate()
+			   SET UPDATE_TIME = getDate()
  			     , UPDATE_USER = #updateUser#
 			 WHERE SITE_ID     = #siteID#
 		</update>
