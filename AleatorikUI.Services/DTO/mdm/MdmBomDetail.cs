@@ -1,7 +1,8 @@
 namespace AleatorikUI.Services.DTO.mdm;
 
-public class MdmBomSub1
+public class MdmBomDetail
 {
+    public string? projectID { get; set; }
     public string? bomID { get; set; }
     public string? fromItemID { get; set; }
     public string? fromSiteID { get; set; }
@@ -12,8 +13,8 @@ public class MdmBomSub1
     public string? toBufferID { get; set; }
     public int toQty { get; set; }
     public string? calendarID { get; set; }
-    public DateTime? createTime { get; set; }
+    public DateTime? createDatetime { get; set; }
     public string? createUser { get; set; }
-    public DateTime? updateTime { get; set; }
-    public string? updateUser { get; set; } 
+    public DateTime? updateDatetime { get; set; }
+    public string? updateUser { get; set; }
 }

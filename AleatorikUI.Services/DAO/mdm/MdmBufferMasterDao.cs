@@ -31,4 +31,29 @@ public class MdmBufferMasterDao : IMdmBufferMasterDao
     {
         return Mapper.Delete("MdmBufferMaster.Delete", mdmBufferMaster);
     }
+
+    /**
+      *  BUFFER PROP
+      */
+    public IEnumerable<MdmBufferProp> GetAllProp(string bufferID)
+    {
+        return Mapper.QueryForList<MdmBufferProp>("MdmBufferProp.Select", bufferID);
+    }
+
+    public void InsertProp(MdmBufferProp mdmBufferProp)
+    {
+        Mapper.Insert("MdmBufferProp.InsertProp", mdmBufferProp);
+    }
+
+    public int UpdateProp(MdmBufferProp mdmBufferProp)
+    {
+        return Mapper.Update("MdmBufferProp.Update", mdmBufferProp);
+    }
+
+    public int DeleteProp(MdmBufferProp mdmBufferProp)
+    {
+        return Mapper.Delete("MdmBufferProp.Delete", mdmBufferProp);
+    }
+
+
 }

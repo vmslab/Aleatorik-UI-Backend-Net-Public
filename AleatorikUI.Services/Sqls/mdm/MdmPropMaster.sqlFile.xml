@@ -4,88 +4,81 @@
 
 	<resultMaps>
 		<resultMap id="rtnMdmPropMaster"  class="MdmPropMaster" >
-			<result property="propertyID"   column="PROPERTY_ID"/>
-			<result property="category"     column="CATEGORY"/>
-			<result property="valueType"    column="VALUE_TYPE"/>
-			<result property="description"  column="DESCRIPTION"/>
-			<result property="reservedWord" column="RESERVED_WORD"/>
-			<result property="defaultValue" column="DEFAULT_VALUE"/>
-			<result property="isActive"     column="IS_ACTIVE"/>
-			<result property="createTime"   column="CREATE_TIME"/>
-			<result property="createUser"   column="CREATE_USER"/>
-			<result property="updateTime"   column="UPDATE_TIME"/>
-			<result property="updateUser"   column="UPDATE_USER"/>
+			<result property="propID"         column="PROP_ID"/>
+			<result property="propCategory"   column="PROP_CATEGORY"/>
+			<result property="dataType"       column="DATA_TYPE"/>
+			<result property="description"    column="DESCRIPTION"/>
+			<result property="reservedWord"   column="RESERVED_WORD"/>
+			<result property="defaultValue"   column="DEFAULT_VALUE"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 	
 	<statements>
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmPropMaster.Select" resultMap="rtnMdmPropMaster">
-			SELECT [PROPERTY_ID]
-				 , [CATEGORY]
-				 , [VALUE_TYPE]
+			SELECT [PROP_ID]
+				 , [PROP_CATEGORY]
+				 , [DATA_TYPE]
 				 , [DESCRIPTION]
 				 , [RESERVED_WORD]
 				 , [DEFAULT_VALUE]
-				 , [IS_ACTIVE]
-				 , [CREATE_TIME]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
-			  FROM [CFG_PROPERTY_MASTER]
+			  FROM [CFG_PROP_MASTER]
 		</select>
 
 		<!--INSERT-->
 		<insert id="MdmPropMaster.Insert" parameterClass="MdmPropMaster">
-			INSERT INTO [CFG_PROPERTY_MASTER]
-				 ( [PROPERTY_ID]
-				 , [CATEGORY]
-				 , [VALUE_TYPE]
+			INSERT INTO [CFG_PROP_MASTER]
+				 ( [PROP_ID]
+				 , [PROP_CATEGORY]
+				 , [DATA_TYPE]
 				 , [DESCRIPTION]
 				 , [RESERVED_WORD]
 				 , [DEFAULT_VALUE]
-				 , [IS_ACTIVE]
-				 , [CREATE_TIME]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #propertyID#
-				 , #category#
-				 , #valueType#
+				 ( #propID#
+				 , #propCategory#
+				 , #dataType#
 				 , #description#
 				 , #reservedWord#
 				 , #defaultValue#
-				 , #isActive#
-				 , #createTime#
+				 , getdate()
 				 , #createUser#
-				 , #updateTime#
+				 , getdate()
 				 , #updateUser#
 				 )
 		</insert>
 
 		<!--UPDATE-->
 		<update id="MdmPropMaster.Update" parameterClass="MdmPropMaster">
-			UPDATE [CFG_PROPERTY_MASTER]
-			   SET [PROPERTY_ID]   = #propertyID#
-				 , [CATEGORY]      = #category#
-				 , [VALUE_TYPE]    = #valueType#
-				 , [DESCRIPTION]   = #description#
-				 , [RESERVED_WORD] = #reservedWord#
-				 , [DEFAULT_VALUE] = #defaultValue#
-				 , [IS_ACTIVE]     = #isActive#
-				 , [CREATE_TIME]   = #createTime#
-				 , [CREATE_USER]   = #createUser#
-				 , [UPDATE_TIME]   = #updateTime#
-				 , [UPDATE_USER]   = #updateUser#
-			 WHERE [PROPERTY_ID]   = #propertyID#
+			UPDATE [CFG_PROP_MASTER]
+			   SET [PROP_ID]         = #propID#
+				 , [PROP_CATEGORY]   = #propCategory#
+				 , [DATA_TYPE]       = #dataType#
+				 , [DESCRIPTION]     = #description#
+				 , [RESERVED_WORD]   = #reservedWord#
+				 , [DEFAULT_VALUE]   = #defaultValue#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROP_ID]         = #propID#
 		</update>
 
 		<!--DELETE-->
 		<delete id="MdmPropMaster.Delete" parameterClass="string">
-			DELETE 
-			  FROM [CFG_PROPERTY_MASTER]
-			 WHERE [PROPERTY_ID]   = #propertyID#
+			DELETE
+			  FROM [CFG_PROP_MASTER]
+			 WHERE [PROP_ID]         = #propID#
 		</delete>
 
 	</statements>

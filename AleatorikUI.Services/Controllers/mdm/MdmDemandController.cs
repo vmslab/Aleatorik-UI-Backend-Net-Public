@@ -21,7 +21,7 @@ public class MdmDemandController : ControllerBase
     }
 
     /// <summary>
-    /// Demand 추가
+    /// Demand 를 조회 합니다.
     /// </summary>
     /// <returns></returns>
     [HttpGet("/api/MdmDemand")]
@@ -41,7 +41,11 @@ public class MdmDemandController : ControllerBase
             return new List<MdmDemand>();
         }
     }
-
+    /// <summary>
+    /// DEMAND 를 추가 합니다.
+    /// </summary>
+    /// <param name="mdmDemand"></param>
+    /// <returns></returns>
     [HttpPost("/api/MdmDemand")]
     public int Insert(MdmDemand mdmDemand)
     {
@@ -57,8 +61,12 @@ public class MdmDemandController : ControllerBase
             return 0;
         }
     }
-
-    [HttpPut("/api/MdmDemand/{soID}")]
+    /// <summary>
+    /// DEMAND 를 수정 합니다.
+    /// </summary>
+    /// <param name="mdmDemand"></param>
+    /// <returns></returns>
+    [HttpPut("/api/MdmDemand/{demandID}")]
     public int Update(MdmDemand mdmDemand)
     {
         _logger.LogInformation("Update : {}", mdmDemand);
@@ -75,14 +83,104 @@ public class MdmDemandController : ControllerBase
             return 0;
         }
     }
-
-    [HttpDelete("/api/MdmDemand/{soID}")]
+    /// <summary>
+    /// DEMAND 를 삭제 합니다.
+    /// </summary>
+    /// <param name="mdmDemand"></param>
+    /// <returns></returns>
+    [HttpDelete("/api/MdmDemand/{demandID}")]
     public int Delete(MdmDemand mdmDemand)
     {
         _logger.LogInformation("Delete : {}", mdmDemand);
         try
         {
             var result = _mdmDemandDao.Delete(mdmDemand);
+            _logger.LogInformation("result : {}", result);
+
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+    }
+
+    /// <summary>
+    /// Demand PROP 를 조회 합니다.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("/api/MdmDemand/{demandID}/PROP")]
+    public IEnumerable<MdmDemandProp> GetAllProp(String demandID)
+    {
+        try
+        {
+            var result = _mdmDemandDao.GetAllProp(demandID);
+            _logger.LogInformation("result : {}", result);
+            Serilog.Log.Logger.Information(result.ToString());
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            Serilog.Log.Logger.Error(e.Message);
+            return new List<MdmDemandProp>();
+        }
+    }
+    /// <summary>
+    /// DEMAND PROP 를 추가 합니다.
+    /// </summary>
+    /// <param name="MdmDemandProp"></param>
+    /// <returns></returns>
+    [HttpPost("/api/MdmDemand/{demandID}/PROP")]
+    public int InsertProp(MdmDemandProp mdmDemandProp)
+    {
+        try
+        {
+            _logger.LogInformation("Insert : {}", mdmDemandProp);
+            _mdmDemandDao.InsertProp(mdmDemandProp);
+            return 1;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+    }
+    /// <summary>
+    /// DEMAND PROP 를 수정 합니다.
+    /// </summary>
+    /// <param name="MdmDemandProp"></param>
+    /// <returns></returns>
+    [HttpPut("/api/MdmDemandProp/{demandID}/PROP/{propID}")]
+    public int UpdateProp(MdmDemandProp mdmDemandProp)
+    {
+        _logger.LogInformation("Update : {}", mdmDemandProp);
+        try
+        {
+            var result = _mdmDemandDao.UpdateProp(mdmDemandProp);
+            _logger.LogInformation("result : {}", result);
+
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+    }
+    /// <summary>
+    /// DEMAND PROP 를 삭제 합니다.
+    /// </summary>
+    /// <param name="MdmDemandProp"></param>
+    /// <returns></returns>
+    [HttpDelete("/api/MdmDemandProp/{demandID}/PROP/{propID}")]
+    public int DeleteProp(MdmDemandProp mdmDemandProp)
+    {
+        _logger.LogInformation("Delete : {}", mdmDemandProp);
+        try
+        {
+            var result = _mdmDemandDao.DeleteProp(mdmDemandProp);
             _logger.LogInformation("result : {}", result);
 
             return result;

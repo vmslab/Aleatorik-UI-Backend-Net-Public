@@ -14,7 +14,7 @@
 	</resultMaps>
 
 	<statements>
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmItemMaster.Select" resultMap="rtnMdmItemMaster">
 			SELECT [ITEM_ID]
 				 , [ITEM_TYPE]

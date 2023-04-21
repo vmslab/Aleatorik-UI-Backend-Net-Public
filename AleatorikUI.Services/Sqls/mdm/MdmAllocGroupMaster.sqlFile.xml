@@ -4,65 +4,84 @@
 
 	<resultMaps>
 		<resultMap id="rtnMdmAllocGroupMaster"  class="MdmAllocGroupMaster" >
-			<result property="allocGroupID" column="ALLOCATION_GROUP_ID"/>
-			<result property="sequence"     column="SEQUENCE"/>
-			<result property="allocType"    column="ALLOCATION_TYPE"/>
-			<result property="createTime"   column="CREATE_TIME"/>
-			<result property="createUser"	column="CREATE_USER"/>
-			<result property="updateTime"	column="UPDATE_TIME"/>
-			<result property="updateUser"	column="UPDATE_USER"/>
+			<result property="projectID"           column="PROJECT_ID"/>
+			<result property="allocationGroupID"   column="ALLOCATION_GROUP_ID"/>
+			<result property="allocationGroupSeq"  column="ALLOCATION_GROUP_SEQ"/>
+			<result property="allocationType"      column="ALLOCATION_TYPE"/>
+			<result property="stageID"             column="STAGE_ID"/>
+			<result property="description"         column="DESCRIPTION"/>
+			<result property="createDatetime"      column="CREATE_DATETIME"/>
+			<result property="createUser"          column="CREATE_USER"/>
+			<result property="updateDatetime"      column="UPDATE_DATETIME"/>
+			<result property="updateUser"          column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
 	<statements>
-		<!--SELECT All-->
-		<select id="MdmAllocGroupMaster.Select" resultMap="rtnMdmAllocGroupMaster">
-			SELECT ALLOCATION_GROUP_ID
-				 , [SEQUENCE]
-				 , ALLOCATION_TYPE
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_ALLOCATION_GROUP_MASTER
+		<!--SELECT-->
+		<select id="MdmAllocGroupMaster.Select" parameterClass="string" resultMap="rtnMdmAllocGroupMaster">
+			SELECT [PROJECT_ID]
+				 , [ALLOCATION_GROUP_ID]
+				 , [ALLOCATION_GROUP_SEQ]
+				 , [ALLOCATION_TYPE]
+				 , [STAGE_ID]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_ALLOCATION_GROUP_MASTER]
+			 WHERE [PROJECT_ID] = #projectID#
 		</select>
 
 		<!--INSERT-->
 		<insert id="MdmAllocGroupMaster.Insert" parameterClass="MdmAllocGroupMaster">
-			INSERT INTO CFG_ALLOCATION_GROUP_MASTER
-				( ALLOCATION_GROUP_ID
-				, [SEQUENCE]
-				, ALLOCATION_TYPE
-				, CREATE_TIME
-				, CREATE_USER
-				, UPDATE_TIME
-				, UPDATE_USER
-				) VALUES
-				( #allocGroupID#
-				, #sequence#
-				, #allocType#
-				, getdate()
-				, #createUser#
-				, #updateTime#
-				, getdate()
-				)
+			INSERT INTO [CFG_ALLOCATION_GROUP_MASTER]
+				 ( [PROJECT_ID]
+				 , [ALLOCATION_GROUP_ID]
+				 , [ALLOCATION_GROUP_SEQ]
+				 , [ALLOCATION_TYPE]
+				 , [STAGE_ID]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #allocationGroupID#
+				 , #allocationGroupSeq#
+				 , #allocationType#
+				 , #stageID#
+				 , #description#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
 		</insert>
 
 		<!--UPDATE-->
 		<update id="MdmAllocGroupMaster.Update" parameterClass="MdmAllocGroupMaster">
-			UPDATE CFG_ALLOCATION_GROUP_MASTER
-			   SET [SEQUENCE]          = #sequence#
-			     , ALLOCATION_TYPE     = #allocType#
-			     , UPDATE_TIME         = getdate()
-			     , UPDATE_USER         = #updateUser#
-			 WHERE ALLOCATION_GROUP_ID = #allocGroupID#
+			UPDATE [CFG_ALLOCATION_GROUP_MASTER]
+			   SET [PROJECT_ID]           = #projectID#
+			     , [ALLOCATION_GROUP_ID]  = #allocationGroupID#
+			     , [ALLOCATION_GROUP_SEQ] = #allocationGroupSeq#
+			     , [ALLOCATION_TYPE]      = #allocationType#
+			     , [STAGE_ID]             = #stageID#
+			     , [DESCRIPTION]          = #description#
+			     , [UPDATE_DATETIME]      = getdate()
+			     , [UPDATE_USER]          = #updateUser#
+			 WHERE [PROJECT_ID]           = #projectID#
+			   AND [ALLOCATION_GROUP_ID]  = #allocationGroupID#
 		</update>
 
 		<!--DELETE-->
 		<delete id="MdmAllocGroupMaster.Delete" parameterClass="MdmAllocGroupMaster">
-			DELETE
-			  FROM CFG_ALLOCATION_GROUP_MASTER
-			 WHERE ALLOCATION_GROUP_ID = #allocGroupID#
+			DELETE 
+			  FROM [CFG_ALLOCATION_GROUP_MASTER]
+			 WHERE [PROJECT_ID]           = #projectID#
+			   AND [ALLOCATION_GROUP_ID]  = #allocationGroupID#
 		</delete>
 
 	</statements>

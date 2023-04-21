@@ -2,7 +2,7 @@ using AleatorikUI.Services.DAO.aor;
 using AleatorikUI.Services.DTO.aor;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AleatorikUI.Services.Controllers.exp;
+namespace AleatorikUI.Services.Controllers.aor;
 
 [ApiController]
 [Route("[controller]")]

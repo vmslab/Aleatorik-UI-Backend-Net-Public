@@ -16,7 +16,7 @@
 
 	<statements>
 
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="Todo.SelectTodos" resultMap="todo-result">
 			SELECT
 				ID,

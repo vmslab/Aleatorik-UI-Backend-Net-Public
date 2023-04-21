@@ -18,13 +18,17 @@ public class MdmBomMasterController : ControllerBase
         _logger = logger;
         _mdmBomMasterDao = mdmBomMasterDao;
     }
-
-    [HttpGet("/api/MdmBomMaster")]
-    public IEnumerable<MdmBomMaster> GetAll()
+    /// <summary>
+    /// BOM MASTER 정보를 조회 합니다.
+    /// </summary>
+    /// <param name="projectID"></param>
+    /// <returns></returns>
+    [HttpGet("/api/MdmBomMaster/{projectID}")]
+    public IEnumerable<MdmBomMaster> GetAll(String projectID)
     {
         try
         {
-            var result = _mdmBomMasterDao.GetAll();
+            var result = _mdmBomMasterDao.GetAll(projectID);
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -36,8 +40,12 @@ public class MdmBomMasterController : ControllerBase
             return new List<MdmBomMaster>();
         }
     }
-
-    [HttpPost("/api/MdmBomMaster")]
+    /// <summary>
+    /// BOM MASTER 정보를 저장 합니다.
+    /// </summary>
+    /// <param name="mdmBomMaster"></param>
+    /// <returns></returns>
+    [HttpPost("/api/MdmBomMaster/{projectID}")]
     public int Insert(MdmBomMaster mdmBomMaster)
     {
         try
@@ -52,8 +60,12 @@ public class MdmBomMasterController : ControllerBase
             return 0;
         }
     }
-
-    [HttpPut("/api/MdmBomMaster/{bomID}")]
+    /// <summary>
+    /// BOM MASTER 정보를 수정 합니다.
+    /// </summary>
+    /// <param name="mdmBomMaster"></param>
+    /// <returns></returns>
+    [HttpPut("/api/MdmBomMaster/{projectID}/{bomID}")]
     public int Update(MdmBomMaster mdmBomMaster)
     {
         _logger.LogInformation("Update : {}", mdmBomMaster);
@@ -70,8 +82,12 @@ public class MdmBomMasterController : ControllerBase
             return 0;
         }
     }
-
-    [HttpDelete("/api/MdmBomMaster/{bomID}")]
+    /// <summary>
+    /// BOM MASTER 정보를 삭제 합니다.
+    /// </summary>
+    /// <param name="mdmBomMaster"></param>
+    /// <returns></returns>
+    [HttpDelete("/api/MdmBomMaster/{projectID}/{bomID}")]
     public int Delete(MdmBomMaster mdmBomMaster)
     {
         _logger.LogInformation("Delete : {}", mdmBomMaster);
@@ -88,15 +104,18 @@ public class MdmBomMasterController : ControllerBase
             return 0;
         }
     }
-    /**
-     * Sub1
-     */
-    [HttpGet("/api/MdmBomMaster/{bomID}/Sub1")]
-    public IEnumerable<MdmBomSub1> GetAllSub1(String bomID)
+
+    /// <summary>
+    /// BOM DETAIL 정보를 조회 합니다.
+    /// </summary>
+    /// <param name="projectID"></param>
+    /// <returns></returns>
+    [HttpGet("/api/MdmBomMaster/{projectID}/{bomID}/Detail")]
+    public IEnumerable<MdmBomDetail> GetAllDetail(String projectID)
     {
         try
         {
-            var result = _mdmBomMasterDao.GetAllSub1(bomID);
+            var result = _mdmBomMasterDao.GetAllDetail(projectID);
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -105,18 +124,21 @@ public class MdmBomMasterController : ControllerBase
         {
             _logger.LogError("error : {}", e.Message);
             Serilog.Log.Logger.Error(e.Message);
-            return new List<MdmBomSub1>();
+            return new List<MdmBomDetail>();
         }
     }
-
-    [HttpPost("/api/MdmBomMaster/{bomID}/Sub1")]
-    public int InsertSub1(MdmBomSub1 mdmBomSub1, String bomID)
+    /// <summary>
+    /// BOM DETAIL 정보를 저장 합니다.
+    /// </summary>
+    /// <param name="mdmBomDetail"></param>
+    /// <returns></returns>
+    [HttpPost("/api/MdmBomMaster/{projectID}/{bomID}/Detail")]
+    public int InsertDetail(MdmBomDetail mdmBomDetail)
     {
         try
         {
-            mdmBomSub1.bomID = bomID;
-            _logger.LogInformation("Insert : {}", mdmBomSub1);
-            _mdmBomMasterDao.InsertSub1(mdmBomSub1);
+            _logger.LogInformation("Insert : {}", mdmBomDetail);
+            _mdmBomMasterDao.InsertDetail(mdmBomDetail);
             return 1;
         }
         catch (Exception e)
@@ -125,14 +147,18 @@ public class MdmBomMasterController : ControllerBase
             return 0;
         }
     }
-
-    [HttpPut("/api/MdmBomMaster/{bomID}/Sub1/{fromItemID}")]
-    public int UpdateSub1(MdmBomSub1 mdmBomSub1)
+    /// <summary>
+    /// BOM DETAIL 정보를 수정 합니다.
+    /// </summary>
+    /// <param name="mdmBomDetail"></param>
+    /// <returns></returns>
+    [HttpPut("/api/MdmBomMaster/{projectID}/{bomID}/Detail/{fromItemID}")]
+    public int UpdateDetail(MdmBomDetail mdmBomDetail)
     {
-        _logger.LogInformation("Update : {}", mdmBomSub1);
+        _logger.LogInformation("Update : {}", mdmBomDetail);
         try
         {
-            var result = _mdmBomMasterDao.UpdateSub1(mdmBomSub1);
+            var result = _mdmBomMasterDao.UpdateDetail(mdmBomDetail);
             _logger.LogInformation("result : {}", result);
 
             return result;
@@ -143,14 +169,18 @@ public class MdmBomMasterController : ControllerBase
             return 0;
         }
     }
-
-    [HttpDelete("/api/MdmBomMaster/{bomID}/Sub1/{fromItemID}")]
-    public int DeleteSub1(MdmBomSub1 mdmBomSub1)
+    /// <summary>
+    /// BOM DETAIL 정보를 삭제 합니다.
+    /// </summary>
+    /// <param name="mdmBomDetail"></param>
+    /// <returns></returns>
+    [HttpDelete("/api/MdmBomMaster/{projectID}/{bomID}/Detail/{fromItemID}")]
+    public int DeleteDetail(MdmBomDetail mdmBomDetail)
     {
-        _logger.LogInformation("Delete : {}", mdmBomSub1);
+        _logger.LogInformation("Delete : {}", mdmBomDetail);
         try
         {
-            var result = _mdmBomMasterDao.DeleteSub1(mdmBomSub1);
+            var result = _mdmBomMasterDao.DeleteDetail(mdmBomDetail);
             _logger.LogInformation("result : {}", result);
 
             return result;
@@ -161,15 +191,17 @@ public class MdmBomMasterController : ControllerBase
             return 0;
         }
     }
-    /**
-     * Sub2
-     */
-    [HttpGet("/api/MdmBomMaster/{bomID}/Sub2")]
-    public IEnumerable<MdmBomSub2> GetAllSub2(String bomID)
+    /// <summary>
+    /// BOM DETAIL ALT 정보를 조회 합니다.
+    /// </summary>
+    /// <param name="projectID"></param>
+    /// <returns></returns>
+    [HttpGet("/api/MdmBomMaster/{projectID}/{bomID}/DetailAlt")]
+    public IEnumerable<MdmBomDetailAlt> GetAllDetailAlt(String projectID)
     {
         try
         {
-            var result = _mdmBomMasterDao.GetAllSub2(bomID);
+            var result = _mdmBomMasterDao.GetAllDetailAlt(projectID);
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -178,18 +210,21 @@ public class MdmBomMasterController : ControllerBase
         {
             _logger.LogError("error : {}", e.Message);
             Serilog.Log.Logger.Error(e.Message);
-            return new List<MdmBomSub2>();
+            return new List<MdmBomDetailAlt>();
         }
     }
-
-    [HttpPost("/api/MdmBomMaster/{bomID}/Sub2")]
-    public int InsertSub2(MdmBomSub2 mdmBomSub2, String bomID)
+    /// <summary>
+    /// BOM DETAIL ALT 정보를 저장 합니다.
+    /// </summary>
+    /// <param name="mdmBomDetailAlt"></param>
+    /// <returns></returns>
+    [HttpPost("/api/MdmBomMaster/{projectID}/{bomID}/DetailAlt")]
+    public int InsertDetailAlt(MdmBomDetailAlt mdmBomDetailAlt)
     {
         try
         {
-            mdmBomSub2.bomID = bomID;
-            _logger.LogInformation("Insert : {}", mdmBomSub2);
-            _mdmBomMasterDao.InsertSub2(mdmBomSub2);
+            _logger.LogInformation("Insert : {}", mdmBomDetailAlt);
+            _mdmBomMasterDao.InsertDetailAlt(mdmBomDetailAlt);
             return 1;
         }
         catch (Exception e)
@@ -198,14 +233,18 @@ public class MdmBomMasterController : ControllerBase
             return 0;
         }
     }
-
-    [HttpPut("/api/MdmBomMaster/{bomID}/Sub2/{itemID}")]
-    public int UpdateSub2(MdmBomSub2 mdmBomSub2)
+    /// <summary>
+    /// BOM DETAIL ALT 정보를 수정 합니다.
+    /// </summary>
+    /// <param name="mdmBomDetailAlt"></param>
+    /// <returns></returns>
+    [HttpPut("/api/MdmBomMaster/{projectID}/{bomID}/DetailAlt/{itemID}")]
+    public int UpdateDetailAlt(MdmBomDetailAlt mdmBomDetailAlt)
     {
-        _logger.LogInformation("Update : {}", mdmBomSub2);
+        _logger.LogInformation("Update : {}", mdmBomDetailAlt);
         try
         {
-            var result = _mdmBomMasterDao.UpdateSub2(mdmBomSub2);
+            var result = _mdmBomMasterDao.UpdateDetailAlt(mdmBomDetailAlt);
             _logger.LogInformation("result : {}", result);
 
             return result;
@@ -216,14 +255,18 @@ public class MdmBomMasterController : ControllerBase
             return 0;
         }
     }
-
-    [HttpDelete("/api/MdmBomMaster/{bomID}/Sub2/{itemID}")]
-    public int DeleteSub2(MdmBomSub2 mdmBomSub2)
+    /// <summary>
+    /// BOM DETAIL ALT 정보를 삭제 합니다.
+    /// </summary>
+    /// <param name="mdmBomDetailAlt"></param>
+    /// <returns></returns>
+    [HttpDelete("/api/MdmBomMaster/{projectID}/{bomID}/DetailAlt/{itemID}")]
+    public int DeleteDetailAlt(MdmBomDetailAlt mdmBomDetailAlt)
     {
-        _logger.LogInformation("Delete : {}", mdmBomSub2);
+        _logger.LogInformation("Delete : {}", mdmBomDetailAlt);
         try
         {
-            var result = _mdmBomMasterDao.DeleteSub2(mdmBomSub2);
+            var result = _mdmBomMasterDao.DeleteDetailAlt(mdmBomDetailAlt);
             _logger.LogInformation("result : {}", result);
 
             return result;
@@ -234,15 +277,17 @@ public class MdmBomMasterController : ControllerBase
             return 0;
         }
     }
-    /**
-      * Sub3
-      */
-    [HttpGet("/api/MdmBomMaster/{bomID}/Sub3")]
-    public IEnumerable<MdmBomSub3> GetAllSub3(String bomID)
+    /// <summary>
+    /// BOM Prop 정보를 조회 합니다.
+    /// </summary>
+    /// <param name="projectID"></param>
+    /// <returns></returns>
+    [HttpGet("/api/MdmBomMaster/{projectID}/{bomID}/Prop")]
+    public IEnumerable<MdmBomProp> GetAllProp(String projectID)
     {
         try
         {
-            var result = _mdmBomMasterDao.GetAllSub3(bomID);
+            var result = _mdmBomMasterDao.GetAllProp(projectID);
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -251,18 +296,21 @@ public class MdmBomMasterController : ControllerBase
         {
             _logger.LogError("error : {}", e.Message);
             Serilog.Log.Logger.Error(e.Message);
-            return new List<MdmBomSub3>();
+            return new List<MdmBomProp>();
         }
     }
-
-    [HttpPost("/api/MdmBomMaster/{bomID}/Sub3")]
-    public int InsertSub3(MdmBomSub3 mdmBomSub3, String bomID)
+    /// <summary>
+    /// BOM Prop 정보를 저장 합니다.
+    /// </summary>
+    /// <param name="mdmBomProp"></param>
+    /// <returns></returns>
+    [HttpPost("/api/MdmBomMaster/{projectID}/{bomID}/Prop")]
+    public int InsertProp(MdmBomProp mdmBomProp)
     {
         try
         {
-            mdmBomSub3.bomID = bomID;
-            _logger.LogInformation("Insert : {}", mdmBomSub3);
-            _mdmBomMasterDao.InsertSub3(mdmBomSub3);
+            _logger.LogInformation("Insert : {}", mdmBomProp);
+            _mdmBomMasterDao.InsertProp(mdmBomProp);
             return 1;
         }
         catch (Exception e)
@@ -271,14 +319,40 @@ public class MdmBomMasterController : ControllerBase
             return 0;
         }
     }
-
-    [HttpPut("/api/MdmBomMaster/{bomID}/Sub3/{propertyID}")]
-    public int UpdateSub3(MdmBomSub3 mdmBomSub3)
+    /// <summary>
+    /// BOM Prop 정보를 수정 합니다.
+    /// </summary>
+    /// <param name="mdmBomProp"></param>
+    /// <returns></returns>
+    [HttpPut("/api/MdmBomMaster/{projectID}/{bomID}/Prop/{propID}")]
+    public int UpdateProp(MdmBomProp mdmBomProp)
     {
-        _logger.LogInformation("Update : {}", mdmBomSub3);
+        _logger.LogInformation("Update : {}", mdmBomProp);
         try
         {
-            var result = _mdmBomMasterDao.UpdateSub3(mdmBomSub3);
+            var result = _mdmBomMasterDao.UpdateProp(mdmBomProp);
+            _logger.LogInformation("result : {}", result);
+
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+    }
+    /// <summary>
+    /// BOM Prop 정보를 삭제 합니다.
+    /// </summary>
+    /// <param name="mdmBomProp"></param>
+    /// <returns></returns>
+    [HttpDelete("/api/MdmBomMaster/{projectID}/{bomID}/Prop/{propID}")]
+    public int DeleteProp(MdmBomProp mdmBomProp)
+    {
+        _logger.LogInformation("Delete : {}", mdmBomProp);
+        try
+        {
+            var result = _mdmBomMasterDao.DeleteProp(mdmBomProp);
             _logger.LogInformation("result : {}", result);
 
             return result;
@@ -290,33 +364,17 @@ public class MdmBomMasterController : ControllerBase
         }
     }
 
-    [HttpDelete("/api/MdmBomMaster/{bomID}/Sub3/{propertyID}")]
-    public int DeleteSub3(MdmBomSub3 mdmBomSub3)
-    {
-        _logger.LogInformation("Delete : {}", mdmBomSub3);
-        try
-        {
-            var result = _mdmBomMasterDao.DeleteSub3(mdmBomSub3);
-            _logger.LogInformation("result : {}", result);
-
-            return result;
-        }
-        catch (Exception e)
-        {
-            _logger.LogError("error : {}", e.Message);
-            return 0;
-        }
-    }
-
-    /**
-      * Sub4
-      */
-    [HttpGet("/api/MdmBomMaster/{bomID}/Sub4")]
-    public IEnumerable<MdmBomSub4> GetAllSub4(String bomID)
+    /// <summary>
+    /// BOM Routing 정보를 조회 합니다.
+    /// </summary>
+    /// <param name="projectID"></param>
+    /// <returns></returns>
+    [HttpGet("/api/MdmBomMaster/{projectID}/{bomID}/Routing")]
+    public IEnumerable<MdmBomRouting> GetAllRouting(String projectID)
     {
         try
         {
-            var result = _mdmBomMasterDao.GetAllSub4(bomID);
+            var result = _mdmBomMasterDao.GetAllRouting(projectID);
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -325,18 +383,21 @@ public class MdmBomMasterController : ControllerBase
         {
             _logger.LogError("error : {}", e.Message);
             Serilog.Log.Logger.Error(e.Message);
-            return new List<MdmBomSub4>();
+            return new List<MdmBomRouting>();
         }
     }
-
-    [HttpPost("/api/MdmBomMaster/{bomID}/Sub4")]
-    public int InsertSub4(MdmBomSub4 mdmBomSub4, String bomID)
+    /// <summary>
+    /// BOM Routing 정보를 저장 합니다.
+    /// </summary>
+    /// <param name="mdmBomRouting"></param>
+    /// <returns></returns>
+    [HttpPost("/api/MdmBomMaster/{projectID}/{bomID}/Routing")]
+    public int InsertRouting(MdmBomRouting mdmBomRouting)
     {
         try
         {
-            mdmBomSub4.bomID = bomID;
-            _logger.LogInformation("Insert : {}", mdmBomSub4);
-            _mdmBomMasterDao.InsertSub4(mdmBomSub4);
+            _logger.LogInformation("Insert : {}", mdmBomRouting);
+            _mdmBomMasterDao.InsertRouting(mdmBomRouting);
             return 1;
         }
         catch (Exception e)
@@ -345,14 +406,40 @@ public class MdmBomMasterController : ControllerBase
             return 0;
         }
     }
-
-    [HttpPut("/api/MdmBomMaster/{bomID}/Sub4/{routingID}")]
-    public int UpdateSub4(MdmBomSub4 mdmBomSub4)
+    /// <summary>
+    /// BOM Routing 정보를 수정 합니다.
+    /// </summary>
+    /// <param name="mdmBomRouting"></param>
+    /// <returns></returns>
+    [HttpPut("/api/MdmBomMaster/{projectID}/{bomID}/Routing/{routingID}")]
+    public int UpdateRouting(MdmBomRouting mdmBomRouting)
     {
-        _logger.LogInformation("Update : {}", mdmBomSub4);
+        _logger.LogInformation("Update : {}", mdmBomRouting);
         try
         {
-            var result = _mdmBomMasterDao.UpdateSub4(mdmBomSub4);
+            var result = _mdmBomMasterDao.UpdateRouting(mdmBomRouting);
+            _logger.LogInformation("result : {}", result);
+
+            return result;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("error : {}", e.Message);
+            return 0;
+        }
+    }
+    /// <summary>
+    /// BOM Routing 정보를 삭제 합니다.
+    /// </summary>
+    /// <param name="mdmBomRouting"></param>
+    /// <returns></returns>
+    [HttpDelete("/api/MdmBomMaster/{projectID}/{bomID}/Routing/{routingID}")]
+    public int DeleteRouting(MdmBomRouting mdmBomRouting)
+    {
+        _logger.LogInformation("Delete : {}", mdmBomRouting);
+        try
+        {
+            var result = _mdmBomMasterDao.DeleteRouting(mdmBomRouting);
             _logger.LogInformation("result : {}", result);
 
             return result;
@@ -364,33 +451,17 @@ public class MdmBomMasterController : ControllerBase
         }
     }
 
-    [HttpDelete("/api/MdmBomMaster/{bomID}/Sub4/{routingID}")]
-    public int DeleteSub4(MdmBomSub4 mdmBomSub4)
-    {
-        _logger.LogInformation("Delete : {}", mdmBomSub4);
-        try
-        {
-            var result = _mdmBomMasterDao.DeleteSub4(mdmBomSub4);
-            _logger.LogInformation("result : {}", result);
-
-            return result;
-        }
-        catch (Exception e)
-        {
-            _logger.LogError("error : {}", e.Message);
-            return 0;
-        }
-    }
-
-    /**
-      * Sub5
-      */
-    [HttpGet("/api/MdmBomMaster/{bomID}/Sub5")]
-    public IEnumerable<MdmBomSub5> GetAllSub5(String bomID)
+    /// <summary>
+    /// BOM Routing Prop 정보를 조회 합니다.
+    /// </summary>
+    /// <param name="projectID"></param>
+    /// <returns></returns>
+    [HttpGet("/api/MdmBomMaster/{projectID}/{bomID}/Routing/{routingID}/RoutingProp")]
+    public IEnumerable<MdmBomRoutingProp> GetAllRoutingProp(String projectID)
     {
         try
         {
-            var result = _mdmBomMasterDao.GetAllSub5(bomID);
+            var result = _mdmBomMasterDao.GetAllRoutingProp(projectID);
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -399,18 +470,21 @@ public class MdmBomMasterController : ControllerBase
         {
             _logger.LogError("error : {}", e.Message);
             Serilog.Log.Logger.Error(e.Message);
-            return new List<MdmBomSub5>();
+            return new List<MdmBomRoutingProp>();
         }
     }
-
-    [HttpPost("/api/MdmBomMaster/{bomID}/Sub5")]
-    public int InsertSub5(MdmBomSub5 mdmBomSub5, String bomID)
+    /// <summary>
+    /// BOM Routing Prop 정보를 저장 합니다.
+    /// </summary>
+    /// <param name="mdmBomRoutingProp"></param>
+    /// <returns></returns>
+    [HttpPost("/api/MdmBomMaster/{projectID}/{bomID}/Routing/{routingID}/RoutingProp")]
+    public int InsertRoutingProp(MdmBomRoutingProp mdmBomRoutingProp)
     {
         try
         {
-            mdmBomSub5.bomID = bomID;
-            _logger.LogInformation("Insert : {}", mdmBomSub5);
-            _mdmBomMasterDao.InsertSub5(mdmBomSub5);
+            _logger.LogInformation("Insert : {}", mdmBomRoutingProp);
+            _mdmBomMasterDao.InsertRoutingProp(mdmBomRoutingProp);
             return 1;
         }
         catch (Exception e)
@@ -419,14 +493,18 @@ public class MdmBomMasterController : ControllerBase
             return 0;
         }
     }
-
-    [HttpPut("/api/MdmBomMaster/{bomID}/Sub5/{routingID}")]
-    public int UpdateSub5(MdmBomSub5 mdmBomSub5)
+    /// <summary>
+    /// BOM Routing Prop 정보를 수정 합니다.
+    /// </summary>
+    /// <param name="mdmBomRoutingProp"></param>
+    /// <returns></returns>
+    [HttpPut("/api/MdmBomMaster/{projectID}/{bomID}/Routing/{routingID}/RoutingProp/{propID}")]
+    public int UpdateRoutingProp(MdmBomRoutingProp mdmBomRoutingProp)
     {
-        _logger.LogInformation("Update : {}", mdmBomSub5);
+        _logger.LogInformation("Update : {}", mdmBomRoutingProp);
         try
         {
-            var result = _mdmBomMasterDao.UpdateSub5(mdmBomSub5);
+            var result = _mdmBomMasterDao.UpdateRoutingProp(mdmBomRoutingProp);
             _logger.LogInformation("result : {}", result);
 
             return result;
@@ -437,14 +515,18 @@ public class MdmBomMasterController : ControllerBase
             return 0;
         }
     }
-
-    [HttpDelete("/api/MdmBomMaster/{bomID}/Sub5/{routingID}")]
-    public int DeleteSub5(MdmBomSub5 mdmBomSub5)
+    /// <summary>
+    /// BOM Routing Prop 정보를 삭제 합니다.
+    /// </summary>
+    /// <param name="mdmBomRoutingProp"></param>
+    /// <returns></returns>
+    [HttpDelete("/api/MdmBomMaster/{projectID}/{bomID}/Routing/{routingID}/RoutingProp/{propID}")]
+    public int DeleteRoutingProp(MdmBomRoutingProp mdmBomRoutingProp)
     {
-        _logger.LogInformation("Delete : {}", mdmBomSub5);
+        _logger.LogInformation("Delete : {}", mdmBomRoutingProp);
         try
         {
-            var result = _mdmBomMasterDao.DeleteSub5(mdmBomSub5);
+            var result = _mdmBomMasterDao.DeleteRoutingProp(mdmBomRoutingProp);
             _logger.LogInformation("result : {}", result);
 
             return result;

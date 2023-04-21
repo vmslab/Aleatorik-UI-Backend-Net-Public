@@ -4,112 +4,127 @@
 
 	<resultMaps>
 		<resultMap id="rtnMdmBomMaster"  class="MdmBomMaster" >
-			<result property="bomID"         column="BOM_ID"/>
-			<result property="bomType"       column="BOM_TYPE"/>
-			<result property="priority"      column="PRIORITY"/>
-			<result property="effStartTime"  column="EFF_START_TIME"/>
-			<result property="effEndTime"    column="EFF_END_TIME"/>
-			<result property="createTime"    column="CREATE_TIME"/>
-			<result property="createUser"    column="CREATE_USER"/>
-			<result property="updateTime"    column="UPDATE_TIME"/>
-			<result property="updateUser"    column="UPDATE_USER"/>
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="bomID"          column="BOM_ID"/>
+			<result property="bomType"        column="BOM_TYPE"/>
+			<result property="bomPriority"    column="BOM_PRIORITY"/>
+			<result property="effStartDate"   column="EFF_START_DATE"/>
+			<result property="effEndDate"     column="EFF_END_DATE"/>
+			<result property="description"    column="DESCRIPTION"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
 		</resultMap>
-		<resultMap id="rtnMdmBomSub1"  class="MdmBomSub1" >
-			<result property="bomID"         column="BOM_ID"/>
-			<result property="fromItemID"    column="FROM_ITEM_ID"/>
-			<result property="fromSiteID"    column="FROM_SITE_ID"/>
-			<result property="fromBufferID"  column="FROM_BUFFER_ID"/>
-			<result property="fromQty"       column="FROM_QTY"/>
-			<result property="toItemID"      column="TO_ITEM_ID"/>
-			<result property="toSiteID"      column="TO_SITE_ID"/>
-			<result property="toBufferID"    column="TO_BUFFER_ID"/>
-			<result property="toQty"         column="TO_QTY"/>
-			<result property="calendarID"    column="CALENDAR_ID"/>
-			<result property="createTime"    column="CREATE_TIME"/>
-			<result property="createUser"    column="CREATE_USER"/>
-			<result property="updateTime"    column="UPDATE_TIME"/>
-			<result property="updateUser"    column="UPDATE_USER"/>
+		<resultMap id="rtnMdmBomDetail"  class="MdmBomDetail" >
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="bomID"          column="BOM_ID"/>
+			<result property="fromItemID"     column="FROM_ITEM_ID"/>
+			<result property="fromSiteID"     column="FROM_SITE_ID"/>
+			<result property="fromBufferID"   column="FROM_BUFFER_ID"/>
+			<result property="fromQty"        column="FROM_QTY"/>
+			<result property="toItemID"       column="TO_ITEM_ID"/>
+			<result property="toSiteID"       column="TO_SITE_ID"/>
+			<result property="toBufferID"     column="TO_BUFFER_ID"/>
+			<result property="toQty"          column="TO_QTY"/>
+			<result property="calendarID"     column="CALENDAR_ID"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
 		</resultMap>
-		<resultMap id="rtnMdmBomSub2"  class="MdmBomSub2" >
-			<result property="bomID"       column="BOM_ID"/>
-			<result property="itemID"      column="ITEM_ID"/>
-			<result property="siteID"      column="SITE_ID"/>
-			<result property="bufferID"    column="BUFFER_ID"/>
-			<result property="altitemID"   column="ALTITEM_ID"/>
-			<result property="altsiteID"   column="ALTSITE_ID"/>
-			<result property="altbufferID" column="ALTBUFFER_ID"/>
-			<result property="priority"    column="PRIORITY"/>
-			<result property="createTime"  column="CREATE_TIME"/>
-			<result property="createUser"  column="CREATE_USER"/>
-			<result property="updateTime"  column="UPDATE_TIME"/>
-			<result property="updateUser"  column="UPDATE_USER"/>
+		<resultMap id="rtnMdmBomDetailAlt"  class="MdmBomDetailAlt" >
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="bomID"          column="BOM_ID"/>
+			<result property="itemID"         column="ITEM_ID"/>
+			<result property="siteID"         column="SITE_ID"/>
+			<result property="bufferID"       column="BUFFER_ID"/>
+			<result property="altItemID"      column="ALT_ITEM_ID"/>
+			<result property="altSiteID"      column="ALT_SITE_ID"/>
+			<result property="altBufferID"    column="ALT_BUFFER_ID"/>
+			<result property="altPriority"    column="ALT_PRIORITY"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
 		</resultMap>
-		<resultMap id="rtnMdmBomSub3"  class="MdmBomSub3" >
-			<result property="bomID"      column="BOM_ID"/>
-			<result property="propertyID" column="PROPERTY_ID"/>
-			<result property="value"      column="VALUE"/>
-			<result property="calendarID" column="CALENDAR_ID"/>
-			<result property="createTime" column="CREATE_TIME"/>
-			<result property="createUser" column="CREATE_USER"/>
-			<result property="updateTime" column="UPDATE_TIME"/>
-			<result property="updateUser" column="UPDATE_USER"/>
+		<resultMap id="rtnMdmBomProp"  class="MdmBomProp" >
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="bomID"          column="BOM_ID"/>
+			<result property="propID"         column="PROP_ID"/>
+			<result property="propValue"      column="PROP_VALUE"/>
+			<result property="calendarID"     column="CALENDAR_ID"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
 		</resultMap>
-		<resultMap id="rtnMdmBomSub4"  class="MdmBomSub4" >
-			<result property="bomID"      column="BOM_ID"/>
-			<result property="routingID"  column="ROUTING_ID"/>
-			<result property="priority"   column="PRIORITY"/>
-			<result property="createTime" column="CREATE_TIME"/>
-			<result property="createUser" column="CREATE_USER"/>
-			<result property="updateTime" column="UPDATE_TIME"/>
-			<result property="updateUser" column="UPDATE_USER"/>
+		<resultMap id="rtnMdmBomRouting"  class="MdmBomRouting" >
+			<result property="projectID"       column="PROJECT_ID"/>
+			<result property="bomID"           column="BOM_ID"/>
+			<result property="routingID"       column="ROUTING_ID"/>
+			<result property="routingPriority" column="ROUTING_PRIORITY"/>
+			<result property="createDatetime"  column="CREATE_DATETIME"/>
+			<result property="createUser"      column="CREATE_USER"/>
+			<result property="updateDatetime"  column="UPDATE_DATETIME"/>
+			<result property="updateUser"      column="UPDATE_USER"/>
 		</resultMap>
-		<resultMap id="rtnMdmBomSub5"  class="MdmBomSub5" >
-			<result property="bomID"      column="BOM_ID"/>
-			<result property="routingID"  column="ROUTING_ID"/>
-			<result property="propertyID" column="PROPERTY_ID"/>
-			<result property="value"      column="VALUE"/>
-			<result property="createTime" column="CREATE_TIME"/>
-			<result property="createUser" column="CREATE_USER"/>
-			<result property="updateTime" column="UPDATE_TIME"/>
-			<result property="updateUser" column="UPDATE_USER"/>
+		<resultMap id="rtnMdmBomRoutingProp"  class="MdmBomRoutingProp" >
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="bomID"          column="BOM_ID"/>
+			<result property="routingID"      column="ROUTING_ID"/>
+			<result property="propID"         column="PROP_ID"/>
+			<result property="propValue"      column="PROP_VALUE"/>
+			<result property="calendarID"     column="CALENDAR_ID"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
 
 	<statements>
 		<!-- MASTER -->
-		<!--SELECT All-->
-		<select id="MdmBomMaster.Select" resultMap="rtnMdmBomMaster">
-			SELECT [BOM_ID]
+		<!--SELECT-->
+		<select id="MdmBomMaster.Select" parameterClass="string" resultMap="rtnMdmBomMaster">
+			SELECT [PROJECT_ID]
+				 , [BOM_ID]
 				 , [BOM_TYPE]
-				 , [PRIORITY]
-				 , [EFF_START_TIME]
-				 , [EFF_END_TIME]
-				 , [CREATE_TIME]
+				 , [BOM_PRIORITY]
+				 , [EFF_START_DATE]
+				 , [EFF_END_DATE]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_BOM_MASTER]
+			 WHERE [PROJECT_ID] = #projectID#
 		</select>
 
 		<!--INSERT-->
 		<insert id="MdmBomMaster.Insert" parameterClass="MdmBomMaster">
 			INSERT INTO [CFG_BOM_MASTER]
-				 ( [BOM_ID]
+				 ( [PROJECT_ID]
+				 , [BOM_ID]
 				 , [BOM_TYPE]
-				 , [PRIORITY]
-				 , [EFF_START_TIME]
-				 , [EFF_END_TIME]
-				 , [CREATE_TIME]
+				 , [BOM_PRIORITY]
+				 , [EFF_START_DATE]
+				 , [EFF_END_DATE]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #bomID#
+				 ( #projectID#
+				 , #bomID#
 				 , #bomType#
-				 , #priority#
-				 , #effStartTime#
-				 , #effEndTime#
+				 , #bomPriority#
+				 , #effStartDate#
+				 , #effEndDate#
+				 , #description#
 				 , getdate()
 				 , #createUser#
 				 , getdate()
@@ -120,27 +135,32 @@
 		<!--UPDATE-->
 		<update id="MdmBomMaster.Update" parameterClass="MdmBomMaster">
 			UPDATE [CFG_BOM_MASTER]
-			   SET [BOM_ID]         = #bomID#
-				 , [BOM_TYPE]       = #bomType#
-				 , [PRIORITY]       = #priority#
-				 , [EFF_START_TIME] = #effStartTime#
-				 , [EFF_END_TIME]   = #effEndTime#
-				 , [UPDATE_TIME]    = getdate()
-				 , [UPDATE_USER]    = #updateUser#
-			 WHERE [BOM_ID]         = #bomID#
+			   SET [PROJECT_ID]      = #projectID#
+				 , [BOM_ID]          = #bomID#
+				 , [BOM_TYPE]        = #bomType#
+				 , [BOM_PRIORITY]    = #bomPriority#
+				 , [EFF_START_DATE]  = #effStartDate#
+				 , [EFF_END_DATE]    = #effEndDate#
+				 , [DESCRIPTION]     = #description#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [BOM_ID]          = #bomID#
 		</update>
 
 		<!--DELETE-->
 		<delete id="MdmBomMaster.Delete" parameterClass="MdmBomMaster">
-			DELETE 
+			DELETE
 			  FROM [CFG_BOM_MASTER]
-			 WHERE [BOM_ID]         = #bomID#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [BOM_ID]          = #bomID#
 		</delete>
 
-		<!-- Sub1 -->
-		<!--SELECT All-->
-		<select id="MdmBomSub1.Select" parameterClass="string"  resultMap="rtnMdmBomSub1">
-			SELECT [BOM_ID]
+		<!-- Detail -->
+		<!--SELECT-->
+		<select id="MdmBomDetail.Select" parameterClass="String"  resultMap="rtnMdmBomDetail">
+			SELECT [PROJECT_ID]
+				 , [BOM_ID]
 				 , [FROM_ITEM_ID]
 				 , [FROM_SITE_ID]
 				 , [FROM_BUFFER_ID]
@@ -150,18 +170,20 @@
 				 , [TO_BUFFER_ID]
 				 , [TO_QTY]
 				 , [CALENDAR_ID]
-				 , [CREATE_TIME]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_BOM_DETAIL]
-			 WHERE [BOM_ID] = #bomID#
+			 WHERE [PROJECT_ID] = #projectID#
+			   AND [BOM_ID]     = #bomID#
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmBomSub1.Insert" parameterClass="MdmBomSub1">
+		<insert id="MdmBomDetail.Insert" parameterClass="MdmBomDetail">
 			INSERT INTO [CFG_BOM_DETAIL]
-				 ( [BOM_ID]
+				 ( [PROJECT_ID]
+				 , [BOM_ID]
 				 , [FROM_ITEM_ID]
 				 , [FROM_SITE_ID]
 				 , [FROM_BUFFER_ID]
@@ -171,12 +193,13 @@
 				 , [TO_BUFFER_ID]
 				 , [TO_QTY]
 				 , [CALENDAR_ID]
-				 , [CREATE_TIME]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #bomID#
+				 ( #projectID#
+				 , #bomID#
 				 , #fromItemID#
 				 , #fromSiteID#
 				 , #fromBufferID#
@@ -194,85 +217,92 @@
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmBomSub1.Update" parameterClass="MdmBomSub1">
+		<update id="MdmBomDetail.Update" parameterClass="MdmBomDetail">
 			UPDATE [CFG_BOM_DETAIL]
-			   SET [BOM_ID]         = #bomID#
-				 , [FROM_ITEM_ID]   = #fromItemID#
-				 , [FROM_SITE_ID]   = #fromSiteID#
-				 , [FROM_BUFFER_ID] = #fromBufferID#
-				 , [FROM_QTY]       = #fromQty#
-				 , [TO_ITEM_ID]     = #toItemID#
-				 , [TO_SITE_ID]     = #toSiteID#
-				 , [TO_BUFFER_ID]   = #toBufferID#
-				 , [TO_QTY]         = #toQty#
-				 , [CALENDAR_ID]    = #calendarID#
-				 , [UPDATE_TIME]    = getdate()
-				 , [UPDATE_USER]    = #updateUser#
-			 WHERE [BOM_ID]         = #bomID#
-			   AND [FROM_ITEM_ID]   = #fromItemID#
-			   AND [FROM_SITE_ID]   = #fromSiteID#
-			   AND [FROM_BUFFER_ID] = #fromBufferID#
-			   AND [TO_ITEM_ID]     = #toItemID#
-			   AND [TO_SITE_ID]     = #toSiteID#
-			   AND [TO_BUFFER_ID]   = #toBufferID#
+			   SET [PROJECT_ID]      = #projectID#
+				 , [BOM_ID]          = #bomID#
+				 , [FROM_ITEM_ID]    = #fromItemID#
+				 , [FROM_SITE_ID]    = #fromSiteID#
+				 , [FROM_BUFFER_ID]  = #fromBufferID#
+				 , [FROM_QTY]        = #fromQty#
+				 , [TO_ITEM_ID]      = #toItemID#
+				 , [TO_SITE_ID]      = #toSiteID#
+				 , [TO_BUFFER_ID]    = #toBufferID#
+				 , [TO_QTY]          = #toQty#
+				 , [CALENDAR_ID]     = #calendarID#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [BOM_ID]          = #bomID#
+			   AND [FROM_ITEM_ID]    = #fromItemID#
+			   AND [FROM_SITE_ID]    = #fromSiteID#
+			   AND [FROM_BUFFER_ID]  = #fromBufferID#
+			   AND [TO_ITEM_ID]      = #toItemID#
+			   AND [TO_SITE_ID]      = #toSiteID#
+			   AND [TO_BUFFER_ID]    = #toBufferID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmBomSub1.Delete" parameterClass="MdmBomSub1">
+		<delete id="MdmBomDetail.Delete" parameterClass="MdmBomDetail">
 			DELETE 
 			  FROM [CFG_BOM_DETAIL]
-			 WHERE [BOM_ID]         = #bomID#
-			   AND [FROM_ITEM_ID]   = #fromItemID#
-			   AND [FROM_SITE_ID]   = #fromSiteID#
-			   AND [FROM_BUFFER_ID] = #fromBufferID#
-			   AND [TO_ITEM_ID]     = #toItemID#
-			   AND [TO_SITE_ID]     = #toSiteID#
-			   AND [TO_BUFFER_ID]   = #toBufferID#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [BOM_ID]          = #bomID#
+			   AND [FROM_ITEM_ID]    = #fromItemID#
+			   AND [FROM_SITE_ID]    = #fromSiteID#
+			   AND [FROM_BUFFER_ID]  = #fromBufferID#
+			   AND [TO_ITEM_ID]      = #toItemID#
+			   AND [TO_SITE_ID]      = #toSiteID#
+			   AND [TO_BUFFER_ID]    = #toBufferID#
 		</delete>
 	
-		<!-- Sub2 -->
-		<!--SELECT All-->
-		<select id="MdmBomSub2.Select" parameterClass="string"  resultMap="rtnMdmBomSub2">
-			SELECT [BOM_ID]
+		<!-- DetailAlt -->
+		<!--SELECT-->
+		<select id="MdmBomDetailAlt.Select" parameterClass="string"  resultMap="rtnMdmBomDetailAlt">
+			SELECT [PROJECT_ID]
+				 , [BOM_ID]
 				 , [ITEM_ID]
 				 , [SITE_ID]
 				 , [BUFFER_ID]
-				 , [ALTITEM_ID]
-				 , [ALTSITE_ID]
-				 , [ALTBUFFER_ID]
-				 , [PRIORITY]
-				 , [CREATE_TIME]
+				 , [ALT_ITEM_ID]
+				 , [ALT_SITE_ID]
+				 , [ALT_BUFFER_ID]
+				 , [ALT_PRIORITY]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_BOM_DETAIL_ALT]
-			 WHERE [BOM_ID] = #bomID#
+			 WHERE [PROJECT_ID] = #projectID#
+			   AND [BOM_ID]     = #bomID#
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmBomSub2.Insert" parameterClass="MdmBomSub2">
+		<insert id="MdmBomDetailAlt.Insert" parameterClass="MdmBomDetailAlt">
 			INSERT INTO [CFG_BOM_DETAIL_ALT]
-				 ( [BOM_ID]
+				 ( [PROJECT_ID]
+				 , [BOM_ID]
 				 , [ITEM_ID]
 				 , [SITE_ID]
 				 , [BUFFER_ID]
-				 , [ALTITEM_ID]
-				 , [ALTSITE_ID]
-				 , [ALTBUFFER_ID]
-				 , [PRIORITY]
-				 , [CREATE_TIME]
+				 , [ALT_ITEM_ID]
+				 , [ALT_SITE_ID]
+				 , [ALT_BUFFER_ID]
+				 , [ALT_PRIORITY]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #bomID#
+				 ( #projectID#
+				 , #bomID#
 				 , #itemID#
 				 , #siteID#
 				 , #bufferID#
-				 , #altitemID#
-				 , #altsiteID#
-				 , #altbufferID#
-				 , #priority#
+				 , #altItemID#
+				 , #altSiteID#
+				 , #altBufferID#
+				 , #altPriority#
 				 , getdate()
 				 , #createUser#
 				 , getdate()
@@ -281,70 +311,77 @@
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmBomSub2.Update" parameterClass="MdmBomSub2">
+		<update id="MdmBomDetailAlt.Update" parameterClass="MdmBomDetailAlt">
 			UPDATE [CFG_BOM_DETAIL_ALT]
-			   SET [BOM_ID]       = #bomID#
-				 , [ITEM_ID]      = #itemID#
-				 , [SITE_ID]      = #siteID#
-				 , [BUFFER_ID]    = #bufferID#
-				 , [ALTITEM_ID]   = #altitemID#
-				 , [ALTSITE_ID]   = #altsiteID#
-				 , [ALTBUFFER_ID] = #altbufferID#
-				 , [PRIORITY]     = #priority#
-				 , [UPDATE_TIME]  = getdate()
-				 , [UPDATE_USER]  = #updateUser#
-			 WHERE [BOM_ID]       = #bomID#
-			   AND [ITEM_ID]      = #itemID#
-			   AND [SITE_ID]      = #siteID#
-			   AND [BUFFER_ID]    = #bufferID#
-			   AND [ALTITEM_ID]   = #altitemID#
-			   AND [ALTSITE_ID]   = #altsiteID#
-			   AND [ALTBUFFER_ID] = #altbufferID#
+			   SET [PROJECT_ID]      = #projectID#
+				 , [BOM_ID]          = #bomID#
+				 , [ITEM_ID]         = #itemID#
+				 , [SITE_ID]         = #siteID#
+				 , [BUFFER_ID]       = #bufferID#
+				 , [ALT_ITEM_ID]     = #altItemID#
+				 , [ALT_SITE_ID]     = #altSiteID#
+				 , [ALT_BUFFER_ID]   = #altBufferID#
+				 , [ALT_PRIORITY]    = #altPriority#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [BOM_ID]          = #bomID#
+			   AND [ITEM_ID]         = #itemID#
+			   AND [SITE_ID]         = #siteID#
+			   AND [BUFFER_ID]       = #bufferID#
+			   AND [ALT_ITEM_ID]     = #altItemID#
+			   AND [ALT_SITE_ID]     = #altSiteID#
+			   AND [ALT_BUFFER_ID]   = #altBufferID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmBomSub2.Delete" parameterClass="MdmBomSub2">
+		<delete id="MdmBomDetailAlt.Delete" parameterClass="MdmBomDetailAlt">
 			DELETE 
 			  FROM [CFG_BOM_DETAIL_ALT]
-			 WHERE [BOM_ID]       = #bomID#
-			   AND [ITEM_ID]      = #itemID#
-			   AND [SITE_ID]      = #siteID#
-			   AND [BUFFER_ID]    = #bufferID#
-			   AND [ALTITEM_ID]   = #altitemID#
-			   AND [ALTSITE_ID]   = #altsiteID#
-			   AND [ALTBUFFER_ID] = #altbufferID#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [BOM_ID]          = #bomID#
+			   AND [ITEM_ID]         = #itemID#
+			   AND [SITE_ID]         = #siteID#
+			   AND [BUFFER_ID]       = #bufferID#
+			   AND [ALT_ITEM_ID]     = #altItemID#
+			   AND [ALT_SITE_ID]     = #altSiteID#
+			   AND [ALT_BUFFER_ID]   = #altBufferID#
 		</delete>
 
-		<!-- Sub3 -->
-		<!--SELECT All-->
-		<select id="MdmBomSub3.Select" parameterClass="string"  resultMap="rtnMdmBomSub3">
-			SELECT [BOM_ID]
-				 , [PROPERTY_ID]
-				 , [VALUE]
+		<!-- Prop -->
+		<!--SELECT-->
+		<select id="MdmBomProp.Select" parameterClass="string"  resultMap="rtnMdmBomProp">
+			SELECT [PROJECT_ID]
+				 , [BOM_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
 				 , [CALENDAR_ID]
-				 , [CREATE_TIME]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
-			  FROM [CFG_BOM_PROPERTY_VALUE]
-			 WHERE [BOM_ID] = #bomID#			  
+			  FROM [CFG_BOM_PROP_VALUE]
+			 WHERE [PROJECT_ID] = #projectID#
+			   AND [BOM_ID]     = #bomID#
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmBomSub3.Insert" parameterClass="MdmBomSub3">
-			INSERT INTO [CFG_BOM_PROPERTY_VALUE]
-				 ( [BOM_ID]
-				 , [PROPERTY_ID]
-				 , [VALUE]
+		<insert id="MdmBomProp.Insert" parameterClass="MdmBomProp">
+			INSERT INTO [CFG_BOM_PROP_VALUE]
+				 ( [PROJECT_ID]
+				 , [BOM_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
 				 , [CALENDAR_ID]
-				 , [CREATE_TIME]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #bomID#
-				 , #propertyID#
-				 , #value#
+				 ( #projectID#
+				 , #bomID#
+				 , #propID#
+				 , #propValue#
 				 , #calendarID#
 				 , getdate()
 				 , #createUser#
@@ -354,112 +391,61 @@
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmBomSub3.Update" parameterClass="MdmBomSub3">
-			UPDATE [CFG_BOM_PROPERTY_VALUE]
-			   SET [BOM_ID]      = #bomID#
-				 , [PROPERTY_ID] = #propertyID#
-				 , [VALUE]       = #value#
-				 , [CALENDAR_ID] = #calendarID#
-				 , [UPDATE_TIME] = getdate()
-				 , [UPDATE_USER] = #updateUser#
-			 WHERE [BOM_ID]      = #bomID#
-			   AND [PROPERTY_ID] = #propertyID#
+		<update id="MdmBomProp.Update" parameterClass="MdmBomProp">
+			UPDATE [CFG_BOM_PROP_VALUE]
+			   SET [PROJECT_ID]      = #projectID#
+				 , [BOM_ID]          = #bomID#
+				 , [PROP_ID]         = #propID#
+				 , [PROP_VALUE]      = #propValue#
+				 , [CALENDAR_ID]     = #calendarID#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [BOM_ID]          = #bomID#
+			   AND [PROP_ID]         = #propID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmBomSub3.Delete" parameterClass="MdmBomSub3">
+		<delete id="MdmBomProp.Delete" parameterClass="MdmBomProp">
 			DELETE 
-			  FROM [CFG_BOM_PROPERTY_VALUE]
-			 WHERE [BOM_ID]      = #bomID#
-			   AND [PROPERTY_ID] = #propertyID#
+			  FROM [CFG_BOM_PROP_VALUE]
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [BOM_ID]          = #bomID#
+			   AND [PROP_ID]         = #propID#
 		</delete>
 
-		<!-- Sub4 -->
-		<!--SELECT All-->
-		<select id="MdmBomSub4.Select" parameterClass="string"  resultMap="rtnMdmBomSub4">
-			SELECT [BOM_ID]
+		<!-- Routing -->
+		<!--SELECT-->
+		<select id="MdmBomRouting.Select" parameterClass="string"  resultMap="rtnMdmBomRouting">
+			SELECT [PROJECT_ID]
+				 , [BOM_ID]
 				 , [ROUTING_ID]
-				 , [PRIORITY]
-				 , [CREATE_TIME]
+				 , [ROUTING_PRIORITY]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
-		  	  FROM [CFG_BOM_ROUTING]
-			 WHERE [BOM_ID] = #bomID#
-		</select>
-
-		<!--INSERT-->
-		<insert id="MdmBomSub4.Insert" parameterClass="MdmBomSub4">
-			INSERT INTO [CFG_BOM_ROUTING]
-				 ( [BOM_ID]
-				 , [ROUTING_ID]
-				 , [PRIORITY]
-				 , [CREATE_TIME]
-				 , [CREATE_USER]
-				 , [UPDATE_TIME]
-				 , [UPDATE_USER]
-				 ) VALUES
-				 ( #bomID#
-				 , #routingID#
-				 , #priority#
-				 , getdate()
-				 , #createUser#
-				 , getdate()
-				 , #updateUser#
-				 )
-		</insert>
-
-		<!--UPDATE-->
-		<update id="MdmBomSub4.Update" parameterClass="MdmBomSub4">
-			UPDATE [CFG_BOM_ROUTING]
-			   SET [BOM_ID]      = #bomID#
-			     , [ROUTING_ID]  = #routingID#
-			     , [PRIORITY]    = #priority#
-			     , [UPDATE_TIME] = getdate()
-			     , [UPDATE_USER] = #updateUser#
-			 WHERE [BOM_ID]      = #bomID#
-			   AND [ROUTING_ID]  = #routingID#
-		</update>
-
-		<!--DELETE-->
-		<delete id="MdmBomSub4.Delete" parameterClass="MdmBomSub4">
-			DELETE
 			  FROM [CFG_BOM_ROUTING]
-			 WHERE [BOM_ID]      = #bomID#
-			   AND [ROUTING_ID]  = #routingID#
-		</delete>
-
-		<!-- Sub5 -->
-		<!--SELECT All-->
-		<select id="MdmBomSub5.Select" parameterClass="string"  resultMap="rtnMdmBomSub5">
-			SELECT [BOM_ID]
-				 , [ROUTING_ID]
-				 , [PROPERTY_ID]
-				 , [VALUE]
-				 , [CREATE_TIME]
-				 , [CREATE_USER]
-				 , [UPDATE_TIME]
-				 , [UPDATE_USER]
-			  FROM [CFG_BOM_ROUTING_PROPERTY_VALUE]
-			 WHERE [BOM_ID] = #bomID#
+			 WHERE [PROJECT_ID] = #projectID#
+			   AND [BOM_ID] = #bomID#
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmBomSub5.Insert" parameterClass="MdmBomSub5">
-			INSERT INTO [CFG_BOM_ROUTING_PROPERTY_VALUE]
-				 ( [BOM_ID]
+		<insert id="MdmBomRouting.Insert" parameterClass="MdmBomRouting">
+			INSERT INTO [CFG_BOM_ROUTING]
+				 ( [PROJECT_ID]
+				 , [BOM_ID]
 				 , [ROUTING_ID]
-				 , [PROPERTY_ID]
-				 , [VALUE]
-				 , [CREATE_TIME]
+				 , [ROUTING_PRIORITY]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #bomID#
+				 ( #projectID#
+				 , #bomID#
 				 , #routingID#
-				 , #propertyID#
-				 , #value#
+				 , #routingPriority#
 				 , getdate()
 				 , #createUser#
 				 , getdate()
@@ -468,26 +454,98 @@
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmBomSub5.Update" parameterClass="MdmBomSub5">
-			UPDATE [CFG_BOM_ROUTING_PROPERTY_VALUE]
-			   SET [BOM_ID]      = #bomID#
-			     , [ROUTING_ID]  = #routingID#
-			     , [PROPERTY_ID] = #propertyID#
-			     , [VALUE]       = #value#
-			     , [UPDATE_TIME] = getdate()
-			     , [UPDATE_USER] = #updateUser#
-			 WHERE [BOM_ID]      = #bomID#
-			   AND [ROUTING_ID]  = #routingID#
-			   AND [PROPERTY_ID] = #propertyID#
+		<update id="MdmBomRouting.Update" parameterClass="MdmBomRouting">
+			UPDATE [CFG_BOM_ROUTING]
+			   SET [PROJECT_ID]       = #projectID#
+				 , [BOM_ID]           = #bomID#
+				 , [ROUTING_ID]       = #routingID#
+				 , [ROUTING_PRIORITY] = #routingPriority#
+				 , [UPDATE_DATETIME]  = getdate()
+				 , [UPDATE_USER]      = #updateUser#
+			 WHERE [PROJECT_ID]       = #projectID#
+			   AND [BOM_ID]           = #bomID#
+			   AND [ROUTING_ID]       = #routingID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmBomSub5.Delete" parameterClass="MdmBomSub5">
+		<delete id="MdmBomRouting.Delete" parameterClass="MdmBomRouting">
+			DELETE 
+			  FROM [CFG_BOM_ROUTING]
+			 WHERE [PROJECT_ID]       = #projectID#
+			   AND [BOM_ID]           = #bomID#
+			   AND [ROUTING_ID]       = #routingID#
+		</delete>
+
+		<!-- RoutingProp -->
+		<!--SELECT-->
+		<select id="MdmBomRoutingProp.Select" parameterClass="string"  resultMap="rtnMdmBomRoutingProp">
+			SELECT [PROJECT_ID]
+				 , [BOM_ID]
+				 , [ROUTING_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_BOM_ROUTING_PROP_VALUE]
+			 WHERE [PROJECT_ID] = #projectID#
+			   AND [BOM_ID]		= #bomID#
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmBomRoutingProp.Insert" parameterClass="MdmBomRoutingProp">
+			INSERT INTO [CFG_BOM_ROUTING_PROP_VALUE]
+				 ( [PROJECT_ID]
+				 , [BOM_ID]
+				 , [ROUTING_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #bomID#
+				 , #routingID#
+				 , #propID#
+				 , #propValue#
+				 , #calendarID#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmBomRoutingProp.Update" parameterClass="MdmBomRoutingProp">
+			UPDATE [CFG_BOM_ROUTING_PROP_VALUE]
+			   SET [PROJECT_ID]      = #projectID#
+				 , [BOM_ID]          = #bomID#
+				 , [ROUTING_ID]      = #routingID#
+				 , [PROP_ID]         = #propID#
+				 , [PROP_VALUE]      = #propValue#
+				 , [CALENDAR_ID]     = #calendarID#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [BOM_ID]          = #bomID#
+			   AND [ROUTING_ID]      = #routingID#
+			   AND [PROP_ID]         = #propID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmBomRoutingProp.Delete" parameterClass="MdmBomRoutingProp">
 			DELETE
-			  FROM [CFG_BOM_ROUTING_PROPERTY_VALUE]
-			 WHERE [BOM_ID]      = #bomID#
-			   AND [ROUTING_ID]  = #routingID#
-			   AND [PROPERTY_ID] = #propertyID#
+			  FROM [CFG_BOM_ROUTING_PROP_VALUE]
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [BOM_ID]          = #bomID#
+			   AND [ROUTING_ID]      = #routingID#
+			   AND [PROP_ID]         = #propID#
 		</delete>
 	</statements>
 </sqlMap>

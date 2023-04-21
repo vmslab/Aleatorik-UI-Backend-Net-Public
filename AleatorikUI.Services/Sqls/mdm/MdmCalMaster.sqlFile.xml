@@ -41,7 +41,7 @@
 
 	<statements>
 		<!-- MASTER -->
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmCalMaster.Select" resultMap="rtnMdmCalMaster">
 			SELECT [CALENDAR_ID]
 				 , [CALENDAR_TYPE]
@@ -89,7 +89,7 @@
 		</delete>
 
 		<!-- Sub1 -->
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmCalSub1.Select" parameterClass="string"  resultMap="rtnMdmCalSub1">
 			SELECT [PATTERN_SEQ]
 			     , [CALENDAR_ID]
@@ -160,7 +160,7 @@
 		</delete>
 
 		<!-- Sub2 -->
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmCalSub2.Select" parameterClass="string"  resultMap="rtnMdmCalSub2">
 			SELECT [ATTRIBUTE]
 			     , [PATTERN_SEQ]

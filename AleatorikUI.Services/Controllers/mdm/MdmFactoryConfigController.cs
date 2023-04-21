@@ -7,24 +7,24 @@ namespace AleatorikUI.Services.Controllers.mdm;
 [ApiVersion("1.0")]
 [ApiController]
 [Route("[controller]")]
-public class MdmCustInfoController : ControllerBase
+public class MdmFactoryConfigController : ControllerBase
 {
 
-    private readonly ILogger<MdmCustInfoController> _logger;
-    private readonly IMdmCustInfoDao _mdmCustInfoDao;
+    private readonly ILogger<MdmFactoryConfigController> _logger;
+    private readonly IMdmFactoryConfigDao _mdmFactoryConfigDao;
 
-    public MdmCustInfoController(ILogger<MdmCustInfoController> logger, IMdmCustInfoDao mdmCustInfoDao)
+    public MdmFactoryConfigController(ILogger<MdmFactoryConfigController> logger, IMdmFactoryConfigDao mdmFactoryConfigDao)
     {
         _logger = logger;
-        _mdmCustInfoDao = mdmCustInfoDao;
+        _mdmFactoryConfigDao = mdmFactoryConfigDao;
     }
 
-    [HttpGet("/api/MdmCustInfo")]
-    public IEnumerable<MdmCustInfo> GetAll()
+    [HttpGet("/api/MdmFactoryConfig")]
+    public IEnumerable<MdmFactoryConfig> GetAll()
     {
         try
         {
-            var result = _mdmCustInfoDao.GetAll();
+            var result = _mdmFactoryConfigDao.GetAll();
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -33,17 +33,17 @@ public class MdmCustInfoController : ControllerBase
         {
             _logger.LogError("error : {}", e.Message);
             Serilog.Log.Logger.Error(e.Message);
-            return new List<MdmCustInfo>();
+            return new List<MdmFactoryConfig>();
         }
     }
 
-    [HttpPost("/api/MdmCustInfo")]
-    public int Insert(MdmCustInfo mdmCustInfo)
+    [HttpPost("/api/MdmFactoryConfig")]
+    public int Insert(MdmFactoryConfig mdmFactoryConfig)
     {
         try
         {
-            _logger.LogInformation("Insert : {}", mdmCustInfo);
-            _mdmCustInfoDao.Insert(mdmCustInfo);
+            _logger.LogInformation("Insert : {}", mdmFactoryConfig);
+            _mdmFactoryConfigDao.Insert(mdmFactoryConfig);
             return 1;
         }
         catch (Exception e)
@@ -53,13 +53,13 @@ public class MdmCustInfoController : ControllerBase
         }
     }
 
-    [HttpPut("/api/MdmCustInfo/{customerID}")]
-    public int Update(MdmCustInfo mdmCustInfo)
+    [HttpPut("/api/MdmFactoryConfig/{factoryStartTime}")]
+    public int Update(MdmFactoryConfig mdmFactoryConfig)
     {
-        _logger.LogInformation("Update : {}", mdmCustInfo);
+        _logger.LogInformation("Update : {}", mdmFactoryConfig);
         try
         {
-            var result = _mdmCustInfoDao.Update(mdmCustInfo);
+            var result = _mdmFactoryConfigDao.Update(mdmFactoryConfig);
             _logger.LogInformation("result : {}", result);
 
             return result;
@@ -71,13 +71,13 @@ public class MdmCustInfoController : ControllerBase
         }
     }
 
-    [HttpDelete("/api/MdmCustInfo/{customerID}")]
-    public int Delete(MdmCustInfo mdmCustInfo)
+    [HttpDelete("/api/MdmFactoryConfig/{factoryStartHour}")]
+    public int Delete(MdmFactoryConfig mdmFactoryConfig)
     {
-        _logger.LogInformation("Delete : {}", mdmCustInfo);
+        _logger.LogInformation("Delete : {}", mdmFactoryConfig);
         try
         {
-            var result = _mdmCustInfoDao.Delete(mdmCustInfo);
+            var result = _mdmFactoryConfigDao.Delete(mdmFactoryConfig);
             _logger.LogInformation("result : {}", result);
 
             return result;

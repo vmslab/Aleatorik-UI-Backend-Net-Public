@@ -43,7 +43,7 @@
 
 	<statements>
 		<!-- MASTER -->
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmRoutingMaster.Select" resultMap="rtnMdmRoutingMaster">
 			SELECT [ROUTING_ID]
 				 , [DESCRIPTION]
@@ -99,7 +99,7 @@
 		</delete>
 
 		<!-- Sub1 -->
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmRoutingSub1.Select" parameterClass="string"  resultMap="rtnMdmRoutingSub1">
 			SELECT [ROUTING_ID]
 				 , [OPERATION_ID]
@@ -174,7 +174,7 @@
 		</delete>
 
 		<!-- Sub2 -->
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmRoutingSub2.Select" parameterClass="string"  resultMap="rtnMdmRoutingSub2">
 			SELECT [ROUTING_ID]
 				 , [OPERATION_ID]

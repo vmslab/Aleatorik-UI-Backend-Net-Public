@@ -22,7 +22,7 @@
 
 	<statements>
 
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="User.SelectUsers" resultMap="user-group-result">
       SELECT
       T_USER.EMAIL,

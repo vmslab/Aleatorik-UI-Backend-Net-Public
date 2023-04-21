@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnMdmCustMaster"  class="MdmCustMaster" >
+			<result property="custID"         column="CUST_ID"/>
+			<result property="custName"       column="CUST_NAME"/>
+			<result property="custPriority"   column="CUST_PRIORITY"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="description"    column="DESCRIPTION"/>
+		</resultMap>
+		<resultMap id="rtnMdmCustProp"  class="MdmCustProp" >
+			<result property="custID"         column="CUST_ID"/>
+			<result property="propID"         column="PROP_ID"/>
+			<result property="propValue"      column="PROP_VALUE"/>
+			<result property="calendarID"     column="CALENDAR_ID"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
+			<result property="projectID"      column="PROJECT_ID"/>
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+		<!--SELECT-->
+		<select id="MdmCustMaster.Select" resultMap="rtnMdmCustMaster">
+			SELECT [CUST_ID]
+				 , [CUST_NAME]
+				 , [CUST_PRIORITY]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 , [PROJECT_ID]
+				 , [DESCRIPTION]
+			  FROM [CFG_CUST_MASTER]
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmCustMaster.Insert" parameterClass="MdmCustMaster">
+			INSERT INTO [CFG_CUST_MASTER]
+				 ( [CUST_ID]
+				 , [CUST_NAME]
+				 , [CUST_PRIORITY]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 , [PROJECT_ID]
+				 , [DESCRIPTION]
+				 ) VALUES
+				 ( #custID#
+				 , #custName#
+				 , #custPriority#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 , #projectID#
+				 , #description#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmCustMaster.Update" parameterClass="MdmCustMaster">
+			UPDATE [CFG_CUST_MASTER]
+			   SET [CUST_ID]         = #custID#
+			     , [CUST_NAME]       = #custName#
+			     , [CUST_PRIORITY]   = #custPriority#
+			     , [UPDATE_DATETIME] = getdate()
+			     , [UPDATE_USER]     = #updateUser#
+			     , [PROJECT_ID]      = #projectID#
+			     , [DESCRIPTION]     = #description#
+			 WHERE [CUST_ID]         = #custID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmCustMaster.Delete" parameterClass="string">
+			DELETE
+			  FROM [CFG_CUST_MASTER]
+			 WHERE [CUST_ID]         = #custID#
+		</delete>
+		
+		<!--CUST PROP -->
+		<!--SELECT-->
+		<select id="MdmCustProp.Select" parameterClass="string" resultMap="rtnMdmCustProp">
+			SELECT [CUST_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 , [PROJECT_ID]
+			  FROM [CFG_CUST_PROP_VALUE]
+			 WHERE [CUST_ID] = #custID#
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmCustProp.Insert" parameterClass="MdmCustProp">
+			INSERT INTO [CFG_CUST_PROP_VALUE]
+				 ( [CUST_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 , [PROJECT_ID]
+				 ) VALUES
+				 ( #custID#
+				 , #propID#
+				 , #propValue#
+				 , #calendarID#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 , #projectID#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmCustProp.Update" parameterClass="MdmCustProp">
+			UPDATE [CFG_CUST_PROP_VALUE]
+			   SET [CUST_ID]         = #custID#
+			     , [PROP_ID]         = #propID#
+			     , [PROP_VALUE]      = #propValue#
+			     , [CALENDAR_ID]     = #calendarID#
+			     , [UPDATE_DATETIME] = getdate()
+			     , [UPDATE_USER]     = #updateUser#
+			     , [PROJECT_ID]      = #projectID#
+			 WHERE [CUST_ID]         = #custID#
+			   AND [PROP_ID]         = #propID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmCustProp.Delete" parameterClass="string">
+			DELETE
+			  FROM [CFG_CUST_PROP_VALUE]
+			 WHERE [CUST_ID]         = #custID#
+			   AND [PROP_ID]         = #propID#
+		</delete>
+	</statements>
+</sqlMap>

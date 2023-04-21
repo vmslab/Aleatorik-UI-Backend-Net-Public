@@ -19,7 +19,7 @@ public class MdmPropMasterController : ControllerBase
         _mdmPropMasterDao = mdmPropMasterDao;
     }
 
-    [HttpGet("/api/MdmPropMastery")]
+    [HttpGet("/api/MdmPropMaster")]
     public IEnumerable<MdmPropMaster> GetAll()
     {
         try
@@ -37,7 +37,7 @@ public class MdmPropMasterController : ControllerBase
         }
     }
 
-    [HttpPost("/api/MdmPropMastery")]
+    [HttpPost("/api/MdmPropMaster")]
     public int Insert(MdmPropMaster mdmPropMaster)
     {
         try
@@ -53,7 +53,7 @@ public class MdmPropMasterController : ControllerBase
         }
     }
 
-    [HttpPut("/api/MdmPropMastery/{propertyID}")]
+    [HttpPut("/api/MdmPropMaster/{propID}")]
     public int Update(MdmPropMaster mdmPropMaster)
     {
         _logger.LogInformation("Update : {}", mdmPropMaster);
@@ -71,7 +71,7 @@ public class MdmPropMasterController : ControllerBase
         }
     }
 
-    [HttpDelete("/api/MdmPropMastery/{propertyID}")]
+    [HttpDelete("/api/MdmPropMaster/{propID}")]
     public int Delete(MdmPropMaster mdmPropMaster)
     {
         _logger.LogInformation("Delete : {}", mdmPropMaster);

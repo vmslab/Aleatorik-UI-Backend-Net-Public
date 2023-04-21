@@ -22,7 +22,7 @@
 	</resultMaps>
 
 	<statements>
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmResMaster.Select" resultMap="rtnMdmResMaster">
 			SELECT [RESOURCE_ID]
 				 , [SITE_ID]

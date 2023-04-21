@@ -1,13 +1,11 @@
 namespace AleatorikUI.Services.DTO.mdm;
 
-public class MdmAllocGroupMaster
+public class MdmBomRouting
 {
     public string? projectID { get; set; }
-    public string? allocationGroupID { get; set; }
-    public int allocationGroupSeq { get; set; }
-    public string? allocationType { get; set; }
-    public DateTime? stageID { get; set; }
-    public string? description { get; set; }
+    public string? bomID { get; set; }
+    public string? routingID { get; set; }
+    public int routingPriority { get; set; }
     public DateTime? createDatetime { get; set; }
     public string? createUser { get; set; }
     public DateTime? updateDatetime { get; set; }

@@ -32,4 +32,27 @@ public class MdmDemandDao : IMdmDemandDao
     {
         return Mapper.Delete("MdmDemand.Delete", mdmDemand);
     }
+
+    /**
+     *  DEMAND PROP
+     */
+    public IEnumerable<MdmDemandProp> GetAllProp(string demandID)
+    {
+        return Mapper.QueryForList<MdmDemandProp>("MdmDemandProp.Select", demandID);
+    }
+
+    public void InsertProp(MdmDemandProp mdmDemandProp)
+    {
+        Mapper.Insert("MdmDemandProp.InsertProp", mdmDemandProp);
+    }
+
+    public int UpdateProp(MdmDemandProp mdmDemandProp)
+    {
+        return Mapper.Update("MdmDemandProp.Update", mdmDemandProp);
+    }
+
+    public int DeleteProp(MdmDemandProp mdmDemandProp)
+    {
+        return Mapper.Delete("MdmDemandProp.Delete", mdmDemandProp);
+    }
 }

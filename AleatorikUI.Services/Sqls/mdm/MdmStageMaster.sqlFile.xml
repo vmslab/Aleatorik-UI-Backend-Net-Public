@@ -4,36 +4,36 @@
 
 	<resultMaps>
 		<resultMap id="rtnMdmStageMaster"  class="MdmStageMaster" >
-			<result property="stageID"    	column="STAGE_ID"/>
-			<result property="description"  column="DESCRIPTION"/>
-			<result property="createTime"   column="CREATE_TIME"/>
-			<result property="createUser"	column="CREATE_USER"/>
-			<result property="updateTime"	column="UPDATE_TIME"/>
-			<result property="updateUser"	column="UPDATE_USER"/>
+			<result property="stageID"        column="STAGE_ID"/>
+			<result property="description"    column="DESCRIPTION"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
 	<statements>
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmStageMaster.Select" resultMap="rtnMdmStageMaster">
-			SELECT STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
-			  FROM CFG_STAGE
+			SELECT [STAGE_ID]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+		  	  FROM [CFG_STAGE_MASTER]
 		</select>
 
 		<!--INSERT-->
 		<insert id="MdmStageMaster.Insert" parameterClass="MdmStageMaster">
-			INSERT INTO CFG_STAGE
-				 ( STAGE_ID
-				 , DESCRIPTION
-				 , CREATE_TIME
-				 , CREATE_USER
-				 , UPDATE_TIME
-				 , UPDATE_USER
+			INSERT INTO [CFG_STAGE_MASTER]
+				 ( [STAGE_ID]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
 				 ) VALUES
 				 ( #stageID#
 				 , #description#
@@ -46,18 +46,19 @@
 
 		<!--UPDATE-->
 		<update id="MdmStageMaster.Update" parameterClass="MdmStageMaster">
-			UPDATE CFG_STAGE
-			   SET DESCRIPTION = #description#
-				 , UPDATE_TIME = getdate()
-				 , UPDATE_USER = #updateUser#
-			 WHERE STAGE_ID    = #stageID#
+			UPDATE [CFG_STAGE_MASTER]
+			   SET [STAGE_ID]        = #stageID#
+				 , [DESCRIPTION]     = #description#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [STAGE_ID]        = #stageID#
 		</update>
 
 		<!--DELETE-->
 		<delete id="MdmStageMaster.Delete" parameterClass="MdmStageMaster">
 			DELETE
-			  FROM CFG_STAGE
-			 WHERE STAGE_ID = #stageID#
+			  FROM [CFG_STAGE_MASTER]
+			 WHERE [STAGE_ID]        = #stageID#
 		</delete>
 
 	</statements>

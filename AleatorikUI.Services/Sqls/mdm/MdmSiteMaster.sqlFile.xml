@@ -13,7 +13,7 @@
 	</resultMaps>
 
 	<statements>
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmSiteMaster.Select" resultMap="rtnMdmSiteMaster">
 			SELECT SITE_ID
 				 , CREATE_TIME

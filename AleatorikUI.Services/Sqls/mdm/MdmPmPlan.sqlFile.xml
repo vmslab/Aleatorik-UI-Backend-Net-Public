@@ -21,7 +21,7 @@
 	</resultMaps>
 
 	<statements>
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmPmPlan.Select" resultMap="rtnMdmPmPlan">
 			SELECT [PM_ID]
 				 , [PRIORITY]

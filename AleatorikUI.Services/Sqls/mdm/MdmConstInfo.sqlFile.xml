@@ -16,7 +16,7 @@
 	</resultMaps>
 
 	<statements>
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmConstInfo.Select" resultMap="rtnMdmConstInfo">
 			SELECT [CONSTRAINT_ID]
 				 , [PROPERTY_ID]

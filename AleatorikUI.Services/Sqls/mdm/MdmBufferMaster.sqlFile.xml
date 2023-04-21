@@ -12,10 +12,21 @@
 			<result property="updateTime" column="UPDATE_TIME"/>
 			<result property="updateUser" column="UPDATE_USER"/>
 		</resultMap>
+		<resultMap id="rtnMdmBufferProp"  class="MdmBufferProp" >
+			<result property="bufferID"       column="BUFFER_ID"/>
+			<result property="propID"         column="PROP_ID"/>
+			<result property="propValue"      column="PROP_VALUE"/>
+			<result property="calendarID"     column="CALENDAR_ID"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
+			<result property="projectID"      column="PROJECT_ID"/>
+		</resultMap>
 	</resultMaps>
 
 	<statements>
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmBufferMaster.Select" resultMap="rtnMdmBufferMaster">
 			SELECT [STAGE_ID]
 				 , [BUFFER_ID]
@@ -70,5 +81,67 @@
 			   AND [BUFFER_ID]   = #bufferID#
 		</delete>
 
+		<!--BUFFER PROP -->
+		<!--SELECT-->
+		<select id="MdmBufferProp.Select" parameterClass="string" resultMap="rtnMdmBufferProp">
+			SELECT [BUFFER_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 , [PROJECT_ID]
+			  FROM [CFG_BUFFER_PROP_VALUE]
+			 WHERE [BUFFER_ID] = #bufferID#
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmBufferProp.Insert" parameterClass="MdmBufferProp">
+			INSERT INTO [CFG_BUFFER_PROP_VALUE]
+				 ( [BUFFER_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 , [PROJECT_ID]
+				 ) VALUES
+				 ( #bufferID#
+				 , #propID#
+				 , #propValue#
+				 , #calendarID#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 , #projectID#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmBufferProp.Update" parameterClass="MdmBufferProp">
+			UPDATE [CFG_BUFFER_PROP_VALUE]
+			   SET [BUFFER_ID]       = #bufferID#
+				 , [PROP_ID]         = #propID#
+				 , [PROP_VALUE]      = #propValue#
+				 , [CALENDAR_ID]     = #calendarID#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+				 , [PROJECT_ID]      = #projectID#
+			 WHERE [BUFFER_ID]       = #bufferID#
+			   AND [PROP_ID]         = #propID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmBufferProp.Delete" parameterClass="string">
+			DELETE 
+			  FROM [CFG_BUFFER_PROP_VALUE]
+			 WHERE [BUFFER_ID]       = #bufferID#
+			   AND [PROP_ID]         = #propID#
+		</delete>
 	</statements>
 </sqlMap>

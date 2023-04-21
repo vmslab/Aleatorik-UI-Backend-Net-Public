@@ -15,7 +15,7 @@
 	</resultMaps>
 
 	<statements>
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmIsbMaster.Select" resultMap="rtnMdmIsbMaster">
 			SELECT [ITEM_ID]
 				 , [SITE_ID]

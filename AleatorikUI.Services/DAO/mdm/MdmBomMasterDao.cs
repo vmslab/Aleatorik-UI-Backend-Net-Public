@@ -12,9 +12,9 @@ public class MdmBomMasterDao : IMdmBomMasterDao
 
     private ISqlMapper Mapper { get; }
 
-    public IEnumerable<MdmBomMaster> GetAll()
+    public IEnumerable<MdmBomMaster> GetAll(String projectID)
     {
-        return Mapper.QueryForList<MdmBomMaster>("MdmBomMaster.Select", null);
+        return Mapper.QueryForList<MdmBomMaster>("MdmBomMaster.Select", projectID);
     }
 
     public void Insert(MdmBomMaster mdmBomMaster)
@@ -33,118 +33,118 @@ public class MdmBomMasterDao : IMdmBomMasterDao
     }
 
     /**
-     * Sub1
+     * Detail
      */
-    public IEnumerable<MdmBomSub1> GetAllSub1(String bomID)
+    public IEnumerable<MdmBomDetail> GetAllDetail(String projectID)
     {
-        return Mapper.QueryForList<MdmBomSub1>("MdmBomSub1.Select", bomID);
+        return Mapper.QueryForList<MdmBomDetail>("MdmBomDetail.Select", projectID);
     }
 
-    public void InsertSub1(MdmBomSub1 mdmBomSub1)
+    public void InsertDetail(MdmBomDetail mdmBomDetail)
     {
-        Mapper.Insert("MdmBomSub1.Insert", mdmBomSub1);
+        Mapper.Insert("MdmBomDetail.Insert", mdmBomDetail);
     }
 
-    public int UpdateSub1(MdmBomSub1 mdmBomSub1)
+    public int UpdateDetail(MdmBomDetail mdmBomDetail)
     {
-        return Mapper.Update("MdmBomSub1.Update", mdmBomSub1);
+        return Mapper.Update("MdmBomDetail.Update", mdmBomDetail);
     }
 
-    public int DeleteSub1(MdmBomSub1 mdmBomSub1)
+    public int DeleteDetail(MdmBomDetail mdmBomDetail)
     {
-        return Mapper.Delete("MdmBomSub1.Delete", mdmBomSub1);
+        return Mapper.Delete("MdmBomDetail.Delete", mdmBomDetail);
     }
 
     /**
-     * Sub2
+     * DetailAlt
      */
-    public IEnumerable<MdmBomSub2> GetAllSub2(String bomID)
+    public IEnumerable<MdmBomDetailAlt> GetAllDetailAlt(String projectID)
     {
-        return Mapper.QueryForList<MdmBomSub2>("MdmBomSub2.Select", bomID);
+        return Mapper.QueryForList<MdmBomDetailAlt>("MdmBomDetailAlt.Select", projectID);
     }
 
-    public void InsertSub2(MdmBomSub2 mdmBomSub2)
+    public void InsertDetailAlt(MdmBomDetailAlt mdmBomDetailAlt)
     {
-        Mapper.Insert("MdmBomSub2.Insert", mdmBomSub2);
+        Mapper.Insert("MdmBomDetailAlt.Insert", mdmBomDetailAlt);
     }
 
-    public int UpdateSub2(MdmBomSub2 mdmBomSub2)
+    public int UpdateDetailAlt(MdmBomDetailAlt mdmBomDetailAlt)
     {
-        return Mapper.Update("MdmBomSub2.Update", mdmBomSub2);
+        return Mapper.Update("MdmBomDetailAlt.Update", mdmBomDetailAlt);
     }
 
-    public int DeleteSub2(MdmBomSub2 mdmBomSub2)
+    public int DeleteDetailAlt(MdmBomDetailAlt mdmBomDetailAlt)
     {
-        return Mapper.Delete("MdmBomSub2.Delete", mdmBomSub2);
+        return Mapper.Delete("MdmBomDetailAlt.Delete", mdmBomDetailAlt);
     }
 
     /**
-     * Sub3
+     * Prop
      */
-    public IEnumerable<MdmBomSub3> GetAllSub3(String bomID)
+    public IEnumerable<MdmBomProp> GetAllProp(String projectID)
     {
-        return Mapper.QueryForList<MdmBomSub3>("MdmBomSub3.Select", bomID);
+        return Mapper.QueryForList<MdmBomProp>("MdmBomProp.Select", projectID);
     }
 
-    public void InsertSub3(MdmBomSub3 mdmBomSub3)
+    public void InsertProp(MdmBomProp mdmBomProp)
     {
-        Mapper.Insert("MdmBomSub3.Insert", mdmBomSub3);
+        Mapper.Insert("MdmBomProp.Insert", mdmBomProp);
     }
 
-    public int UpdateSub3(MdmBomSub3 mdmBomSub3)
+    public int UpdateProp(MdmBomProp mdmBomProp)
     {
-        return Mapper.Update("MdmBomSub3.Update", mdmBomSub3);
+        return Mapper.Update("MdmBomProp.Update", mdmBomProp);
     }
 
-    public int DeleteSub3(MdmBomSub3 mdmBomSub3)
+    public int DeleteProp(MdmBomProp mdmBomProp)
     {
-        return Mapper.Delete("MdmBomSub3.Delete", mdmBomSub3);
+        return Mapper.Delete("MdmBomProp.Delete", mdmBomProp);
     }
 
     /**
-    * Sub4
+    * Routing
     */
-    public IEnumerable<MdmBomSub4> GetAllSub4(String bomID)
+    public IEnumerable<MdmBomRouting> GetAllRouting(String projectID)
     {
-        return Mapper.QueryForList<MdmBomSub4>("MdmBomSub4.Select", bomID);
+        return Mapper.QueryForList<MdmBomRouting>("MdmBomRouting.Select", projectID);
     }
 
-    public void InsertSub4(MdmBomSub4 mdmBomSub4)
+    public void InsertRouting(MdmBomRouting mdmBomRouting)
     {
-        Mapper.Insert("MdmBomSub4.Insert", mdmBomSub4);
+        Mapper.Insert("MdmBomRouting.Insert", mdmBomRouting);
     }
 
-    public int UpdateSub4(MdmBomSub4 mdmBomSub4)
+    public int UpdateRouting(MdmBomRouting mdmBomRouting)
     {
-        return Mapper.Update("MdmBomSub4.Update", mdmBomSub4);
+        return Mapper.Update("MdmBomRouting.Update", mdmBomRouting);
     }
 
-    public int DeleteSub4(MdmBomSub4 mdmBomSub4)
+    public int DeleteRouting(MdmBomRouting mdmBomRouting)
     {
-        return Mapper.Delete("MdmBomSub4.Delete", mdmBomSub4);
+        return Mapper.Delete("MdmBomRouting.Delete", mdmBomRouting);
     }
 
 
     /**
-    * Sub5
+    * RoutingProp
     */
-    public IEnumerable<MdmBomSub5> GetAllSub5(String bomID)
+    public IEnumerable<MdmBomRoutingProp> GetAllRoutingProp(String projectID)
     {
-        return Mapper.QueryForList<MdmBomSub5>("MdmBomSub5.Select", bomID);
+        return Mapper.QueryForList<MdmBomRoutingProp>("MdmBomRoutingProp.Select", projectID);
     }
 
-    public void InsertSub5(MdmBomSub5 mdmBomSub5)
+    public void InsertRoutingProp(MdmBomRoutingProp mdmBomRoutingProp)
     {
-        Mapper.Insert("MdmBomSub5.Insert", mdmBomSub5);
+        Mapper.Insert("MdmBomRoutingProp.Insert", mdmBomRoutingProp);
     }
 
-    public int UpdateSub5(MdmBomSub5 mdmBomSub5)
+    public int UpdateRoutingProp(MdmBomRoutingProp mdmBomRoutingProp)
     {
-        return Mapper.Update("MdmBomSub5.Update", mdmBomSub5);
+        return Mapper.Update("MdmBomRoutingProp.Update", mdmBomRoutingProp);
     }
 
-    public int DeleteSub5(MdmBomSub5 mdmBomSub5)
+    public int DeleteRoutingProp(MdmBomRoutingProp mdmBomRoutingProp)
     {
-        return Mapper.Delete("MdmBomSub5.Delete", mdmBomSub5);
+        return Mapper.Delete("MdmBomRoutingProp.Delete", mdmBomRoutingProp);
     }
 }

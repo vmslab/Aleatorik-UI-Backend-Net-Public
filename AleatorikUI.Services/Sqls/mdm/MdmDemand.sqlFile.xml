@@ -4,83 +4,85 @@
 
 	<resultMaps>
 		<resultMap id="rtnMdmDemand"  class="MdmDemand" >
-			<result property="soID"              column="SO_ID"/>
-			<result property="stageID"           column="STAGE_ID"/>
-			<result property="itemID"            column="ITEM_ID"/>
-			<result property="siteID"            column="SITE_ID"/>
-			<result property="bufferID"          column="BUFFER_ID"/>
-			<result property="dueDate"           column="DUE_DATE"/>
-			<result property="qty"               column="QTY"/>
-			<result property="priority"          column="PRIORITY"/>
-			<result property="customerID"        column="CUSTOMER_ID"/>
-			<result property="demandType"        column="DEMAND_TYPE"/>
-			<result property="maxLatenessDays"   column="MAX_LATENESS_DAYS"/>
-			<result property="maxEarlinessDays"  column="MAX_EARLINESS_DAYS"/>
-			<result property="isRtfTarget"       column="IS_RTF_TARGET"/>
-			<result property="createTime"        column="CREATE_TIME"/>
-			<result property="createUser"        column="CREATE_USER"/>
-			<result property="updateTime"        column="UPDATE_TIME"/>
-			<result property="updateUser"        column="UPDATE_USER"/>
+			<result property="demandID"         column="DEMAND_ID"/>
+			<result property="itemID"           column="ITEM_ID"/>
+			<result property="siteID"           column="SITE_ID"/>
+			<result property="bufferID"         column="BUFFER_ID"/>
+			<result property="dueDate"          column="DUE_DATE"/>
+			<result property="demandQty"        column="DEMAND_QTY"/>
+			<result property="demandPriority"   column="DEMAND_PRIORITY"/>
+			<result property="custID"           column="CUST_ID"/>
+			<result property="demandType"       column="DEMAND_TYPE"/>
+			<result property="maxLatenessDay"   column="MAX_LATENESS_DAY"/>
+			<result property="maxEarlinessDay"  column="MAX_EARLINESS_DAY"/>
+			<result property="createDatetime"   column="CREATE_DATETIME"/>
+			<result property="createUser"       column="CREATE_USER"/>
+			<result property="updateDatetime"   column="UPDATE_DATETIME"/>
+			<result property="updateUser"       column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmDemandProp"  class="MdmDemandProp" >
+			<result property="demandID"       column="DEMAND_ID"/>
+			<result property="propID"         column="PROP_ID"/>
+			<result property="propValue"      column="PROP_VALUE"/>
+			<result property="calendarID"     column="CALENDAR_ID"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
 	<statements>
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmDemand.Select" resultMap="rtnMdmDemand">
-			SELECT [SO_ID]
-				 , [STAGE_ID]
+			SELECT [DEMAND_ID]
 				 , [ITEM_ID]
 				 , [SITE_ID]
 				 , [BUFFER_ID]
 				 , [DUE_DATE]
-				 , [QTY]
-				 , [PRIORITY]
-				 , [CUSTOMER_ID]
+				 , [DEMAND_QTY]
+				 , [DEMAND_PRIORITY]
+				 , [CUST_ID]
 				 , [DEMAND_TYPE]
-				 , [MAX_LATENESS_DAYS]
-				 , [MAX_EARLINESS_DAYS]
-				 , [IS_RTF_TARGET]
-				 , [CREATE_TIME]
+				 , [MAX_LATENESS_DAY]
+				 , [MAX_EARLINESS_DAY]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
-			  FROM [CFG_SALES_ORDER]
+			  FROM [CFG_DEMAND]
 		</select>
 
 		<!--INSERT-->
 		<insert id="MdmDemand.Insert" parameterClass="MdmDemand">
-			INSERT INTO [CFG_SALES_ORDER]
-				 ( [SO_ID]
-				 , [STAGE_ID]
+			INSERT INTO [CFG_DEMAND]
+				 ( [DEMAND_ID]
 				 , [ITEM_ID]
 				 , [SITE_ID]
 				 , [BUFFER_ID]
 				 , [DUE_DATE]
-				 , [QTY]
-				 , [PRIORITY]
-				 , [CUSTOMER_ID]
+				 , [DEMAND_QTY]
+				 , [DEMAND_PRIORITY]
+				 , [CUST_ID]
 				 , [DEMAND_TYPE]
-				 , [MAX_LATENESS_DAYS]
-				 , [MAX_EARLINESS_DAYS]
-				 , [IS_RTF_TARGET]
-				 , [CREATE_TIME]
+				 , [MAX_LATENESS_DAY]
+				 , [MAX_EARLINESS_DAY]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #soID#
-				 , #stageID#
+				 ( #demandID#
 				 , #itemID#
 				 , #siteID#
 				 , #bufferID#
 				 , #dueDate#
-				 , #qty#
-				 , #priority#
-				 , #customerID#
+				 , #demandQty#
+				 , #demandPriority#
+				 , #custID#
 				 , #demandType#
-				 , #maxLatenessDays#
-				 , #maxEarlinessDays#
-				 , #isRtfTarget#
+				 , #maxLatenessDay#
+				 , #maxEarlinessDay#
 				 , getdate()
 				 , #createUser#
 				 , getdate()
@@ -90,30 +92,87 @@
 
 		<!--UPDATE-->
 		<update id="MdmDemand.Update" parameterClass="MdmDemand">
-			UPDATE [CFG_SALES_ORDER]
-			   SET [SO_ID]              = #soID#
-				 , [STAGE_ID]           = #stageID#
-				 , [ITEM_ID]            = #itemID#
-				 , [SITE_ID]            = #siteID#
-				 , [BUFFER_ID]          = #bufferID#
-				 , [DUE_DATE]           = #dueDate#
-				 , [QTY]                = #qty#
-				 , [PRIORITY]           = #priority#
-				 , [CUSTOMER_ID]        = #customerID#
-				 , [DEMAND_TYPE]        = #demandType#
-				 , [MAX_LATENESS_DAYS]  = #maxLatenessDays#
-				 , [MAX_EARLINESS_DAYS] = #maxEarlinessDays#
-				 , [IS_RTF_TARGET]      = #isRtfTarget#
-				 , [UPDATE_TIME]        = getdate()
-				 , [UPDATE_USER]        = #updateUser#
-			 WHERE [SO_ID]              = #soID#
+			UPDATE [CFG_DEMAND]
+			   SET [DEMAND_ID]         = #demandID#
+				 , [ITEM_ID]           = #itemID#
+				 , [SITE_ID]           = #siteID#
+				 , [BUFFER_ID]         = #bufferID#
+				 , [DUE_DATE]          = #dueDate#
+				 , [DEMAND_QTY]        = #demandQty#
+				 , [DEMAND_PRIORITY]   = #demandPriority#
+				 , [CUST_ID]           = #custID#
+				 , [DEMAND_TYPE]       = #demandType#
+				 , [MAX_LATENESS_DAY]  = #maxLatenessDay#
+				 , [MAX_EARLINESS_DAY] = #maxEarlinessDay#
+				 , [UPDATE_DATETIME]   = getdate()
+				 , [UPDATE_USER]       = #updateUser#
+			 WHERE [DEMAND_ID]         = #demandID#
 		</update>
 
 		<!--DELETE-->
 		<delete id="MdmDemand.Delete" parameterClass="string">
 			DELETE
-			  FROM [CFG_SALES_ORDER]
-			 WHERE [SO_ID]              = #soID#
+			  FROM [CFG_DEMAND]
+			 WHERE [DEMAND_ID]         = #demandID#
+		</delete>
+
+		<!--DEMAND PROP -->
+		<!--SELECT-->
+		<select id="MdmDemandProp.Select" parameterClass="string" resultMap="rtnMdmDemandProp">
+			SELECT [DEMAND_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_DEMAND_PROP_VALUE]
+			 WHERE [DEMAND_ID] = #demandID#
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmDemandProp.Insert" parameterClass="MdmDemandProp">
+			INSERT INTO [CFG_DEMAND_PROP_VALUE]
+			     ( [DEMAND_ID]
+			     , [PROP_ID]
+			     , [PROP_VALUE]
+			     , [CALENDAR_ID]
+			     , [CREATE_DATETIME]
+			     , [CREATE_USER]
+			     , [UPDATE_DATETIME]
+			     , [UPDATE_USER]
+			     ) VALUES
+			     ( #demandID#
+			     , #propID#
+			     , #propValue#
+			     , #calendarID#
+			     , getdate()
+			     , #createUser#
+			     , getdate()
+			     , #updateUser#
+			     )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmDemandProp.Update" parameterClass="MdmDemandProp">
+			UPDATE [CFG_DEMAND_PROP_VALUE]
+			   SET [DEMAND_ID]       = #demandID#
+				 , [PROP_ID]         = #propID#
+				 , [PROP_VALUE]      = #propValue#
+				 , [CALENDAR_ID]     = #calendarID#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [DEMAND_ID]       = #demandID#
+			   AND [PROP_ID]         = #propID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmDemandProp.Delete" parameterClass="string">
+			DELETE 
+			  FROM [CFG_DEMAND_PROP_VALUE]
+			 WHERE [DEMAND_ID]       = #demandID#
+			   AND [PROP_ID]         = #propID#
 		</delete>
 
 	</statements>

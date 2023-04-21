@@ -4,34 +4,34 @@ namespace AleatorikUI.Services.DAO.mdm
 {
     public interface IMdmBomMasterDao
     {
-        public IEnumerable<MdmBomMaster> GetAll();
+        public IEnumerable<MdmBomMaster> GetAll(String projectID);
         public void Insert(MdmBomMaster mdmBomMaster);
         public int Update(MdmBomMaster mdmBomMaster);
         public int Delete(MdmBomMaster mdmBomMaster);
 
-        public IEnumerable<MdmBomSub1> GetAllSub1(String bomID);
-        public void InsertSub1(MdmBomSub1 mdmBomSub1);
-        public int UpdateSub1(MdmBomSub1 mdmBomSub1);
-        public int DeleteSub1(MdmBomSub1 mdmBomSub1);
+        public IEnumerable<MdmBomDetail> GetAllDetail(String projectID);
+        public void InsertDetail(MdmBomDetail mdmBomDetail);
+        public int UpdateDetail(MdmBomDetail mdmBomDetail);
+        public int DeleteDetail(MdmBomDetail mdmBomDetail);
 
-        public IEnumerable<MdmBomSub2> GetAllSub2(String bomID);
-        public void InsertSub2(MdmBomSub2 mdmBomSub2);
-        public int UpdateSub2(MdmBomSub2 mdmBomSub2);
-        public int DeleteSub2(MdmBomSub2 mdmBomSub2);
+        public IEnumerable<MdmBomDetailAlt> GetAllDetailAlt(String projectID);
+        public void InsertDetailAlt(MdmBomDetailAlt mdmBomDetailAlt);
+        public int UpdateDetailAlt(MdmBomDetailAlt mdmBomDetailAlt);
+        public int DeleteDetailAlt(MdmBomDetailAlt mdmBomDetailAlt);
 
-        public IEnumerable<MdmBomSub3> GetAllSub3(String bomID);
-        public void InsertSub3(MdmBomSub3 mdmBomSub3);
-        public int UpdateSub3(MdmBomSub3 mdmBomSub3);
-        public int DeleteSub3(MdmBomSub3 mdmBomSub3);
+        public IEnumerable<MdmBomProp> GetAllProp(String projectID);
+        public void InsertProp(MdmBomProp mdmBomProp);
+        public int UpdateProp(MdmBomProp mdmBomProp);
+        public int DeleteProp(MdmBomProp mdmBomProp);
 
-        public IEnumerable<MdmBomSub4> GetAllSub4(String bomID);
-        public void InsertSub4(MdmBomSub4 mdmBomSub4);
-        public int UpdateSub4(MdmBomSub4 mdmBomSub4);
-        public int DeleteSub4(MdmBomSub4 mdmBomSub4);
+        public IEnumerable<MdmBomRouting> GetAllRouting(String projectID);
+        public void InsertRouting(MdmBomRouting mdmBomRouting);
+        public int UpdateRouting(MdmBomRouting mdmBomRouting);
+        public int DeleteRouting(MdmBomRouting mdmBomRouting);
 
-        public IEnumerable<MdmBomSub5> GetAllSub5(String bomID);
-        public void InsertSub5(MdmBomSub5 mdmBomSub5);
-        public int UpdateSub5(MdmBomSub5 mdmBomSub5);
-        public int DeleteSub5(MdmBomSub5 mdmBomSub5);
+        public IEnumerable<MdmBomRoutingProp> GetAllRoutingProp(String projectID);
+        public void InsertRoutingProp(MdmBomRoutingProp mdmBomRoutingProp);
+        public int UpdateRoutingProp(MdmBomRoutingProp mdmBomRoutingProp);
+        public int DeleteRoutingProp(MdmBomRoutingProp mdmBomRoutingProp);
     }
 }

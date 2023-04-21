@@ -31,7 +31,7 @@
 
 	<statements>
 
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="Menu.SelectMenus" parameterClass="string" resultMap="menu-result">
       SELECT 
 				MENU_ID, 

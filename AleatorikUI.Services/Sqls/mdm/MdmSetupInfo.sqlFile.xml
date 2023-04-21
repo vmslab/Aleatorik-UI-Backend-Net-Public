@@ -21,7 +21,7 @@
 	</resultMaps>
 
 	<statements>
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmSetupInfo.Select" resultMap="rtnMdmSetupInfo">
 			SELECT [SETUP_ID]
 				 , [SETUP_TYPE]

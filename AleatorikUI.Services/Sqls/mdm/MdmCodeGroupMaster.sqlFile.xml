@@ -18,7 +18,7 @@
 
 	<statements>
 	<!-- MASTER -->
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmCodeGroupMaster.Select" resultMap="rtnMdmCodeGroupMaster">
 			SELECT CATEGORY_ID
 				 , DESCRIPTION
@@ -51,7 +51,7 @@
 		</delete>
 		
 	<!-- Sub1 -->
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmCodeGroupSub1.Select" parameterClass="string"  resultMap="rtnMdmCodeGroupSub1">
 			SELECT CATEGORY_ID
 				 , CODE_ID

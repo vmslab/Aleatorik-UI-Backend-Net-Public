@@ -1,13 +1,9 @@
 using AleatorikUI.Services.DAO.mdm;
 using AleatorikUI.Services.DTO.mdm;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
-
 
 namespace AleatorikUI.Services.Controllers.mdm;
-/// <summary>
-/// 요것
-/// </summary>
+
 [ApiVersion("1.0")]
 [ApiController]
 [Route("[controller]")]
@@ -16,11 +12,6 @@ public class MdmAllocGroupMasterController : ControllerBase
     private readonly ILogger<MdmAllocGroupMasterController> _logger;
     private readonly IMdmAllocGroupMasterDao _mdmAllocGroupMasterDao;
 
-    /// <summary>
-    /// Allocation Group 을 조회 합니다.
-    /// </summary>
-    /// <param name="logger"></param>
-    /// <param name="mdmAllocGroupMasterDao"></param>
     public MdmAllocGroupMasterController(ILogger<MdmAllocGroupMasterController> logger, IMdmAllocGroupMasterDao mdmAllocGroupMasterDao)
     {
         _logger = logger;
@@ -30,12 +21,12 @@ public class MdmAllocGroupMasterController : ControllerBase
     ///  Allocation Group 을 조회 합니다.
     /// </summary>
     /// <returns></returns>
-    [HttpGet("/api/MdmAllocGroupMaster")]
-    public IEnumerable<MdmAllocGroupMaster> GetAll()
+    [HttpGet("/api/MdmAllocGroupMaster/{projectID}")]
+    public IEnumerable<MdmAllocGroupMaster> GetAll(String projectID)
     {
         try
         {
-            var result = _mdmAllocGroupMasterDao.GetAll();
+            var result = _mdmAllocGroupMasterDao.GetAll(projectID);
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -52,7 +43,7 @@ public class MdmAllocGroupMasterController : ControllerBase
     /// </summary>
     /// <param name="mdmAllocGroupMaster"></param>
     /// <returns></returns>
-    [HttpPost("/api/MdmAllocGroupMaster")]
+    [HttpPost("/api/MdmAllocGroupMaster/{projectID}")]
     public int Insert(MdmAllocGroupMaster mdmAllocGroupMaster)
     {
         try
@@ -73,7 +64,7 @@ public class MdmAllocGroupMasterController : ControllerBase
     /// </summary>
     /// <param name="mdmAllocGroupMaster"></param>
     /// <returns></returns>
-    [HttpPut("/api/MdmAllocGroupMaster/{allocGroupID}")]
+    [HttpPut("/api/MdmAllocGroupMaster/{projectID}/{allocGroupID}")]
     public int Update(MdmAllocGroupMaster mdmAllocGroupMaster)
     {
         _logger.LogInformation("Update : {}", mdmAllocGroupMaster);
@@ -95,7 +86,7 @@ public class MdmAllocGroupMasterController : ControllerBase
     /// </summary>
     /// <param name="mdmAllocGroupMaster"></param>
     /// <returns></returns>
-    [HttpDelete("/api/MdmAllocGroupMaster/{allocGroupID}")]
+    [HttpDelete("/api/MdmAllocGroupMaster/{projectID}/{allocGroupID}")]
     public int Delete(MdmAllocGroupMaster mdmAllocGroupMaster)
     {
         _logger.LogInformation("Delete : {}", mdmAllocGroupMaster);

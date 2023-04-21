@@ -1,15 +1,14 @@
 namespace AleatorikUI.Services.DTO.mdm;
 
-public class MdmPropMaster
+public class MdmBufferProp
 {
+    public string? bufferID { get; set; }
     public string? propID { get; set; }
-    public string? propCategory { get; set; }
-    public string? dataType { get; set; }
-    public string? description { get; set; }
-    public string? reservedWord { get; set; }
-    public string? defaultValue { get; set; }
+    public string? propValue { get; set; }
+    public string? calendarID { get; set; }
     public DateTime? createDatetime { get; set; }
     public string? createUser { get; set; }
     public DateTime? updateDatetime { get; set; }
     public string? updateUser { get; set; }
+    public string? projectID { get; set; }
 }

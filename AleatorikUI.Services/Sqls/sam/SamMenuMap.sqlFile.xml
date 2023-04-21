@@ -20,7 +20,7 @@
 
 	<statements>
 
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MenuMap.SelectMenuMaps" parameterClass="SamMenuMapInfo" resultMap="menu-map-result">
       SELECT
       T_MENU_MAP.MENU_MAP_ID,

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnMdmFactoryConfig"  class="MdmFactoryConfig" >
+			<result property="factoryStartHour"  column="FACTORY_START_HOUR"/>
+			<result property="startDayOfWeek"   column="START_DAY_OF_WEEK"/>
+			<result property="createDatetime"    column="CREATE_DATETIME"/>
+			<result property="createUser"        column="CREATE_USER"/>
+			<result property="updateDatetime"    column="UPDATE_DATETIME"/>
+			<result property="updateUser"        column="UPDATE_USER"/>
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+		<!--SELECT-->
+		<select id="MdmFactoryConfig.Select" resultMap="rtnMdmFactoryConfig">
+			SELECT [FACTORY_START_HOUR]
+				 , [START_DAY_OF_WEEK]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_FACTORY_CONFIG]
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmFactoryConfig.Insert" parameterClass="MdmFactoryConfig">
+			INSERT INTO [CFG_FACTORY_CONFIG]
+				 ( [FACTORY_START_HOUR]
+				 , [START_DAY_OF_WEEK]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #factoryStartHour#
+				 , #startDayOfWeek#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmFactoryConfig.Update" parameterClass="MdmFactoryConfig">
+			UPDATE [CFG_FACTORY_CONFIG]
+			   SET [FACTORY_START_HOUR] = #factoryStartHour#
+			     , [START_DAY_OF_WEEK]  = #startDayOfWeek#
+			     , [UPDATE_DATETIME]    = getdate()
+			     , [UPDATE_USER]        = #updateUser#
+			 WHERE [FACTORY_START_HOUR] = #factoryStartHour#
+			   AND [START_DAY_OF_WEEK]  = #startDayOfWeek#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmFactoryConfig.Delete" parameterClass="MdmFactoryConfig">
+			DELETE
+			  FROM [CFG_FACTORY_CONFIG]
+			 WHERE [FACTORY_START_HOUR] = #factoryStartHour#
+			   AND [START_DAY_OF_WEEK]  = #startDayOfWeek#
+		</delete>
+
+	</statements>
+</sqlMap>

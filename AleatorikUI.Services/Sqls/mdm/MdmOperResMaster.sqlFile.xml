@@ -33,7 +33,7 @@
 
 	<statements>
 		<!-- MASTER -->
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmOperResMaster.Select" resultMap="rtnMdmOperResMaster">
 			SELECT [ROUTING_ID]
 				 , [OPERATION_ID]
@@ -105,7 +105,7 @@
 		</delete>
 
 		<!-- Sub1 -->
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmOperResSub1.Select" parameterClass="string"  resultMap="rtnMdmOperResSub1">
 			SELECT [ROUTING_ID]
 				 , [OPERATION_ID]

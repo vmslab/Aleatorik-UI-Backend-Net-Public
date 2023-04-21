@@ -65,7 +65,7 @@ public class Startup
         services.AddSingletonWithNamedMapper<IMdmStageMasterDao, MdmStageMasterDao>(sMode);                     // 스테이지
         services.AddSingletonWithNamedMapper<IMdmSiteMasterDao, MdmSiteMasterDao>(sMode);                       // 사이트
         services.AddSingletonWithNamedMapper<IMdmAllocGroupMasterDao, MdmAllocGroupMasterDao>(sMode);           // 할당그룹
-        services.AddSingletonWithNamedMapper<IMdmFactoryMasterDao, MdmFactoryMasterDao>(sMode);                 // 공장운영정보 
+        services.AddSingletonWithNamedMapper<IMdmFactoryConfigDao, MdmFactoryConfigDao>(sMode);                 // 공장운영정보 
         services.AddSingletonWithNamedMapper<IMdmCodeGroupMasterDao, MdmCodeGroupMasterDao>(sMode);             // 코드 그룹, 코드 관리
         services.AddSingletonWithNamedMapper<IMdmPropMasterDao, MdmPropMasterDao>(sMode);                       // 속성 관리
         /* -------------------------------------------------------------------------------------------- */
@@ -77,7 +77,7 @@ public class Startup
         /* -------------------------------------------------------------------------------------------- */
         services.AddSingletonWithNamedMapper<IMdmWipDao, MdmWipDao>(sMode);                                     // 재공 정보
         /* -------------------------------------------------------------------------------------------- */
-        services.AddSingletonWithNamedMapper<IMdmCustInfoDao, MdmCustInfoDao>(sMode);                           // 고객 정보
+        services.AddSingletonWithNamedMapper<IMdmCustMasterDao, MdmCustMasterDao>(sMode);                           // 고객 정보
         services.AddSingletonWithNamedMapper<IMdmDemandDao, MdmDemandDao>(sMode);                               // DEMAND 정보
         /* -------------------------------------------------------------------------------------------- */
         services.AddSingletonWithNamedMapper<IMdmResGroupMasterDao, MdmResGroupMasterDao>(sMode);               // RESOURCE GROUP MASTER

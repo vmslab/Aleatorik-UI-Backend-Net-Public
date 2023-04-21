@@ -72,7 +72,7 @@
     <None Update="Sqls\mdm\MdmDemand.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmCustInfo.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmCustMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\mdm\MdmResGroupMaster.sqlFile.xml">
@@ -108,7 +108,7 @@
     <None Update="Sqls\mdm\MdmAllocGroupMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmFactoryMaster.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmFactoryConfig.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\mdm\MdmCodeGroupMaster.sqlFile.xml">

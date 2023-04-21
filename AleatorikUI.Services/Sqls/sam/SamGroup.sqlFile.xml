@@ -13,7 +13,7 @@
 
 	<statements>
 
-    <!--SELECT All-->
+    <!--SELECT-->
     <select id="Group.SelectGroups" resultMap="group-result">
       SELECT
       GROUP_ID,

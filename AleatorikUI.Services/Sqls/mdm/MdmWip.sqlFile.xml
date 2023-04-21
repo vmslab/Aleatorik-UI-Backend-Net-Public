@@ -25,7 +25,7 @@
 	</resultMaps>
 
 	<statements>
-		<!--SELECT All-->
+		<!--SELECT-->
 		<select id="MdmWip.Select" resultMap="rtnMdmWip">
 			SELECT [LOT_ID]
 				 , [STAGE_ID]
