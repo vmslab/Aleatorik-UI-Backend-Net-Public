@@ -2,6 +2,7 @@ namespace AleatorikUI.Services.DTO.mdm;
 
 public class MdmBufferProp
 {
+    public string? projectID { get; set; }
     public string? bufferID { get; set; }
     public string? propID { get; set; }
     public string? propValue { get; set; }
@@ -10,5 +11,4 @@ public class MdmBufferProp
     public string? createUser { get; set; }
     public DateTime? updateDatetime { get; set; }
     public string? updateUser { get; set; }
-    public string? projectID { get; set; }
 }

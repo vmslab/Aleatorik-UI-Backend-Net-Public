@@ -12,9 +12,9 @@ public class MdmBomMasterDao : IMdmBomMasterDao
 
     private ISqlMapper Mapper { get; }
 
-    public IEnumerable<MdmBomMaster> GetAll(String projectID)
+    public IEnumerable<MdmBomMaster> GetAll(MdmBomMaster mdmBomMaster)
     {
-        return Mapper.QueryForList<MdmBomMaster>("MdmBomMaster.Select", projectID);
+        return Mapper.QueryForList<MdmBomMaster>("MdmBomMaster.Select", mdmBomMaster);
     }
 
     public void Insert(MdmBomMaster mdmBomMaster)
@@ -35,9 +35,9 @@ public class MdmBomMasterDao : IMdmBomMasterDao
     /**
      * Detail
      */
-    public IEnumerable<MdmBomDetail> GetAllDetail(String projectID)
+    public IEnumerable<MdmBomDetail> GetAllDetail(MdmBomDetail mdmBomDetail)
     {
-        return Mapper.QueryForList<MdmBomDetail>("MdmBomDetail.Select", projectID);
+        return Mapper.QueryForList<MdmBomDetail>("MdmBomDetail.Select", mdmBomDetail);
     }
 
     public void InsertDetail(MdmBomDetail mdmBomDetail)
@@ -58,9 +58,9 @@ public class MdmBomMasterDao : IMdmBomMasterDao
     /**
      * DetailAlt
      */
-    public IEnumerable<MdmBomDetailAlt> GetAllDetailAlt(String projectID)
+    public IEnumerable<MdmBomDetailAlt> GetAllDetailAlt(MdmBomDetailAlt mdmBomDetailAlt)
     {
-        return Mapper.QueryForList<MdmBomDetailAlt>("MdmBomDetailAlt.Select", projectID);
+        return Mapper.QueryForList<MdmBomDetailAlt>("MdmBomDetailAlt.Select", mdmBomDetailAlt);
     }
 
     public void InsertDetailAlt(MdmBomDetailAlt mdmBomDetailAlt)
@@ -81,9 +81,9 @@ public class MdmBomMasterDao : IMdmBomMasterDao
     /**
      * Prop
      */
-    public IEnumerable<MdmBomProp> GetAllProp(String projectID)
+    public IEnumerable<MdmBomProp> GetAllProp(MdmBomProp mdmBomProp)
     {
-        return Mapper.QueryForList<MdmBomProp>("MdmBomProp.Select", projectID);
+        return Mapper.QueryForList<MdmBomProp>("MdmBomProp.Select", mdmBomProp);
     }
 
     public void InsertProp(MdmBomProp mdmBomProp)
@@ -104,9 +104,9 @@ public class MdmBomMasterDao : IMdmBomMasterDao
     /**
     * Routing
     */
-    public IEnumerable<MdmBomRouting> GetAllRouting(String projectID)
+    public IEnumerable<MdmBomRouting> GetAllRouting(MdmBomRouting mdmBomRouting)
     {
-        return Mapper.QueryForList<MdmBomRouting>("MdmBomRouting.Select", projectID);
+        return Mapper.QueryForList<MdmBomRouting>("MdmBomRouting.Select", mdmBomRouting);
     }
 
     public void InsertRouting(MdmBomRouting mdmBomRouting)
@@ -128,9 +128,9 @@ public class MdmBomMasterDao : IMdmBomMasterDao
     /**
     * RoutingProp
     */
-    public IEnumerable<MdmBomRoutingProp> GetAllRoutingProp(String projectID)
+    public IEnumerable<MdmBomRoutingProp> GetAllRoutingProp(MdmBomRoutingProp mdmBomRoutingProp)
     {
-        return Mapper.QueryForList<MdmBomRoutingProp>("MdmBomRoutingProp.Select", projectID);
+        return Mapper.QueryForList<MdmBomRoutingProp>("MdmBomRoutingProp.Select", mdmBomRoutingProp);
     }
 
     public void InsertRoutingProp(MdmBomRoutingProp mdmBomRoutingProp)

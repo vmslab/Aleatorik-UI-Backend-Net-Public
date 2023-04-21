@@ -10,7 +10,7 @@ public class MdmBomDetailAlt
     public string? altItemID { get; set; }
     public string? altSiteID { get; set; }
     public string? altBufferID { get; set; }
-    public int altPriority { get; set; }
+    public int? altPriority { get; set; }
     public DateTime? createDatetime { get; set; }
     public string? createUser { get; set; }
     public DateTime? updateDatetime { get; set; }

@@ -100,7 +100,35 @@
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_BOM_MASTER]
-			 WHERE [PROJECT_ID] = #projectID#
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="bomID">
+					[BOM_ID]          = #bomID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="bomType">
+					[BOM_TYPE]        = #bomType#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="bomPriority">
+					[BOM_PRIORITY]    = #bomPriority#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="effStartDate">
+					[EFF_START_DATE]  = #effStartDate#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="effEndDate">
+					[EFF_END_DATE]    = #effEndDate#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="description">
+					[DESCRIPTION]     = #description#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
 		</select>
 
 		<!--INSERT-->
@@ -175,8 +203,47 @@
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_BOM_DETAIL]
-			 WHERE [PROJECT_ID] = #projectID#
-			   AND [BOM_ID]     = #bomID#
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="bomID">
+					[BOM_ID]          = #bomID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="fromItemID">
+					[FROM_ITEM_ID]    = #fromItemID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="fromSiteID">
+					[FROM_SITE_ID]    = #fromSiteID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="fromBufferID">
+					[FROM_BUFFER_ID]  = #fromBufferID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="fromQty">
+					[FROM_QTY]        = #fromQty#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="toItemID">
+					[TO_ITEM_ID]      = #toItemID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="toSiteID">
+					[TO_SITE_ID]      = #toSiteID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="toBufferID">
+					[TO_BUFFER_ID]    = #toBufferID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="toQty">
+					[TO_QTY]          = #toQty#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="calendarID">
+					[CALENDAR_ID]     = #calendarID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
 		</select>
 
 		<!--INSERT-->
@@ -273,8 +340,41 @@
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_BOM_DETAIL_ALT]
-			 WHERE [PROJECT_ID] = #projectID#
-			   AND [BOM_ID]     = #bomID#
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="bomID">
+					[BOM_ID]          = #bomID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="itemID">
+					[ITEM_ID]         = #itemID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="siteID">
+					[SITE_ID]         = #siteID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="bufferID">
+					[BUFFER_ID]       = #bufferID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="altItemID">
+					[ALT_ITEM_ID]     = #altItemID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="altSiteID">
+					[ALT_SITE_ID]     = #altSiteID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="altBufferID">
+					[ALT_BUFFER_ID]   = #altBufferID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="altPriority">
+					[ALT_PRIORITY]    = #altPriority#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
 		</select>
 
 		<!--INSERT-->
@@ -361,8 +461,29 @@
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_BOM_PROP_VALUE]
-			 WHERE [PROJECT_ID] = #projectID#
-			   AND [BOM_ID]     = #bomID#
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="bomID">
+					[BOM_ID]          = #bomID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propID">
+					[PROP_ID]         = #propID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propValue">
+					[PROP_VALUE]      = #propValue#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="calendarID">
+					[CALENDAR_ID]     = #calendarID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
 		</select>
 
 		<!--INSERT-->
@@ -426,8 +547,26 @@
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_BOM_ROUTING]
-			 WHERE [PROJECT_ID] = #projectID#
-			   AND [BOM_ID] = #bomID#
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]       = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="bomID">
+					[BOM_ID]           = #bomID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="routingID">
+					[ROUTING_ID]       = #routingID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="routingPriority">
+					[ROUTING_PRIORITY] = #routingPriority#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]      = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]      = #updateUser#
+				</isNotEmpty>
+			</dynamic>
 		</select>
 
 		<!--INSERT-->
@@ -490,8 +629,32 @@
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_BOM_ROUTING_PROP_VALUE]
-			 WHERE [PROJECT_ID] = #projectID#
-			   AND [BOM_ID]		= #bomID#
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="bomID">
+					[BOM_ID]          = #bomID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="routingID">
+					[ROUTING_ID]      = #routingID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propID">
+					[PROP_ID]         = #propID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propValue">
+					[PROP_VALUE]      = #propValue#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="calendarID">
+					[CALENDAR_ID]     = #calendarID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
 		</select>
 
 		<!--INSERT-->

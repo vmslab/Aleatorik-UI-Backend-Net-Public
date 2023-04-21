@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AleatorikUI.Services.Controllers.mdm;
 
-[ApiVersion("1.0")]
 [ApiController]
 [Route("[controller]")]
+[ApiVersion("1.0")]
 public class MdmAllocGroupMasterController : ControllerBase
 {
     private readonly ILogger<MdmAllocGroupMasterController> _logger;
@@ -21,12 +21,13 @@ public class MdmAllocGroupMasterController : ControllerBase
     ///  Allocation Group 을 조회 합니다.
     /// </summary>
     /// <returns></returns>
-    [HttpGet("/api/MdmAllocGroupMaster/{projectID}")]
-    public IEnumerable<MdmAllocGroupMaster> GetAll(String projectID)
+    [HttpGet("/{projectID}/MdmAllocGroupMaster/")]
+    public IEnumerable<MdmAllocGroupMaster> GetAll(string projectID, [FromQuery] MdmAllocGroupMaster mdmAllocGroupMaster)
     {
         try
         {
-            var result = _mdmAllocGroupMasterDao.GetAll(projectID);
+            mdmAllocGroupMaster.projectID = projectID;
+            var result = _mdmAllocGroupMasterDao.GetAll(mdmAllocGroupMaster);
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -41,13 +42,15 @@ public class MdmAllocGroupMasterController : ControllerBase
     /// <summary>
     /// Allocation Group 을 추가 합니다.
     /// </summary>
+    /// <param name="projectID"></param>
     /// <param name="mdmAllocGroupMaster"></param>
     /// <returns></returns>
-    [HttpPost("/api/MdmAllocGroupMaster/{projectID}")]
-    public int Insert(MdmAllocGroupMaster mdmAllocGroupMaster)
+    [HttpPost("/{projectID}/MdmAllocGroupMaster/")]
+    public int Insert(string projectID, MdmAllocGroupMaster mdmAllocGroupMaster)
     {
         try
         {
+            mdmAllocGroupMaster.projectID = projectID;
             _logger.LogInformation("Insert : {}", mdmAllocGroupMaster);
             _mdmAllocGroupMasterDao.Insert(mdmAllocGroupMaster);
             return 1;
@@ -60,16 +63,18 @@ public class MdmAllocGroupMasterController : ControllerBase
     }
 
     /// <summary>
-    ///  Allocation Group 을 수정 합니다.
+    /// Allocation Group 을 수정 합니다.
     /// </summary>
+    /// <param name="projectID"></param>
     /// <param name="mdmAllocGroupMaster"></param>
     /// <returns></returns>
-    [HttpPut("/api/MdmAllocGroupMaster/{projectID}/{allocGroupID}")]
-    public int Update(MdmAllocGroupMaster mdmAllocGroupMaster)
+    [HttpPut("/{projectID}/MdmAllocGroupMaster/{allocGroupID}")]
+    public int Update(string projectID, MdmAllocGroupMaster mdmAllocGroupMaster)
     {
         _logger.LogInformation("Update : {}", mdmAllocGroupMaster);
         try
         {
+            mdmAllocGroupMaster.projectID = projectID;
             var result = _mdmAllocGroupMasterDao.Update(mdmAllocGroupMaster);
             _logger.LogInformation("result : {}", result);
 
@@ -82,16 +87,18 @@ public class MdmAllocGroupMasterController : ControllerBase
         }
     }
     /// <summary>
-    ///  Allocation Group 을 삭제 합니다.
+    /// Allocation Group 을 삭제 합니다.
     /// </summary>
+    /// <param name="projectID"></param>
     /// <param name="mdmAllocGroupMaster"></param>
     /// <returns></returns>
-    [HttpDelete("/api/MdmAllocGroupMaster/{projectID}/{allocGroupID}")]
-    public int Delete(MdmAllocGroupMaster mdmAllocGroupMaster)
+    [HttpDelete("/{projectID}/MdmAllocGroupMaster/{allocGroupID}")]
+    public int Delete(string projectID, MdmAllocGroupMaster mdmAllocGroupMaster)
     {
         _logger.LogInformation("Delete : {}", mdmAllocGroupMaster);
         try
         {
+            mdmAllocGroupMaster.projectID = projectID;
             var result = _mdmAllocGroupMasterDao.Delete(mdmAllocGroupMaster);
             _logger.LogInformation("result : {}", result);
 

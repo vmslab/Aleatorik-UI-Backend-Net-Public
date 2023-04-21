@@ -12,9 +12,9 @@ public class MdmBufferMasterDao : IMdmBufferMasterDao
 
     private ISqlMapper Mapper { get; }
 
-    public IEnumerable<MdmBufferMaster> GetAll()
+    public IEnumerable<MdmBufferMaster> GetAll(MdmBufferMaster mdmBufferMaster)
     {
-        return Mapper.QueryForList<MdmBufferMaster>("MdmBufferMaster.Select", null);
+        return Mapper.QueryForList<MdmBufferMaster>("MdmBufferMaster.Select", mdmBufferMaster);
     }
 
     public void Insert(MdmBufferMaster mdmBufferMaster)
@@ -35,9 +35,9 @@ public class MdmBufferMasterDao : IMdmBufferMasterDao
     /**
       *  BUFFER PROP
       */
-    public IEnumerable<MdmBufferProp> GetAllProp(string bufferID)
+    public IEnumerable<MdmBufferProp> GetAllProp(MdmBufferProp mdmBufferProp)
     {
-        return Mapper.QueryForList<MdmBufferProp>("MdmBufferProp.Select", bufferID);
+        return Mapper.QueryForList<MdmBufferProp>("MdmBufferProp.Select", mdmBufferProp);
     }
 
     public void InsertProp(MdmBufferProp mdmBufferProp)

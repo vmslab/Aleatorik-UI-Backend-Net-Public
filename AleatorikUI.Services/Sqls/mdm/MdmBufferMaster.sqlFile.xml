@@ -4,15 +4,18 @@
 
 	<resultMaps>
 		<resultMap id="rtnMdmBufferMaster"  class="MdmBufferMaster" >
-			<result property="stageID"    column="STAGE_ID"/>
-			<result property="bufferID"   column="BUFFER_ID"/>
-			<result property="sequence"   column="SEQUENCE"/>
-			<result property="createTime" column="CREATE_TIME"/>
-			<result property="createUser" column="CREATE_USER"/>
-			<result property="updateTime" column="UPDATE_TIME"/>
-			<result property="updateUser" column="UPDATE_USER"/>
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="bufferID"       column="BUFFER_ID"/>
+			<result property="bufferSeq"      column="BUFFER_SEQ"/>
+			<result property="stageID"        column="STAGE_ID"/>
+			<result property="description"    column="DESCRIPTION"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
 		</resultMap>
 		<resultMap id="rtnMdmBufferProp"  class="MdmBufferProp" >
+			<result property="projectID"      column="PROJECT_ID"/>
 			<result property="bufferID"       column="BUFFER_ID"/>
 			<result property="propID"         column="PROP_ID"/>
 			<result property="propValue"      column="PROP_VALUE"/>
@@ -21,40 +24,68 @@
 			<result property="createUser"     column="CREATE_USER"/>
 			<result property="updateDatetime" column="UPDATE_DATETIME"/>
 			<result property="updateUser"     column="UPDATE_USER"/>
-			<result property="projectID"      column="PROJECT_ID"/>
 		</resultMap>
 	</resultMaps>
 
 	<statements>
 		<!--SELECT-->
 		<select id="MdmBufferMaster.Select" resultMap="rtnMdmBufferMaster">
-			SELECT [STAGE_ID]
+			SELECT [PROJECT_ID]
 				 , [BUFFER_ID]
-				 , [SEQUENCE]
-				 , [CREATE_TIME]
+				 , [BUFFER_SEQ]
+				 , [STAGE_ID]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_BUFFER_MASTER]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="bufferID">
+					[BUFFER_ID]       = #bufferID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="bufferSeq">
+					[BUFFER_SEQ]      = #bufferSeq#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="stageID">
+					[STAGE_ID]        = #stageID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="description">
+					[DESCRIPTION]     = #description#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
 		</select>
 		
 		<!--INSERT-->
 		<insert id="MdmBufferMaster.Insert" parameterClass="MdmBufferMaster">
 			INSERT INTO [CFG_BUFFER_MASTER]
-				 ( [STAGE_ID]
+				 ( [PROJECT_ID]
 				 , [BUFFER_ID]
-				 , [SEQUENCE]
-				 , [CREATE_TIME]
+				 , [BUFFER_SEQ]
+				 , [STAGE_ID]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #stageID#
+				 ( #projectID#
 				 , #bufferID#
-				 , #sequence#
-				 , #createTime#
+				 , #bufferSeq#
+				 , #stageID#
+				 , #description#
+				 , getdate()
 				 , #createUser#
-				 , #updateTime#
+				 , getdate()
 				 , #updateUser#
 				 )
 		</insert>
@@ -62,29 +93,30 @@
 		<!--UPDATE-->
 		<update id="MdmBufferMaster.Update" parameterClass="MdmBufferMaster">
 			UPDATE [CFG_BUFFER_MASTER]
-			   SET [STAGE_ID]    = #stageID#
-			     , [BUFFER_ID]   = #bufferID#
-			     , [SEQUENCE]    = #sequence#
-			     , [CREATE_TIME] = #createTime#
-			     , [CREATE_USER] = #createUser#
-			     , [UPDATE_TIME] = #updateTime#
-			     , [UPDATE_USER] = #updateUser#
-			 WHERE [STAGE_ID]    = #stageID#
-			   AND [BUFFER_ID]   = #bufferID#
+			   SET [PROJECT_ID]      = #projectID#
+				 , [BUFFER_ID]       = #bufferID#
+				 , [BUFFER_SEQ]      = #bufferSeq#
+				 , [STAGE_ID]        = #stageID#
+				 , [DESCRIPTION]     = #description#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			AND [BUFFER_ID]       = #bufferID#
 		</update>
 
 		<!--DELETE-->
 		<delete id="MdmBufferMaster.Delete" parameterClass="string">
 			DELETE
 			  FROM [CFG_BUFFER_MASTER]
-		 	 WHERE [STAGE_ID]    = #stageID#
-			   AND [BUFFER_ID]   = #bufferID#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [BUFFER_ID]       = #bufferID#
 		</delete>
 
 		<!--BUFFER PROP -->
 		<!--SELECT-->
 		<select id="MdmBufferProp.Select" parameterClass="string" resultMap="rtnMdmBufferProp">
-			SELECT [BUFFER_ID]
+			SELECT [PROJECT_ID]
+				 , [BUFFER_ID]
 				 , [PROP_ID]
 				 , [PROP_VALUE]
 				 , [CALENDAR_ID]
@@ -92,15 +124,37 @@
 				 , [CREATE_USER]
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
-				 , [PROJECT_ID]
 			  FROM [CFG_BUFFER_PROP_VALUE]
-			 WHERE [BUFFER_ID] = #bufferID#
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="bufferID">
+					[BUFFER_ID]       = #bufferID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propID">
+					[PROP_ID]         = #propID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propValue">
+					[PROP_VALUE]      = #propValue#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="calendarID">
+					[CALENDAR_ID]     = #calendarID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
 		</select>
 
 		<!--INSERT-->
 		<insert id="MdmBufferProp.Insert" parameterClass="MdmBufferProp">
 			INSERT INTO [CFG_BUFFER_PROP_VALUE]
-				 ( [BUFFER_ID]
+				 ( [PROJECT_ID]
+				 , [BUFFER_ID]
 				 , [PROP_ID]
 				 , [PROP_VALUE]
 				 , [CALENDAR_ID]
@@ -108,9 +162,9 @@
 				 , [CREATE_USER]
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
-				 , [PROJECT_ID]
 				 ) VALUES
-				 ( #bufferID#
+				 ( #projectID#
+				 , #bufferID#
 				 , #propID#
 				 , #propValue#
 				 , #calendarID#
@@ -118,29 +172,30 @@
 				 , #createUser#
 				 , getdate()
 				 , #updateUser#
-				 , #projectID#
 				 )
 		</insert>
 
 		<!--UPDATE-->
 		<update id="MdmBufferProp.Update" parameterClass="MdmBufferProp">
 			UPDATE [CFG_BUFFER_PROP_VALUE]
-			   SET [BUFFER_ID]       = #bufferID#
-				 , [PROP_ID]         = #propID#
-				 , [PROP_VALUE]      = #propValue#
-				 , [CALENDAR_ID]     = #calendarID#
-				 , [UPDATE_DATETIME] = getdate()
-				 , [UPDATE_USER]     = #updateUser#
-				 , [PROJECT_ID]      = #projectID#
-			 WHERE [BUFFER_ID]       = #bufferID#
+			   SET [PROJECT_ID]      = #projectID#
+			     , [BUFFER_ID]       = #bufferID#
+			     , [PROP_ID]         = #propID#
+			     , [PROP_VALUE]      = #propValue#
+			     , [CALENDAR_ID]     = #calendarID#
+			     , [UPDATE_DATETIME] = getdate()
+			     , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [BUFFER_ID]       = #bufferID#
 			   AND [PROP_ID]         = #propID#
 		</update>
 
 		<!--DELETE-->
 		<delete id="MdmBufferProp.Delete" parameterClass="string">
-			DELETE 
+			DELETE
 			  FROM [CFG_BUFFER_PROP_VALUE]
-			 WHERE [BUFFER_ID]       = #bufferID#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [BUFFER_ID]       = #bufferID#
 			   AND [PROP_ID]         = #propID#
 		</delete>
 	</statements>

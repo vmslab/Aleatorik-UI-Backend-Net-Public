@@ -19,7 +19,7 @@
 
 	<statements>
 		<!--SELECT-->
-		<select id="MdmAllocGroupMaster.Select" parameterClass="string" resultMap="rtnMdmAllocGroupMaster">
+		<select id="MdmAllocGroupMaster.Select" parameterClass="MdmAllocGroupMaster" resultMap="rtnMdmAllocGroupMaster">
 			SELECT [PROJECT_ID]
 				 , [ALLOCATION_GROUP_ID]
 				 , [ALLOCATION_GROUP_SEQ]
@@ -31,7 +31,32 @@
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_ALLOCATION_GROUP_MASTER]
-			 WHERE [PROJECT_ID] = #projectID#
+			<dynamic prepend="WHERE " close=" ">
+			   <isNotEmpty prepend="AND " property="projectID">    
+				  [PROJECT_ID]           = #projectID#
+			   </isNotEmpty>
+			   <isNotEmpty prepend="AND " property="allocationGroupID">    
+				  [ALLOCATION_GROUP_ID]  = #allocationGroupID#
+			   </isNotEmpty>
+			   <isNotEmpty prepend="AND " property="allocationGroupSeq">    
+				  [ALLOCATION_GROUP_SEQ] = #allocationGroupSeq#
+			   </isNotEmpty>
+			   <isNotEmpty prepend="AND " property="allocationType">    
+				  [ALLOCATION_TYPE]      = #allocationType#
+			   </isNotEmpty>
+			   <isNotEmpty prepend="AND " property="stageID">    
+				  [STAGE_ID]             = #stageID#
+			   </isNotEmpty>
+			   <isNotEmpty prepend="AND " property="description">    
+				  [DESCRIPTION]          = #description#
+			   </isNotEmpty>
+			   <isNotEmpty prepend="AND " property="createUser">    
+				  [CREATE_USER]          = #createUser#
+			   </isNotEmpty>
+			   <isNotEmpty prepend="AND " property="updateUser">    
+				  [UPDATE_USER]          = #updateUser#
+			   </isNotEmpty>
+			</dynamic>
 		</select>
 
 		<!--INSERT-->

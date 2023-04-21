@@ -7,11 +7,11 @@ public class MdmBomDetail
     public string? fromItemID { get; set; }
     public string? fromSiteID { get; set; }
     public string? fromBufferID { get; set; }
-    public int fromQty { get; set; }
+    public int? fromQty { get; set; }
     public string? toItemID { get; set; }
     public string? toSiteID { get; set; }
     public string? toBufferID { get; set; }
-    public int toQty { get; set; }
+    public int? toQty { get; set; }
     public string? calendarID { get; set; }
     public DateTime? createDatetime { get; set; }
     public string? createUser { get; set; }

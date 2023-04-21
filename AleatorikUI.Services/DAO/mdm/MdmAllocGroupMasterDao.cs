@@ -12,9 +12,9 @@ public class MdmAllocGroupMasterDao : IMdmAllocGroupMasterDao
 
     private ISqlMapper Mapper { get; }
 
-    public IEnumerable<MdmAllocGroupMaster> GetAll(String projectID)
+    public IEnumerable<MdmAllocGroupMaster> GetAll(MdmAllocGroupMaster mdmAllocGroupMaster)
     {
-        return Mapper.QueryForList<MdmAllocGroupMaster>("MdmAllocGroupMaster.Select", projectID);
+        return Mapper.QueryForList<MdmAllocGroupMaster>("MdmAllocGroupMaster.Select", mdmAllocGroupMaster);
     }
 
     public void Insert(MdmAllocGroupMaster mdmAllocGroupMaster)
