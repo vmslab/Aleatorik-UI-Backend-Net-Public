@@ -93,7 +93,7 @@
     <None Update="Sqls\mdm\MdmSetupInfo.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmCalMaster.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmCalendarMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\iod\IodReport.sqlFile.xml">

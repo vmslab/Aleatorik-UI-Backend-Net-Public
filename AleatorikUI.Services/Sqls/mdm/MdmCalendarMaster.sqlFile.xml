@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnMdmCalendarMaster"  class="MdmCalendarMaster" >
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="calendarID"     column="CALENDAR_ID"/>
+			<result property="description"    column="DESCRIPTION"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmCalendarDetail"  class="MdmCalendarDetail" >
+			<result property="projectID"       column="PROJECT_ID"/>
+			<result property="calendarID"      column="CALENDAR_ID"/>
+			<result property="patternID"       column="PATTERN_ID"/>
+			<result property="effStartDate"    column="EFF_START_DATE"/>
+			<result property="effEndDate"      column="EFF_END_DATE"/>
+			<result property="patternType"     column="PATTERN_TYPE"/>
+			<result property="patternValue"    column="PATTERN_VALUE"/>
+			<result property="patternPriority" column="PATTERN_PRIORITY"/>
+			<result property="description"     column="DESCRIPTION"/>
+			<result property="createDatetime"  column="CREATE_DATETIME"/>
+			<result property="createUser"      column="CREATE_USER"/>
+			<result property="updateDatetime"  column="UPDATE_DATETIME"/>
+			<result property="updateUser"      column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmCalendarBasedAttr"  class="MdmCalendarBasedAttr" >
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="calendarID"     column="CALENDAR_ID"/>
+			<result property="patternID"      column="PATTERN_ID"/>
+			<result property="attrType"       column="ATTR_TYPE"/>
+			<result property="attrValue"      column="ATTR_VALUE"/>
+			<result property="attrDataType"   column="ATTR_DATA_TYPE"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
+		</resultMap>
+	</resultMaps>
+
+
+	<statements>
+		<!-- MASTER -->
+		<!--SELECT-->
+		<select id="MdmCalendarMaster.Select" parameterClass="MdmCalendarMaster" resultMap="rtnMdmCalendarMaster">
+			SELECT [PROJECT_ID]
+				 , [CALENDAR_ID]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_CALENDAR_MASTER]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="calendarID">
+					[CALENDAR_ID]     = #calendarID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="description">
+					[DESCRIPTION]     = #description#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmCalendarMaster.Insert" parameterClass="MdmCalendarMaster">
+			INSERT INTO [CFG_CALENDAR_MASTER]
+				 ( [PROJECT_ID]
+				 , [CALENDAR_ID]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #calendarID#
+				 , #description#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmCalendarMaster.Update" parameterClass="MdmCalendarMaster">
+			UPDATE [CFG_CALENDAR_MASTER]
+			   SET [PROJECT_ID]      = #projectID#
+			     , [CALENDAR_ID]     = #calendarID#
+			     , [DESCRIPTION]     = #description#
+			     , [UPDATE_DATETIME] = getdate()
+			     , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [CALENDAR_ID]     = #calendarID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmCalendarMaster.Delete" parameterClass="MdmCalendarMaster">
+			DELETE
+			  FROM [CFG_CALENDAR_MASTER]
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [CALENDAR_ID]     = #calendarID#
+		</delete>
+
+		<!-- Detail -->
+		<!--SELECT-->
+		<select id="MdmCalendarDetail.Select" parameterClass="MdmCalendarDetail"  resultMap="rtnMdmCalendarDetail">
+			SELECT [PROJECT_ID]
+				 , [CALENDAR_ID]
+				 , [PATTERN_ID]
+				 , [EFF_START_DATE]
+				 , [EFF_END_DATE]
+				 , [PATTERN_TYPE]
+				 , [PATTERN_VALUE]
+				 , [PATTERN_PRIORITY]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_CALENDAR_DETAIL]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]       = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="calendarID">
+					[CALENDAR_ID]      = #calendarID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="patternID">
+					[PATTERN_ID]       = #patternID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="effStartDate">
+					[EFF_START_DATE]   = #effStartDate#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="effEndDate">
+					[EFF_END_DATE]     = #effEndDate#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="patternType">
+					[PATTERN_TYPE]     = #patternType#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="patternValue">
+					[PATTERN_VALUE]    = #patternValue#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="patternPriority">
+					[PATTERN_PRIORITY] = #patternPriority#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="description">
+					[DESCRIPTION]      = #description#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]      = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]      = #updateUser#
+				</isNotEmpty>
+			</dynamic>
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmCalendarDetail.Insert" parameterClass="MdmCalendarDetail">
+			INSERT INTO [CFG_CALENDAR_DETAIL]
+				 ( [PROJECT_ID]
+				 , [CALENDAR_ID]
+				 , [PATTERN_ID]
+				 , [EFF_START_DATE]
+				 , [EFF_END_DATE]
+				 , [PATTERN_TYPE]
+				 , [PATTERN_VALUE]
+				 , [PATTERN_PRIORITY]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #calendarID#
+				 , #patternID#
+				 , #effStartDate#
+				 , #effEndDate#
+				 , #patternType#
+				 , #patternValue#
+				 , #patternPriority#
+				 , #description#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmCalendarDetail.Update" parameterClass="MdmCalendarDetail">
+			UPDATE [CFG_CALENDAR_DETAIL]
+			   SET [PROJECT_ID]       = #projectID#
+				 , [CALENDAR_ID]      = #calendarID#
+				 , [PATTERN_ID]       = #patternID#
+				 , [EFF_START_DATE]   = #effStartDate#
+				 , [EFF_END_DATE]     = #effEndDate#
+				 , [PATTERN_TYPE]     = #patternType#
+				 , [PATTERN_VALUE]    = #patternValue#
+				 , [PATTERN_PRIORITY] = #patternPriority#
+				 , [DESCRIPTION]      = #description#
+				 , [UPDATE_DATETIME]  = getdate()
+				 , [UPDATE_USER]      = #updateUser#
+			 WHERE [PROJECT_ID]       = #projectID#
+			   AND [CALENDAR_ID]      = #calendarID#
+			   AND [PATTERN_ID]       = #patternID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmCalendarDetail.Delete" parameterClass="MdmCalendarDetail">
+			DELETE
+			  FROM [CFG_CALENDAR_DETAIL]
+			 WHERE [PROJECT_ID]       = #projectID#
+			   AND [CALENDAR_ID]      = #calendarID#
+			   AND [PATTERN_ID]       = #patternID#
+		</delete>
+
+		<!-- BasedAttr -->
+		<!--SELECT-->
+		<select id="MdmCalendarBasedAttr.Select" parameterClass="MdmCalendarBasedAttr"  resultMap="rtnMdmCalendarBasedAttr">
+			SELECT [PROJECT_ID]
+				 , [CALENDAR_ID]
+				 , [PATTERN_ID]
+				 , [ATTR_TYPE]
+				 , [ATTR_VALUE]
+				 , [ATTR_DATA_TYPE]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_CALENDAR_BASED_ATTR]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="calendarID">
+					[CALENDAR_ID]     = #calendarID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="patternID">
+					[PATTERN_ID]      = #patternID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="attrType">
+					[ATTR_TYPE]       = #attrType#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="attrValue">
+					[ATTR_VALUE]      = #attrValue#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="attrDataType">
+					[ATTR_DATA_TYPE]  = #attrDataType#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmCalendarBasedAttr.Insert" parameterClass="MdmCalendarBasedAttr">
+			INSERT INTO [CFG_CALENDAR_BASED_ATTR]
+				 ( [PROJECT_ID]
+				 , [CALENDAR_ID]
+				 , [PATTERN_ID]
+				 , [ATTR_TYPE]
+				 , [ATTR_VALUE]
+				 , [ATTR_DATA_TYPE]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #calendarID#
+				 , #patternID#
+				 , #attrType#
+				 , #attrValue#
+				 , #attrDataType#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmCalendarBasedAttr.Update" parameterClass="MdmCalendarBasedAttr">
+			UPDATE [CFG_CALENDAR_BASED_ATTR]
+			   SET [PROJECT_ID]      = #projectID#
+				 , [CALENDAR_ID]     = #calendarID#
+				 , [PATTERN_ID]      = #patternID#
+				 , [ATTR_TYPE]       = #attrType#
+				 , [ATTR_VALUE]      = #attrValue#
+				 , [ATTR_DATA_TYPE]  = #attrDataType#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [CALENDAR_ID]     = #calendarID#
+			   AND [PATTERN_ID]      = #patternID#
+			   AND [ATTR_TYPE]       = #attrType#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmCalendarBasedAttr.Delete" parameterClass="MdmCalendarBasedAttr">
+			DELETE
+			  FROM [CFG_CALENDAR_BASED_ATTR]
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [CALENDAR_ID]     = #calendarID#
+			   AND [PATTERN_ID]      = #patternID#
+			   AND [ATTR_TYPE]       = #attrType#
+		</delete>
+	</statements>
+</sqlMap>

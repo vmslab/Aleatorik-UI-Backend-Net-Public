@@ -87,7 +87,7 @@ public class Startup
         services.AddSingletonWithNamedMapper<IMdmPmPlanDao, MdmPmPlanDao>(sMode);                               // PM PLAN
         services.AddSingletonWithNamedMapper<IMdmSetupInfoDao, MdmSetupInfoDao>(sMode);                         // SETUP INFO
         /* --------------------------------------------------------------------------------------------- */
-        services.AddSingletonWithNamedMapper<IMdmCalMasterDao, MdmCalMasterDao>(sMode);                         // 캘린더마스터, 캘린더상세정보, 캘린더속성값 관리
+        services.AddSingletonWithNamedMapper<IMdmCalendarMasterDao, MdmCalendarMasterDao>(sMode);                         // 캘린더마스터, 캘린더상세정보, 캘린더속성값 관리
         /* --------------------------------------------------------------------------------------------- */
         /**
          *        계획 관리
