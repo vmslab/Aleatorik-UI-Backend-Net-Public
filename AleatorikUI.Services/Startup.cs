@@ -83,7 +83,7 @@ public class Startup
         /* -------------------------------------------------------------------------------------------- */
         services.AddSingletonWithNamedMapper<IMdmResGroupMasterDao, MdmResGroupMasterDao>(sMode);               // RESOURCE GROUP MASTER
         services.AddSingletonWithNamedMapper<IMdmResMasterDao, MdmResMasterDao>(sMode);                         // RESOURCE MASTER
-        services.AddSingletonWithNamedMapper<IMdmOperResMasterDao, MdmOperResMasterDao>(sMode);                 // OPERATION RESOURCE, OPERATION RESOURCE PROPERTY VALUE
+        services.AddSingletonWithNamedMapper<IMdmOperResDao, MdmOperResDao>(sMode);                             // OPERATION RESOURCE, OPERATION RESOURCE PROPERTY VALUE
         services.AddSingletonWithNamedMapper<IMdmConstraintDao, MdmConstraintDao>(sMode);                       // CONSTRAINT INFO
         services.AddSingletonWithNamedMapper<IMdmPmPlanDao, MdmPmPlanDao>(sMode);                               // PM PLAN
         services.AddSingletonWithNamedMapper<IMdmSetupInfoDao, MdmSetupInfoDao>(sMode);                         // SETUP INFO

@@ -1,0 +1,482 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnMdmOperRes"  class="MdmOperRes" >
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="routingID"      column="ROUTING_ID"/>
+			<result property="operID"         column="OPER_ID"/>
+			<result property="resID"          column="RES_ID"/>
+			<result property="flowTime"       column="FLOW_TIME"/>
+			<result property="usagePer"       column="USAGE_PER"/>
+			<result property="resPriority"    column="RES_PRIORITY"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmOperResProp"  class="MdmOperResProp" >
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="routingID"      column="ROUTING_ID"/>
+			<result property="operID"         column="OPER_ID"/>
+			<result property="resID"          column="RES_ID"/>
+			<result property="propID"         column="PROP_ID"/>
+			<result property="propValue"      column="PROP_VALUE"/>
+			<result property="calendarID"     column="CALENDAR_ID"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmOperAddRes"  class="MdmOperAddRes" >
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="routingID"      column="ROUTING_ID"/>
+			<result property="operID"         column="OPER_ID"/>
+			<result property="resID"          column="RES_ID"/>
+			<result property="addResID"       column="ADD_RES_ID"/>
+			<result property="usagePer"       column="USAGE_PER"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmOperAddResProp"  class="MdmOperAddResProp" >
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="routingID"      column="ROUTING_ID"/>
+			<result property="operID"         column="OPER_ID"/>
+			<result property="resID"          column="RES_ID"/>
+			<result property="addResID"       column="ADD_RES_ID"/>
+			<result property="propID"         column="PROP_ID"/>
+			<result property="propValue"      column="PROP_VALUE"/>
+			<result property="calendarID"     column="CALENDAR_ID"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
+		</resultMap>		
+	</resultMaps>
+
+
+	<statements>
+		<!-- MASTER -->
+		<!--SELECT-->
+		<select id="MdmOperRes.Select" parameterClass="MdmOperRes" resultMap="rtnMdmOperRes">
+			SELECT [PROJECT_ID]
+				 , [ROUTING_ID]
+				 , [OPER_ID]
+				 , [RES_ID]
+				 , [FLOW_TIME]
+				 , [USAGE_PER]
+				 , [RES_PRIORITY]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_OPER_RES]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="routingID">
+					[ROUTING_ID]      = #routingID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="operID">
+					[OPER_ID]         = #operID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="resID">
+					[RES_ID]          = #resID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="flowTime">
+					[FLOW_TIME]       = #flowTime#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="usagePer">
+					[USAGE_PER]       = #usagePer#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="resPriority">
+					[RES_PRIORITY]    = #resPriority#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmOperRes.Insert" parameterClass="MdmOperRes">
+			INSERT INTO [CFG_OPER_RES]
+				 ( [PROJECT_ID]
+				 , [ROUTING_ID]
+				 , [OPER_ID]
+				 , [RES_ID]
+				 , [FLOW_TIME]
+				 , [USAGE_PER]
+				 , [RES_PRIORITY]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #routingID#
+				 , #operID#
+				 , #resID#
+				 , #flowTime#
+				 , #usagePer#
+				 , #resPriority#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmOperRes.Update" parameterClass="MdmOperRes">
+			UPDATE [CFG_OPER_RES]
+			   SET [PROJECT_ID]      = #projectID#
+				 , [ROUTING_ID]      = #routingID#
+				 , [OPER_ID]         = #operID#
+				 , [RES_ID]          = #resID#
+				 , [FLOW_TIME]       = #flowTime#
+				 , [USAGE_PER]       = #usagePer#
+				 , [RES_PRIORITY]    = #resPriority#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ROUTING_ID]      = #routingID#
+			   AND [OPER_ID]         = #operID#
+			   AND [RES_ID]          = #resID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmOperRes.Delete" parameterClass="MdmOperRes">
+			DELETE 
+			  FROM [CFG_OPER_RES]
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ROUTING_ID]      = #routingID#
+			   AND [OPER_ID]         = #operID#
+			   AND [RES_ID]          = #resID#
+		</delete>
+
+		<!-- Prop -->
+		<!--SELECT-->
+		<select id="MdmOperResProp.Select" parameterClass="MdmOperResProp"  resultMap="rtnMdmOperResProp">
+			SELECT [PROJECT_ID]
+				 , [ROUTING_ID]
+				 , [OPER_ID]
+				 , [RES_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_OPER_RES_PROP_VALUE]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="routingID">
+					[ROUTING_ID]      = #routingID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="operID">
+					[OPER_ID]         = #operID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="resID">
+					[RES_ID]          = #resID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propID">
+					[PROP_ID]         = #propID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propValue">
+					[PROP_VALUE]      = #propValue#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="calendarID">
+					[CALENDAR_ID]     = #calendarID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmOperResProp.Insert" parameterClass="MdmOperResProp">
+			INSERT INTO [CFG_OPER_RES_PROP_VALUE]
+				 ( [PROJECT_ID]
+				 , [ROUTING_ID]
+				 , [OPER_ID]
+				 , [RES_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #routingID#
+				 , #operID#
+				 , #resID#
+				 , #propID#
+				 , #propValue#
+				 , #calendarID#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmOperResProp.Update" parameterClass="MdmOperResProp">
+			UPDATE [CFG_OPER_RES_PROP_VALUE]
+			   SET [PROJECT_ID]      = #projectID#
+				 , [ROUTING_ID]      = #routingID#
+				 , [OPER_ID]         = #operID#
+				 , [RES_ID]          = #resID#
+				 , [PROP_ID]         = #propID#
+				 , [PROP_VALUE]      = #propValue#
+				 , [CALENDAR_ID]     = #calendarID#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ROUTING_ID]      = #routingID#
+			   AND [OPER_ID]         = #operID#
+			   AND [RES_ID]          = #resID#
+			   AND [PROP_ID]         = #propID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmOperResProp.Delete" parameterClass="MdmOperResProp">
+			DELETE 
+			  FROM [CFG_OPER_RES_PROP_VALUE]
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ROUTING_ID]      = #routingID#
+			   AND [OPER_ID]         = #operID#
+			   AND [RES_ID]          = #resID#
+			   AND [PROP_ID]         = #propID#
+		</delete>
+
+		<!-- AddRes -->
+		<!--SELECT-->
+		<select id="MdmOperAddRes.Select" parameterClass="MdmOperAddRes"  resultMap="rtnMdmOperAddRes">
+			SELECT [PROJECT_ID]
+				 , [ROUTING_ID]
+				 , [OPER_ID]
+				 , [RES_ID]
+				 , [ADD_RES_ID]
+				 , [USAGE_PER]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_OPER_ADD_RES]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="routingID">
+					[ROUTING_ID]      = #routingID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="operID">
+					[OPER_ID]         = #operID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="resID">
+					[RES_ID]          = #resID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="addResID">
+					[ADD_RES_ID]      = #addResID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="usagePer">
+					[USAGE_PER]       = #usagePer#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmOperAddRes.Insert" parameterClass="MdmOperAddRes">
+			INSERT INTO [CFG_OPER_ADD_RES]
+				 ( [PROJECT_ID]
+				 , [ROUTING_ID]
+				 , [OPER_ID]
+				 , [RES_ID]
+				 , [ADD_RES_ID]
+				 , [USAGE_PER]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #routingID#
+				 , #operID#
+				 , #resID#
+				 , #addResID#
+				 , #usagePer#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmOperAddRes.Update" parameterClass="MdmOperAddRes">
+			UPDATE [CFG_OPER_ADD_RES]
+			   SET [PROJECT_ID]      = #projectID#
+				 , [ROUTING_ID]      = #routingID#
+				 , [OPER_ID]         = #operID#
+				 , [RES_ID]          = #resID#
+				 , [ADD_RES_ID]      = #addResID#
+				 , [USAGE_PER]       = #usagePer#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ROUTING_ID]      = #routingID#
+			   AND [OPER_ID]         = #operID#
+			   AND [RES_ID]          = #resID#
+			   AND [ADD_RES_ID]      = #addResID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmOperAddRes.Delete" parameterClass="MdmOperAddRes">
+			DELETE
+			  FROM [CFG_OPER_ADD_RES]
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ROUTING_ID]      = #routingID#
+			   AND [OPER_ID]         = #operID#
+			   AND [RES_ID]          = #resID#
+			   AND [ADD_RES_ID]      = #addResID#
+		</delete>
+
+		<!-- AddResProp -->
+		<!--SELECT-->
+		<select id="MdmOperAddResProp.Select" parameterClass="MdmOperAddResProp"  resultMap="rtnMdmOperAddResProp">
+			SELECT [PROJECT_ID]
+				 , [ROUTING_ID]
+				 , [OPER_ID]
+				 , [RES_ID]
+				 , [ADD_RES_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_OPER_ADD_RES_PROP_VALUE]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="routingID">
+					[ROUTING_ID]      = #routingID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="operID">
+					[OPER_ID]         = #operID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="resID">
+					[RES_ID]          = #resID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="addResID">
+					[ADD_RES_ID]      = #addResID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propID">
+					[PROP_ID]         = #propID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propValue">
+					[PROP_VALUE]      = #propValue#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="calendarID">
+					[CALENDAR_ID]     = #calendarID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmOperAddResProp.Insert" parameterClass="MdmOperAddResProp">
+			INSERT INTO [CFG_OPER_ADD_RES_PROP_VALUE]
+				 ( [PROJECT_ID]
+				 , [ROUTING_ID]
+				 , [OPER_ID]
+				 , [RES_ID]
+				 , [ADD_RES_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #routingID#
+				 , #operID#
+				 , #resID#
+				 , #addResID#
+				 , #propID#
+				 , #propValue#
+				 , #calendarID#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmOperAddResProp.Update" parameterClass="MdmOperAddResProp">
+			UPDATE [CFG_OPER_ADD_RES_PROP_VALUE]
+			   SET [PROJECT_ID]      = #projectID#
+				 , [ROUTING_ID]      = #routingID#
+				 , [OPER_ID]         = #operID#
+				 , [RES_ID]          = #resID#
+				 , [ADD_RES_ID]      = #addResID#
+				 , [PROP_ID]         = #propID#
+				 , [PROP_VALUE]      = #propValue#
+				 , [CALENDAR_ID]     = #calendarID#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ROUTING_ID]      = #routingID#
+			   AND [OPER_ID]         = #operID#
+			   AND [RES_ID]          = #resID#
+			   AND [ADD_RES_ID]      = #addResID#
+			   AND [PROP_ID]         = #propID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmOperAddResProp.Delete" parameterClass="MdmOperAddResProp">
+			DELETE 
+			  FROM [CFG_OPER_ADD_RES_PROP_VALUE]
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ROUTING_ID]      = #routingID#
+			   AND [OPER_ID]         = #operID#
+			   AND [RES_ID]          = #resID#
+			   AND [ADD_RES_ID]      = #addResID#
+			   AND [PROP_ID]         = #propID#
+		</delete>
+	</statements>
+</sqlMap>

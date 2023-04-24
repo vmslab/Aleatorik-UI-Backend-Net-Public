@@ -35,22 +35,22 @@ public class MdmRoutingMasterDao : IMdmRoutingMasterDao
     /**
      * Sub1
      */
-    public IEnumerable<MdmRoutingSub1> GetAllSub1(String routingID)
+    public IEnumerable<MdmRoutingOper> GetAllSub1(String routingID)
     {
-        return Mapper.QueryForList<MdmRoutingSub1>("MdmRoutingSub1.Select", routingID);
+        return Mapper.QueryForList<MdmRoutingOper>("MdmRoutingSub1.Select", routingID);
     }
 
-    public void InsertSub1(MdmRoutingSub1 mdmRoutingSub1)
+    public void InsertSub1(MdmRoutingOper mdmRoutingSub1)
     {
         Mapper.Insert("MdmRoutingSub1.Insert", mdmRoutingSub1);
     }
 
-    public int UpdateSub1(MdmRoutingSub1 mdmRoutingSub1)
+    public int UpdateSub1(MdmRoutingOper mdmRoutingSub1)
     {
         return Mapper.Update("MdmRoutingSub1.Update", mdmRoutingSub1);
     }
 
-    public int DeleteSub1(MdmRoutingSub1 mdmRoutingSub1)
+    public int DeleteSub1(MdmRoutingOper mdmRoutingSub1)
     {
         return Mapper.Delete("MdmRoutingSub1.Delete", mdmRoutingSub1);
     }
@@ -58,22 +58,22 @@ public class MdmRoutingMasterDao : IMdmRoutingMasterDao
     /**
      * Sub2
      */
-    public IEnumerable<MdmRoutingSub2> GetAllSub2(String routingID)
+    public IEnumerable<MdmRoutingOperProp> GetAllSub2(String routingID)
     {
-        return Mapper.QueryForList<MdmRoutingSub2>("MdmRoutingSub2.Select", routingID);
+        return Mapper.QueryForList<MdmRoutingOperProp>("MdmRoutingSub2.Select", routingID);
     }
 
-    public void InsertSub2(MdmRoutingSub2 mdmRoutingSub2)
+    public void InsertSub2(MdmRoutingOperProp mdmRoutingSub2)
     {
         Mapper.Insert("MdmRoutingSub2.Insert", mdmRoutingSub2);
     }
 
-    public int UpdateSub2(MdmRoutingSub2 mdmRoutingSub2)
+    public int UpdateSub2(MdmRoutingOperProp mdmRoutingSub2)
     {
         return Mapper.Update("MdmRoutingSub2.Update", mdmRoutingSub2);
     }
 
-    public int DeleteSub2(MdmRoutingSub2 mdmRoutingSub2)
+    public int DeleteSub2(MdmRoutingOperProp mdmRoutingSub2)
     {
         return Mapper.Delete("MdmRoutingSub2.Delete", mdmRoutingSub2);
     }

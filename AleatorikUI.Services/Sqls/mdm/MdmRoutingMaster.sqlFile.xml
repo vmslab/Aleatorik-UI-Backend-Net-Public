@@ -4,39 +4,42 @@
 
 	<resultMaps>
 		<resultMap id="rtnMdmRoutingMaster"  class="MdmRoutingMaster" >
-			<result property="routingID"     column="ROUTING_ID"/>
-			<result property="description"   column="DESCRIPTION"/>
-			<result property="effStartTime"  column="EFF_START_TIME"/>
-			<result property="effEndTime"    column="EFF_END_TIME"/>
-			<result property="createTime"    column="CREATE_TIME"/>
-			<result property="createUser"    column="CREATE_USER"/>
-			<result property="updateTime"    column="UPDATE_TIME"/>
-			<result property="updateUser"    column="UPDATE_USER"/>
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="routingID"      column="ROUTING_ID"/>
+			<result property="effStartDate"   column="EFF_START_DATE"/>
+			<result property="effEndDate"     column="EFF_END_DATE"/>
+			<result property="description"    column="DESCRIPTION"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
 		</resultMap>
-		<resultMap id="rtnMdmRoutingSub1"  class="MdmRoutingSub1" >
-			<result property="routingID"     column="ROUTING_ID"/>
-			<result property="operationID"   column="OPERATION_ID"/>
-			<result property="sequence"      column="SEQUENCE"/>
-			<result property="operationType" column="OPERATION_TYPE"/>
-			<result property="waitTat"       column="WAIT_TAT"/>
-			<result property="runTat"        column="RUN_TAT"/>
-			<result property="timeUom"       column="TIME_UOM"/>
-			<result property="yield"         column="YIELD"/>
-			<result property="createTime"    column="CREATE_TIME"/>
-			<result property="createUser"    column="CREATE_USER"/>
-			<result property="updateTime"    column="UPDATE_TIME"/>
-			<result property="updateUser"    column="UPDATE_USER"/>
+		<resultMap id="rtnMdmRoutingOper"  class="MdmRoutingOper" >
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="routingID"      column="ROUTING_ID"/>
+			<result property="operID"         column="OPER_ID"/>
+			<result property="operSeq"        column="OPER_SEQ"/>
+			<result property="operType"       column="OPER_TYPE"/>
+			<result property="waitTat"        column="WAIT_TAT"/>
+			<result property="runTat"         column="RUN_TAT"/>
+			<result property="operYield"      column="OPER_YIELD"/>
+			<result property="description"    column="DESCRIPTION"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
 		</resultMap>
-		<resultMap id="rtnMdmRoutingSub2"  class="MdmRoutingSub2" >
-			<result property="routingID"   column="ROUTING_ID"/>
-			<result property="operationID" column="OPERATION_ID"/>
-			<result property="propertyID"  column="PROPERTY_ID"/>
-			<result property="value"       column="VALUE"/>
-			<result property="calendarID"  column="CALENDAR_ID"/>
-			<result property="createTime"  column="CREATE_TIME"/>
-			<result property="createUser"  column="CREATE_USER"/>
-			<result property="updateTime"  column="UPDATE_TIME"/>
-			<result property="updateUser"  column="UPDATE_USER"/>
+		<resultMap id="rtnMdmRoutingOperProp"  class="MdmRoutingOperProp" >
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="routingID"      column="ROUTING_ID"/>
+			<result property="operID"         column="OPER_ID"/>
+			<result property="propID"         column="PROP_ID"/>
+			<result property="propValue"      column="PROP_VALUE"/>
+			<result property="calendarID"     column="CALENDAR_ID"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
@@ -44,34 +47,60 @@
 	<statements>
 		<!-- MASTER -->
 		<!--SELECT-->
-		<select id="MdmRoutingMaster.Select" resultMap="rtnMdmRoutingMaster">
-			SELECT [ROUTING_ID]
+		<select id="MdmRoutingMaster.Select" parameterClass="MdmRoutingMaster" resultMap="rtnMdmRoutingMaster">
+			SELECT [PROJECT_ID]
+				 , [ROUTING_ID]
+				 , [EFF_START_DATE]
+				 , [EFF_END_DATE]
 				 , [DESCRIPTION]
-				 , [EFF_START_TIME]
-				 , [EFF_END_TIME]
-				 , [CREATE_TIME]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_ROUTING_MASTER]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="routingID">
+					[ROUTING_ID]      = #routingID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="effStartDate">
+					[EFF_START_DATE]  = #effStartDate#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="effEndDate">
+					[EFF_END_DATE]    = #effEndDate#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="description">
+					[DESCRIPTION]     = #description#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
 		</select>
 
 		<!--INSERT-->
 		<insert id="MdmRoutingMaster.Insert" parameterClass="MdmRoutingMaster">
 			INSERT INTO [CFG_ROUTING_MASTER]
-				 ( [ROUTING_ID]
+				 ( [PROJECT_ID]
+				 , [ROUTING_ID]
+				 , [EFF_START_DATE]
+				 , [EFF_END_DATE]
 				 , [DESCRIPTION]
-				 , [EFF_START_TIME]
-				 , [EFF_END_TIME]
-				 , [CREATE_TIME]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #routingID#
+				 ( #projectID#
+				 , #routingID#
+				 , #effStartDate#
+				 , #effEndDate#
 				 , #description#
-				 , #effStartTime#
-				 , #effEndTime#
 				 , getdate()
 				 , #createUser#
 				 , getdate()
@@ -82,65 +111,105 @@
 		<!--UPDATE-->
 		<update id="MdmRoutingMaster.Update" parameterClass="MdmRoutingMaster">
 			UPDATE [CFG_ROUTING_MASTER]
-			   SET [ROUTING_ID]     = #routingID#
-				 , [DESCRIPTION]    = #description#
-				 , [EFF_START_TIME] = #effStartTime#
-				 , [EFF_END_TIME]   = #effEndTime#
-				 , [UPDATE_TIME]    = getdate()
-				 , [UPDATE_USER]    = #updateUser#
-			 WHERE [ROUTING_ID]     = #routingID#
+			   SET [PROJECT_ID]      = #projectID#
+				 , [ROUTING_ID]      = #routingID#
+				 , [EFF_START_DATE]  = #effStartDate#
+				 , [EFF_END_DATE]    = #effEndDate#
+				 , [DESCRIPTION]     = #description#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ROUTING_ID]      = #routingID#
 		</update>
 
 		<!--DELETE-->
 		<delete id="MdmRoutingMaster.Delete" parameterClass="MdmRoutingMaster">
 			DELETE
 			  FROM [CFG_ROUTING_MASTER]
-		 	 WHERE [ROUTING_ID]     = #routingID#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ROUTING_ID]      = #routingID#
 		</delete>
 
-		<!-- Sub1 -->
+		<!-- Oper -->
 		<!--SELECT-->
-		<select id="MdmRoutingSub1.Select" parameterClass="string"  resultMap="rtnMdmRoutingSub1">
-			SELECT [ROUTING_ID]
-				 , [OPERATION_ID]
-				 , [SEQUENCE]
-				 , [OPERATION_TYPE]
+		<select id="MdmRoutingOper.Select" parameterClass="MdmRoutingOper"  resultMap="rtnMdmRoutingOper">
+			SELECT [PROJECT_ID]
+				 , [ROUTING_ID]
+				 , [OPER_ID]
+				 , [OPER_SEQ]
+				 , [OPER_TYPE]
 				 , [WAIT_TAT]
 				 , [RUN_TAT]
-				 , [TIME_UOM]
-				 , [YIELD]
-				 , [CREATE_TIME]
+				 , [OPER_YIELD]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
-		  	  FROM [CFG_ROUTING_OPERATION]
-			 WHERE [ROUTING_ID] = #routingID#
+			  FROM [CFG_ROUTING_OPER]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="routingID">
+					[ROUTING_ID]      = #routingID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="operID">
+					[OPER_ID]         = #operID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="operSeq">
+					[OPER_SEQ]        = #operSeq#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="operType">
+					[OPER_TYPE]       = #operType#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="waitTat">
+					[WAIT_TAT]        = #waitTat#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="runTat">
+					[RUN_TAT]         = #runTat#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="operYield">
+					[OPER_YIELD]      = #operYield#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="description">
+					[DESCRIPTION]     = #description#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmRoutingSub1.Insert" parameterClass="MdmRoutingSub1">
-			INSERT INTO [CFG_ROUTING_OPERATION]
-				 ( [ROUTING_ID]
-				 , [OPERATION_ID]
-				 , [SEQUENCE]
-				 , [OPERATION_TYPE]
+		<insert id="MdmRoutingOper.Insert" parameterClass="MdmRoutingOper">
+			INSERT INTO [CFG_ROUTING_OPER]
+				 ( [PROJECT_ID]
+				 , [ROUTING_ID]
+				 , [OPER_ID]
+				 , [OPER_SEQ]
+				 , [OPER_TYPE]
 				 , [WAIT_TAT]
 				 , [RUN_TAT]
-				 , [TIME_UOM]
-				 , [YIELD]
-				 , [CREATE_TIME]
+				 , [OPER_YIELD]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #routingID#
-				 , #operationID#
-				 , #sequence#
-				 , #operationType#
+				 ( #projectID#
+				 , #routingID#
+				 , #operID#
+				 , #operSeq#
+				 , #operType#
 				 , #waitTat#
 				 , #runTat#
-				 , #timeUom#
-				 , #yield#
+				 , #operYield#
+				 , #description#
 				 , getdate()
 				 , #createUser#
 				 , getdate()
@@ -149,64 +218,94 @@
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmRoutingSub1.Update" parameterClass="MdmRoutingSub1">
-			UPDATE [CFG_ROUTING_OPERATION]
-			   SET [ROUTING_ID]     = #routingID#
-				 , [OPERATION_ID]   = #operationID#
-				 , [SEQUENCE]       = #sequence#
-				 , [OPERATION_TYPE] = #operationType#
-				 , [WAIT_TAT]       = #waitTat#
-				 , [RUN_TAT]        = #runTat#
-				 , [TIME_UOM]       = #timeUom#
-				 , [YIELD]          = #yield#
-				 , [UPDATE_TIME]    = getdate()
-				 , [UPDATE_USER]    = #updateUser#
-			 WHERE [ROUTING_ID]     = #routingID#
-			   AND [OPERATION_ID]   = #operationID#
+		<update id="MdmRoutingOper.Update" parameterClass="MdmRoutingOper">
+			UPDATE [CFG_ROUTING_OPER]
+			   SET [PROJECT_ID]      = #projectID#
+			     , [ROUTING_ID]      = #routingID#
+			     , [OPER_ID]         = #operID#
+			     , [OPER_SEQ]        = #operSeq#
+			     , [OPER_TYPE]       = #operType#
+			     , [WAIT_TAT]        = #waitTat#
+			     , [RUN_TAT]         = #runTat#
+			     , [OPER_YIELD]      = #operYield#
+			     , [DESCRIPTION]     = #description#
+			     , [UPDATE_DATETIME] = getdate()
+			     , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ROUTING_ID]      = #routingID#
+			   AND [OPER_ID]         = #operID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmRoutingSub1.Delete" parameterClass="MdmRoutingSub1">
+		<delete id="MdmRoutingOper.Delete" parameterClass="MdmRoutingOper">
 			DELETE
-			  FROM [CFG_ROUTING_OPERATION]
-			 WHERE [ROUTING_ID]     = #routingID#
-			   AND [OPERATION_ID]   = #operationID#
+			  FROM [CFG_ROUTING_OPER]
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ROUTING_ID]      = #routingID#
+			   AND [OPER_ID]         = #operID#
 		</delete>
 
-		<!-- Sub2 -->
+		<!-- OperProp -->
 		<!--SELECT-->
-		<select id="MdmRoutingSub2.Select" parameterClass="string"  resultMap="rtnMdmRoutingSub2">
-			SELECT [ROUTING_ID]
-				 , [OPERATION_ID]
-				 , [PROPERTY_ID]
-				 , [VALUE]
+		<select id="MdmRoutingOperProp.Select" parameterClass="string"  resultMap="rtnMdmRoutingOperProp">
+			SELECT [PROJECT_ID]
+				 , [ROUTING_ID]
+				 , [OPER_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
 				 , [CALENDAR_ID]
-				 , [CREATE_TIME]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
-			  FROM [CFG_ROUTING_OPERATION_PROPERTY_VALUE]
-			 WHERE [ROUTING_ID]     = #routingID#
-			   AND [OPERATION_ID]   = #operationID# 
+			  FROM [CFG_ROUTING_OPER_PROP_VALUE]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="routingID">
+					[ROUTING_ID]      = #routingID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="operID">
+					[OPER_ID]         = #operID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propID">
+					[PROP_ID]         = #propID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propValue">
+					[PROP_VALUE]      = #propValue#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="calendarID">
+					[CALENDAR_ID]     = #calendarID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmRoutingSub2.Insert" parameterClass="MdmRoutingSub2">
-			INSERT INTO [CFG_ROUTING_OPERATION_PROPERTY_VALUE]
-				 ( [ROUTING_ID]
-				 , [OPERATION_ID]
-				 , [PROPERTY_ID]
-				 , [VALUE]
+		<insert id="MdmRoutingOperProp.Insert" parameterClass="MdmRoutingOperProp">
+			INSERT INTO [CFG_ROUTING_OPER_PROP_VALUE]
+				 ( [PROJECT_ID]
+				 , [ROUTING_ID]
+				 , [OPER_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
 				 , [CALENDAR_ID]
-				 , [CREATE_TIME]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #routingID#
-				 , #operationID#
-				 , #propertyID#
-				 , #value#
+				 ( #projectID#
+				 , #routingID#
+				 , #operID#
+				 , #propID#
+				 , #propValue#
 				 , #calendarID#
 				 , getdate()
 				 , #createUser#
@@ -216,27 +315,30 @@
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmRoutingSub2.Update" parameterClass="MdmRoutingSub2">
-			UPDATE [CFG_ROUTING_OPERATION_PROPERTY_VALUE]
-			   SET [ROUTING_ID]   = #routingID#
-				 , [OPERATION_ID] = #operationID#
-				 , [PROPERTY_ID]  = #propertyID#
-				 , [VALUE]        = #value#
-				 , [CALENDAR_ID]  = #calendarID#
-				 , [UPDATE_TIME]  = getdate()
-				 , [UPDATE_USER]  = #updateUser#
-			 WHERE [ROUTING_ID]   = #routingID#
-			   AND [OPERATION_ID] = #operationID#
-			   AND [PROPERTY_ID]  = #propertyID#
+		<update id="MdmRoutingOperProp.Update" parameterClass="MdmRoutingOperProp">
+			UPDATE [CFG_ROUTING_OPER_PROP_VALUE]
+			   SET [PROJECT_ID]      = #projectID#
+				 , [ROUTING_ID]      = #routingID#
+				 , [OPER_ID]         = #operID#
+				 , [PROP_ID]         = #propID#
+				 , [PROP_VALUE]      = #propValue#
+				 , [CALENDAR_ID]     = #calendarID#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ROUTING_ID]      = #routingID#
+			   AND [OPER_ID]         = #operID#
+			   AND [PROP_ID]         = #propID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmRoutingSub2.Delete" parameterClass="MdmRoutingSub2">
+		<delete id="MdmRoutingOperProp.Delete" parameterClass="MdmRoutingOperProp">
 			DELETE
-			  FROM [CFG_ROUTING_OPERATION_PROPERTY_VALUE]
-			 WHERE [ROUTING_ID]   = #routingID#
-			   AND [OPERATION_ID] = #operationID#
-			   AND [PROPERTY_ID]  = #propertyID#
+			  FROM [CFG_ROUTING_OPER_PROP_VALUE]
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ROUTING_ID]      = #routingID#
+			   AND [OPER_ID]         = #operID#
+			   AND [PROP_ID]         = #propID#
 		</delete>
 	</statements>
 </sqlMap>

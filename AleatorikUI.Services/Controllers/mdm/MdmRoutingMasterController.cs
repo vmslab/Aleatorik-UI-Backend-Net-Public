@@ -92,7 +92,7 @@ public class MdmRoutingMasterController : ControllerBase
      * Sub1
      */
     [HttpGet("/api/MdmRoutingMaster/{routingID}/Sub1")]
-    public IEnumerable<MdmRoutingSub1> GetAllSub1(String routingID)
+    public IEnumerable<MdmRoutingOper> GetAllSub1(String routingID)
     {
         try
         {
@@ -105,12 +105,12 @@ public class MdmRoutingMasterController : ControllerBase
         {
             _logger.LogError("error : {}", e.Message);
             Serilog.Log.Logger.Error(e.Message);
-            return new List<MdmRoutingSub1>();
+            return new List<MdmRoutingOper>();
         }
     }
 
     [HttpPost("/api/MdmRoutingMaster/{routingID}/Sub1")]
-    public int InsertSub1(MdmRoutingSub1 mdmRoutingSub1, String routingID)
+    public int InsertSub1(MdmRoutingOper mdmRoutingSub1, String routingID)
     {
         try
         {
@@ -127,7 +127,7 @@ public class MdmRoutingMasterController : ControllerBase
     }
 
     [HttpPut("/api/MdmRoutingMaster/{routingID}/Sub1/{operationID}")]
-    public int UpdateSub1(MdmRoutingSub1 mdmRoutingSub1)
+    public int UpdateSub1(MdmRoutingOper mdmRoutingSub1)
     {
         _logger.LogInformation("Update : {}", mdmRoutingSub1);
         try
@@ -145,7 +145,7 @@ public class MdmRoutingMasterController : ControllerBase
     }
 
     [HttpDelete("/api/MdmRoutingMaster/{routingID}/Sub1/{operationID}")]
-    public int DeleteSub1(MdmRoutingSub1 mdmRoutingSub1)
+    public int DeleteSub1(MdmRoutingOper mdmRoutingSub1)
     {
         _logger.LogInformation("Delete : {}", mdmRoutingSub1);
         try
@@ -165,7 +165,7 @@ public class MdmRoutingMasterController : ControllerBase
      * Sub2
      */
     [HttpGet("/api/MdmRoutingMaster/{routingID}/Sub2")]
-    public IEnumerable<MdmRoutingSub2> GetAllSub2(String routingID)
+    public IEnumerable<MdmRoutingOperProp> GetAllSub2(String routingID)
     {
         try
         {
@@ -178,12 +178,12 @@ public class MdmRoutingMasterController : ControllerBase
         {
             _logger.LogError("error : {}", e.Message);
             Serilog.Log.Logger.Error(e.Message);
-            return new List<MdmRoutingSub2>();
+            return new List<MdmRoutingOperProp>();
         }
     }
 
     [HttpPost("/api/MdmRoutingMaster/{routingID}/Sub2")]
-    public int InsertSub2(MdmRoutingSub2 mdmRoutingSub2, String routingID)
+    public int InsertSub2(MdmRoutingOperProp mdmRoutingSub2, String routingID)
     {
         try
         {
@@ -200,7 +200,7 @@ public class MdmRoutingMasterController : ControllerBase
     }
 
     [HttpPut("/api/MdmRoutingMaster/{routingID}/Sub2/{operationID}/{propertyID}")]
-    public int UpdateSub2(MdmRoutingSub2 mdmRoutingSub2)
+    public int UpdateSub2(MdmRoutingOperProp mdmRoutingSub2)
     {
         _logger.LogInformation("Update : {}", mdmRoutingSub2);
         try
@@ -218,7 +218,7 @@ public class MdmRoutingMasterController : ControllerBase
     }
 
     [HttpDelete("/api/MdmRoutingMaster/{routingID}/Sub2/{operationID}/{propertyID}")]
-    public int DeleteSub2(MdmRoutingSub2 mdmRoutingSub2)
+    public int DeleteSub2(MdmRoutingOperProp mdmRoutingSub2)
     {
         _logger.LogInformation("Delete : {}", mdmRoutingSub2);
         try
