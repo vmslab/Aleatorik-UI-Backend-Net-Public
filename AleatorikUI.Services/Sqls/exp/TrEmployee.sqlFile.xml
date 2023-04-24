@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="trEmployee"  class="TrEmployee" >
+      <result property="empNO"			column="EMP_NO"/>
+      <result property="empName"		column="EMP_NAME"/>
+      <result property="department"	column="DEPARTMENT"/>
+      <result property="phoneNO"		column="PHONE_NO"/>
+      <result property="hireDate"		column="HIRE_DATE"/>
+      <result property="birthDate"	column="BIRTH_DATE"/>
+      <result property="salary"			column="SALARY"/>
+      <result property="createUser"	column="CREATE_USER"/>
+      <result property="createDatetime"	column="CREATE_DATETIME"/>
+		</resultMap>
+	</resultMaps>
+	<statements>
+
+		<!--SELECT-->
+		<select id="TrEmployee.Select" parameterClass="TrEmployee" resultMap="trEmployee">
+      SELECT [EMP_NO]
+      , [EMP_NAME]
+      , [DEPARTMENT]
+      , [PHONE_NO]
+      , [HIRE_DATE]
+      , [BIRTH_DATE]
+      , [SALARY]
+      , [CREATE_USER]
+      , [CREATE_DATETIME]
+      FROM [TR_EMPLOYEE]
+      <dynamic prepend="WHERE " close=" ">
+        <isNotEmpty prepend="AND " property="empNO">
+          [EMP_NO]     = #empNO#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="empName">
+          [EMP_NAME]   = #empName#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="department">
+          [DEPARTMENT] = #department#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="phoneNO">
+          [PHONE_NO]   = #phoneNO#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="hireDate">
+          [HIRE_DATE]  = #hireDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="birthDate">
+          [BIRTH_DATE] = #birthDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="salary">
+          [SALARY]     = #salary#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="createUser">
+          [CREATE_USER]     = #createUser#
+        </isNotEmpty>
+      </dynamic>
+		</select>
+
+		<!--INSERT-->
+		<insert id="TrEmployee.Insert" parameterClass="TrEmployee">
+      INSERT INTO [TR_EMPLOYEE]
+      ( [EMP_NO]
+      , [EMP_NAME]
+      , [DEPARTMENT]
+      , [PHONE_NO]
+      , [HIRE_DATE]
+      , [BIRTH_DATE]
+      , [SALARY]
+      , [CREATE_USER]
+      , [CREATE_DATETIME]
+      ) VALUES
+      ( #empNO#
+      , #empName#
+      , #department#
+      , #phoneNO#
+      , #hireDate#
+      , #birthDate#
+      , #salary#
+      , #createUser#
+      , getdate()
+      )
+    </insert>
+
+		<!--UPDATE-->
+		<update id="TrEmployee.Update" parameterClass="TrEmployee">
+      UPDATE [TR_EMPLOYEE]
+      SET [EMP_NO]     = #empNO#
+      , [EMP_NAME]   = #empName#
+      , [DEPARTMENT] = #department#
+      , [PHONE_NO]   = #phoneNO#
+      , [HIRE_DATE]  = #hireDate#
+      , [BIRTH_DATE] = #birthDate#
+      , [SALARY]     = #salary#
+      <dynamic prepend="WHERE " close=" ">
+        <isNotEmpty prepend="AND " property="empNO">
+          [EMP_NO]     = #empNO#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="empName">
+          [EMP_NAME]   = #empName#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="department">
+          [DEPARTMENT] = #department#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="phoneNO">
+          [PHONE_NO]   = #phoneNO#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="hireDate">
+          [HIRE_DATE]  = #hireDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="birthDate">
+          [BIRTH_DATE] = #birthDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="salary">
+          [SALARY]     = #salary#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="createUser">
+          [CREATE_USER]     = #createUser#
+        </isNotEmpty>
+      </dynamic>
+    </update>
+
+		<!--DELETE-->
+		<delete id="TrEmployee.Delete" parameterClass="TrEmployee">
+      DELETE
+      FROM [TR_EMPLOYEE]
+      <dynamic prepend="WHERE " close=" ">
+        <isNotEmpty prepend="AND " property="empNO">
+          [EMP_NO]     = #empNO#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="empName">
+          [EMP_NAME]   = #empName#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="department">
+          [DEPARTMENT] = #department#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="phoneNO">
+          [PHONE_NO]   = #phoneNO#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="hireDate">
+          [HIRE_DATE]  = #hireDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="birthDate">
+          [BIRTH_DATE] = #birthDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="salary">
+          [SALARY]     = #salary#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND " property="createUser">
+          [CREATE_USER]     = #createUser#
+        </isNotEmpty>
+      </dynamic>
+    </delete>
+
+	</statements>
+</sqlMap>

@@ -74,6 +74,9 @@
     <None Update="Sqls\exp\Gantt.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Sqls\exp\TrEmployee.sqlFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sqls\mdm\MdmDemand.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -37,8 +37,9 @@ public class SamMenuDao : ISamMenuDao
             {
                 if (samMenuInfo.State == "removed")
                 {
-                    affectedRow += transaction.SqlMapper.Update("Menu.DeleteMenu", samMenuInfo);
-                    affectedRow += transaction.SqlMapper.Update("Menu.DeleteMenuMap", samMenuInfo);
+                    transaction.SqlMapper.Delete("Menu.DeleteMenu", samMenuInfo);
+                    transaction.SqlMapper.Delete("Menu.DeleteMenuMap", samMenuInfo);
+                    affectedRow++;
                 }
                 else
                 {
@@ -55,7 +56,7 @@ public class SamMenuDao : ISamMenuDao
                             IsRead = true,
                             IsWrite = true
                         };
-                        affectedRow += transaction.SqlMapper.Update("Menu.InsertMenuMap", adminMapInfo);
+                        transaction.SqlMapper.Insert("Menu.InsertMenuMap", adminMapInfo);
                         var defaultMapInfo = new SamMenuMapInfo
                         {
                             MenuMapId = Guid.NewGuid().ToString(),
@@ -65,7 +66,8 @@ public class SamMenuDao : ISamMenuDao
                             IsRead = true,
                             IsWrite = false
                         };
-                        affectedRow += transaction.SqlMapper.Update("Menu.InsertMenuMap", defaultMapInfo);
+                        transaction.SqlMapper.Insert("Menu.InsertMenuMap", defaultMapInfo);
+                        affectedRow++;
                     }
                     else
                     {
