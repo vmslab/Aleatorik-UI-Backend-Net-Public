@@ -1,8 +1,8 @@
 ﻿using AleatorikUI.Services.Authentication;
 using AleatorikUI.Services.Configuration;
-using AleatorikUI.Services.DAO.aor;
 using AleatorikUI.Services.DAO.exp;
 using AleatorikUI.Services.DAO.mdm;
+using AleatorikUI.Services.DAO.rar;
 using AleatorikUI.Services.DAO.plm;
 using AleatorikUI.Services.DAO.sam;
 using AleatorikUI.Services.Helper;
@@ -67,32 +67,33 @@ public class Startup
         services.AddSingletonWithNamedMapper<IMdmSiteMasterDao, MdmSiteMasterDao>(sMode);                       // 사이트
         services.AddSingletonWithNamedMapper<IMdmAllocGroupMasterDao, MdmAllocGroupMasterDao>(sMode);           // 할당그룹
         services.AddSingletonWithNamedMapper<IMdmFactoryConfigDao, MdmFactoryConfigDao>(sMode);                 // 공장운영정보 
-        services.AddSingletonWithNamedMapper<IMdmCodeGroupMasterDao, MdmCodeGroupMasterDao>(sMode);             // 코드 그룹, 코드 관리
+        services.AddSingletonWithNamedMapper<IMdmCodeCategoryMasterDao, MdmCodeCategoryMasterDao>(sMode);       // 코드 그룹, 코드 관리
         services.AddSingletonWithNamedMapper<IMdmPropMasterDao, MdmPropMasterDao>(sMode);                       // 속성 관리
         /* -------------------------------------------------------------------------------------------- */
         services.AddSingletonWithNamedMapper<IMdmItemMasterDao, MdmItemMasterDao>(sMode);                       // 품목 정보
         services.AddSingletonWithNamedMapper<IMdmBufferMasterDao, MdmBufferMasterDao>(sMode);                   // 버퍼 정보
-        services.AddSingletonWithNamedMapper<IMdmIsbMasterDao, MdmIsbMasterDao>(sMode);                         // ISB 정보
+        services.AddSingletonWithNamedMapper<IMdmItemSiteBufferMasterDao, MdmItemSiteBufferMasterDao>(sMode);   // ISB 정보
         services.AddSingletonWithNamedMapper<IMdmBomMasterDao, MdmBomMasterDao>(sMode);                         // BOM MASTER, DETAIL, DETAIL ALT, PROPERTY VALUE, BOM ROUTING, BOM ROUTING PROPERTY VALUE
         services.AddSingletonWithNamedMapper<IMdmRoutingMasterDao, MdmRoutingMasterDao>(sMode);                 // ROUTING MASTER, ROUTING OPERATION, ROUTING OPERATION PROPERTY VALUE 
         /* -------------------------------------------------------------------------------------------- */
         services.AddSingletonWithNamedMapper<IMdmWipDao, MdmWipDao>(sMode);                                     // 재공 정보
         /* -------------------------------------------------------------------------------------------- */
-        services.AddSingletonWithNamedMapper<IMdmCustMasterDao, MdmCustMasterDao>(sMode);                           // 고객 정보
+        services.AddSingletonWithNamedMapper<IMdmCustMasterDao, MdmCustMasterDao>(sMode);                       // 고객 정보
         services.AddSingletonWithNamedMapper<IMdmDemandDao, MdmDemandDao>(sMode);                               // DEMAND 정보
         /* -------------------------------------------------------------------------------------------- */
         services.AddSingletonWithNamedMapper<IMdmResGroupMasterDao, MdmResGroupMasterDao>(sMode);               // RESOURCE GROUP MASTER
         services.AddSingletonWithNamedMapper<IMdmResMasterDao, MdmResMasterDao>(sMode);                         // RESOURCE MASTER
         services.AddSingletonWithNamedMapper<IMdmOperResMasterDao, MdmOperResMasterDao>(sMode);                 // OPERATION RESOURCE, OPERATION RESOURCE PROPERTY VALUE
-        services.AddSingletonWithNamedMapper<IMdmConstInfoDao, MdmConstInfoDao>(sMode);                         // CONSTRAINT INFO
+        services.AddSingletonWithNamedMapper<IMdmConstraintDao, MdmConstraintDao>(sMode);                       // CONSTRAINT INFO
         services.AddSingletonWithNamedMapper<IMdmPmPlanDao, MdmPmPlanDao>(sMode);                               // PM PLAN
         services.AddSingletonWithNamedMapper<IMdmSetupInfoDao, MdmSetupInfoDao>(sMode);                         // SETUP INFO
         /* --------------------------------------------------------------------------------------------- */
-        services.AddSingletonWithNamedMapper<IMdmCalendarMasterDao, MdmCalendarMasterDao>(sMode);                         // 캘린더마스터, 캘린더상세정보, 캘린더속성값 관리
+        services.AddSingletonWithNamedMapper<IMdmCalendarMasterDao, MdmCalendarMasterDao>(sMode);               // 캘린더마스터, 캘린더상세정보, 캘린더속성값 관리
         /* --------------------------------------------------------------------------------------------- */
         /**
          *        계획 관리
          */
+        services.AddSingletonWithNamedMapper<IPlmFactorMasterDao, PlmFactorMasterDao>(sMode);                   // Factor 관리
         services.AddSingletonWithNamedMapper<IPlmPlanExecuteDao, PlmPlanExecuteDao>(sMode);
 
         /**

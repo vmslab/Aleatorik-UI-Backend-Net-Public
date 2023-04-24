@@ -1,6 +1,6 @@
-﻿using AleatorikUI.Services.DTO.aor;
+﻿using AleatorikUI.Services.DTO.rar;
 
-namespace AleatorikUI.Services.DAO.aor;
+namespace AleatorikUI.Services.DAO.rar;
 
 public interface IAorBomMapDao
 {

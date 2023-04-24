@@ -4,42 +4,95 @@
 
 	<resultMaps>
 		<resultMap id="rtnMdmItemMaster"  class="MdmItemMaster" >
-			<result property="itemID"     column="ITEM_ID"/>
-			<result property="itemType"   column="ITEM_TYPE"/>
-			<result property="createTime" column="CREATE_TIME"/>
-			<result property="createUser" column="CREATE_USER"/>
-			<result property="updateTime" column="UPDATE_TIME"/>
-			<result property="updateUser" column="UPDATE_USER"/>
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="itemID"         column="ITEM_ID"/>
+			<result property="itemType"       column="ITEM_TYPE"/>
+			<result property="itemName"       column="ITEM_NAME"/>
+			<result property="itemGroup"      column="ITEM_GROUP"/>
+			<result property="description"    column="DESCRIPTION"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmItemProp"  class="MdmItemProp" >
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="itemID"         column="ITEM_ID"/>
+			<result property="propID"         column="PROP_ID"/>
+			<result property="propValue"      column="PROP_VALUE"/>
+			<result property="calendarID"     column="CALENDAR_ID"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
 		</resultMap>
 	</resultMaps>
 
 	<statements>
 		<!--SELECT-->
-		<select id="MdmItemMaster.Select" resultMap="rtnMdmItemMaster">
-			SELECT [ITEM_ID]
+		<select id="MdmItemMaster.Select" parameterClass="MdmItemMaster" resultMap="rtnMdmItemMaster">
+			SELECT [PROJECT_ID]
+				 , [ITEM_ID]
 				 , [ITEM_TYPE]
-				 , [CREATE_TIME]
+				 , [ITEM_NAME]
+				 , [ITEM_GROUP]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
-		  	  FROM [CFG_ITEM_MASTER]
+			  FROM [CFG_ITEM_MASTER]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="itemID">
+					[ITEM_ID]         = #itemID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="itemType">
+					[ITEM_TYPE]       = #itemType#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="itemName">
+					[ITEM_NAME]       = #itemName#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="itemGroup">
+					[ITEM_GROUP]      = #itemGroup#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="description">
+					[DESCRIPTION]     = #description#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
 		</select>
 
 		<!--INSERT-->
 		<insert id="MdmItemMaster.Insert" parameterClass="MdmItemMaster">
 			INSERT INTO [CFG_ITEM_MASTER]
-				 ( [ITEM_ID]
+				 ( [PROJECT_ID]
+				 , [ITEM_ID]
 				 , [ITEM_TYPE]
-				 , [CREATE_TIME]
+				 , [ITEM_NAME]
+				 , [ITEM_GROUP]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
-				 , [UPDATE_TIME]
+				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #itemID#
+				 ( #projectID#
+				 , #itemID#
 				 , #itemType#
-				 , #createTime#
+				 , #itemName#
+				 , #itemGroup#
+				 , #description#
+				 , getdate()
 				 , #createUser#
-				 , #updateTime#
+				 , getdate()
 				 , #updateUser#
 				 )
 		</insert>
@@ -47,21 +100,113 @@
 		<!--UPDATE-->
 		<update id="MdmItemMaster.Update" parameterClass="MdmItemMaster">
 			UPDATE [CFG_ITEM_MASTER]
-			   SET [ITEM_ID]     = #itemID#
-				 , [ITEM_TYPE]   = #itemType#
-				 , [CREATE_TIME] = #createTime#
-				 , [CREATE_USER] = #createUser#
-				 , [UPDATE_TIME] = #updateTime#
-				 , [UPDATE_USER] = #updateUser#
-		 	 WHERE [ITEM_ID]     = #itemID#
+			   SET [PROJECT_ID]      = #projectID#
+			     , [ITEM_ID]         = #itemID#
+			     , [ITEM_TYPE]       = #itemType#
+			     , [ITEM_NAME]       = #itemName#
+			     , [ITEM_GROUP]      = #itemGroup#
+			     , [DESCRIPTION]     = #description#
+			     , [UPDATE_DATETIME] = getdate()
+			     , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ITEM_ID]         = #itemID#
+			   AND [DESCRIPTION]     = #description#
 		</update>
 
 		<!--DELETE-->
 		<delete id="MdmItemMaster.Delete" parameterClass="MdmItemMaster">
 			DELETE
 			  FROM [CFG_ITEM_MASTER]
-			 WHERE [ITEM_ID]     = #itemID#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ITEM_ID]         = #itemID#
+			   AND [DESCRIPTION]     = #description#
 		</delete>
+		
+		<!--ITEM PROP -->
+		<!--SELECT-->
+		<select id="MdmItemProp.Select" parameterClass="MdmItemProp" resultMap="rtnMdmItemProp">
+			SELECT [PROJECT_ID]
+				 , [ITEM_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_ITEM_PROP_VALUE]
+			<dynamic prepend="WHERE " close=" ">
+			   <isNotEmpty prepend="AND " property="projectID">    
+				  [PROJECT_ID]      = #projectID#
+			   </isNotEmpty>
+			   <isNotEmpty prepend="AND " property="itemID">    
+				  [ITEM_ID]         = #itemID#
+			   </isNotEmpty>
+			   <isNotEmpty prepend="AND " property="propID">    
+				  [PROP_ID]         = #propID#
+			   </isNotEmpty>
+			   <isNotEmpty prepend="AND " property="propValue">    
+				  [PROP_VALUE]      = #propValue#
+			   </isNotEmpty>
+			   <isNotEmpty prepend="AND " property="calendarID">    
+				  [CALENDAR_ID]     = #calendarID#
+			   </isNotEmpty>
+			   <isNotEmpty prepend="AND " property="createUser">    
+				  [CREATE_USER]     = #createUser#
+			   </isNotEmpty>
+			   <isNotEmpty prepend="AND " property="updateUser">    
+				  [UPDATE_USER]     = #updateUser#
+			   </isNotEmpty>
+			</dynamic>
+		</select>
 
+		<!--INSERT-->
+		<insert id="MdmItemProp.Insert" parameterClass="MdmItemProp">
+			INSERT INTO [CFG_ITEM_PROP_VALUE]
+				 ( [PROJECT_ID]
+				 , [ITEM_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #itemID#
+				 , #propID#
+				 , #propValue#
+				 , #calendarID#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmItemProp.Update" parameterClass="MdmItemProp">
+			UPDATE [CFG_ITEM_PROP_VALUE]
+			   SET [PROJECT_ID]      = #projectID#
+				 , [ITEM_ID]         = #itemID#
+				 , [PROP_ID]         = #propID#
+				 , [PROP_VALUE]      = #propValue#
+				 , [CALENDAR_ID]     = #calendarID#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ITEM_ID]         = #itemID#
+			   AND [PROP_ID]         = #propID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmItemProp.Delete" parameterClass="MdmItemProp">
+			DELETE 
+			  FROM [CFG_ITEM_PROP_VALUE]
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [ITEM_ID]         = #itemID#
+			   AND [PROP_ID]         = #propID#
+		</delete>
 	</statements>
 </sqlMap>

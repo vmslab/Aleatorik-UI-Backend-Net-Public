@@ -1,8 +1,8 @@
-using AleatorikUI.Services.DAO.aor;
-using AleatorikUI.Services.DTO.aor;
+using AleatorikUI.Services.DAO.rar;
+using AleatorikUI.Services.DTO.rar;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AleatorikUI.Services.Controllers.aor;
+namespace AleatorikUI.Services.Controllers.rar;
 
 [ApiController]
 [Route("[controller]")]

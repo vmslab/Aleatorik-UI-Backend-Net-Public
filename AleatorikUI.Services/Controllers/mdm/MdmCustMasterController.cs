@@ -21,13 +21,16 @@ public class MdmCustMasterController : ControllerBase
     /// <summary>
     /// 거래처 정보를 조회 합니다.
     /// </summary>
+    /// <param name="projectID"></param>
+    /// <param name="mdmCustMaster"></param>
     /// <returns></returns>
-    [HttpGet("/api/MdmCustMaster")]
-    public IEnumerable<MdmCustMaster> GetAll()
+    [HttpGet("/api/{projectID}/MdmCustMaster")]
+    public IEnumerable<MdmCustMaster> GetAll(String projectID, [FromQuery] MdmCustMaster mdmCustMaster)
     {
         try
         {
-            var result = _mdmCustMasterDao.GetAll();
+            mdmCustMaster.projectID = projectID;
+            var result = _mdmCustMasterDao.GetAll(mdmCustMaster);
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -40,15 +43,17 @@ public class MdmCustMasterController : ControllerBase
         }
     }
     /// <summary>
-    /// 거래처 정보를 추가 합니다.
+    /// 거래처 정보를 저장 합니다.
     /// </summary>
+    /// <param name="projectID"></param>
     /// <param name="mdmCustMaster"></param>
     /// <returns></returns>
-    [HttpPost("/api/MdmCustMaster")]
-    public int Insert(MdmCustMaster mdmCustMaster)
+    [HttpPost("/api/{projectID}/MdmCustMaster")]
+    public int Insert(String projectID, MdmCustMaster mdmCustMaster)
     {
         try
         {
+            mdmCustMaster.projectID = projectID;
             _logger.LogInformation("Insert : {}", mdmCustMaster);
             _mdmCustMasterDao.Insert(mdmCustMaster);
             return 1;
@@ -62,14 +67,16 @@ public class MdmCustMasterController : ControllerBase
     /// <summary>
     /// 거래처 정보를 수정 합니다.
     /// </summary>
+    /// <param name="projectID"></param>
     /// <param name="mdmCustMaster"></param>
     /// <returns></returns>
-    [HttpPut("/api/MdmCustMaster/{custID}")]
-    public int Update(MdmCustMaster mdmCustMaster)
+    [HttpPut("/api/{projectID}/MdmCustMaster/{custID}")]
+    public int Update(String projectID, MdmCustMaster mdmCustMaster)
     {
         _logger.LogInformation("Update : {}", mdmCustMaster);
         try
         {
+            mdmCustMaster.projectID = projectID;
             var result = _mdmCustMasterDao.Update(mdmCustMaster);
             _logger.LogInformation("result : {}", result);
 
@@ -84,14 +91,16 @@ public class MdmCustMasterController : ControllerBase
     /// <summary>
     /// 거래처 정보를 삭제 합니다.
     /// </summary>
+    /// <param name="projectID"></param>
     /// <param name="mdmCustMaster"></param>
     /// <returns></returns>
-    [HttpDelete("/api/MdmCustMaster/{custID}")]
-    public int Delete(MdmCustMaster mdmCustMaster)
+    [HttpDelete("/api/{projectID}/MdmCustMaster/{custID}")]
+    public int Delete(String projectID, MdmCustMaster mdmCustMaster)
     {
         _logger.LogInformation("Delete : {}", mdmCustMaster);
         try
         {
+            mdmCustMaster.projectID = projectID;
             var result = _mdmCustMasterDao.Delete(mdmCustMaster);
             _logger.LogInformation("result : {}", result);
 
@@ -104,15 +113,18 @@ public class MdmCustMasterController : ControllerBase
         }
     }
     /// <summary>
-    /// 거래처정보 - PROP 를 조회 합니다.
+    /// 거래처정보 추가속성을 조회 합니다.
     /// </summary>
+    /// <param name="projectID"></param>
+    /// <param name="mdmCustProp"></param>
     /// <returns></returns>
-    [HttpGet("/api/MdmCustMaster/{custID}/PROP")]
-    public IEnumerable<MdmCustProp> GetAllProp(String custID)
+    [HttpGet("/api/{projectID}/MdmCustMaster/{custID}/PROP")]
+    public IEnumerable<MdmCustProp> GetAllProp(String projectID, [FromQuery] MdmCustProp mdmCustProp)
     {
         try
         {
-            var result = _mdmCustMasterDao.GetAllProp(custID);
+            mdmCustProp.projectID = projectID;
+            var result = _mdmCustMasterDao.GetAllProp(mdmCustProp);
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -126,15 +138,17 @@ public class MdmCustMasterController : ControllerBase
     }
 
     /// <summary>
-    /// 거래처정보 - PROP 를 추가 합니다.
+    /// 거래처정보 추가속성을 저장 합니다.
     /// </summary>
+    /// <param name="projectID"></param>
     /// <param name="mdmCustProp"></param>
     /// <returns></returns>
-    [HttpPost("/api/MdmCustMaster/{custID}/PROP")]
-    public int InsertProp(MdmCustProp mdmCustProp)
+    [HttpPost("/api/{projectID}/MdmCustMaster/{custID}/PROP")]
+    public int InsertProp(String projectID, MdmCustProp mdmCustProp)
     {
         try
         {
+            mdmCustProp.projectID = projectID;
             _logger.LogInformation("Insert : {}", mdmCustProp);
             _mdmCustMasterDao.InsertProp(mdmCustProp);
             return 1;
@@ -146,16 +160,18 @@ public class MdmCustMasterController : ControllerBase
         }
     }
     /// <summary>
-    /// 거래처정보 - PROP 를 수정 합니다.
+    /// 거래처정보 추가속성을 수정 합니다.
     /// </summary>
+    /// <param name="projectID"></param>
     /// <param name="mdmCustProp"></param>
     /// <returns></returns>
-    [HttpPut("/api/MdmCustProp/{custID}/PROP/{propID}")]
-    public int UpdateProp(MdmCustProp mdmCustProp)
+    [HttpPut("/api/{projectID}/MdmCustMaster/{custID}/PROP/{propID}")]
+    public int UpdateProp(String projectID, MdmCustProp mdmCustProp)
     {
         _logger.LogInformation("Update : {}", mdmCustProp);
         try
         {
+            mdmCustProp.projectID = projectID;
             var result = _mdmCustMasterDao.UpdateProp(mdmCustProp);
             _logger.LogInformation("result : {}", result);
 
@@ -169,16 +185,18 @@ public class MdmCustMasterController : ControllerBase
     }
 
     /// <summary>
-    /// 거래처정보 - PROP 를 삭제 합니다.
+    /// 거래처정보 추가속성을 삭제 합니다.
     /// </summary>
+    /// <param name="projectID"></param>
     /// <param name="mdmCustProp"></param>
     /// <returns></returns>
-    [HttpDelete("/api/MdmCustProp/{custID}/PROP/{propID}")]
-    public int DeleteProp(MdmCustProp mdmCustProp)
+    [HttpDelete("/api/{projectID}/MdmCustMaster/{custID}/PROP/{propID}")]
+    public int DeleteProp(String projectID, MdmCustProp mdmCustProp)
     {
         _logger.LogInformation("Delete : {}", mdmCustProp);
         try
         {
+            mdmCustProp.projectID = projectID;
             var result = _mdmCustMasterDao.DeleteProp(mdmCustProp);
             _logger.LogInformation("result : {}", result);
 

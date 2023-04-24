@@ -2,6 +2,7 @@ namespace AleatorikUI.Services.DTO.mdm;
 
 public class MdmDemandProp
 {
+    public string? projectID { get; set; }
     public string? demandID { get; set; }
     public string? propID { get; set; }
     public string? propValue { get; set; }

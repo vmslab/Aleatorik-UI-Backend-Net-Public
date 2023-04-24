@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnPlmFactorMaster"  class="PlmFactorMaster" >
+			<result property="projectID"      column="PROJECT_ID"/>
+			<result property="rulePoint"      column="RULE_POINT"/>
+			<result property="factorID"       column="FACTOR_ID"/>
+			<result property="factorType"     column="FACTOR_TYPE"/>
+			<result property="factorScript"   column="FACTOR_SCRIPT"/>
+			<result property="factorValue"    column="FACTOR_VALUE"/>
+			<result property="description"    column="DESCRIPTION"/>
+			<result property="createDatetime" column="CREATE_DATETIME"/>
+			<result property="createUser"     column="CREATE_USER"/>
+			<result property="updateDatetime" column="UPDATE_DATETIME"/>
+			<result property="updateUser"     column="UPDATE_USER"/>
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+		<!--SELECT-->
+		<select id="PlmFactorMaster.Select" parameterClass="PlmFactorMaster" resultMap="rtnPlmFactorMaster">
+			SELECT [PROJECT_ID]
+				 , [RULE_POINT]
+				 , [FACTOR_ID]
+				 , [FACTOR_TYPE]
+				 , [FACTOR_SCRIPT]
+				 , [FACTOR_VALUE]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_FACTOR_MASTER]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="rulePoint">
+					[RULE_POINT]      = #rulePoint#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="factorID">
+					[FACTOR_ID]       = #factorID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="factorType">
+					[FACTOR_TYPE]     = #factorType#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="factorScript">
+					[FACTOR_SCRIPT]   = #factorScript#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="factorValue">
+					[FACTOR_VALUE]    = #factorValue#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="description">
+					[DESCRIPTION]     = #description#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
+		</select>
+
+		<!--INSERT-->
+		<insert id="PlmFactorMaster.Insert" parameterClass="PlmFactorMaster">
+			INSERT INTO [CFG_FACTOR_MASTER]
+				 ( [PROJECT_ID]
+				 , [RULE_POINT]
+				 , [FACTOR_ID]
+				 , [FACTOR_TYPE]
+				 , [FACTOR_SCRIPT]
+				 , [FACTOR_VALUE]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #rulePoint#
+				 , #factorID#
+				 , #factorType#
+				 , #factorScript#
+				 , #factorValue#
+				 , #description#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="PlmFactorMaster.Update" parameterClass="PlmFactorMaster">
+			UPDATE [CFG_FACTOR_MASTER]
+			   SET [PROJECT_ID]      = #projectID#
+				 , [RULE_POINT]      = #rulePoint#
+				 , [FACTOR_ID]       = #factorID#
+				 , [FACTOR_TYPE]     = #factorType#
+				 , [FACTOR_SCRIPT]   = #factorScript#
+				 , [FACTOR_VALUE]    = #factorValue#
+				 , [DESCRIPTION]     = #description#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [RULE_POINT]      = #rulePoint#
+			   AND [FACTOR_ID]       = #factorID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="PlmFactorMaster.Delete" parameterClass="PlmFactorMaster">
+			DELETE
+			  FROM [CFG_FACTOR_MASTER]
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [RULE_POINT]      = #rulePoint#
+			   AND [FACTOR_ID]       = #factorID#
+		</delete>
+
+	</statements>
+</sqlMap>

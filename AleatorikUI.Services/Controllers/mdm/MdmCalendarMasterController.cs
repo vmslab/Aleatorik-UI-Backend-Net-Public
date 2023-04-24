@@ -24,7 +24,7 @@ public class MdmCalendarMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmCalendarMaster"></param>
     /// <returns></returns>
-    [HttpGet("/{projectID}/MdmCalendarMaster")]
+    [HttpGet("/api/{projectID}/MdmCalendarMaster")]
     public IEnumerable<MdmCalendarMaster> GetAll(String projectID, [FromQuery] MdmCalendarMaster mdmCalendarMaster)
     {
         try
@@ -48,7 +48,7 @@ public class MdmCalendarMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmCalendarMaster"></param>
     /// <returns></returns>
-    [HttpPost("/{projectID}/MdmCalendarMaster")]
+    [HttpPost("/api/{projectID}/MdmCalendarMaster")]
     public int Insert(String projectID, MdmCalendarMaster mdmCalendarMaster)
     {
         try
@@ -70,7 +70,7 @@ public class MdmCalendarMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmCalendarMaster"></param>
     /// <returns></returns>
-    [HttpPut("/{projectID}/MdmCalendarMaster/{calendarID}")]
+    [HttpPut("/api/{projectID}/MdmCalendarMaster/{calendarID}")]
     public int Update(String projectID, MdmCalendarMaster mdmCalendarMaster)
     {
         _logger.LogInformation("Update : {}", mdmCalendarMaster);
@@ -94,7 +94,7 @@ public class MdmCalendarMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmCalendarMaster"></param>
     /// <returns></returns>
-    [HttpDelete("/{projectID}/MdmCalendarMaster/{calendarID}")]
+    [HttpDelete("/api/{projectID}/MdmCalendarMaster/{calendarID}")]
     public int Delete(String projectID, MdmCalendarMaster mdmCalendarMaster)
     {
         _logger.LogInformation("Delete : {}", mdmCalendarMaster);
@@ -118,7 +118,7 @@ public class MdmCalendarMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmCalendarDetail"></param>
     /// <returns></returns>
-    [HttpGet("/{projectID}/MdmCalendarMaster/{calendarID}/Detail")]
+    [HttpGet("/api/{projectID}/MdmCalendarMaster/{calendarID}/Detail")]
     public IEnumerable<MdmCalendarDetail> GetAllDetail(String projectID, [FromQuery] MdmCalendarDetail mdmCalendarDetail)
     {
         try
@@ -142,7 +142,7 @@ public class MdmCalendarMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmCalendarDetail"></param>
     /// <returns></returns>
-    [HttpPost("/{projectID}/MdmCalendarMaster/{calendarID}/Detail")]
+    [HttpPost("/api/{projectID}/MdmCalendarMaster/{calendarID}/Detail")]
     public int InsertDetail(String projectID, MdmCalendarDetail mdmCalendarDetail)
     {
         try
@@ -164,7 +164,7 @@ public class MdmCalendarMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmCalendarDetail"></param>
     /// <returns></returns>
-    [HttpPut("/{projectID}/MdmCalendarMaster/{calendarID}/Detail/{patternID}")]
+    [HttpPut("/api/{projectID}/MdmCalendarMaster/{calendarID}/Detail/{patternID}")]
     public int UpdateDetail(String projectID, MdmCalendarDetail mdmCalendarDetail)
     {
         _logger.LogInformation("Update : {}", mdmCalendarDetail);
@@ -188,7 +188,7 @@ public class MdmCalendarMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmCalendarDetail"></param>
     /// <returns></returns>
-    [HttpDelete("/{projectID}/MdmCalendarMaster/{calendarID}/Detail/{patternID}")]
+    [HttpDelete("/api/{projectID}/MdmCalendarMaster/{calendarID}/Detail/{patternID}")]
     public int DeleteDetail(String projectID, MdmCalendarDetail mdmCalendarDetail)
     {
         _logger.LogInformation("Delete : {}", mdmCalendarDetail);
@@ -212,7 +212,7 @@ public class MdmCalendarMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmCalendarBasedAttr"></param>
     /// <returns></returns>
-    [HttpGet("/{projectID}/MdmCalendarMaster/{calendarID}/Detail/{patternID}/BasedAttr")]
+    [HttpGet("/api/{projectID}/MdmCalendarMaster/{calendarID}/Detail/{patternID}/BasedAttr")]
     public IEnumerable<MdmCalendarBasedAttr> GetAllBasedAttr(String projectID, [FromQuery] MdmCalendarBasedAttr mdmCalendarBasedAttr)
     {
         try
@@ -236,7 +236,7 @@ public class MdmCalendarMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmCalendarBasedAttr"></param>
     /// <returns></returns>
-    [HttpPost("/{projectID}/MdmCalendarMaster/{calendarID}/Detail/{patternID}/BasedAttr")]
+    [HttpPost("/api/{projectID}/MdmCalendarMaster/{calendarID}/Detail/{patternID}/BasedAttr")]
     public int InsertBasedAttr(String projectID, MdmCalendarBasedAttr mdmCalendarBasedAttr)
     {
         try
@@ -258,7 +258,7 @@ public class MdmCalendarMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmCalendarBasedAttr"></param>
     /// <returns></returns>
-    [HttpPut("/{projectID}/MdmCalendarMaster/{calendarID}/Detail/{patternID}/BasedAttr/{attrType}")]
+    [HttpPut("/api/{projectID}/MdmCalendarMaster/{calendarID}/Detail/{patternID}/BasedAttr/{attrType}")]
     public int UpdateBasedAttr(String projectID, MdmCalendarBasedAttr mdmCalendarBasedAttr)
     {
         _logger.LogInformation("Update : {}", mdmCalendarBasedAttr);
@@ -282,7 +282,7 @@ public class MdmCalendarMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmCalendarBasedAttr"></param>
     /// <returns></returns>
-    [HttpDelete("/{projectID}/MdmCalendarMaster/{calendarID}/Detail/{patternID}/BasedAttr/{attrType}")]
+    [HttpDelete("/api/{projectID}/MdmCalendarMaster/{calendarID}/Detail/{patternID}/BasedAttr/{attrType}")]
     public int DeleteBasedAttr(String projectID, MdmCalendarBasedAttr mdmCalendarBasedAttr)
     {
         _logger.LogInformation("Delete : {}", mdmCalendarBasedAttr);

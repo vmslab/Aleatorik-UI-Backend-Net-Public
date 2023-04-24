@@ -12,9 +12,9 @@ public class MdmFactoryConfigDao : IMdmFactoryConfigDao
 
     private ISqlMapper Mapper { get; }
 
-    public IEnumerable<MdmFactoryConfig> GetAll()
+    public IEnumerable<MdmFactoryConfig> GetAll(MdmFactoryConfig mdmFactoryConfig)
     {
-        return Mapper.QueryForList<MdmFactoryConfig>("MdmFactoryConfig.Select", null);
+        return Mapper.QueryForList<MdmFactoryConfig>("MdmFactoryConfig.Select", mdmFactoryConfig);
     }
 
     public void Insert(MdmFactoryConfig mdmFactoryConfig)

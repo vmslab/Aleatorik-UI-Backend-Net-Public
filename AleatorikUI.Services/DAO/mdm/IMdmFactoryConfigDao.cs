@@ -4,7 +4,7 @@ namespace AleatorikUI.Services.DAO.mdm
 {
     public interface IMdmFactoryConfigDao
     {
-        public IEnumerable<MdmFactoryConfig> GetAll();
+        public IEnumerable<MdmFactoryConfig> GetAll(MdmFactoryConfig mdmFactoryConfig);
         public void Insert(MdmFactoryConfig mdmFactoryConfig);
         public int Update(MdmFactoryConfig mdmFactoryConfig);
         public int Delete(MdmFactoryConfig mdmFactoryConfig);

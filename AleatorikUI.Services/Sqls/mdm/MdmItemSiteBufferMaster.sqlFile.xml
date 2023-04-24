@@ -3,20 +3,22 @@
 <sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
 	<resultMaps>
-		<resultMap id="rtnMdmCustMaster"  class="MdmCustMaster" >
+		<resultMap id="rtnMdmItemSiteBufferMaster"  class="MdmItemSiteBufferMaster" >
 			<result property="projectID"      column="PROJECT_ID"/>
-			<result property="custID"         column="CUST_ID"/>
-			<result property="custName"       column="CUST_NAME"/>
-			<result property="custPriority"   column="CUST_PRIORITY"/>
+			<result property="itemID"         column="ITEM_ID"/>
+			<result property="siteID"         column="SITE_ID"/>
+			<result property="bufferID"       column="BUFFER_ID"/>
 			<result property="description"    column="DESCRIPTION"/>
 			<result property="createDatetime" column="CREATE_DATETIME"/>
 			<result property="createUser"     column="CREATE_USER"/>
 			<result property="updateDatetime" column="UPDATE_DATETIME"/>
 			<result property="updateUser"     column="UPDATE_USER"/>
 		</resultMap>
-		<resultMap id="rtnMdmCustProp"  class="MdmCustProp" >
+		<resultMap id="rtnMdmItemSiteBufferProp"  class="MdmItemSiteBufferProp" >
 			<result property="projectID"      column="PROJECT_ID"/>
-			<result property="custID"         column="CUST_ID"/>
+			<result property="itemID"         column="ITEM_ID"/>
+			<result property="siteID"         column="SITE_ID"/>
+			<result property="bufferID"       column="BUFFER_ID"/>
 			<result property="propID"         column="PROP_ID"/>
 			<result property="propValue"      column="PROP_VALUE"/>
 			<result property="calendarID"     column="CALENDAR_ID"/>
@@ -29,29 +31,29 @@
 
 	<statements>
 		<!--SELECT-->
-		<select id="MdmCustMaster.Select" parameterClass="MdmCustMaster" resultMap="rtnMdmCustMaster">
+		<select id="MdmItemSiteBufferMaster.Select" parameterClass="MdmItemSiteBufferMaster" resultMap="rtnMdmItemSiteBufferMaster">
 			SELECT [PROJECT_ID]
-				 , [CUST_ID]
-				 , [CUST_NAME]
-				 , [CUST_PRIORITY]
+				 , [ITEM_ID]
+				 , [SITE_ID]
+				 , [BUFFER_ID]
 				 , [DESCRIPTION]
 				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
 				 , [UPDATE_DATETIME]
-				 , [UPDATE_USER]
-			  FROM [CFG_CUST_MASTER]
+			 	 , [UPDATE_USER]
+			  FROM [CFG_ITEM_SITE_BUFFER_MASTER]
 			<dynamic prepend="WHERE " close=" ">
 				<isNotEmpty prepend="AND " property="projectID">
 					[PROJECT_ID]      = #projectID#
 				</isNotEmpty>
-				<isNotEmpty prepend="AND " property="custID">
-					[CUST_ID]         = #custID#
+				<isNotEmpty prepend="AND " property="itemID">
+					[ITEM_ID]         = #itemID#
 				</isNotEmpty>
-				<isNotEmpty prepend="AND " property="custName">
-					[CUST_NAME]       = #custName#
+				<isNotEmpty prepend="AND " property="siteID">
+					[SITE_ID]         = #siteID#
 				</isNotEmpty>
-				<isNotEmpty prepend="AND " property="custPriority">
-					[CUST_PRIORITY]   = #custPriority#
+				<isNotEmpty prepend="AND " property="bufferID">
+					[BUFFER_ID]       = #bufferID#
 				</isNotEmpty>
 				<isNotEmpty prepend="AND " property="description">
 					[DESCRIPTION]     = #description#
@@ -66,12 +68,12 @@
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmCustMaster.Insert" parameterClass="MdmCustMaster">
-			INSERT INTO [CFG_CUST_MASTER]
+		<insert id="MdmItemSiteBufferMaster.Insert" parameterClass="MdmItemSiteBufferMaster">
+			INSERT INTO [CFG_ITEM_SITE_BUFFER_MASTER]
 				 ( [PROJECT_ID]
-				 , [CUST_ID]
-				 , [CUST_NAME]
-				 , [CUST_PRIORITY]
+				 , [ITEM_ID]
+				 , [SITE_ID]
+				 , [BUFFER_ID]
 				 , [DESCRIPTION]
 				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
@@ -79,9 +81,9 @@
 				 , [UPDATE_USER]
 				 ) VALUES
 				 ( #projectID#
-				 , #custID#
-				 , #custName#
-				 , #custPriority#
+				 , #itemID#
+				 , #siteID#
+				 , #bufferID#
 				 , #description#
 				 , getdate()
 				 , #createUser#
@@ -91,32 +93,38 @@
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmCustMaster.Update" parameterClass="MdmCustMaster">
-			UPDATE [CFG_CUST_MASTER]
+		<update id="MdmItemSiteBufferMaster.Update" parameterClass="MdmItemSiteBufferMaster">
+			UPDATE [CFG_ITEM_SITE_BUFFER_MASTER]
 			   SET [PROJECT_ID]      = #projectID#
-			     , [CUST_ID]         = #custID#
-			     , [CUST_NAME]       = #custName#
-			     , [CUST_PRIORITY]   = #custPriority#
-			     , [DESCRIPTION]     = #description#
-			     , [UPDATE_DATETIME] = getdate()
-			     , [UPDATE_USER]     = #updateUser#
+				 , [ITEM_ID]         = #itemID#
+				 , [SITE_ID]         = #siteID#
+				 , [BUFFER_ID]       = #bufferID#
+				 , [DESCRIPTION]     = #description#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
 			 WHERE [PROJECT_ID]      = #projectID#
-			   AND [CUST_ID]         = #custID#
+			   AND [ITEM_ID]         = #itemID#
+			   AND [SITE_ID]         = #siteID#
+			   AND [BUFFER_ID]       = #bufferID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmCustMaster.Delete" parameterClass="MdmCustMaster">
+		<delete id="MdmItemSiteBufferMaster.Delete" parameterClass="MdmItemSiteBufferMaster">
 			DELETE
-			  FROM [CFG_CUST_MASTER]
+			  FROM [CFG_ITEM_SITE_BUFFER_MASTER]
 			 WHERE [PROJECT_ID]      = #projectID#
-			   AND [CUST_ID]         = #custID#
+			   AND [ITEM_ID]         = #itemID#
+			   AND [SITE_ID]         = #siteID#
+			   AND [BUFFER_ID]       = #bufferID#
 		</delete>
 		
 		<!--CUST PROP -->
 		<!--SELECT-->
-		<select id="MdmCustProp.Select" parameterClass="MdmCustProp" resultMap="rtnMdmCustProp">
+		<select id="MdmItemSiteBufferProp.Select" parameterClass="MdmItemSiteBufferProp" resultMap="rtnMdmItemSiteBufferProp">
 			SELECT [PROJECT_ID]
-				 , [CUST_ID]
+				 , [ITEM_ID]
+				 , [SITE_ID]
+				 , [BUFFER_ID]
 				 , [PROP_ID]
 				 , [PROP_VALUE]
 				 , [CALENDAR_ID]
@@ -124,13 +132,19 @@
 				 , [CREATE_USER]
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
-			  FROM [CFG_CUST_PROP_VALUE]
+			  FROM [CFG_ITEM_SITE_BUFFER_PROP_VALUE]
 			<dynamic prepend="WHERE " close=" ">
 				<isNotEmpty prepend="AND " property="projectID">
 					[PROJECT_ID]      = #projectID#
 				</isNotEmpty>
-				<isNotEmpty prepend="AND " property="custID">
-					[CUST_ID]         = #custID#
+				<isNotEmpty prepend="AND " property="itemID">
+					[ITEM_ID]         = #itemID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="siteID">
+					[SITE_ID]         = #siteID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="bufferID">
+					[BUFFER_ID]       = #bufferID#
 				</isNotEmpty>
 				<isNotEmpty prepend="AND " property="propID">
 					[PROP_ID]         = #propID#
@@ -151,10 +165,12 @@
 		</select>
 
 		<!--INSERT-->
-		<insert id="MdmCustProp.Insert" parameterClass="MdmCustProp">
-			INSERT INTO [CFG_CUST_PROP_VALUE]
+		<insert id="MdmItemSiteBufferProp.Insert" parameterClass="MdmItemSiteBufferProp">
+			INSERT INTO [CFG_ITEM_SITE_BUFFER_PROP_VALUE]
 				 ( [PROJECT_ID]
-				 , [CUST_ID]
+				 , [ITEM_ID]
+				 , [SITE_ID]
+				 , [BUFFER_ID]
 				 , [PROP_ID]
 				 , [PROP_VALUE]
 				 , [CALENDAR_ID]
@@ -164,7 +180,9 @@
 				 , [UPDATE_USER]
 				 ) VALUES
 				 ( #projectID#
-				 , #custID#
+				 , #itemID#
+				 , #siteID#
+				 , #bufferID#
 				 , #propID#
 				 , #propValue#
 				 , #calendarID#
@@ -176,26 +194,32 @@
 		</insert>
 
 		<!--UPDATE-->
-		<update id="MdmCustProp.Update" parameterClass="MdmCustProp">
-			UPDATE [CFG_CUST_PROP_VALUE]
+		<update id="MdmItemSiteBufferProp.Update" parameterClass="MdmItemSiteBufferProp">
+			UPDATE [CFG_ITEM_SITE_BUFFER_PROP_VALUE]
 			   SET [PROJECT_ID]      = #projectID#
-			     , [CUST_ID]         = #custID#
-			     , [PROP_ID]         = #propID#
-			     , [PROP_VALUE]      = #propValue#
-			     , [CALENDAR_ID]     = #calendarID#
-			     , [UPDATE_DATETIME] = getdate()
-			     , [UPDATE_USER]     = #updateUser#
+				 , [ITEM_ID]         = #itemID#
+				 , [SITE_ID]         = #siteID#
+				 , [BUFFER_ID]       = #bufferID#
+				 , [PROP_ID]         = #propID#
+				 , [PROP_VALUE]      = #propValue#
+				 , [CALENDAR_ID]     = #calendarID#
+				 , [UPDATE_DATETIME] = getdate()
+				 , [UPDATE_USER]     = #updateUser#
 			 WHERE [PROJECT_ID]      = #projectID#
-			   AND [CUST_ID]         = #custID#
+			   AND [ITEM_ID]         = #itemID#
+			   AND [SITE_ID]         = #siteID#
+			   AND [BUFFER_ID]       = #bufferID#
 			   AND [PROP_ID]         = #propID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmCustProp.Delete" parameterClass="MdmCustProp">
-			DELETE
-		  	  FROM [CFG_CUST_PROP_VALUE]
+		<delete id="MdmItemSiteBufferProp.Delete" parameterClass="MdmItemSiteBufferProp">
+			DELETE 
+			  FROM [CFG_ITEM_SITE_BUFFER_PROP_VALUE]
 			 WHERE [PROJECT_ID]      = #projectID#
-			   AND [CUST_ID]         = #custID#
+			   AND [ITEM_ID]         = #itemID#
+			   AND [SITE_ID]         = #siteID#
+			   AND [BUFFER_ID]       = #bufferID#
 			   AND [PROP_ID]         = #propID#
 		</delete>
 	</statements>

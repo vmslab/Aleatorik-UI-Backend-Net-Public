@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnMdmCodeCategoryMaster"  class="MdmCodeCategoryMaster" >
+			<result property="projectID"       column="PROJECT_ID"/>
+			<result property="codeCategoryID"  column="CODE_CATEGORY_ID"/>
+			<result property="description"     column="DESCRIPTION"/>
+			<result property="createDatetime"  column="CREATE_DATETIME"/>
+			<result property="createUser"      column="CREATE_USER"/>
+			<result property="updateDatetime"  column="UPDATE_DATETIME"/>
+			<result property="updateUser"      column="UPDATE_USER"/>
+		</resultMap>
+		<resultMap id="rtnMdmCodeMaster"  class="MdmCodeMaster" >
+			<result property="projectID"       column="PROJECT_ID"/>
+			<result property="codeCategoryID"  column="CODE_CATEGORY_ID"/>
+			<result property="codeID"          column="CODE_ID"/>
+			<result property="codeName"        column="CODE_NAME"/>
+			<result property="codeSeq"         column="CODE_SEQ"/>
+			<result property="createDatetime"  column="CREATE_DATETIME"/>
+			<result property="createUser"      column="CREATE_USER"/>
+			<result property="updateDatetime"  column="UPDATE_DATETIME"/>
+			<result property="updateUser"      column="UPDATE_USER"/>
+		</resultMap>	
+	</resultMaps>
+
+
+	<statements>
+	<!-- MASTER -->
+		<!--SELECT-->
+		<select id="MdmCodeCategoryMaster.Select" parameterClass="MdmCodeCategoryMaster" resultMap="rtnMdmCodeCategoryMaster">
+			SELECT [PROJECT_ID]
+				 , [CODE_CATEGORY_ID]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_CODE_CATEGORY_MASTER]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]       = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="codeCategoryID">
+					[CODE_CATEGORY_ID] = #codeCategoryID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="description">
+					[DESCRIPTION]      = #description#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]      = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]      = #updateUser#
+				</isNotEmpty>
+			</dynamic>
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmCodeCategoryMaster.Insert" parameterClass="MdmCodeCategoryMaster">
+			INSERT INTO [CFG_CODE_CATEGORY_MASTER]
+				 ( [PROJECT_ID]
+				 , [CODE_CATEGORY_ID]
+				 , [DESCRIPTION]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #codeCategoryID#
+				 , #description#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmCodeCategoryMaster.Update" parameterClass="MdmCodeCategoryMaster">
+			UPDATE [CFG_CODE_CATEGORY_MASTER]
+			   SET [PROJECT_ID]       = #projectID#
+				 , [CODE_CATEGORY_ID] = #codeCategoryID#
+				 , [DESCRIPTION]      = #description#
+				 , [UPDATE_DATETIME]  = getdate()
+				 , [UPDATE_USER]      = #updateUser#
+			 WHERE [PROJECT_ID]       = #projectID#
+			   AND [CODE_CATEGORY_ID] = #codeCategoryID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmCodeCategoryMaster.Delete" parameterClass="MdmCodeCategoryMaster">
+			DELETE 
+			  FROM [CFG_CODE_CATEGORY_MASTER]
+			 WHERE [PROJECT_ID]       = #projectID#
+			   AND [CODE_CATEGORY_ID] = #codeCategoryID#
+		</delete>
+		
+		<!-- Master -->
+		<!--SELECT-->
+		<select id="MdmCodeMaster.Select" parameterClass="MdmCodeMaster"  resultMap="rtnMdmCodeMaster">
+			SELECT [PROJECT_ID]
+				 , [CODE_CATEGORY_ID]
+				 , [CODE_ID]
+				 , [CODE_NAME]
+				 , [CODE_SEQ]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_CODE_MASTER]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]       = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="codeCategoryID">
+					[CODE_CATEGORY_ID] = #codeCategoryID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="codeID">
+					[CODE_ID]          = #codeID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="codeName">
+					[CODE_NAME]        = #codeName#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="codeSeq">
+					[CODE_SEQ]         = #codeSeq#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]      = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]      = #updateUser#
+				</isNotEmpty>
+			</dynamic>
+		</select>
+
+		<!--INSERT-->
+		<insert id="MdmCodeMaster.Insert" parameterClass="MdmCodeMaster">
+			INSERT INTO [CFG_CODE_MASTER]
+				 ( [PROJECT_ID]
+				 , [CODE_CATEGORY_ID]
+				 , [CODE_ID]
+				 , [CODE_NAME]
+				 , [CODE_SEQ]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #codeCategoryID#
+				 , #codeID#
+				 , #codeName#
+				 , #codeSeq#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmCodeMaster.Update" parameterClass="MdmCodeMaster">
+			UPDATE [CFG_CODE_MASTER]
+			   SET [PROJECT_ID]       = #projectID#
+			     , [CODE_CATEGORY_ID] = #codeCategoryID#
+			     , [CODE_ID]          = #codeID#
+			     , [CODE_NAME]        = #codeName#
+			     , [CODE_SEQ]         = #codeSeq#
+			     , [UPDATE_DATETIME]  = getdate()
+			     , [UPDATE_USER]      = #updateUser#
+		  	 WHERE [PROJECT_ID]       = #projectID#
+			   AND [CODE_CATEGORY_ID] = #codeCategoryID#
+			   AND [CODE_ID]          = #codeID#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmCodeMaster.Delete" parameterClass="MdmCodeMaster">
+			DELETE
+			  FROM [CFG_CODE_MASTER]
+			 WHERE [PROJECT_ID]       = #projectID#
+			   AND [CODE_CATEGORY_ID] = #codeCategoryID#
+			   AND [CODE_ID]          = #codeID#
+		</delete>
+	</statements>
+</sqlMap>

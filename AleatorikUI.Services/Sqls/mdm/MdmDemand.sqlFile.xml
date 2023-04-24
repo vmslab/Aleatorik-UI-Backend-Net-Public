@@ -4,6 +4,7 @@
 
 	<resultMaps>
 		<resultMap id="rtnMdmDemand"  class="MdmDemand" >
+			<result property="projectID"        column="PROJECT_ID"/>
 			<result property="demandID"         column="DEMAND_ID"/>
 			<result property="itemID"           column="ITEM_ID"/>
 			<result property="siteID"           column="SITE_ID"/>
@@ -15,12 +16,14 @@
 			<result property="demandType"       column="DEMAND_TYPE"/>
 			<result property="maxLatenessDay"   column="MAX_LATENESS_DAY"/>
 			<result property="maxEarlinessDay"  column="MAX_EARLINESS_DAY"/>
+			<result property="description"      column="DESCRIPTION"/>
 			<result property="createDatetime"   column="CREATE_DATETIME"/>
 			<result property="createUser"       column="CREATE_USER"/>
 			<result property="updateDatetime"   column="UPDATE_DATETIME"/>
 			<result property="updateUser"       column="UPDATE_USER"/>
 		</resultMap>
 		<resultMap id="rtnMdmDemandProp"  class="MdmDemandProp" >
+			<result property="projectID"      column="PROJECT_ID"/>
 			<result property="demandID"       column="DEMAND_ID"/>
 			<result property="propID"         column="PROP_ID"/>
 			<result property="propValue"      column="PROP_VALUE"/>
@@ -34,8 +37,9 @@
 
 	<statements>
 		<!--SELECT-->
-		<select id="MdmDemand.Select" resultMap="rtnMdmDemand">
-			SELECT [DEMAND_ID]
+		<select id="MdmDemand.Select" parameterClass="MdmDemand" resultMap="rtnMdmDemand">
+			SELECT [PROJECT_ID]
+				 , [DEMAND_ID]
 				 , [ITEM_ID]
 				 , [SITE_ID]
 				 , [BUFFER_ID]
@@ -46,17 +50,66 @@
 				 , [DEMAND_TYPE]
 				 , [MAX_LATENESS_DAY]
 				 , [MAX_EARLINESS_DAY]
+				 , [DESCRIPTION]
 				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_DEMAND]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]        = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="demandID">
+					[DEMAND_ID]         = #demandID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="itemID">
+					[ITEM_ID]           = #itemID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="siteID">
+					[SITE_ID]           = #siteID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="bufferID">
+					[BUFFER_ID]         = #bufferID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="dueDate">
+					[DUE_DATE]          = #dueDate#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="demandQty">
+					[DEMAND_QTY]        = #demandQty#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="demandPriority">
+					[DEMAND_PRIORITY]   = #demandPriority#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="custID">
+					[CUST_ID]           = #custID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="demandType">
+					[DEMAND_TYPE]       = #demandType#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="maxLatenessDay">
+					[MAX_LATENESS_DAY]  = #maxLatenessDay#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="maxEarlinessDay">
+					[MAX_EARLINESS_DAY] = #maxEarlinessDay#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="description">
+					[DESCRIPTION]       = #description#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]       = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]       = #updateUser#
+				</isNotEmpty>
+			</dynamic>
 		</select>
 
 		<!--INSERT-->
 		<insert id="MdmDemand.Insert" parameterClass="MdmDemand">
 			INSERT INTO [CFG_DEMAND]
-				 ( [DEMAND_ID]
+				 ( [PROJECT_ID]
+				 , [DEMAND_ID]
 				 , [ITEM_ID]
 				 , [SITE_ID]
 				 , [BUFFER_ID]
@@ -67,12 +120,14 @@
 				 , [DEMAND_TYPE]
 				 , [MAX_LATENESS_DAY]
 				 , [MAX_EARLINESS_DAY]
+				 , [DESCRIPTION]
 				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #demandID#
+				 ( #projectID#
+				 , #demandID#
 				 , #itemID#
 				 , #siteID#
 				 , #bufferID#
@@ -83,6 +138,7 @@
 				 , #demandType#
 				 , #maxLatenessDay#
 				 , #maxEarlinessDay#
+				 , #description#
 				 , getdate()
 				 , #createUser#
 				 , getdate()
@@ -93,7 +149,8 @@
 		<!--UPDATE-->
 		<update id="MdmDemand.Update" parameterClass="MdmDemand">
 			UPDATE [CFG_DEMAND]
-			   SET [DEMAND_ID]         = #demandID#
+			   SET [PROJECT_ID]        = #projectID#
+				 , [DEMAND_ID]         = #demandID#
 				 , [ITEM_ID]           = #itemID#
 				 , [SITE_ID]           = #siteID#
 				 , [BUFFER_ID]         = #bufferID#
@@ -104,22 +161,26 @@
 				 , [DEMAND_TYPE]       = #demandType#
 				 , [MAX_LATENESS_DAY]  = #maxLatenessDay#
 				 , [MAX_EARLINESS_DAY] = #maxEarlinessDay#
+				 , [DESCRIPTION]       = #description#
 				 , [UPDATE_DATETIME]   = getdate()
 				 , [UPDATE_USER]       = #updateUser#
-			 WHERE [DEMAND_ID]         = #demandID#
+			 WHERE [PROJECT_ID]        = #projectID#
+			   AND [DEMAND_ID]         = #demandID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmDemand.Delete" parameterClass="string">
+		<delete id="MdmDemand.Delete" parameterClass="MdmDemand">
 			DELETE
 			  FROM [CFG_DEMAND]
-			 WHERE [DEMAND_ID]         = #demandID#
+			 WHERE [PROJECT_ID]        = #projectID#
+			   AND [DEMAND_ID]         = #demandID#
 		</delete>
 
 		<!--DEMAND PROP -->
 		<!--SELECT-->
-		<select id="MdmDemandProp.Select" parameterClass="string" resultMap="rtnMdmDemandProp">
-			SELECT [DEMAND_ID]
+		<select id="MdmDemandProp.Select" parameterClass="MdmDemandProp" resultMap="rtnMdmDemandProp">
+			SELECT [PROJECT_ID]
+				 , [DEMAND_ID]
 				 , [PROP_ID]
 				 , [PROP_VALUE]
 				 , [CALENDAR_ID]
@@ -128,50 +189,77 @@
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_DEMAND_PROP_VALUE]
-			 WHERE [DEMAND_ID] = #demandID#
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]      = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="demandID">
+					[DEMAND_ID]       = #demandID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propID">
+					[PROP_ID]         = #propID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propValue">
+					[PROP_VALUE]      = #propValue#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="calendarID">
+					[CALENDAR_ID]     = #calendarID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]     = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]     = #updateUser#
+				</isNotEmpty>
+			</dynamic>
 		</select>
 
 		<!--INSERT-->
 		<insert id="MdmDemandProp.Insert" parameterClass="MdmDemandProp">
 			INSERT INTO [CFG_DEMAND_PROP_VALUE]
-			     ( [DEMAND_ID]
-			     , [PROP_ID]
-			     , [PROP_VALUE]
-			     , [CALENDAR_ID]
-			     , [CREATE_DATETIME]
-			     , [CREATE_USER]
-			     , [UPDATE_DATETIME]
-			     , [UPDATE_USER]
-			     ) VALUES
-			     ( #demandID#
-			     , #propID#
-			     , #propValue#
-			     , #calendarID#
-			     , getdate()
-			     , #createUser#
-			     , getdate()
-			     , #updateUser#
-			     )
+				 ( [PROJECT_ID]
+				 , [DEMAND_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #demandID#
+				 , #propID#
+				 , #propValue#
+				 , #calendarID#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
 		</insert>
 
 		<!--UPDATE-->
 		<update id="MdmDemandProp.Update" parameterClass="MdmDemandProp">
 			UPDATE [CFG_DEMAND_PROP_VALUE]
-			   SET [DEMAND_ID]       = #demandID#
-				 , [PROP_ID]         = #propID#
-				 , [PROP_VALUE]      = #propValue#
-				 , [CALENDAR_ID]     = #calendarID#
-				 , [UPDATE_DATETIME] = getdate()
-				 , [UPDATE_USER]     = #updateUser#
-			 WHERE [DEMAND_ID]       = #demandID#
+			   SET [PROJECT_ID]      = #projectID#
+			     , [DEMAND_ID]       = #demandID#
+			     , [PROP_ID]         = #propID#
+			     , [PROP_VALUE]      = #propValue#
+			     , [CALENDAR_ID]     = #calendarID#
+			     , [UPDATE_DATETIME] = getdate()
+			     , [UPDATE_USER]     = #updateUser#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [DEMAND_ID]       = #demandID#
 			   AND [PROP_ID]         = #propID#
 		</update>
 
 		<!--DELETE-->
-		<delete id="MdmDemandProp.Delete" parameterClass="string">
-			DELETE 
+		<delete id="MdmDemandProp.Delete" parameterClass="MdmDemandProp">
+			DELETE
 			  FROM [CFG_DEMAND_PROP_VALUE]
-			 WHERE [DEMAND_ID]       = #demandID#
+			 WHERE [PROJECT_ID]      = #projectID#
+			   AND [DEMAND_ID]       = #demandID#
 			   AND [PROP_ID]         = #propID#
 		</delete>
 
