@@ -3,6 +3,7 @@ using AleatorikUI.Services.Configuration;
 using AleatorikUI.Services.DAO.aor;
 using AleatorikUI.Services.DAO.exp;
 using AleatorikUI.Services.DAO.mdm;
+using AleatorikUI.Services.DAO.plm;
 using AleatorikUI.Services.DAO.sam;
 using AleatorikUI.Services.Helper;
 using Microsoft.AspNetCore.Mvc;
@@ -92,6 +93,7 @@ public class Startup
         /**
          *        계획 관리
          */
+        services.AddSingletonWithNamedMapper<IPlmPlanExecuteDao, PlmPlanExecuteDao>(sMode);
 
         /**
          *        결과분석 및 리포트

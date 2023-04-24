@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnPlmPlanExecuteInfo"  class="PlmPlanExecuteInfo" >
+      <result property="ProjectID" column="PROJECT_ID" />
+      <result property="PlanVer" column="PLAN_VER" />
+      <result property="ScenarioID" column="SCENARIO_ID" />
+      <result property="PlanStartDate"  column="PLAN_START_DATE" />
+      <result property="PlanPeriod" column="PLAN_PERIOD" />
+      <result property="PlanType" column="PLAN_TYPE" />
+      <result property="ExecutionType"  column="EXECUTION_TYPE" />
+      <result property="Description"  column="DESCRIPTION" />
+      <result property="RefPlanVer" column="REF_PLAN_VER" />
+      <result property="PlanStatus" column="PLAN_STATUS" />
+      <result property="InboundStartDatetime" column="INBOUND_START_DATETIME" />
+      <result property="InboundEndDatetime" column="INBOUND_END_DATETIME" />
+      <result property="EngineStartDatetime"  column="ENGINE_START_DATETIME" />
+      <result property="EngineEndDatetime"  column="ENGINE_END_DATETIME" />
+      <result property="CreateUser" column="CREATE_USER" />
+      <result property="CreateDatetime" column="CREATE_DATETIME" />
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+		<!--SELECT All-->
+		<select id="PlanExecute.Select" resultMap="rtnPlmPlanExecuteInfo">
+      <![CDATA[
+        SELECT
+          A.PROJECT_ID,
+          A.PLAN_VER,
+          A.SCENARIO_ID,
+          A.PLAN_START_DATE,
+          A.PLAN_PERIOD,
+          A.PLAN_TYPE,
+          A.EXECUTION_TYPE,
+          A.DESCRIPTION,
+          A.REF_PLAN_VER,
+          A.CREATE_USER,
+          A.CREATE_DATETIME,
+          B.PLAN_STATUS,
+          B.INBOUND_START_DATETIME,
+          B.INBOUND_END_DATETIME,
+          B.ENGINE_START_DATETIME,
+          B.ENGINE_END_DATETIME
+        FROM
+          CFG_PLAN_CONFIG as A
+        LEFT JOIN
+          CFG_PLAN_CTRL as B
+        ON
+          A.PLAN_VER = B.PLAN_VER
+          AND (B.PLAN_STATUS <> 'REVISION' OR A.CREATE_USER = 'Aleatorik')
+      ]]>
+    </select>
+
+		<!--INSERT CONFIG-->
+    <insert id="PlanExecute.InsertCfg" parameterClass="PlmPlanExecuteInfo">
+      INSERT INTO CFG_PLAN_CONFIG
+      (PROJECT_ID
+      ,PLAN_VER
+      ,PLAN_TYPE
+      ,SCENARIO_ID
+      ,PLAN_PERIOD
+      ,PLAN_START_DATE
+      <isNotEmpty property="RefPlanVer">
+        ,REF_PLAN_VER
+      </isNotEmpty>
+      <isNotEmpty property="ExecutionType">
+        ,EXECUTION_TYPE
+      </isNotEmpty>
+      <isNotEmpty property="Description">
+        ,DESCRIPTION
+      </isNotEmpty>
+      <isNotEmpty property="CreateDatetime">
+        ,CREATE_DATETIME
+      </isNotEmpty>
+      <isNotEmpty property="CreateUser">
+        ,CREATE_USER
+      </isNotEmpty>
+      <isNotEmpty property="CreateDatetime">
+        ,UPDATE_DATETIME
+      </isNotEmpty>
+      <isNotEmpty property="CreateUser">
+        ,UPDATE_USER
+      </isNotEmpty>
+      )
+      VALUES(
+      #ProjectID#
+      , #PlanVer#
+      , #PlanType#
+      , #ScenarioID#
+      , #PlanPeriod#
+      , #PlanStartDate#
+      <isNotEmpty property="RefPlanVer">
+        , #RefPlanVer#
+      </isNotEmpty>
+      <isNotEmpty property="ExecutionType">
+        , #ExecutionType#
+      </isNotEmpty>
+      <isNotEmpty property="Description">
+        , #Description#
+      </isNotEmpty>
+      <isNotEmpty property="CreateDatetime">
+        , #CreateDatetime#
+      </isNotEmpty>
+      <isNotEmpty property="CreateUser">
+        , #CreateUser#
+      </isNotEmpty>
+      <isNotEmpty property="CreateDatetime">
+        , #CreateDatetime#
+      </isNotEmpty>
+      <isNotEmpty property="CreateUser">
+        , #CreateUser#
+      </isNotEmpty>
+      )
+    </insert>
+    
+    <!--INSERT CONTROL-->
+    <insert id="PlanExecute.InsertCtrl" parameterClass="PlmPlanExecuteInfo">
+      INSERT INTO
+      CFG_PLAN_CTRL
+      (PROJECT_ID
+      , PLAN_VER
+      , PLAN_STATUS
+      <isNotEmpty property="CreateUser">
+        , CREATE_DATETIME
+      </isNotEmpty>
+      <isNotEmpty property="CreateDatetime">
+        , CREATE_USER
+      </isNotEmpty>
+      <isNotEmpty property="InboundStartDatetime">
+        , INBOUND_START_DATETIME
+      </isNotEmpty>
+      <isNotEmpty property="InboundEndDatetime">
+        , INBOUND_END_DATETIME
+      </isNotEmpty>
+      <isNotEmpty property="EngineStartDatetime">
+        , ENGINE_START_DATETIME
+      </isNotEmpty>
+      <isNotEmpty property="EngineEndDatetime">
+        , ENGINE_END_DATETIME
+      </isNotEmpty>
+      )
+      VALUES
+      (#PlanVer#
+      , #PlanStatus#
+      <isNotEmpty property="CreateUser">
+        , #CreateUser#
+      </isNotEmpty>
+      <isNotEmpty property="CreateDatetime">
+        , #CreateDatetime#
+      </isNotEmpty>
+      <isNotEmpty property="InboundStartDatetime">
+        , #InboundStartDatetime#
+      </isNotEmpty>
+      <isNotEmpty property="InboundEndDatetime">
+        , #InboundEndDatetime#
+      </isNotEmpty>
+      <isNotEmpty property="EngineStartDatetime">
+        , #EngineStartDatetime#
+      </isNotEmpty>
+      <isNotEmpty property="EngineEndDatetime">
+        , #EngineEndDatetime#
+      </isNotEmpty>
+      );
+
+    </insert>
+
+		<!--UPDATE CONFIG-->
+		<update id="PlanExecute.UpdateCfg" parameterClass="PlmPlanExecuteInfo">
+      UPDATE
+      CFG_PLAN_CONFIG
+      SET
+      <dynamic prepend=" " close=" ">
+        <isNotEmpty prepend="," property="PlanType">
+          PLAN_TYPE
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="ScearioID">
+          SCENARIO_ID
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="PlanPeriod">
+          PLAN_PERIOD
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="PlanStartDate">
+          PLAN_START_DATE
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="ExecutionType">
+          EXECUTION_TYPE
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="Description">
+          DESCRIPTION
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="UpdateDatetime">
+          UPDATE_DATETIME
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="UpdateUser">
+          UPDATE_USER
+        </isNotEmpty>
+        WHERE
+        PROJECT_ID = #ProjectID#
+        AND PLAN_VER = #PlanVer#
+      </dynamic>
+		</update>
+
+    <!--UPDATE CONTROL-->
+    <update id="PlanExecute.UpdateCtrl" parameterClass="PlmPlanExecuteInfo">
+      UPDATE
+      CFG_PLAN_CTRL
+      SET
+      <dynamic prepend=" " close=" ">
+        <isNotEmpty prepend="," property="PlanStatus">
+          PLAN_STATUS = #PlanStatus#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="InboundStartDatetime">
+          INBOUND_START_DATETIME = #InboundStartDatetime#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="InboundEndDatetime">
+          INBOUND_END_DATETIME = #InboundEndDatetime#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="EngineStartDatetime">
+          ENGINE_START_DATETIME = #EngineStartDatetime#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="EngineEndDatetime">
+          ENGINE_END_DATETIME = #EngineEndDatetime#
+        </isNotEmpty>
+        WHERE
+        PROJECT_ID = #ProjectID#
+        AND PLAN_VER = #PlanVer#
+      </dynamic>
+    </update>
+
+    <!--INBOUND-->
+    <select id="PlanExecute.Inbound" parameterClass="PlmPlanExecuteInfo">
+      uSpFromCfgToOdvCopy 'COPY', #PlanVer#, #CreateUser#
+    </select>
+
+    <!--DELETE-->
+    <select id="PlanExecute.Delete" parameterClass="PlmPlanExecuteInfo">
+      uSpFromCfgToOdvCopy 'DEL', #PlanVer#
+    </select>
+
+	</statements>
+</sqlMap>
