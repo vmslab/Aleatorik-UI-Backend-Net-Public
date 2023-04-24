@@ -24,7 +24,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomMaster"></param>
     /// <returns></returns>
-    [HttpGet("/{projectID}/MdmBomMaster")]
+    [HttpGet("/api/{projectID}/MdmBomMaster")]
     public IEnumerable<MdmBomMaster> GetAll(String projectID, [FromQuery] MdmBomMaster mdmBomMaster)
     {
         try
@@ -48,7 +48,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomMaster"></param>
     /// <returns></returns>
-    [HttpPost("/{projectID}/MdmBomMaster")]
+    [HttpPost("/api/{projectID}/MdmBomMaster")]
     public int Insert(String projectID, MdmBomMaster mdmBomMaster)
     {
         try
@@ -70,7 +70,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomMaster"></param>
     /// <returns></returns>
-    [HttpPut("/{projectID}/MdmBomMaster/{bomID}")]
+    [HttpPut("/api/{projectID}/MdmBomMaster/{bomID}")]
     public int Update(String projectID, MdmBomMaster mdmBomMaster)
     {
         _logger.LogInformation("Update : {}", mdmBomMaster);
@@ -94,7 +94,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomMaster"></param>
     /// <returns></returns>
-    [HttpDelete("/{projectID}/MdmBomMaster/{bomID}")]
+    [HttpDelete("/api/{projectID}/MdmBomMaster/{bomID}")]
     public int Delete(String projectID, MdmBomMaster mdmBomMaster)
     {
         _logger.LogInformation("Delete : {}", mdmBomMaster);
@@ -119,7 +119,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomDetail"></param>
     /// <returns></returns>
-    [HttpGet("/{projectID}/MdmBomMaster/{bomID}/Detail")]
+    [HttpGet("/api/{projectID}/MdmBomMaster/{bomID}/Detail")]
     public IEnumerable<MdmBomDetail> GetAllDetail(String projectID, [FromQuery] MdmBomDetail mdmBomDetail)
     {
         try
@@ -143,7 +143,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomDetail"></param>
     /// <returns></returns>
-    [HttpPost("/{projectID}/MdmBomMaster/{bomID}/Detail")]
+    [HttpPost("/api/{projectID}/MdmBomMaster/{bomID}/Detail")]
     public int InsertDetail(String projectID, MdmBomDetail mdmBomDetail)
     {
         try
@@ -165,7 +165,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomDetail"></param>
     /// <returns></returns>
-    [HttpPut("/{projectID}/MdmBomMaster/{bomID}/Detail/{fromItemID}")]
+    [HttpPut("/api/{projectID}/MdmBomMaster/{bomID}/Detail/{fromItemID}")]
     public int UpdateDetail(String projectID, MdmBomDetail mdmBomDetail)
     {
         _logger.LogInformation("Update : {}", mdmBomDetail);
@@ -189,7 +189,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomDetail"></param>
     /// <returns></returns>
-    [HttpDelete("/{projectID}/MdmBomMaster/{bomID}/Detail/{fromItemID}")]
+    [HttpDelete("/api/{projectID}/MdmBomMaster/{bomID}/Detail/{fromItemID}")]
     public int DeleteDetail(String projectID, MdmBomDetail mdmBomDetail)
     {
         _logger.LogInformation("Delete : {}", mdmBomDetail);
@@ -213,7 +213,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomDetailAlt"></param>
     /// <returns></returns>
-    [HttpGet("/{projectID}/MdmBomMaster/{bomID}/DetailAlt")]
+    [HttpGet("/api/{projectID}/MdmBomMaster/{bomID}/DetailAlt")]
     public IEnumerable<MdmBomDetailAlt> GetAllDetailAlt(String projectID, [FromQuery] MdmBomDetailAlt mdmBomDetailAlt)
     {
         try
@@ -237,7 +237,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomDetailAlt"></param>
     /// <returns></returns>
-    [HttpPost("/{projectID}/MdmBomMaster/{bomID}/DetailAlt")]
+    [HttpPost("/api/{projectID}/MdmBomMaster/{bomID}/DetailAlt")]
     public int InsertDetailAlt(String projectID, MdmBomDetailAlt mdmBomDetailAlt)
     {
         try
@@ -259,7 +259,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomDetailAlt"></param>
     /// <returns></returns>
-    [HttpPut("/{projectID}/MdmBomMaster/{bomID}/DetailAlt/{itemID}")]
+    [HttpPut("/api/{projectID}/MdmBomMaster/{bomID}/DetailAlt/{itemID}")]
     public int UpdateDetailAlt(String projectID, MdmBomDetailAlt mdmBomDetailAlt)
     {
         _logger.LogInformation("Update : {}", mdmBomDetailAlt);
@@ -283,7 +283,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomDetailAlt"></param>
     /// <returns></returns>
-    [HttpDelete("/{projectID}/MdmBomMaster/{bomID}/DetailAlt/{itemID}")]
+    [HttpDelete("/api/{projectID}/MdmBomMaster/{bomID}/DetailAlt/{itemID}")]
     public int DeleteDetailAlt(String projectID, MdmBomDetailAlt mdmBomDetailAlt)
     {
         _logger.LogInformation("Delete : {}", mdmBomDetailAlt);
@@ -307,7 +307,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomProp"></param>
     /// <returns></returns>
-    [HttpGet("/{projectID}/MdmBomMaster/{bomID}/Prop")]
+    [HttpGet("/api/{projectID}/MdmBomMaster/{bomID}/Prop")]
     public IEnumerable<MdmBomProp> GetAllProp(String projectID, [FromQuery] MdmBomProp mdmBomProp)
     {
         try
@@ -331,7 +331,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomProp"></param>
     /// <returns></returns>
-    [HttpPost("/{projectID}/MdmBomMaster/{bomID}/Prop")]
+    [HttpPost("/api/{projectID}/MdmBomMaster/{bomID}/Prop")]
     public int InsertProp(String projectID, MdmBomProp mdmBomProp)
     {
         try
@@ -353,7 +353,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomProp"></param>
     /// <returns></returns>
-    [HttpPut("/{projectID}/MdmBomMaster/{bomID}/Prop/{propID}")]
+    [HttpPut("/api/{projectID}/MdmBomMaster/{bomID}/Prop/{propID}")]
     public int UpdateProp(String projectID, MdmBomProp mdmBomProp)
     {
         _logger.LogInformation("Update : {}", mdmBomProp);
@@ -377,7 +377,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomProp"></param>
     /// <returns></returns>
-    [HttpDelete("/{projectID}/MdmBomMaster/{bomID}/Prop/{propID}")]
+    [HttpDelete("/api/{projectID}/MdmBomMaster/{bomID}/Prop/{propID}")]
     public int DeleteProp(String projectID, MdmBomProp mdmBomProp)
     {
         _logger.LogInformation("Delete : {}", mdmBomProp);
@@ -402,7 +402,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomRouting"></param>
     /// <returns></returns>
-    [HttpGet("/{projectID}/MdmBomMaster/{bomID}/Routing")]
+    [HttpGet("/api/{projectID}/MdmBomMaster/{bomID}/Routing")]
     public IEnumerable<MdmBomRouting> GetAllRouting(String projectID, [FromQuery] MdmBomRouting mdmBomRouting)
     {
         try
@@ -426,7 +426,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomRouting"></param>
     /// <returns></returns>
-    [HttpPost("/{projectID}/MdmBomMaster/{bomID}/Routing")]
+    [HttpPost("/api/{projectID}/MdmBomMaster/{bomID}/Routing")]
     public int InsertRouting(String projectID, MdmBomRouting mdmBomRouting)
     {
         try
@@ -448,7 +448,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomRouting"></param>
     /// <returns></returns>
-    [HttpPut("/{projectID}/MdmBomMaster/{bomID}/Routing/{routingID}")]
+    [HttpPut("/api/{projectID}/MdmBomMaster/{bomID}/Routing/{routingID}")]
     public int UpdateRouting(String projectID, MdmBomRouting mdmBomRouting)
     {
         _logger.LogInformation("Update : {}", mdmBomRouting);
@@ -472,7 +472,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomRouting"></param>
     /// <returns></returns>
-    [HttpDelete("/{projectID}/MdmBomMaster/{bomID}/Routing/{routingID}")]
+    [HttpDelete("/api/{projectID}/MdmBomMaster/{bomID}/Routing/{routingID}")]
     public int DeleteRouting(String projectID, MdmBomRouting mdmBomRouting)
     {
         _logger.LogInformation("Delete : {}", mdmBomRouting);
@@ -497,7 +497,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomRoutingProp"></param>
     /// <returns></returns>
-    [HttpGet("/{projectID}/MdmBomMaster/{bomID}/Routing/{routingID}/RoutingProp")]
+    [HttpGet("/api/{projectID}/MdmBomMaster/{bomID}/Routing/{routingID}/RoutingProp")]
     public IEnumerable<MdmBomRoutingProp> GetAllRoutingProp(String projectID, [FromQuery] MdmBomRoutingProp mdmBomRoutingProp)
     {
         try
@@ -521,7 +521,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomRoutingProp"></param>
     /// <returns></returns>
-    [HttpPost("/{projectID}/MdmBomMaster/{bomID}/Routing/{routingID}/RoutingProp")]
+    [HttpPost("/api/{projectID}/MdmBomMaster/{bomID}/Routing/{routingID}/RoutingProp")]
     public int InsertRoutingProp(String projectID, MdmBomRoutingProp mdmBomRoutingProp)
     {
         try
@@ -543,7 +543,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomRoutingProp"></param>
     /// <returns></returns>
-    [HttpPut("/{projectID}/MdmBomMaster/{bomID}/Routing/{routingID}/RoutingProp/{propID}")]
+    [HttpPut("/api/{projectID}/MdmBomMaster/{bomID}/Routing/{routingID}/RoutingProp/{propID}")]
     public int UpdateRoutingProp(String projectID, MdmBomRoutingProp mdmBomRoutingProp)
     {
         _logger.LogInformation("Update : {}", mdmBomRoutingProp);
@@ -567,7 +567,7 @@ public class MdmBomMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBomRoutingProp"></param>
     /// <returns></returns>
-    [HttpDelete("/{projectID}/MdmBomMaster/{bomID}/Routing/{routingID}/RoutingProp/{propID}")]
+    [HttpDelete("/api/{projectID}/MdmBomMaster/{bomID}/Routing/{routingID}/RoutingProp/{propID}")]
     public int DeleteRoutingProp(String projectID, MdmBomRoutingProp mdmBomRoutingProp)
     {
         _logger.LogInformation("Delete : {}", mdmBomRoutingProp);

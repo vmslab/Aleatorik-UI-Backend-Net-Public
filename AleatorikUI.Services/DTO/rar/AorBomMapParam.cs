@@ -1,4 +1,4 @@
-namespace AleatorikUI.Services.DTO.aor;
+namespace AleatorikUI.Services.DTO.rar;
 
 public class AorBomMapParam
 {

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="AleatorikUI.Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+	<resultMaps>
+		<resultMap id="rtnMdmConstraint"  class="MdmConstraint" >
+			<result property="projectID"        column="PROJECT_ID"/>
+			<result property="constraintID"     column="CONSTRAINT_ID"/>
+			<result property="propID"           column="PROP_ID"/>
+			<result property="propValue"        column="PROP_VALUE"/>
+			<result property="calendarID"       column="CALENDAR_ID"/>
+			<result property="constraintPolicy" column="CONSTRAINT_POLICY"/>
+			<result property="createDatetime"   column="CREATE_DATETIME"/>
+			<result property="createUser"       column="CREATE_USER"/>
+			<result property="updateDatetime"   column="UPDATE_DATETIME"/>
+			<result property="updateUser"       column="UPDATE_USER"/>
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+		<!--SELECT-->
+		<select id="MdmConstraint.Select" parameterClass="MdmConstraint" resultMap="rtnMdmConstraint">
+			SELECT [PROJECT_ID]
+				 , [CONSTRAINT_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CONSTRAINT_POLICY]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+			  FROM [CFG_CONSTRAINT]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]        = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="constraintID">
+					[CONSTRAINT_ID]     = #constraintID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propID">
+					[PROP_ID]           = #propID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="propValue">
+					[PROP_VALUE]        = #propValue#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="calendarID">
+					[CALENDAR_ID]       = #calendarID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="constraintPolicy">
+					[CONSTRAINT_POLICY] = #constraintPolicy#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]       = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]       = #updateUser#
+				</isNotEmpty>
+			</dynamic>
+		</select>
+
+
+
+		<!--INSERT-->
+		<insert id="MdmConstraint.Insert" parameterClass="MdmConstraint">
+			INSERT INTO [CFG_CONSTRAINT]
+				 ( [PROJECT_ID]
+				 , [CONSTRAINT_ID]
+				 , [PROP_ID]
+				 , [PROP_VALUE]
+				 , [CALENDAR_ID]
+				 , [CONSTRAINT_POLICY]
+				 , [CREATE_DATETIME]
+				 , [CREATE_USER]
+				 , [UPDATE_DATETIME]
+				 , [UPDATE_USER]
+				 ) VALUES
+				 ( #projectID#
+				 , #constraintID#
+				 , #propID#
+				 , #propValue#
+				 , #calendarID#
+				 , #constraintPolicy#
+				 , getdate()
+				 , #createUser#
+				 , getdate()
+				 , #updateUser#
+				 )
+		</insert>
+
+		<!--UPDATE-->
+		<update id="MdmConstraint.Update" parameterClass="MdmConstraint">
+			UPDATE [CFG_CONSTRAINT]
+			   SET [PROJECT_ID]        = #projectID#
+				 , [CONSTRAINT_ID]     = #constraintID#
+				 , [PROP_ID]           = #propID#
+				 , [PROP_VALUE]        = #propValue#
+				 , [CALENDAR_ID]       = #calendarID#
+				 , [CONSTRAINT_POLICY] = #constraintPolicy#
+				 , [UPDATE_DATETIME]   = getdate()
+				 , [UPDATE_USER]       = #updateUser#
+			 WHERE [PROJECT_ID]        = #projectID#
+			   AND [CONSTRAINT_ID]     = #constraintID#
+			   AND [CONSTRAINT_POLICY] = #constraintPolicy#
+		</update>
+
+		<!--DELETE-->
+		<delete id="MdmConstraint.Delete" parameterClass="MdmConstraint">
+			DELETE
+			  FROM [CFG_CONSTRAINT]
+			 WHERE [PROJECT_ID]        = #projectID#
+			   AND [CONSTRAINT_ID]     = #constraintID#
+			   AND [CONSTRAINT_POLICY] = #constraintPolicy#
+		</delete>
+
+	</statements>
+</sqlMap>

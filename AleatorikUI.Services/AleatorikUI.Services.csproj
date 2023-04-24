@@ -63,7 +63,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Sqls\aor\AorBomMap.sqlFile.xml">
+    <None Update="Sqls\rar\AorBomMap.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\exp\Gantt.sqlFile.xml">
@@ -81,7 +81,7 @@
     <None Update="Sqls\mdm\MdmResMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmConstInfo.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmConstraint.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\mdm\MdmPmPlan.sqlFile.xml">
@@ -111,7 +111,7 @@
     <None Update="Sqls\mdm\MdmFactoryConfig.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmCodeGroupMaster.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmCodeCategoryMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\mdm\MdmPropMaster.sqlFile.xml">
@@ -123,7 +123,7 @@
     <None Update="Sqls\mdm\MdmBufferMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\mdm\MdmIsbMaster.sqlFile.xml">
+    <None Update="Sqls\mdm\MdmItemSiteBufferMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\mdm\MdmBomMaster.sqlFile.xml">
@@ -138,7 +138,7 @@
     <None Update="Sqls\Member.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sqls\plm\PlmFactor.sqlFile.xml">
+    <None Update="Sqls\plm\PlmFactorMaster.sqlFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sqls\rar\RarBomMapView.sqlFile.xml">

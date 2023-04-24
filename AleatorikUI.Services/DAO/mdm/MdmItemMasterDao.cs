@@ -12,9 +12,9 @@ public class MdmItemMasterDao : IMdmItemMasterDao
 
     private ISqlMapper Mapper { get; }
 
-    public IEnumerable<MdmItemMaster> GetAll()
+    public IEnumerable<MdmItemMaster> GetAll(MdmItemMaster mdmItemMaster)
     {
-        return Mapper.QueryForList<MdmItemMaster>("MdmItemMaster.Select", null);
+        return Mapper.QueryForList<MdmItemMaster>("MdmItemMaster.Select", mdmItemMaster);
     }
 
     public void Insert(MdmItemMaster mdmItemMaster)
@@ -30,5 +30,28 @@ public class MdmItemMasterDao : IMdmItemMasterDao
     public int Delete(MdmItemMaster mdmItemMaster)
     {
         return Mapper.Delete("MdmItemMaster.Delete", mdmItemMaster);
+    }
+
+    /**
+    *  Item PROP
+    */
+    public IEnumerable<MdmItemProp> GetAllProp(MdmItemProp mdmItemProp)
+    {
+        return Mapper.QueryForList<MdmItemProp>("MdmItemProp.Select", mdmItemProp);
+    }
+
+    public void InsertProp(MdmItemProp mdmItemProp)
+    {
+        Mapper.Insert("MdmItemProp.InsertProp", mdmItemProp);
+    }
+
+    public int UpdateProp(MdmItemProp mdmItemProp)
+    {
+        return Mapper.Update("MdmItemProp.Update", mdmItemProp);
+    }
+
+    public int DeleteProp(MdmItemProp mdmItemProp)
+    {
+        return Mapper.Delete("MdmItemProp.Delete", mdmItemProp);
     }
 }

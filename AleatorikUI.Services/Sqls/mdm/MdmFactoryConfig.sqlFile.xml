@@ -4,8 +4,9 @@
 
 	<resultMaps>
 		<resultMap id="rtnMdmFactoryConfig"  class="MdmFactoryConfig" >
+			<result property="projectID"         column="PROJECT_ID"/>
 			<result property="factoryStartHour"  column="FACTORY_START_HOUR"/>
-			<result property="startDayOfWeek"   column="START_DAY_OF_WEEK"/>
+			<result property="startDayOfWeek"    column="START_DAY_OF_WEEK"/>
 			<result property="createDatetime"    column="CREATE_DATETIME"/>
 			<result property="createUser"        column="CREATE_USER"/>
 			<result property="updateDatetime"    column="UPDATE_DATETIME"/>
@@ -15,27 +16,48 @@
 
 	<statements>
 		<!--SELECT-->
-		<select id="MdmFactoryConfig.Select" resultMap="rtnMdmFactoryConfig">
-			SELECT [FACTORY_START_HOUR]
+		<select id="MdmFactoryConfig.Select" parameterClass="MdmFactoryConfig" resultMap="rtnMdmFactoryConfig">
+			SELECT [PROJECT_ID]
+				 , [FACTORY_START_HOUR]
 				 , [START_DAY_OF_WEEK]
 				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 			  FROM [CFG_FACTORY_CONFIG]
+			<dynamic prepend="WHERE " close=" ">
+				<isNotEmpty prepend="AND " property="projectID">
+					[PROJECT_ID]         = #projectID#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="factoryStartHour">
+					[FACTORY_START_HOUR] = #factoryStartHour#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="startDayOfWeek">
+					[START_DAY_OF_WEEK]  = #startDayOfWeek#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="createUser">
+					[CREATE_USER]        = #createUser#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND " property="updateUser">
+					[UPDATE_USER]        = #updateUser#
+				</isNotEmpty>
+			</dynamic>
+
 		</select>
 
 		<!--INSERT-->
 		<insert id="MdmFactoryConfig.Insert" parameterClass="MdmFactoryConfig">
 			INSERT INTO [CFG_FACTORY_CONFIG]
-				 ( [FACTORY_START_HOUR]
+				 ( [PROJECT_ID]
+				 , [FACTORY_START_HOUR]
 				 , [START_DAY_OF_WEEK]
 				 , [CREATE_DATETIME]
 				 , [CREATE_USER]
 				 , [UPDATE_DATETIME]
 				 , [UPDATE_USER]
 				 ) VALUES
-				 ( #factoryStartHour#
+				 ( #projectID#
+				 , #factoryStartHour#
 				 , #startDayOfWeek#
 				 , getdate()
 				 , #createUser#
@@ -47,11 +69,13 @@
 		<!--UPDATE-->
 		<update id="MdmFactoryConfig.Update" parameterClass="MdmFactoryConfig">
 			UPDATE [CFG_FACTORY_CONFIG]
-			   SET [FACTORY_START_HOUR] = #factoryStartHour#
-			     , [START_DAY_OF_WEEK]  = #startDayOfWeek#
-			     , [UPDATE_DATETIME]    = getdate()
-			     , [UPDATE_USER]        = #updateUser#
-			 WHERE [FACTORY_START_HOUR] = #factoryStartHour#
+			   SET [PROJECT_ID]         = #projectID#
+				 , [FACTORY_START_HOUR] = #factoryStartHour#
+				 , [START_DAY_OF_WEEK]  = #startDayOfWeek#
+				 , [UPDATE_DATETIME]    = getdate()
+				 , [UPDATE_USER]        = #updateUser#
+			 WHERE [PROJECT_ID]         = #projectID#
+			   AND [FACTORY_START_HOUR] = #factoryStartHour#
 			   AND [START_DAY_OF_WEEK]  = #startDayOfWeek#
 		</update>
 
@@ -59,7 +83,8 @@
 		<delete id="MdmFactoryConfig.Delete" parameterClass="MdmFactoryConfig">
 			DELETE
 			  FROM [CFG_FACTORY_CONFIG]
-			 WHERE [FACTORY_START_HOUR] = #factoryStartHour#
+			 WHERE [PROJECT_ID]         = #projectID#
+			   AND [FACTORY_START_HOUR] = #factoryStartHour#
 			   AND [START_DAY_OF_WEEK]  = #startDayOfWeek#
 		</delete>
 

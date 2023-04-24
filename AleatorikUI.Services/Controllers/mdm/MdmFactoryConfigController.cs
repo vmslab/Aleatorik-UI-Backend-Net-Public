@@ -18,13 +18,19 @@ public class MdmFactoryConfigController : ControllerBase
         _logger = logger;
         _mdmFactoryConfigDao = mdmFactoryConfigDao;
     }
-
-    [HttpGet("/api/MdmFactoryConfig")]
-    public IEnumerable<MdmFactoryConfig> GetAll()
+    /// <summary>
+    /// 공장 운영 정보를 조회 합니다.
+    /// </summary>
+    /// <param name="projectID"></param>
+    /// <param name="mdmFactoryConfig"></param>
+    /// <returns></returns>
+    [HttpGet("/api/{projectID}/MdmFactoryConfig")]
+    public IEnumerable<MdmFactoryConfig> GetAll(String projectID, [FromQuery] MdmFactoryConfig mdmFactoryConfig)
     {
         try
         {
-            var result = _mdmFactoryConfigDao.GetAll();
+            mdmFactoryConfig.projectID = projectID;
+            var result = _mdmFactoryConfigDao.GetAll(mdmFactoryConfig);
             _logger.LogInformation("result : {}", result);
             Serilog.Log.Logger.Information(result.ToString());
             return result;
@@ -36,12 +42,18 @@ public class MdmFactoryConfigController : ControllerBase
             return new List<MdmFactoryConfig>();
         }
     }
-
-    [HttpPost("/api/MdmFactoryConfig")]
-    public int Insert(MdmFactoryConfig mdmFactoryConfig)
+    /// <summary>
+    /// 공장 운영 정보를 저장 합니다.
+    /// </summary>
+    /// <param name="projectID"></param>
+    /// <param name="mdmFactoryConfig"></param>
+    /// <returns></returns>
+    [HttpPost("/api/{projectID}/MdmFactoryConfig")]
+    public int Insert(String projectID, MdmFactoryConfig mdmFactoryConfig)
     {
         try
         {
+            mdmFactoryConfig.projectID = projectID;
             _logger.LogInformation("Insert : {}", mdmFactoryConfig);
             _mdmFactoryConfigDao.Insert(mdmFactoryConfig);
             return 1;
@@ -52,13 +64,19 @@ public class MdmFactoryConfigController : ControllerBase
             return 0;
         }
     }
-
-    [HttpPut("/api/MdmFactoryConfig/{factoryStartTime}")]
-    public int Update(MdmFactoryConfig mdmFactoryConfig)
+    /// <summary>
+    /// 공장 운영 정보를 수정 합니다.
+    /// </summary>
+    /// <param name="projectID"></param>
+    /// <param name="mdmFactoryConfig"></param>
+    /// <returns></returns>
+    [HttpPut("/api/{projectID}/MdmFactoryConfig/{factoryStartHour}")]
+    public int Update(String projectID, MdmFactoryConfig mdmFactoryConfig)
     {
         _logger.LogInformation("Update : {}", mdmFactoryConfig);
         try
         {
+            mdmFactoryConfig.projectID = projectID;
             var result = _mdmFactoryConfigDao.Update(mdmFactoryConfig);
             _logger.LogInformation("result : {}", result);
 
@@ -70,13 +88,19 @@ public class MdmFactoryConfigController : ControllerBase
             return 0;
         }
     }
-
-    [HttpDelete("/api/MdmFactoryConfig/{factoryStartHour}")]
-    public int Delete(MdmFactoryConfig mdmFactoryConfig)
+    /// <summary>
+    /// 공장 운영 정보를 삭제 합니다.
+    /// </summary>
+    /// <param name="projectID"></param>
+    /// <param name="mdmFactoryConfig"></param>
+    /// <returns></returns>
+    [HttpDelete("/api/{projectID}/MdmFactoryConfig/{factoryStartHour}")]
+    public int Delete(String projectID, MdmFactoryConfig mdmFactoryConfig)
     {
         _logger.LogInformation("Delete : {}", mdmFactoryConfig);
         try
         {
+            mdmFactoryConfig.projectID = projectID;
             var result = _mdmFactoryConfigDao.Delete(mdmFactoryConfig);
             _logger.LogInformation("result : {}", result);
 

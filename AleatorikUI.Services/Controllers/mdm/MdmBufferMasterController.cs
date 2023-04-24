@@ -25,7 +25,7 @@ public class MdmBufferMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBufferMaster"></param>
     /// <returns></returns>
-    [HttpGet("/{projectID}/MdmBufferMaster")]
+    [HttpGet("/api/{projectID}/MdmBufferMaster")]
     public IEnumerable<MdmBufferMaster> GetAll(String projectID, [FromQuery] MdmBufferMaster mdmBufferMaster)
     {
         try
@@ -49,7 +49,7 @@ public class MdmBufferMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBufferMaster"></param>
     /// <returns></returns>
-    [HttpPost("/{projectID}/MdmBufferMaster")]
+    [HttpPost("/api/{projectID}/MdmBufferMaster")]
     public int Insert(String projectID, MdmBufferMaster mdmBufferMaster)
     {
         try
@@ -71,7 +71,7 @@ public class MdmBufferMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBufferMaster"></param>
     /// <returns></returns>
-    [HttpPut("/{projectID}/MdmBufferMaster/{bufferID}")]
+    [HttpPut("/api/{projectID}/MdmBufferMaster/{bufferID}")]
     public int Update(String projectID, MdmBufferMaster mdmBufferMaster)
     {
         _logger.LogInformation("Update : {}", mdmBufferMaster);
@@ -95,7 +95,7 @@ public class MdmBufferMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBufferMaster"></param>
     /// <returns></returns>
-    [HttpDelete("/{projectID}/MdmBufferMaster/{bufferID}")]
+    [HttpDelete("/api/{projectID}/MdmBufferMaster/{bufferID}")]
     public int Delete(String projectID, MdmBufferMaster mdmBufferMaster)
     {
         _logger.LogInformation("Delete : {}", mdmBufferMaster);
@@ -120,7 +120,7 @@ public class MdmBufferMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBufferProp"></param>
     /// <returns></returns>
-    [HttpGet("/{projectID}/MdmBufferProp/{bufferID}/PROP")]
+    [HttpGet("/api/{projectID}/MdmBufferProp/{bufferID}/PROP")]
     public IEnumerable<MdmBufferProp> GetAllProp(String projectID, [FromQuery] MdmBufferProp mdmBufferProp)
     {
         try
@@ -144,7 +144,7 @@ public class MdmBufferMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBufferProp"></param>
     /// <returns></returns>
-    [HttpPost("/{projectID}/MdmBufferProp/{bufferID}/PROP")]
+    [HttpPost("/api/{projectID}/MdmBufferProp/{bufferID}/PROP")]
     public int InsertProp(String projectID, MdmBufferProp mdmBufferProp)
     {
         try
@@ -166,7 +166,7 @@ public class MdmBufferMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBufferProp"></param>
     /// <returns></returns>
-    [HttpPut("/{projectID}/MdmBufferProp/{bufferID}/PROP/{propID}")]
+    [HttpPut("/api/{projectID}/MdmBufferProp/{bufferID}/PROP/{propID}")]
     public int UpdateProp(String projectID, MdmBufferProp mdmBufferProp)
     {
         _logger.LogInformation("Update : {}", mdmBufferProp);
@@ -190,7 +190,7 @@ public class MdmBufferMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmBufferProp"></param>
     /// <returns></returns>
-    [HttpDelete("/{projectID}/MdmBufferProp/{bufferID}/PROP/{propID}")]
+    [HttpDelete("/api/{projectID}/MdmBufferProp/{bufferID}/PROP/{propID}")]
     public int DeleteProp(String projectID, MdmBufferProp mdmBufferProp)
     {
         _logger.LogInformation("Delete : {}", mdmBufferProp);

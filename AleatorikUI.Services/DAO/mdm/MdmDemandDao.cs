@@ -13,9 +13,9 @@ public class MdmDemandDao : IMdmDemandDao
 
     private ISqlMapper Mapper { get; }
 
-    public IEnumerable<MdmDemand> GetAll()
+    public IEnumerable<MdmDemand> GetAll(MdmDemand mdmDemand)
     {
-        return Mapper.QueryForList<MdmDemand>("MdmDemand.Select", null);
+        return Mapper.QueryForList<MdmDemand>("MdmDemand.Select", mdmDemand);
     }
 
     public void Insert(MdmDemand mdmDemand)
@@ -36,9 +36,9 @@ public class MdmDemandDao : IMdmDemandDao
     /**
      *  DEMAND PROP
      */
-    public IEnumerable<MdmDemandProp> GetAllProp(string demandID)
+    public IEnumerable<MdmDemandProp> GetAllProp(MdmDemandProp mdmDemandProp)
     {
-        return Mapper.QueryForList<MdmDemandProp>("MdmDemandProp.Select", demandID);
+        return Mapper.QueryForList<MdmDemandProp>("MdmDemandProp.Select", mdmDemandProp);
     }
 
     public void InsertProp(MdmDemandProp mdmDemandProp)

@@ -21,7 +21,7 @@ public class MdmAllocGroupMasterController : ControllerBase
     ///  Allocation Group 을 조회 합니다.
     /// </summary>
     /// <returns></returns>
-    [HttpGet("/{projectID}/MdmAllocGroupMaster/")]
+    [HttpGet("/api/{projectID}/MdmAllocGroupMaster/")]
     public IEnumerable<MdmAllocGroupMaster> GetAll(string projectID, [FromQuery] MdmAllocGroupMaster mdmAllocGroupMaster)
     {
         try
@@ -45,7 +45,7 @@ public class MdmAllocGroupMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmAllocGroupMaster"></param>
     /// <returns></returns>
-    [HttpPost("/{projectID}/MdmAllocGroupMaster/")]
+    [HttpPost("/api/{projectID}/MdmAllocGroupMaster/")]
     public int Insert(string projectID, MdmAllocGroupMaster mdmAllocGroupMaster)
     {
         try
@@ -68,7 +68,7 @@ public class MdmAllocGroupMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmAllocGroupMaster"></param>
     /// <returns></returns>
-    [HttpPut("/{projectID}/MdmAllocGroupMaster/{allocGroupID}")]
+    [HttpPut("/api/{projectID}/MdmAllocGroupMaster/{allocGroupID}")]
     public int Update(string projectID, MdmAllocGroupMaster mdmAllocGroupMaster)
     {
         _logger.LogInformation("Update : {}", mdmAllocGroupMaster);
@@ -92,7 +92,7 @@ public class MdmAllocGroupMasterController : ControllerBase
     /// <param name="projectID"></param>
     /// <param name="mdmAllocGroupMaster"></param>
     /// <returns></returns>
-    [HttpDelete("/{projectID}/MdmAllocGroupMaster/{allocGroupID}")]
+    [HttpDelete("/api/{projectID}/MdmAllocGroupMaster/{allocGroupID}")]
     public int Delete(string projectID, MdmAllocGroupMaster mdmAllocGroupMaster)
     {
         _logger.LogInformation("Delete : {}", mdmAllocGroupMaster);

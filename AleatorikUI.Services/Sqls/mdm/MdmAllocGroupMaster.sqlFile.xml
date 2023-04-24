@@ -56,6 +56,9 @@
 			   <isNotEmpty prepend="AND " property="updateUser">    
 				  [UPDATE_USER]          = #updateUser#
 			   </isNotEmpty>
+				<isNotEmpty prepend="AND " property="createDatetime">
+					[CREATE_DATETIME]        = #createDatetime#
+				</isNotEmpty>
 			</dynamic>
 		</select>
 

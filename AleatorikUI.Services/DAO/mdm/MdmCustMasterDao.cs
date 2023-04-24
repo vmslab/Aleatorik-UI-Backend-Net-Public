@@ -12,32 +12,32 @@ public class MdmCustMasterDao : IMdmCustMasterDao
 
     private ISqlMapper Mapper { get; }
 
-    public IEnumerable<MdmCustMaster> GetAll()
+    public IEnumerable<MdmCustMaster> GetAll(MdmCustMaster mdmCustMaster)
     {
-        return Mapper.QueryForList<MdmCustMaster>("MdmCustMaster.Select", null);
+        return Mapper.QueryForList<MdmCustMaster>("MdmCustMaster.Select", mdmCustMaster);
     }
 
-    public void Insert(MdmCustMaster mdmCustInfo)
+    public void Insert(MdmCustMaster mdmCustMaster)
     {
-        Mapper.Insert("MdmCustMaster.Insert", mdmCustInfo);
+        Mapper.Insert("MdmCustMaster.Insert", mdmCustMaster);
     }
 
-    public int Update(MdmCustMaster mdmCustInfo)
+    public int Update(MdmCustMaster mdmCustMaster)
     {
-        return Mapper.Update("MdmCustMaster.Update", mdmCustInfo);
+        return Mapper.Update("MdmCustMaster.Update", mdmCustMaster);
     }
 
-    public int Delete(MdmCustMaster mdmCustInfo)
+    public int Delete(MdmCustMaster mdmCustMaster)
     {
-        return Mapper.Delete("MdmCustMaster.Delete", mdmCustInfo);
+        return Mapper.Delete("MdmCustMaster.Delete", mdmCustMaster);
     }
 
     /**
     *  CUST PROP
     */
-    public IEnumerable<MdmCustProp> GetAllProp(string custID)
+    public IEnumerable<MdmCustProp> GetAllProp(MdmCustProp mdmCustProp)
     {
-        return Mapper.QueryForList<MdmCustProp>("MdmCustProp.Select", custID);
+        return Mapper.QueryForList<MdmCustProp>("MdmCustProp.Select", mdmCustProp);
     }
 
     public void InsertProp(MdmCustProp mdmCustProp)
