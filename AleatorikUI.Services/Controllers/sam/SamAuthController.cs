@@ -28,6 +28,12 @@ public class SamAuthController : ControllerBase
     }
 
     [AllowAnonymous]
+    [HttpGet("/api/test")]
+    public async Task<IActionResult> test() {
+        return Ok("Test");
+	}
+
+    [AllowAnonymous]
     [HttpPost("/api/auth/Login")]
     public async Task<IActionResult> Login(SamAuthInfo request)
     {
