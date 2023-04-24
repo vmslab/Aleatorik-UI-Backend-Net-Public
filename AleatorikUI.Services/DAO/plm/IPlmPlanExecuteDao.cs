@@ -7,6 +7,6 @@ public interface IPlmPlanExecuteDao
     public IEnumerable<PlmPlanExecuteInfo> GetPlan(PlmPlanExecuteInfo param);
     public bool AddPlan(PlmPlanExecuteInfo param);
     public bool UpdatePlan(PlmPlanExecuteInfo param);
-    public bool InboundPlan(PlmPlanExecuteInfo param);
-    public bool RemovePlan(PlmPlanExecuteInfo param);
+    public object InboundPlan(PlmPlanExecuteInfo param);
+    public object RemovePlan(PlmPlanExecuteInfo param);
 }

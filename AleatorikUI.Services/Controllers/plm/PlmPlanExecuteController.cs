@@ -78,7 +78,7 @@ public class PlmPlanExecuteController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("/api/inboundPlan")]
-    public bool InboundPlan(PlmPlanExecuteInfo param)
+    public object InboundPlan(PlmPlanExecuteInfo param)
     {
         try
         {
@@ -97,7 +97,7 @@ public class PlmPlanExecuteController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("/api/removePlan")]
-    public bool RemovePlan(PlmPlanExecuteInfo param)
+    public object RemovePlan(PlmPlanExecuteInfo param)
     {
         try
         {
