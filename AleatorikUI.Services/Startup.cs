@@ -118,7 +118,6 @@ public class Startup
          */
         services.AddSingletonWithNamedMapper<ITodoDao, TodoDao>(sMode);
         services.AddSingletonWithNamedMapper<IGanttDao, GanttDao>(sMode);
-        services.AddSingletonWithNamedMapper<ITrEmployeeDao, TrEmployeeDao>(sMode);
         /* --------------------------------------------------------------------------------------------- */
 
         // 접속 DB 선택
